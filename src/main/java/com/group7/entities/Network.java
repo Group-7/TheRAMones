@@ -16,7 +16,7 @@ public class Network {
 	@Id
 	private int mcc;
 	
-	@Id
+	//@Id
 	private int mnc;
 	
 	private String country;

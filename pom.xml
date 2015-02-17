@@ -8,7 +8,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-6.0</artifactId>
+			<artifactId>jboss-javaee-7.0</artifactId>
 			<version>1.0.0.Final</version>
 			<type>pom</type>
 			<scope>provided</scope>
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.14</version>
+			<version>5.1.18</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
