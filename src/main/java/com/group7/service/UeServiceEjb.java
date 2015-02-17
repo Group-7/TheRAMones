@@ -12,21 +12,16 @@ import com.group7.daoInterface.UeDao;
 import com.group7.entities.UE;
 import com.group7.serviceInterface.UeService;
 
-
 @Stateless
 @Local
-public class UeServiceEjb implements UeService{
+public class UeServiceEjb implements UeService {
 
 	@EJB
 	private UeDao dao;
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Collection<UE> getAllEU() {
-		
 		return dao.getEU();
 	}
-	
-	
-	
 
 }
