@@ -1,4 +1,4 @@
-package com.group7.entities;
+/*package com.group7.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,3 +39,4 @@ public class Failure {
 	
 	
 }
+*/

@@ -1,15 +1,17 @@
-package com.group7.entities;
+/*package com.group7.entities;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
+*//**
  * This class describe the failure cause within the Event Type.
  * 
  * @author giovanni
- */
+ *//*
 
 @Entity
 @Table(name = "Event_Cause")
@@ -50,4 +52,15 @@ public class EventCause {
 		this.discription = discription;
 	}
 
-}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + CauseCode;
+		result = prime * result + eventId;
+		return result;
+	}
+
+
+
+}*/
