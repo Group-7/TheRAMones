@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name="network")
 public class Network {
 
-	@Id
+	//@Id
 	private int mcc;
 	
 	@Id

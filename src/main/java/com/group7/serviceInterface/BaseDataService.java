@@ -8,4 +8,5 @@ public interface BaseDataService {
 
 	public Collection<BaseData> getAllBasedata();
 	public void addBaseData(BaseData basedata);
+	public void putData(Collection<BaseData> bd);
 }

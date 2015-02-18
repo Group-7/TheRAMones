@@ -24,12 +24,20 @@ public class BaseDataServiceEJB implements BaseDataService {
 
 	public Collection<BaseData> getAllBasedata() {
 		// TODO Auto-generated method stub
+		
+		
 		return dao.getAllBaseData();
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void addBaseData(BaseData basedata){
 		dao.addBaseData(basedata);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void putData(Collection<BaseData> bd) {
+		// TODO Auto-generated method stub
+		dao.putData(bd);
 	}
 	
 }
