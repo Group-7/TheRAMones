@@ -1,5 +1,7 @@
 package com.group7.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ import javax.persistence.Table;
  */
 
 @Entity(name="Event_Cause_Table")
-public class EventCause {
+public class EventCause implements Serializable{
 
 	@Id
 	@Column(name="Cause_Code")
