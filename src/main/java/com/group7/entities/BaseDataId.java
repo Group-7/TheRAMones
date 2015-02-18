@@ -8,6 +8,7 @@ public class BaseDataId implements Serializable {
 
 	private Timestamp dateAndTime;
 	private Long imsi;
+	private Integer causeCode;
 	private Integer eventId;
 	private Integer cellid;
 	public BaseDataId(){
@@ -19,11 +20,17 @@ public class BaseDataId implements Serializable {
 	public void setDateAndTime(Timestamp dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
-	public long getImsi() {
+	public Long getImsi() {
 		return imsi;
 	}
-	public void setImsi(long imsi) {
+	public void setImsi(Long imsi) {
 		this.imsi = imsi;
+	}
+	public Integer getCauseCode() {
+		return causeCode;
+	}
+	public void setCauseCode(Integer causeCode) {
+		this.causeCode = causeCode;
 	}
 	public Integer getEventId() {
 		return eventId;
@@ -31,22 +38,18 @@ public class BaseDataId implements Serializable {
 	public void setEventId(Integer eventId) {
 		this.eventId = eventId;
 	}
-	
-	
-	
 	public Integer getCellid() {
 		return cellid;
 	}
 	public void setCellid(Integer cellid) {
 		this.cellid = cellid;
 	}
-	public void setImsi(Long imsi) {
-		this.imsi = imsi;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((causeCode == null) ? 0 : causeCode.hashCode());
 		result = prime * result + ((cellid == null) ? 0 : cellid.hashCode());
 		result = prime * result
 				+ ((dateAndTime == null) ? 0 : dateAndTime.hashCode());
@@ -63,6 +66,11 @@ public class BaseDataId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BaseDataId other = (BaseDataId) obj;
+		if (causeCode == null) {
+			if (other.causeCode != null)
+				return false;
+		} else if (!causeCode.equals(other.causeCode))
+			return false;
 		if (cellid == null) {
 			if (other.cellid != null)
 				return false;
@@ -85,6 +93,5 @@ public class BaseDataId implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 }

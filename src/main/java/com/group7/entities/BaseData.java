@@ -20,7 +20,7 @@ import javax.persistence.Table;
  */
 
 @Entity @IdClass(BaseDataId.class)
-@Table(name="base_data")
+@Table(name="Base_Data")
 public class BaseData {
 
 	@Id
@@ -31,6 +31,7 @@ public class BaseData {
 	@Column(name="Cell_ID")
 	private Integer cellid;
 	
+	@Id
 	@Column(name="Cause_Code")
 	private Integer causeCode;
 	@Id
