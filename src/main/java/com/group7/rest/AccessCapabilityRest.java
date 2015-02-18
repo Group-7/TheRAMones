@@ -1,4 +1,4 @@
-package com.group7.rest;
+/*package com.group7.rest;
 
 import java.util.Collection;
 
@@ -18,3 +18,4 @@ public class AccessCapabilityRest {
 		return service.getAllAccessCapability();
 	}
 }
+*/

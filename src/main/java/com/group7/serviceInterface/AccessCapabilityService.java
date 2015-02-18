@@ -1,4 +1,4 @@
-package com.group7.serviceInterface;
+/*package com.group7.serviceInterface;
 
 import java.util.Collection;
 
@@ -10,3 +10,4 @@ import com.group7.entities.AccessCapability;
 public interface AccessCapabilityService {
 	Collection<AccessCapability> getAllAccessCapability();
 }
+*/

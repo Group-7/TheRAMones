@@ -1,4 +1,4 @@
-package com.group7.daoInterface;
+/*package com.group7.daoInterface;
 
 import java.util.Collection;
 
@@ -10,3 +10,4 @@ import com.group7.entities.TacAccessCapability;
 public interface TacAccessCapabilityDao {
 	Collection<TacAccessCapability> getTacAccessCapability();
 }
+*/

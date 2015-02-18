@@ -1,4 +1,4 @@
-package com.group7.service;
+/*package com.group7.service;
 
 import java.util.Collection;
 
@@ -22,3 +22,4 @@ public class TacAccessCapabilityEjb implements TacAccessCapabilityService {
 	}
 
 }
+*/

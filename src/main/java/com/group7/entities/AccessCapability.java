@@ -1,5 +1,6 @@
-package com.group7.entities;
+/*package com.group7.entities;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ public class AccessCapability {
 	@Column(name = "Capability")
 	private String capability;
 	
+
 	@Column( name = "TAC")
 	private BigInteger tac;
 
@@ -37,3 +39,4 @@ public class AccessCapability {
 	
 	
 }
+*/

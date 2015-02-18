@@ -1,4 +1,4 @@
-package com.group7.dao;
+/*package com.group7.dao;
 
 import java.util.Collection;
 
@@ -25,3 +25,4 @@ public class AccessCapabilityDaoImpl implements AccessCapabilityDao {
 	}
 
 }
+*/

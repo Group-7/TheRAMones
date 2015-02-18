@@ -1,9 +1,9 @@
-package com.group7.dao;
+/*package com.group7.dao;
 
 import java.util.Collection;
 
-import javax.ejb.EJB;
 import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import com.group7.daoInterface.TacAccessCapabilityDao;
 import com.group7.entities.TacAccessCapability;
 
-@EJB
+@Stateless
 @Local
 public class TacAccessCapabilityDaoImpl implements TacAccessCapabilityDao {
 
@@ -25,3 +25,4 @@ public class TacAccessCapabilityDaoImpl implements TacAccessCapabilityDao {
 	}
 
 }
+*/

@@ -1,5 +1,6 @@
-package com.group7.entities;
+/*package com.group7.entities;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import javax.persistence.Column;
@@ -36,3 +37,4 @@ public class TacAccessCapability {
 	
 	
 }
+*/
