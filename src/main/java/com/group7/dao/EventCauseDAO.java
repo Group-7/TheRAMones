@@ -18,6 +18,7 @@ public class EventCauseDAO implements EventCauseDAOInterface{
 	@PersistenceContext
 	private EntityManager entitymanager;
 
+	@Override
 	public Collection<EventCause> getAllEventCauses() {
 			Query query = entitymanager.createQuery("from Event_Cause_Table");
 			return query.getResultList();

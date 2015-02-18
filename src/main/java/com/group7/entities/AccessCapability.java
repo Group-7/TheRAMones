@@ -17,8 +17,10 @@ public class AccessCapability {
 	@Column
 	private String Capability;
 	
+	@Column(name="TAC")
 	private BigInteger tac;
 
+	
 	
 	public String getCapability() {
 		return Capability;

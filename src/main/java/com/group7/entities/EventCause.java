@@ -13,15 +13,14 @@ import javax.persistence.Table;
  */
 
 @Entity(name="Event_Cause_Table")
-@IdClass(CauseCodeID.class)
 public class EventCause {
 
 	@Id
 	@Column(name="Cause_Code")
 	private int causeCode;
 
-	@Id
-	@Column(name="Event_ID")
+	//@Id
+	@Column(name="EventID")
 	private Integer eventId;
 
 	@Column(name="Description")
