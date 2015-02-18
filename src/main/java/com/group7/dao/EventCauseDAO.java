@@ -2,6 +2,8 @@ package com.group7.dao;
 
 import java.util.Collection;
 
+
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,16 +13,16 @@ import javax.persistence.Query;
 import com.group7.daoInterface.EventCauseDAOInterface;
 import com.group7.entities.EventCause;
 
-@Local
 @Stateless
+@Local
 public class EventCauseDAO implements EventCauseDAOInterface{
  
 	@PersistenceContext
-	private EntityManager entitymanager;
+	private EntityManager em;
 
-	@Override
+	
 	public Collection<EventCause> getAllEventCauses() {
-			Query query = entitymanager.createQuery("from Event_Cause_Table");
+			Query query = em.createQuery("from Event_Cause_Table");
 			return query.getResultList();
 		}
 		

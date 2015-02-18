@@ -2,7 +2,6 @@ package com.group7.service;
 
 import java.util.Collection;
 
-
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;

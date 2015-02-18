@@ -10,7 +10,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="network")
+@Table(name="Network")
 public class Network {
 
 	@Id

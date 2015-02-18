@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -15,26 +17,29 @@ import javax.persistence.Table;
  */
 
 @Entity(name="Event_Cause_Table")
+@IdClass(EventCauseID.class)
+//@Table(name="Event_Cause_Table")// does  not work with @Table
 public class EventCause implements Serializable{
-
+	
 	@Id
 	@Column(name="Cause_Code")
-	private int causeCode;
+	private Integer causeCode;
 
-	//@Id
+	@Id
 	@Column(name="EventID")
 	private Integer eventId;
-
+	
+	
 	@Column(name="Description")
 	private String description;
 
 	
 	
-	public int getCauseCode() {
+	public Integer getCauseCode() {
 		return causeCode;
 	}
 
-	public void setCauseCode(int causeCode) {
+	public void setCauseCode(Integer causeCode) {
 		this.causeCode = causeCode;
 	}
 
