@@ -17,15 +17,15 @@ import javax.persistence.Table;
 /**
  *
  * Basedata error records. 
- * Stores the records that did not pass the validation test
+ * Stores the records that did not pass the validation test as Strings
  *
  * @author giovanni
  *
  */
 
-@Entity 
+@Entity
 @Table(name="error_table")
-public class ErrorTable implements Serializable {
+public class ErrorTable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -33,37 +33,37 @@ public class ErrorTable implements Serializable {
 	private long id;
 	
 	@Column(name="DateTime")
-	private Timestamp dateAndTime;
+	private String dateAndTime;
 	
 	@Column(name="Cell_ID")
-	private Integer cellid;
+	private String cellid;
 	
 	@Column(name="Cause_Code")
-	private Integer causeCode;
+	private String causeCode;
 	
 	@Column(name="EventID")
-	private Integer eventId;
+	private String eventId;
 	
 	@Column(name="Failure_Class")
-	private Integer failureClass;
+	private String failureClass;
 	
 	@Column(name="TAC")
-	private long tac;
+	private String tac;
 	
 	@Column(name="MCC")
-	private Integer mcc;
+	private String mcc;
 	
 	@Column(name="MNC")
-	private Integer mnc;
+	private String mnc;
 	
 	@Column(name="Duration")
-	private long duration;
+	private String duration;
 	
 	@Column(name="NE_Version")
 	private String neVersion;
 	
 	@Column(name="IMSI")
-	private long imsi;
+	private String imsi;
 	
 	@Column(name="Hier3_ID")
 	private String heir3ID;
@@ -74,75 +74,75 @@ public class ErrorTable implements Serializable {
 	@Column(name="Hier321_ID")
 	private String heir321ID;
 
-	public Timestamp getDateAndTime() {
+	public String getDateAndTime() {
 		return dateAndTime;
 	}
 
-	public void setDateAndTime(Timestamp dateAndTime) {
+	public void setDateAndTime(String dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
 
-	public Integer getCellid() {
+	public String getCellid() {
 		return cellid;
 	}
 
-	public void setCellid(Integer cellid) {
+	public void setCellid(String cellid) {
 		this.cellid = cellid;
 	}
 
-	public Integer getCauseCode() {
+	public String getCauseCode() {
 		return causeCode;
 	}
 
-	public void setCauseCode(Integer causeCode) {
+	public void setCauseCode(String causeCode) {
 		this.causeCode = causeCode;
 	}
 
-	public Integer getEventId() {
+	public String getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(Integer eventId) {
+	public void setEventId(String eventId) {
 		this.eventId = eventId;
 	}
 
-	public Integer getFailureClass() {
+	public String getFailureClass() {
 		return failureClass;
 	}
 
-	public void setFailureClass(Integer failureClass) {
+	public void setFailureClass(String failureClass) {
 		this.failureClass = failureClass;
 	}
 
-	public long getTac() {
+	public String getTac() {
 		return tac;
 	}
 
-	public void setTac(long tac) {
+	public void setTac(String tac) {
 		this.tac = tac;
 	}
 
-	public Integer getMcc() {
+	public String getMcc() {
 		return mcc;
 	}
 
-	public void setMcc(Integer mcc) {
+	public void setMcc(String mcc) {
 		this.mcc = mcc;
 	}
 
-	public Integer getMnc() {
+	public String getMnc() {
 		return mnc;
 	}
 
-	public void setMnc(Integer mnc) {
+	public void setMnc(String mnc) {
 		this.mnc = mnc;
 	}
 
-	public long getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(long duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
@@ -154,11 +154,11 @@ public class ErrorTable implements Serializable {
 		this.neVersion = neVersion;
 	}
 
-	public long getImsi() {
+	public String getImsi() {
 		return imsi;
 	}
 
-	public void setImsi(long imsi) {
+	public void setImsi(String imsi) {
 		this.imsi = imsi;
 	}
 
