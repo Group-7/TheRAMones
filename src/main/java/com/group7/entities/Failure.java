@@ -1,13 +1,14 @@
-/*package com.group7.entities;
+package com.group7.entities;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Failure_Class_Table")
-public class Failure {
+@Entity(name ="Failure_Class_Table")
+public class Failure implements Serializable{
 
 	@Id
 	@Column(name = "Failure_Class")
@@ -39,4 +40,3 @@ public class Failure {
 	
 	
 }
-*/
