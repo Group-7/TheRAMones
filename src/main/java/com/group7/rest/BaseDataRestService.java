@@ -46,11 +46,17 @@ public class BaseDataRestService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<BaseData> getAllbaseData() throws BiffException, IOException{
 		
-		BaseDataExcelRead bdxr=new BaseDataExcelRead("/home/niall/Downloads/DIT Group Project - Sample Dataset.xls");
-		Collection<BaseData> bd=bdxr.readExcelFile();
-		service.putData(bd);
+		
 		
 		return service.getAllBasedata();
+	}
+	
+	@POST
+	@Path("/import")
+	public void importData() throws BiffException, IOException{
+		BaseDataExcelRead bdxr=new BaseDataExcelRead("/home/niall/Data.xls");
+		Collection<BaseData> bd=bdxr.readExcelFile();
+		service.putData(bd);
 	}
 	
 	@POST
@@ -62,8 +68,7 @@ public class BaseDataRestService {
 	@POST
 	@Path("/upload")
 	@Consumes("multipart/form-data")
-	public void uploadFile(@MultipartForm FileUploadForm form,
-						@Context HttpServletResponse response) throws IOException{
+	public void uploadFile(@MultipartForm FileUploadForm form){
 		
 		
 		
@@ -82,11 +87,7 @@ public class BaseDataRestService {
 		
 		System.out.println("done");
 		
-		//response.sendRedirect("../../import.html");
 		
-		/*return Response.status(200)
-				.entity("uploadFile is called , Uploaded"
-						+ " file name : "+filename).build();*/
 	}
 	
 	private void writeFile(byte[] content, String fileName) throws IOException {
