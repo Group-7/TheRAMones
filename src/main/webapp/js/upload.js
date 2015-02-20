@@ -1,10 +1,12 @@
-document.getElementById("uploadFileBtn").submit = function(){
+$('#uploadFileBtn').click(function(){
 	
 	//sendDataFile();
+	//alert(window.location.host +"\n"+window.location);
+	var url=window.location.search.split('SNAPSHOT/')[0];
 	
-	
-	location.href="import.html";
-};
+	window.location=url+"import.html"
+	//alert(url);
+});
 
 
 function sendDataFile(){
