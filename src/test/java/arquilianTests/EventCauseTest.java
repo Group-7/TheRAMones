@@ -1,6 +1,8 @@
-import static org.junit.Assert.*;
+package arquilianTests;
 
-import java.util.Collection;
+
+
+import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
 
@@ -14,12 +16,22 @@ import org.junit.runner.RunWith;
 
 import com.group7.dao.EventCauseDAO;
 import com.group7.daoInterface.EventCauseDAOInterface;
+import com.group7.entities.EventCause;
+import com.group7.rest.EventCauseREST;
+import com.group7.service.EventCauseService;
+import com.group7.serviceInterface.EventCauseServiceInterface;
 
 @RunWith(Arquillian.class)
 public class EventCauseTest {
 
 	@EJB
 	private EventCauseDAOInterface eventCause;
+	
+	@EJB
+	private EventCauseServiceInterface evsi;
+	
+	@EJB
+	private EventCauseREST ecr;
 	
 	
 	@Test
@@ -31,7 +43,7 @@ public class EventCauseTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 	return ShrinkWrap.create(JavaArchive.class, "test.jar")
-	.addClasses(EventCauseDAO.class, EventCauseDAOInterface.class)
+	.addClasses( EventCause.class,EventCauseDAO.class, EventCauseDAOInterface.class, EventCauseServiceInterface.class, EventCauseService.class, EventCauseREST.class)
 	.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
