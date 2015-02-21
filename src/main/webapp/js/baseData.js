@@ -20,9 +20,7 @@ function showBaseData(){
 function handleBaseDataResponse(data){
 	
 	for(var i=0; i< data.length; i++){
-		
-		
-		
+			
 		$('#baseTableBody').append(
 				"<tr>" +
 				"<td>"+timeconverter(data[i].dateAndTime) +"</td>"+
@@ -49,9 +47,10 @@ function timeconverter(timestamp){
 	
 	//timestamp=timestamp*-1;
 	var a=new Date(timestamp);
+	a.setDate(a.getDate() + 2);
 	var months=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
 	var year=a.getFullYear();
-	var month=a.getMonth()+1;
+	var month=months[a.getMonth()];
 	var date=a.getDate();
 	var hour=a.getHours();
 	var min=a.getMinutes();

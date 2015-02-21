@@ -54,7 +54,7 @@ public class BaseDataRestService {
 	@POST
 	@Path("/import")
 	public void importData() throws BiffException, IOException{
-		BaseDataExcelRead bdxr=new BaseDataExcelRead("/home/niall/Data.xls");
+		BaseDataExcelRead bdxr=new BaseDataExcelRead("C:\\Users\\marc\\Dropbox\\Group-7-SClub DIT Project\\PROJECT BRIEF\\DIT Group Project - Sample Dataset.xls");
 		Collection<BaseData> bd=bdxr.readExcelFile();
 		service.putData(bd);
 	}
