@@ -4,6 +4,7 @@ import java.util.Collection;
 
 
 
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,5 +26,12 @@ public class EventCauseDAO implements EventCauseDAOInterface{
 			Query query = em.createQuery("from Event_Cause_Table");
 			return query.getResultList();
 		}
+
+
+	@Override
+	public String testRun() {
+		// TODO Auto-generated method stub
+		return "just testing the container";
+	}
 		
 }

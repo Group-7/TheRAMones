@@ -12,4 +12,7 @@ import com.group7.entities.EventCause;
 public interface EventCauseDAOInterface {
 	Collection<EventCause> getAllEventCauses();
 
+	String testRun();
+		
+	
 }
