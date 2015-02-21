@@ -11,8 +11,6 @@ import com.group7.vadidation.BaseDataValidation;
  * Tests if the validation methods for validating the baseData
  * are correctly functioning.
  * Test cases are deployed for valid data as for invalid data.
- * 
- * @author giovanni
  *
  */
 public class ValidationTest {
