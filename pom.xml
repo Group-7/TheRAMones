@@ -13,7 +13,18 @@
 			<type>pom</type>
 			<scope>import</scope>
 		</dependency>
-
+<dependency>
+		<groupId>org.jboss.resteasy</groupId>
+		<artifactId>resteasy-jaxrs</artifactId>
+		<version>2.2.1.GA</version>
+		<scope>provided</scope>
+		</dependency>
+		<dependency>
+		<groupId>org.jboss.resteasy</groupId>
+		<artifactId>resteasy-multipart-provider</artifactId>
+		<version>2.2.0.GA</version>
+		<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

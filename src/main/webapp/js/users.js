@@ -50,7 +50,7 @@ $('#buttonJ').click(function(){
                  else {
                 	 alert("GRGR");
                 	 $("#error").text("Hello " + userData.email);
-                	 window.location.href="eventcause.html";
+                	 window.location.href="upload.html";
                  }
              }
          });
