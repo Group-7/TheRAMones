@@ -53,7 +53,7 @@ public class JPABaseDataDAO implements BaseDataDAO {
 			base.setNeVersion(basedata.getNeVersion());
 			base.setImsi(basedata.getImsi());
 			base.setHeir3ID(basedata.getHeir3ID());
-			base.setHeir321ID(basedata.getHeir32ID());
+			base.setHeir32ID(basedata.getHeir32ID());
 			base.setHeir321ID(basedata.getHeir321ID());
 			em.persist(base);
 		}

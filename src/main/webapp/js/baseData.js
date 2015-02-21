@@ -21,9 +21,11 @@ function handleBaseDataResponse(data){
 	
 	for(var i=0; i< data.length; i++){
 		
+		
+		
 		$('#baseTableBody').append(
 				"<tr>" +
-				"<td>"+data[i].dateAndTime +"</td>"+
+				"<td>"+timeconverter(data[i].dateAndTime) +"</td>"+
 				"<td>"+data[i].eventId +"</td>"+
 				"<td>"+data[i].failureClass +"</td>"+
 				"<td>"+data[i].tac +"</td>"+
@@ -31,6 +33,7 @@ function handleBaseDataResponse(data){
 				"<td>"+data[i].mnc +"</td>"+
 				"<td>"+data[i].cellid +"</td>"+
 				"<td>"+data[i].duration +"</td>"+
+				"<td>"+data[i].causeCode +"</td>"+
 				"<td>"+data[i].neVersion +"</td>"+
 				"<td>"+data[i].imsi +"</td>"+
 				"<td>"+data[i].heir3ID +"</td>"+
@@ -40,6 +43,19 @@ function handleBaseDataResponse(data){
 		);
 		
 	};
+}
+
+function timeconverter(timestamp){
 	
-	
+	//timestamp=timestamp*-1;
+	var a=new Date(timestamp);
+	var months=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+	var year=a.getFullYear();
+	var month=a.getMonth()+1;
+	var date=a.getDate();
+	var hour=a.getHours();
+	var min=a.getMinutes();
+	var sec=a.getSeconds();
+	var time=date+'/'+month+'/'+year+' '+hour+':'+min;
+	return time;
 }

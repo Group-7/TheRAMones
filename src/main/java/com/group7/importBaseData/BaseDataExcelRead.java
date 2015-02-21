@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import jxl.Sheet;
 import jxl.Workbook;
@@ -34,14 +36,22 @@ public class BaseDataExcelRead {
 		for(int i=1;i<errorData.getRows();i++){
 			
 			String date=errorData.getCell(0,i).getContents();
+			
 			String[] dayTime=date.split(" ",-1);
+			//dayTime[0]="29/12/13";
 			String[] dates=dayTime[0].split("/",-1);
 			String[] time=dayTime[1].split(":",-1);
 			
-			Calendar c= Calendar.getInstance();
-			c.set(Integer.parseInt(dates[2]),
-					Integer.parseInt(dates[1]),
-					Integer.parseInt(dates[0]));
+			String s=""+dates[0]+"/"+dates[1]+"/"+dates[2]+" "+time[0]+":"+time[1];
+			
+			Calendar c;
+			c=Calendar.getInstance(TimeZone.getDefault(), Locale.UK);
+			/*c.set(Calendar.YEAR, 2013);
+			c.set(Calendar.MONTH, 9);
+			c.set(Calendar.DAY_OF_MONTH, 5);*/
+			c.set(Calendar.YEAR,Integer.parseInt(dates[2])+2000);
+			c.set(Calendar.MONTH, (Integer.parseInt(dates[0]) )-1 );
+			c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dates[1]));
 			
 			c.set(Calendar.HOUR_OF_DAY, Integer.parseInt(time[0]));
 			c.set(Calendar.MINUTE, Integer.parseInt(time[1]));
@@ -53,6 +63,7 @@ public class BaseDataExcelRead {
 			for(int j=0;j<errorData.getColumns();j++){
 				if(errorData.getCell(j,i).equals("(null)")){
 					ok=false;
+					j=40;
 				}
 			}
 			
