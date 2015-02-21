@@ -1,4 +1,4 @@
-$('#uploadFileBtn').click(function(){
+/*$('#uploadFileBtn').click(function(){
 	
 	//sendDataFile();
 	//alert(window.location.host +"\n"+window.location);
@@ -6,7 +6,7 @@ $('#uploadFileBtn').click(function(){
 	
 	window.location=url+"import.html"
 	//alert(url);
-});
+});*/
 
 
 function sendDataFile(){
