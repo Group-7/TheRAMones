@@ -28,6 +28,7 @@ public class EventCauseEJBTest {
 
   }
 
+	//check
 	@EJB
 	private EventCauseDAOInterface dao;
 
