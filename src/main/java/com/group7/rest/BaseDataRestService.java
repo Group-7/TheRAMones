@@ -54,7 +54,7 @@ public class BaseDataRestService {
 	@POST
 	@Path("/import")
 	public void importData() throws BiffException, IOException{
-		BaseDataExcelRead bdxr=new BaseDataExcelRead("/home/gerry/Data.xls");
+		BaseDataExcelRead bdxr=new BaseDataExcelRead("/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
 		Collection<BaseData> bd=bdxr.readExcelFile();
 		service.putData(bd);
 	}
@@ -72,7 +72,7 @@ public class BaseDataRestService {
 		
 		
 		
-		String filename="/home/gerry/Data.xls";
+		String filename="/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
 		if(form==null)
 			filename="null.txt";
 		

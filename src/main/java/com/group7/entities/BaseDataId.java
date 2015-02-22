@@ -1,13 +1,14 @@
 package com.group7.entities;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 public class BaseDataId implements Serializable {
 
 	private Timestamp dateAndTime;
-	private Long imsi;
+	private BigInteger imsi;
 	private Integer causeCode;
 	private Integer eventId;
 	private Integer cellid;
@@ -20,10 +21,11 @@ public class BaseDataId implements Serializable {
 	public void setDateAndTime(Timestamp dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
-	public Long getImsi() {
+	
+	public BigInteger getImsi() {
 		return imsi;
 	}
-	public void setImsi(Long imsi) {
+	public void setImsi(BigInteger imsi) {
 		this.imsi = imsi;
 	}
 	public Integer getCauseCode() {
@@ -93,5 +95,7 @@ public class BaseDataId implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 	
 }

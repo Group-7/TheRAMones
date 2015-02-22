@@ -26,7 +26,7 @@ public class UserDAOImple implements UserDAOLocal {
 	 * @param None
 	 */
 	public Collection<User> showAllUsers() {
-		Query q = em.createQuery("from Users");
+		Query q = em.createQuery("from User");
 		return q.getResultList();
 	}
 

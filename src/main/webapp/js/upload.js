@@ -1,12 +1,11 @@
 $('#uploadFileBtn').click(function(){
 	
 	//sendDataFile();
-	alert(window.location.host +"\n"+window.location);
+	//alert(window.location.host +"\n"+window.location);
 	var url=window.location.search.split('SNAPSHOT/')[0];
 	
-	//window.location.href="import.html"
-directToImport();
-	alert(url);
+	window.location.href=url+"import.html"
+	//alert(url);
 });
 
 
@@ -29,5 +28,5 @@ function sendDataFile(){
 
 function directToImport(){
 
-	window.location.href="import.html";
+	location.href="import.html";
 }

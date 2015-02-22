@@ -1,5 +1,6 @@
 package com.group7.entities;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -37,20 +38,15 @@ public class BaseData {
 	@Id
 	@Column(name="EventID")
 	private Integer eventId;
-	
-	//@Id
-	//private EventCause eventCause;
+
 	
 	@Column(name="Failure_Class")
 	private Integer failureClass;
 	
-	//private Failure failure;
-	
-	
+
 	@Column(name="TAC")
-	private long tac;
+	private BigInteger tac;
 	
-	//private UEType ue;
 	
 	@Column(name="MCC")
 	private Integer mcc;
@@ -58,17 +54,15 @@ public class BaseData {
 	@Column(name="MNC")
 	private Integer mnc;
 	
-	//private Network network;
-	
 	@Column(name="Duration")
-	private long duration;
+	private int duration;
 	
 	@Column(name="NE_Version")
 	private String neVersion;
 	
 	@Id
 	@Column(name="IMSI")
-	private long imsi;
+	private BigInteger imsi;
 	
 	@Column(name="Hier3_ID")
 	private String heir3ID;
@@ -78,6 +72,31 @@ public class BaseData {
 	
 	@Column(name="Hier321_ID")
 	private String heir321ID;
+
+	/*public BaseData(Timestamp dateAndTime, Integer cellid, Integer causeCode,
+			Integer eventId, Integer failureClass, BigInteger tac, Integer mcc,
+			Integer mnc, int duration, String neVersion, BigInteger imsi,
+			String heir3id, String heir32id, String heir321id) {
+		super();
+		this.dateAndTime = dateAndTime;
+		this.cellid = cellid;
+		this.causeCode = causeCode;
+		this.eventId = eventId;
+		this.failureClass = failureClass;
+		this.tac = tac;
+		this.mcc = mcc;
+		this.mnc = mnc;
+		this.duration = duration;
+		this.neVersion = neVersion;
+		this.imsi = imsi;
+		heir3ID = heir3id;
+		heir32ID = heir32id;
+		heir321ID = heir321id;
+	}
+
+	public BaseData() {
+		super();
+	}*/
 
 	public Timestamp getDateAndTime() {
 		return dateAndTime;
@@ -119,13 +138,6 @@ public class BaseData {
 		this.failureClass = failureClass;
 	}
 
-	public long getTac() {
-		return tac;
-	}
-
-	public void setTac(long tac) {
-		this.tac = tac;
-	}
 
 	public Integer getMcc() {
 		return mcc;
@@ -143,13 +155,10 @@ public class BaseData {
 		this.mnc = mnc;
 	}
 
-	public long getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(long duration) {
-		this.duration = duration;
-	}
 
 	public String getNeVersion() {
 		return neVersion;
@@ -159,13 +168,6 @@ public class BaseData {
 		this.neVersion = neVersion;
 	}
 
-	public long getImsi() {
-		return imsi;
-	}
-
-	public void setImsi(long imsi) {
-		this.imsi = imsi;
-	}
 
 	public String getHeir3ID() {
 		return heir3ID;
@@ -191,6 +193,26 @@ public class BaseData {
 		heir321ID = heir321id;
 	}
 
+	public BigInteger getTac() {
+		return tac;
+	}
+
+	public void setTac(BigInteger tac) {
+		this.tac = tac;
+	}
+
+	public BigInteger getImsi() {
+		return imsi;
+	}
+
+	public void setImsi(BigInteger imsi) {
+		this.imsi = imsi;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -200,7 +222,7 @@ public class BaseData {
 		result = prime * result + ((cellid == null) ? 0 : cellid.hashCode());
 		result = prime * result
 				+ ((dateAndTime == null) ? 0 : dateAndTime.hashCode());
-		result = prime * result + (int) (duration ^ (duration >>> 32));
+		result = prime * result + duration;
 		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
 		result = prime * result
 				+ ((failureClass == null) ? 0 : failureClass.hashCode());
@@ -209,12 +231,12 @@ public class BaseData {
 		result = prime * result
 				+ ((heir32ID == null) ? 0 : heir32ID.hashCode());
 		result = prime * result + ((heir3ID == null) ? 0 : heir3ID.hashCode());
-		result = prime * result + (int) (imsi ^ (imsi >>> 32));
+		result = prime * result + ((imsi == null) ? 0 : imsi.hashCode());
 		result = prime * result + ((mcc == null) ? 0 : mcc.hashCode());
 		result = prime * result + ((mnc == null) ? 0 : mnc.hashCode());
 		result = prime * result
 				+ ((neVersion == null) ? 0 : neVersion.hashCode());
-		result = prime * result + (int) (tac ^ (tac >>> 32));
+		result = prime * result + ((tac == null) ? 0 : tac.hashCode());
 		return result;
 	}
 
@@ -269,7 +291,10 @@ public class BaseData {
 				return false;
 		} else if (!heir3ID.equals(other.heir3ID))
 			return false;
-		if (imsi != other.imsi)
+		if (imsi == null) {
+			if (other.imsi != null)
+				return false;
+		} else if (!imsi.equals(other.imsi))
 			return false;
 		if (mcc == null) {
 			if (other.mcc != null)
@@ -286,16 +311,14 @@ public class BaseData {
 				return false;
 		} else if (!neVersion.equals(other.neVersion))
 			return false;
-		if (tac != other.tac)
+		if (tac == null) {
+			if (other.tac != null)
+				return false;
+		} else if (!tac.equals(other.tac))
 			return false;
 		return true;
 	}
 
 	
-	
-	
-	
-	
-	
-	
 }
+
