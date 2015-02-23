@@ -26,6 +26,12 @@ function sendDataFile(){
 	
 }
 
+document.getElementById("uploadDataBtn").onclick = function () {
+    location.href = "import.html";
+};
+
+
+
 function directToImport(){
 
 	location.href="import.html";

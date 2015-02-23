@@ -25,7 +25,7 @@ public class EventCauseEJBTest {
 				.addClasses(EventCauseDAO.class, EventCause.class, EventCauseDAOInterface.class,EventCauseID.class)
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-
+  
   }
 
 	//check

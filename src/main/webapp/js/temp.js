@@ -9,7 +9,7 @@ document.getElementById("eventCauseBtn").onclick = function () {
 };
 
 document.getElementById("networkBtn").onclick = function () {
-    location.href = "index.html";
+    location.href = "network.html";
 };
 
 document.getElementById("euBtn").onclick = function () {
@@ -18,5 +18,9 @@ document.getElementById("euBtn").onclick = function () {
 
 
 document.getElementById("niallBtn").onclick = function () {
-    location.href = "http://localhost:8080/TeamProject-0.0.1-SNAPSHOT/rest/baseData";
+    location.href = "http://localhost:8080/TeamProject-0.0.1-SNAPSHOT/baseData.html";
+};
+
+document.getElementById("uploadBtn").onclick = function () {
+    location.href = "upload.html";
 };

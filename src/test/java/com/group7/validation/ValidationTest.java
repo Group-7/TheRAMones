@@ -23,7 +23,7 @@ public class ValidationTest {
 		validator = new BaseDataValidation();
 	}
 
-	
+	 
 	/**
 	 * Test the mnc Validation method on invalid mnc data.
 	 * @throws Exception 

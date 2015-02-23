@@ -48,9 +48,9 @@ $('#buttonJ').click(function(){
                      $("#error").text("Sorry, there was a problem with your login or password");
                  }
                  else {
-                	 alert("GRGR");
+                	 alert("You succesfully logged in");
                 	 $("#error").text("Hello " + userData.email);
-                	 window.location.href="upload.html";
+                	 window.location.href="temp.html";
                  }
              }
          });
