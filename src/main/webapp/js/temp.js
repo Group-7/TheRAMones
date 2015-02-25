@@ -24,3 +24,7 @@ document.getElementById("niallBtn").onclick = function () {
 document.getElementById("uploadBtn").onclick = function () {
     location.href = "upload.html";
 };
+
+document.getElementById("addUserBtn").onclick = function () {
+    location.href = "addUser.html";
+};
