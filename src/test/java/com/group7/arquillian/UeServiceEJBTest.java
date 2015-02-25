@@ -15,10 +15,10 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import com.group7.dao.UeDaoImpl;
-import com.group7.daoInterface.UeDao;
+import com.group7.dao.UeDAO;
+import com.group7.dao.jpa.UeDAOImpl;
 import com.group7.entities.UE;
-import com.group7.serviceInterface.UeService;
+import com.group7.serviceInterface.UeServiceLocal;
 
 @RunWith(Arquillian.class)
 public class UeServiceEJBTest {
@@ -26,14 +26,14 @@ public class UeServiceEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
-				.addClasses(UeDao.class, UE.class, UeDaoImpl.class)
+				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class)
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
   }
 
 	@EJB
-	private UeDao dao;
+	private UeDAO dao;
 
 	// here create simple test which check method of ejb
 	@Test

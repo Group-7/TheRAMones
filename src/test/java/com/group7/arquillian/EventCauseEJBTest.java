@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.group7.dao.EventCauseDAO;
-import com.group7.daoInterface.EventCauseDAOInterface;
+import com.group7.dao.jpa.EventCauseDAOImpl;
 import com.group7.entities.EventCause;
 import com.group7.entities.EventCauseID;
 
@@ -22,7 +22,7 @@ public class EventCauseEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
-				.addClasses(EventCauseDAO.class, EventCause.class, EventCauseDAOInterface.class,EventCauseID.class)
+				.addClasses(EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class)
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   
@@ -30,7 +30,7 @@ public class EventCauseEJBTest {
 
 	//check
 	@EJB
-	private EventCauseDAOInterface dao;
+	private EventCauseDAO dao;
 
 	// here create simple test which check method of ejb
 	@Test

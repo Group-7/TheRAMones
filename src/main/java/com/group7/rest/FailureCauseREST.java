@@ -8,13 +8,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.group7.entities.Failure;
-import com.group7.serviceInterface.FailureCauseServiceInterface;
+import com.group7.serviceInterface.FailureCauseServiceLocal;
 
 @Path("/failureCause")
 public class FailureCauseREST {
 
 	@EJB
-	private FailureCauseServiceInterface evsl;
+	private FailureCauseServiceLocal evsl;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

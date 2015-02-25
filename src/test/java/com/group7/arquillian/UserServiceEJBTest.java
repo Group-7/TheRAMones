@@ -16,8 +16,8 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.group7.dao.UserDAOImple;
-import com.group7.daoInterface.UserDAOLocal;
+import com.group7.dao.UserDAO;
+import com.group7.dao.jpa.UserDAOImpl;
 import com.group7.entities.User;
 
 @RunWith(Arquillian.class)
@@ -26,14 +26,14 @@ public class UserServiceEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
-				.addClasses(User.class, UserDAOLocal.class, UserDAOImple.class)
+				.addClasses(User.class, UserDAO.class, UserDAOImpl.class)
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
   }
 
 	@EJB
-	private UserDAOLocal dao;
+	private UserDAO dao;
 
 	//this test will work just there is some issue with database which needs to be fixed win the final update
 	@Test

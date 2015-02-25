@@ -10,14 +10,14 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
-import com.group7.daoInterface.BaseDataDAO;
+import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
-import com.group7.serviceInterface.BaseDataService;
+import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class BaseDataServiceEJB implements BaseDataService {
+public class BaseDataServiceEJB implements BaseDataServiceLocal {
 
 	@Inject
 	private BaseDataDAO dao;

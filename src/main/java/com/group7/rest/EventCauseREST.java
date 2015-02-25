@@ -9,13 +9,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.group7.entities.EventCause;
-import com.group7.serviceInterface.EventCauseServiceInterface;
+import com.group7.serviceInterface.EventCauseServiceLocal;
 
 @Path("/eventCause")
 public class EventCauseREST {
 
 	@EJB
-	private EventCauseServiceInterface evsl;
+	private EventCauseServiceLocal evsl;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
