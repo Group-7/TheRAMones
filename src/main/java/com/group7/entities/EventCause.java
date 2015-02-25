@@ -1,53 +1,62 @@
 package com.group7.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 /**
- * This class describe the failure cause within the Event Type.
+ * Presents the failure cause within the Event Type.
  * 
  * @author giovanni
  */
 
-@Entity
-@Table(name = "Event_Cause")
-public class EventCause {
+@Entity(name="Event_Cause_Table")
+@IdClass(EventCauseID.class)
+//@Table(name="Event_Cause_Table")// does  not work with @Table
+public class EventCause implements Serializable{
+	
+	@Id
+	@Column(name="Cause_Code")
+	private Integer causeCode;
 
 	@Id
-	@Column(name = "Cause Code")
-	private int CauseCode;
+	@Column(name="EventID")
+	private Integer eventId;
+	
+	
+	@Column(name="Description")
+	private String description;
 
-	@Id
-	@Column(name = "Event Id")
-	private int eventId;
-
-	@Column(name = "Description")
-	private String discription;
-
-	public int getEventCode() {
-		return CauseCode;
+	
+	
+	public Integer getCauseCode() {
+		return causeCode;
 	}
 
-	public void setEventCode(int eventCode) {
-		this.CauseCode = eventCode;
+	public void setCauseCode(Integer causeCode) {
+		this.causeCode = causeCode;
 	}
 
-	public int getEventId() {
+	public Integer getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(int eventId) {
+	public void setEventID(Integer eventId) {
 		this.eventId = eventId;
 	}
 
-	public String getDiscription() {
-		return discription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDiscription(String discription) {
-		this.discription = discription;
+	public void setDiscription(String description) {
+		this.description = description;
 	}
 
 }
