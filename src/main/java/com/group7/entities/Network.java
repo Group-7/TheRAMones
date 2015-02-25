@@ -1,7 +1,11 @@
 package com.group7.entities;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 /**
@@ -10,16 +14,22 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="network")
-public class Network {
+@IdClass(NetworkId.class)
+@Table(name="Network")
+public class Network implements Serializable{
 
 	//@Id
+	@Column(name = "MCC")
 	private int mcc;
 	
 	@Id
+	@Column(name = "MNC")
 	private int mnc;
 	
+	@Column(name = "Country")
 	private String country;
+	
+	@Column(name = "Operator")
 	private String operator;
 	
 	//Getters and setters

@@ -1,7 +1,9 @@
 package com.group7.importBaseData;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -10,15 +12,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-import javassist.bytecode.SignatureAttribute.BaseType;
-
-import javax.persistence.PersistenceUtil;
-
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-
 
 import com.group7.entities.BaseData;
 
@@ -47,7 +44,7 @@ public class BaseDataExcelRead {
 		int sIndex = 0;
 		File inputWorkBook = new File(fileName);
 		Workbook w;
-		int count = 0;
+		int count = 0;  
 		try {
 			w = Workbook.getWorkbook(inputWorkBook);
 			Sheet sheet = w.getSheet(0);
@@ -71,7 +68,7 @@ public class BaseDataExcelRead {
 				try{
 				validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
 				Timestamp dateDB=new Timestamp(date.getTime());
-				int event_id = Integer.parseInt(validation.isEventDateValid(strings[0]));
+				int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 				int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));
 				BigInteger ueTypeTac = new BigInteger(validation.ueTypeTacValidation(strings[2]));
 				int market = Integer.parseInt(validation.isMCCValid(strings[3]));
@@ -81,12 +78,10 @@ public class BaseDataExcelRead {
 				int cause_code = Integer.parseInt(validation.isCauseCodeValid(strings[7]));
 				String neVersion = validation.neVersionValidation(strings[8]);			
 				BigInteger imsi = new BigInteger(validation.imsiValidation(strings[9]));
+				validation.validateCompositeKeysInNetwork(strings[3]+ strings[4]);
+				validation.validateCompositeInEventCause(strings[7]+ strings[0]);
+			
 				
-				
-				//System.out.println("Ok!! " + count);
-				
-				/*BaseData entity = new BaseData(dateDB, event_id, failure_class, market, cause_code,imsi,cell_id,duration,mnc,neVersion,ueTypeTac,
-						strings[10],strings[11],strings[12]);*/
 				BaseData entity = new BaseData();
 				
 				entity.setDateAndTime(dateDB);
@@ -104,23 +99,48 @@ public class BaseDataExcelRead {
 				entity.setHeir3ID(strings[10]);
 				entity.setHeir32ID(strings[11]);
 				entity.setHeir321ID(strings[12]);
-				
+				count++;
 				bsList.add(entity);
 				convertedDate = null;
 				}catch(Exception e){
-					System.out.println("fail!! " + count);
+					writeToLogError(count);
 					count++;
 					//writeToLogError();
 				}
 				
 				
 			}
+			System.out.println("HERE:----------------------" + bsList.get(0).getHeir32ID());
+			System.out.println("HERE:----------------------" + bsList.get(750).getHeir32ID());
+
 		} catch (BiffException e) {
 			e.printStackTrace();
 		}
 		return bsList;
 
 }
+	public void writeToLogError(int errorLineNo) {
+		final String FILE_PATH = "/home/bmj/git_backup/TheRamones/errorlog.txt";
+
+		try {
+
+			File file = new File(FILE_PATH);
+
+			// if file doesnt exists, then create it
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			PrintWriter out = new PrintWriter(new FileWriter(file, true));
+			out.append("An error was discover in line: " + errorLineNo);
+			out.append("\n");
+			out.close();
+			System.out.println("Done writing to the file");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static boolean isNullString(String cell){
 		return cell.equals("(null)");

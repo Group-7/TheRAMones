@@ -23,88 +23,75 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import com.group7.entities.BaseData;
 import com.group7.entities.FileUploadForm;
 import com.group7.importBaseData.BaseDataExcelRead;
-import com.group7.serviceInterface.BaseDataService;
+import com.group7.serviceInterface.BaseDataServiceLocal;
 
 import jxl.read.biff.BiffException;
 
-
-
 @Path("/baseData")
-public class BaseDataRestService {
+public class BaseDataREST {
 
 	@Inject
-	private BaseDataService service;
+	private BaseDataServiceLocal service;
 
-	
-	
-	
-	public BaseDataRestService(){
-		
+	public BaseDataREST() {
+
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<BaseData> getAllbaseData() throws BiffException, IOException{
-		
-		
-		
+	public Collection<BaseData> getAllbaseData() throws BiffException,
+			IOException {
+
 		return service.getAllBasedata();
 	}
-	
+
 	@POST
 	@Path("/import")
-	public void importData() throws BiffException, IOException{
-		BaseDataExcelRead bdxr=new BaseDataExcelRead("C:\\Users\\marc\\Dropbox\\Group-7-SClub DIT Project\\PROJECT BRIEF\\DIT Group Project - Sample Dataset.xls");
-		Collection<BaseData> bd=bdxr.readExcelFile();
+	public void importData() throws BiffException, IOException {
+		BaseDataExcelRead bdxr = new BaseDataExcelRead(
+				"/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
+		Collection<BaseData> bd = bdxr.readExcelFile();
 		service.putData(bd);
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addBaseData(BaseData basedata){
+	public void addBaseData(BaseData basedata) {
 		service.addBaseData(basedata);
 	}
-	
+
 	@POST
 	@Path("/upload")
 	@Consumes("multipart/form-data")
-	public void uploadFile(@MultipartForm FileUploadForm form){
-		
-		
-		
-		String filename="Downloads/Data.xls";
-		if(form==null)
-			filename="null.txt";
-		
-		
-		try{
-			writeFile(form.getData(),filename);
+	public void uploadFile(@MultipartForm FileUploadForm form) {
+
+		String filename = "/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
+		if (form == null)
+			filename = "null.txt";
+
+		try {
+			writeFile(form.getData(), filename);
 		} catch (IOException e) {
 			e.printStackTrace();
-			
+
 		}
-		
-		
+
 		System.out.println("done");
-		
-		
+
 	}
-	
+
 	private void writeFile(byte[] content, String fileName) throws IOException {
-		File file=new File(fileName);
-		
-		if(file.exists() == false){
+		File file = new File(fileName);
+
+		if (file.exists() == false) {
 			file.createNewFile();
 		}
-		
-		
+
 		FileOutputStream fop = new FileOutputStream(file);
 		fop.write(content);
-		
+
 		fop.flush();
 		fop.close();
-		
-		
-		
+
 	}
 }

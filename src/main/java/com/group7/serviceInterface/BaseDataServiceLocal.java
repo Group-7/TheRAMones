@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.group7.entities.BaseData;
 
-public interface BaseDataService {
+public interface BaseDataServiceLocal {
 
 	public Collection<BaseData> getAllBasedata();
 	public void addBaseData(BaseData basedata);
