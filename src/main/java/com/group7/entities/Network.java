@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="Network")
 public class Network implements Serializable{
 
-	//@Id
+	@Id
 	@Column(name = "MCC")
 	private int mcc;
 	
