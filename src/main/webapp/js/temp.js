@@ -28,3 +28,7 @@ document.getElementById("uploadBtn").onclick = function () {
 document.getElementById("addUserBtn").onclick = function () {
     location.href = "addUser.html";
 };
+
+document.getElementById("allUsersBtn").onclick = function () {
+    location.href = "users.html";
+};
