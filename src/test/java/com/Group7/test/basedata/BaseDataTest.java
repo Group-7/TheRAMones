@@ -13,20 +13,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.group7.dao.JPABaseDataDAO;
+import com.group7.daoInterface.BaseDataDAO;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataId;
-import com.group7.serviceInterface.BaseDataService;
 
 @RunWith(Arquillian.class)
 public class BaseDataTest {
 
 	@EJB
-	private BaseDataService service;
+	private BaseDataDAO service;
 	
 	@Test
 	public void test() {
 	
-		assertEquals(service.getAllBasedata().size(),800);
+		assertEquals(service.getAllBaseData().size(),800);
 	}
 	
 	@Deployment
