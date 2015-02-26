@@ -8,6 +8,26 @@ $('#uploadFileBtn').click(function(){
 	//alert(url);
 });
 
+function load(){
+	document.getElementById("uploadFileBtn").disabled=true;
+}
+
+function validate(){
+	
+	
+	var fup = document.getElementById("uploadFile");
+	var fileName=fup.value;
+	var ext=fileName.substring(fileName.lastIndexOf('.') + 1);
+	
+	if(ext=="xls"){
+		document.getElementById("uploadFileBtn").disabled=false;
+	}
+	else{
+		alert("File must be of type xls");
+		document.getElementById("uploadFileBtn").disabled=true;
+	}
+	
+}
 
 function sendDataFile(){
 	
