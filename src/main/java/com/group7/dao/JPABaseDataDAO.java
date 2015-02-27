@@ -9,7 +9,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 
-import com.group7.daoInterface.BaseDataDAO;
+import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
 
 

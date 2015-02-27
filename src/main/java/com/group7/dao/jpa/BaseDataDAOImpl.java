@@ -18,7 +18,7 @@ import com.group7.entities.BaseData;
 }
 )
 
-public class JPABaseDataDAOImpl implements BaseDataDAO {
+public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@PersistenceContext
 	EntityManager em;
