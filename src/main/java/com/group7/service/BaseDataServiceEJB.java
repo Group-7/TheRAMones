@@ -1,5 +1,6 @@
 package com.group7.service;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.Local;
@@ -38,6 +39,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public void putData(Collection<BaseData> bd) {
 		// TODO Auto-generated method stub
 		dao.putData(bd);
+	}
+	
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType) {
+		
+		return dao.getTotalFailuresOfSpecificPhone(phoneType);
 	}
 	
 }

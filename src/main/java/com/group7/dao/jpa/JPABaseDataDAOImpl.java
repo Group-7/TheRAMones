@@ -1,5 +1,6 @@
 package com.group7.dao.jpa;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.TransactionAttribute;
@@ -59,5 +60,12 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 		}
 		
 	}
+	
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType) {
+		return em.createQuery("SELECT COUNT(*) FROM BaseData o WHERE o.tac LIKE :tac")
+				.setParameter("tac", phoneType)
+				.getResultList();
+		
+				}
 
 }
