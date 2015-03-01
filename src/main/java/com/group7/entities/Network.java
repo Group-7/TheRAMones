@@ -12,6 +12,7 @@ import javax.persistence.Table;
  * 
  * @author marc grogan
  *
+ *	A Test comment but also, named queries to go here!!
  */
 @Entity
 @IdClass(NetworkId.class)
