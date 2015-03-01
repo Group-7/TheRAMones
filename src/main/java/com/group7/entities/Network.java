@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author marc
+ * @author marc grogan
  *
  */
 @Entity
