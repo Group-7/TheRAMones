@@ -6,23 +6,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.inject.Inject;
+
+import com.group7.dao.BaseDataDAO;
+
 public class BaseDataValidation { 
 
 	private List<String> eventId = new ArrayList<String>();
 	private List<String> mcc = new ArrayList<String>();
-	private List<String> mnc = new ArrayList<String>();
+	private List<Integer> mnc = new ArrayList<Integer>();
 	private List<String> cellId = new ArrayList<String>();
 	private List<String> neVersion = new ArrayList<String>();
 	private List<String> ueTypeTac = new ArrayList<String>();
 	private List<String> networkCompositeKeys = new ArrayList<String>();
 	private List<String> eventCauseCompositeKeys = new ArrayList<String>();
 	private String refDuration;
+	@Inject
+	private BaseDataDAO bd;
 	 
 	public BaseDataValidation(){
-		
-		// populate the lists with valid lookupTable data
+					
+		mnc = bd.getMNCFromNetwork();
 		buildValidValidationData();
-		
 	}
 		
 		/**
@@ -254,7 +260,7 @@ public class BaseDataValidation {
 		}
 
 		public void buildValidValidationData(){
-			mnc.add("0");
+			/*mnc.add("0");
 			mnc.add("1");
 			mnc.add("2");
 			mnc.add("3");
@@ -282,7 +288,7 @@ public class BaseDataValidation {
 			mnc.add("71");
 			mnc.add("72");
 			mnc.add("88");
-			mnc.add("90");
+			mnc.add("90");*/
 			
 			cellId.add("4");
 			cellId.add("5");
@@ -368,7 +374,7 @@ public class BaseDataValidation {
 			}
 		}
 
-		public String getRefDuration() {
+		/*public String getRefDuration() {
 			return refDuration;
 		}
 
@@ -394,7 +400,7 @@ public class BaseDataValidation {
 
 		public List<String> getUeTypeTac() {
 			return ueTypeTac;
-		}
+		}*/
 		
 		
 		

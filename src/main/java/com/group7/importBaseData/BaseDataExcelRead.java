@@ -5,12 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -23,6 +26,7 @@ import com.group7.entities.Failure;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
 
+@Stateless
 public class BaseDataExcelRead {
 
 	private String stringInput;
@@ -40,7 +44,9 @@ public class BaseDataExcelRead {
 	ArrayList<UE> ueTableList = new ArrayList<>();
 	ArrayList<EventCause> eventCauseList = new ArrayList<EventCause>();
 	ArrayList<Failure> failureClassList = new ArrayList<>();
-	BaseDataValidation validation = new BaseDataValidation();
+	@Inject
+	BaseDataValidation validation;// = new BaseDataValidation();
+	
 	
 	/**
 	 * Constructor
@@ -48,6 +54,9 @@ public class BaseDataExcelRead {
 	 */
 	public BaseDataExcelRead(String fileName) {
 		this.stringInput=fileName;
+	}
+	public BaseDataExcelRead(){
+		stringInput = "/home/marc/Documents/sample_dataset.xls";
 	}
 	
 	/***
@@ -63,6 +72,9 @@ public class BaseDataExcelRead {
 		File inputWorkBook = new File(stringInput);
 		Workbook w;
 		int count = 0;  
+		if(validation == null){
+			System.out.println("Yes");
+		}
 		try {
 			w = Workbook.getWorkbook(inputWorkBook);
 			Sheet sheet = w.getSheet(0);
@@ -84,8 +96,9 @@ public class BaseDataExcelRead {
 				}
 				sIndex = 0;
 				try{
-				validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
-				Timestamp dateDB=new Timestamp(date.getTime());
+					//validation.xx();
+				//validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
+				//Timestamp dateDB=new Timestamp(date.getTime());
 				int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 				int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));
 				BigInteger ueTypeTac = new BigInteger(validation.ueTypeTacValidation(strings[2]));
@@ -102,7 +115,7 @@ public class BaseDataExcelRead {
 				//create the object 
 				BaseData entity = new BaseData();
 				//set its values
-				entity.setDateAndTime(dateDB);
+				//entity.setDateAndTime(dateDB);
 				entity.setEventId(event_id);
 				entity.setFailureClass(failure_class);
 				entity.setTac(ueTypeTac);

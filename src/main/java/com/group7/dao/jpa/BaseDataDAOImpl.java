@@ -1,9 +1,13 @@
 package com.group7.dao.jpa;
 
 import java.util.Collection;
+import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -16,15 +20,14 @@ import com.group7.entities.Failure;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
 
-import javax.inject.Named;
-
 
 @Named
 @NamedQueries({
 	@NamedQuery(name="BaseData.getAll", query="select bd from baseData bd")
 }
 )
-
+@Local
+@Stateless
 public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@PersistenceContext
@@ -97,5 +100,37 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		}
 		
 	}
+	
+	public List<Integer> getMNCFromNetwork(){
+		if(em == null)
+			System.out.println("NNNNUUULULLLLLL");
+		List<Integer> networks = (List<Integer>)em.createNamedQuery("Network.getMNC").getResultList();
+		System.out.println(networks.size());
+		
+		return networks;
+	}
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

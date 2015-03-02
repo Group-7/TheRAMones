@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,6 +18,7 @@ import jxl.read.biff.BiffException;
 
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
@@ -31,6 +33,10 @@ public class BaseDataREST {
 
 	@Inject
 	private BaseDataServiceLocal service;
+	/*@Inject
+	private BaseDataExcelRead bdxr;*/
+	/*@EJB
+	BaseDataDAO dao;*/
 
 	public BaseDataREST() {
 
@@ -47,21 +53,23 @@ public class BaseDataREST {
 	@POST
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
-		BaseDataExcelRead bdxr = new BaseDataExcelRead(
-				"/home/marc/Documents/sample_dataset.xls");
+		
+		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/marc/Documents/sample_dataset.xls");
 		Collection<Network> networkData = bdxr.readNetworkTable();
 		Collection<UE> ueData = bdxr.readUETable();
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
 		Collection<Failure> failureData = bdxr.readFailureClassTable();
-		//Collection<BaseData> bd = bdxr.readExcelFile();
+		Collection<BaseData> bd = bdxr.readExcelFile();
 		
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
 		service.putFailureData(failureData);
-		//service.putData(bd);
+		service.putData(bd);
 		
 	}
+
+	
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
