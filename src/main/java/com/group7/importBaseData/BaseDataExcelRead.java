@@ -103,7 +103,7 @@ public class BaseDataExcelRead {
 				bsList.add(entity);
 				convertedDate = null;
 				}catch(Exception e){
-					writeToLogError(count);
+				//	writeToLogError(count);
 					count++;
 					//writeToLogError();
 				}

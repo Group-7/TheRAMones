@@ -1,30 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Display Call Failures</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+<!-- <link
+	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="/home/giovanni/git/TheRamones/src/main/webapp/css/bootstrap-datetimepicker.min.css">
+ -->
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
+
 <body>
+	<h2>Call Failures</h2>
+	<p> Use the dropdown-menu to select the phone-type of which you
+		would like to display the number of call failures in a given period</p>
+		<p> make sure the date requested is written in the dd/mm/yyyy format, even if the database has it different</p>
 
-
-	<h1>Call failures</h1>
-	<button class="btn btn-primary" id="displayBtn">Display total of "9109 PA" Call Failures</button>
-	<button class="btn btn-primary" id="displayBtn2">Display total of "VEA3" Call Failures</button>
-	<table id="table" class="table table-striped">
-		<thead>
-			<th>Number of call failures</th>
-				
-			
-		</thead>
-		<tbody  id="table-body">
+	
+				<p> phone TAC number : <input type="text" id="TAC" name="TAC"></p>
+				<p> IMSI number      : <input type="text" id="imsi" name="imsi"></p>
+				<p> select start date :   <input type="text" id="startDate" name="startDate"></p>
+				<p> select end date :   <input type="text" id="endDate" name="endDate"></p>
+		 
 		
-		</tbody>
-	</table>
+		
+<!-- 	<div id="datetimepicker" class="input-append date"> -->
+<!-- 		<input type="text" id="startDate" name="startDate"></input> -->
+<!--       <span class="add-on"> -->
+<!--         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i> -->
+<!--       </span> -->
+<!--     </div> -->
+    
+<!--     <div id="datetimepicker" class="input-append date"> -->
+<!-- 		<input type="text" id="endDate" name="endDate"></input> -->
+<!--       <span class="add-on"> -->
+<!--         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i> -->
+<!--       </span> -->
+<!--     </div> -->
+		
+	
+		
+		
+			 
+		<button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call-Failures per Phone-Type</button>
+		<button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call Failures per IMSI</button>
+		
+ 
+   
+ 	<table id="table" class="table table-striped"> 
+ 		<thead> 
+ 			<th>Number of call failures</th> 
+			
+ 		</thead> 
+ 		 		<tbody id="table-body"> 
+		
+ 		</tbody> 
+ 		 	</table> 
 
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="js/tacQuery.js"></script>
-</body>
+
+
+    <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/tacQuery.js"></script>
+    
+  
+<!--     <script type="text/javascript" -->
+<!-- 		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"> -->
+<!--     </script>  -->
+<!--     <script type="text/javascript" -->
+<!-- 		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> -->
+<!--     </script> -->
+<!--     <script type="text/javascript" -->
+<!-- 		src="/home/giovanni/git/TheRamones/src/main/webapp/js/bootstrap-datetimepicker.min.js"> -->
+<!--     </script> -->
+<!--     <script type="text/javascript" -->
+<!-- 		src="js/locales/bootstrap-datetimepicker.uk.js"> -->
+<!--     </script> -->
+<!--     <script type="text/javascript"> -->
+<!--       $('#datetimepicker').datetimepicker({
+//         format: 'dd/MM/yyyy hh:mm:ss',
+//         language: 'en'
+//       });
+<!--     </script> -->
+  </body>
 </html>
+

@@ -15,6 +15,7 @@ import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
+
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -24,8 +25,6 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	private BaseDataDAO dao;
 
 	public Collection<BaseData> getAllBasedata() {
-		// TODO Auto-generated method stub
-		
 		
 		return dao.getAllBaseData();
 	}
@@ -37,13 +36,22 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-		// TODO Auto-generated method stub
 		dao.putData(bd);
 	}
 	
-	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType) {
+	
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, 
+			String startDate, String endDate) {
 		
-		return dao.getTotalFailuresOfSpecificPhone(phoneType);
+		return dao.getTotalFailuresOfSpecificPhone(phoneType, startDate, endDate);
+	}
+
+	
+	
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
+			String startDate, String endDate) {
+		
+		return dao.getTotalFailuresOfSpecificIMSI(imsi, startDate, endDate);
 	}
 	
 }

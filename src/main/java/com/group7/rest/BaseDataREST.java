@@ -18,6 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.httpclient.URI;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
@@ -51,7 +52,7 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 		BaseDataExcelRead bdxr = new BaseDataExcelRead(
-				"/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
+				"/home/giovanni/Documents/sample_dataset.xls");
 		Collection<BaseData> bd = bdxr.readExcelFile();
 		service.putData(bd);
 	}
@@ -66,8 +67,8 @@ public class BaseDataREST {
 	@Path("/upload")
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
-
-		String filename = "/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
+		//Downloads/Group Project - Dataset 3A.xls";
+		String filename = "/home/giovanni/Documents/sample_dataset.xls";
 		if (form == null)
 			filename = "null.txt";
 
@@ -98,10 +99,27 @@ public class BaseDataREST {
 	}
 	
 	@GET
-	@Path("/tacFailures/")
+	@Path("/tacFailures")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Long> getTotalFailuresOfSpecificPhone(@QueryParam("TAC") BigInteger tacCode){
-		return service.getTotalFailuresOfSpecificPhone(tacCode);
+	public Collection<Long> getTotalFailuresOfSpecificPhone(
+			@QueryParam("TAC") BigInteger tacCode
+			,@QueryParam("startDate") String startDate
+			,@QueryParam("endDate") String endDate){
+		return service.getTotalFailuresOfSpecificPhone(tacCode, startDate, endDate);
 	
 	}
+	
+	
+	@GET
+	@Path("/imsiFailures")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(
+			@QueryParam("imsi") BigInteger imsi
+			,@QueryParam("startDate") String startDate
+			,@QueryParam("endDate") String endDate){
+		return service.getTotalFailuresOfSpecificIMSI(imsi, startDate, endDate);
+	
+	}
+	
+	
 }

@@ -1,6 +1,8 @@
 //$("#infoBtn").click(function() {
 $(document).ready(function(){	
-	getAllthePeople();
+	handleResponseJQuery(document);
+	handleResponseJQuery();
+
 });
 
 function getAllthePeople(){

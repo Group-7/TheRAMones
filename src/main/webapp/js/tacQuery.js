@@ -1,42 +1,44 @@
-$("#displayBtn").click(function() {
+$("#displayCallFailuresPerPhoneType").click(function() {
 	
-	getAllCallFailures();
+	getAllCallFailuresPerPhoneType();
 
 });
 
-
-$("#displayBtn2").click(function() {
+$("#displayCallFailuresPerIMSI").click(function() {
 	
-	getAllCallFailures2();
+	getAllCallFailuresPerIMSI();
 
 });
 
+function getAllCallFailuresPerPhoneType(){
+	var tacNumber = $("#TAC").val();
+	var startDate = $("#startDate").val();
+	var endDate = $("#endDate").val();
 
-
-
-function getAllCallFailures(){
 	$.ajax({
 		  type: 'GET',
-		  url: 'rest/baseData/tacFailures?TAC=33000153',
+		  url: 'rest/baseData/tacFailures?TAC='+ tacNumber+'&startDate='+ startDate+'&endDate='+endDate,
 		  success: handleResponseJQuery,
 		  contentType: 'application/json'
 	});
-	
 }
 
-function getAllCallFailures2(){
+
+function getAllCallFailuresPerIMSI(){
+	var imsiNumber = $("#imsi").val();
+	var startDate = $("#startDate").val();
+	var endDate = $("#endDate").val();
+
 	$.ajax({
 		  type: 'GET',
-		  url: 'rest/baseData/tacFailures?TAC=21060800',
+		  url: 'rest/baseData/imsiFailures?imsi='+ imsiNumber+'&startDate='+ startDate+'&endDate='+endDate,
 		  success: handleResponseJQuery,
 		  contentType: 'application/json'
 	});
-	
 }
+
 
 function handleResponseJQuery(myData) {
-	
-
 	
 		 $('#table-body').append(
 				 "<tr>" +

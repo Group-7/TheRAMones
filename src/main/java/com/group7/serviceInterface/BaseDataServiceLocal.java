@@ -10,5 +10,7 @@ public interface BaseDataServiceLocal {
 	public Collection<BaseData> getAllBasedata();
 	public void addBaseData(BaseData basedata);
 	public void putData(Collection<BaseData> bd);
-	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType);
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate);
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
+
 }
