@@ -12,35 +12,29 @@ import javax.persistence.PersistenceContext;
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
 
-
-@NamedQueries({
-	@NamedQuery(name="BaseData.getAll", query="select bd from baseData bd")
-}
-)
-
 public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@PersistenceContext
 	EntityManager em;
-	
+
 	public Collection<BaseData> getAllBaseData() {
 		// TODO Auto-generated method stub
-		return (Collection<BaseData>)em.createQuery("select bd from BaseData bd").getResultList();
+		return (Collection<BaseData>) em.createQuery(
+				"select bd from BaseData bd").getResultList();
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void addBaseData(BaseData basedata){
+	public void addBaseData(BaseData basedata) {
 		em.persist(basedata);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-		
-		
-		for(BaseData basedata : bd){
-			//em.persist(basedata);
-			
-			BaseData base=new BaseData();
+
+		for (BaseData basedata : bd) {
+			// em.persist(basedata);
+
+			BaseData base = new BaseData();
 			base.setDateAndTime(basedata.getDateAndTime());
 			base.setEventId(basedata.getEventId());
 			base.setFailureClass(basedata.getFailureClass());
@@ -48,7 +42,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			base.setMcc(basedata.getMcc());
 			base.setMnc(basedata.getMnc());
 			base.setCellid(basedata.getCellid());
-			base.setDuration(basedata.getDuration()); 
+			base.setDuration(basedata.getDuration());
 			base.setCauseCode(basedata.getCauseCode());
 			base.setNeVersion(basedata.getNeVersion());
 			base.setImsi(basedata.getImsi());
@@ -57,7 +51,27 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			base.setHeir321ID(basedata.getHeir321ID());
 			em.persist(base);
 		}
-		
+
+	}
+
+	/*
+	 * retrieves all IMSI, Cause_ID, EventID from BaseData
+	 */
+
+	/*
+	 * public Collection<BaseData> getAllCause_CodeAndEventIdByIMSI() {
+	 * 
+	 * @SuppressWarnings("unchecked") Collection<BaseData> resultList =
+	 * (Collection<BaseData>) em.createQuery(
+	 * "BaseData.displayCause_CodeANDEventID").getResultList(); return
+	 * resultList; }
+	 */
+	@SuppressWarnings("unchecked")
+	public Collection<BaseData> getAllCauseCodeAndEventIdByIMSI() {
+		return (Collection<BaseData>) em.createNamedQuery(
+				"BaseData.displayCauseCodeANDEventID").getResultList();
+				//"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi").getResultList();
+				
 	}
 
 }

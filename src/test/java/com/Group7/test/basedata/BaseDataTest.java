@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.group7.dao.BaseDataDAO;
-import com.group7.dao.JPABaseDataDAO;
+import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataId;
 
@@ -28,7 +28,7 @@ public class BaseDataTest {
 		return ShrinkWrap
 				.create(JavaArchive.class, "BaseTest.jar")
 				.addClasses(BaseData.class, BaseDataId.class,
-						JPABaseDataDAO.class)
+						BaseDataDAO.class)
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 

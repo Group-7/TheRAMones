@@ -45,6 +45,13 @@ public class BaseDataREST {
 		return service.getAllBasedata();
 	}
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/imsi")
+	public Collection<BaseData> getAllEventIdAndCauseIdREST() throws BiffException, IOException {
+		return service.getAllEventIdAndCauseId();
+	}
+
 	@POST
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
@@ -94,4 +101,5 @@ public class BaseDataREST {
 		fop.close();
 
 	}
+
 }

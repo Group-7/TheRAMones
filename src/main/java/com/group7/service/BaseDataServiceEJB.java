@@ -23,9 +23,6 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	private BaseDataDAO dao;
 
 	public Collection<BaseData> getAllBasedata() {
-		// TODO Auto-generated method stub
-		
-		
 		return dao.getAllBaseData();
 	}
 	
@@ -38,6 +35,15 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public void putData(Collection<BaseData> bd) {
 		// TODO Auto-generated method stub
 		dao.putData(bd);
+	}
+	
+	
+	//The TransactionAttribute annotation specifies whether the container is to invoke a business method within 
+    //a transaction context. The TransactionAttribute annotation can be used for session beans and message driven beans. 
+	//It can only be specified if container managed transaction demarcation is used. 
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Collection<BaseData> getAllEventIdAndCauseId() {
+		return dao.getAllCauseCodeAndEventIdByIMSI();
 	}
 	
 }

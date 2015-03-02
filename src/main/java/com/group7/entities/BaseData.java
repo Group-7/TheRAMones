@@ -1,14 +1,14 @@
 package com.group7.entities;
 
 import java.math.BigInteger;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +19,10 @@ import javax.persistence.Table;
  * @author niall
  *
  */
+
+@NamedQueries({
+	//@NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd"),
+	@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi") })
 
 @Entity @IdClass(BaseDataId.class)
 @Table(name="Base_Data")
