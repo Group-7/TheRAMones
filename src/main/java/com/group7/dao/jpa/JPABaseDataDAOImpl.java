@@ -1,5 +1,6 @@
 package com.group7.dao.jpa;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.TransactionAttribute;
@@ -58,6 +59,13 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 			em.persist(base);
 		}
 		
+	}
+
+	@Override
+	public Collection<BigInteger> getImsiFailureOverTime(String dateFrom,
+			String dateTo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

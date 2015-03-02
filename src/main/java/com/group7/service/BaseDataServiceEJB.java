@@ -1,5 +1,6 @@
 package com.group7.service;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.Local;
@@ -38,6 +39,12 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public void putData(Collection<BaseData> bd) {
 		// TODO Auto-generated method stub
 		dao.putData(bd);
+	}
+
+	@Override
+	public Collection<BigInteger> getImsiFailureOverTime(String dateFrom, String dateTo) {
+		// TODO Auto-generated method stub
+		return dao.getImsiFailureOverTime(dateFrom,dateTo);
 	}
 	
 }
