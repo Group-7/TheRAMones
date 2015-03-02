@@ -2,30 +2,29 @@ package com.group7.rest;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-import org.apache.commons.httpclient.URI;
+import jxl.read.biff.BiffException;
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.group7.entities.BaseData;
+import com.group7.entities.EventCause;
+import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
+import com.group7.entities.Network;
+import com.group7.entities.UE;
 import com.group7.importBaseData.BaseDataExcelRead;
 import com.group7.serviceInterface.BaseDataServiceLocal;
-
-import jxl.read.biff.BiffException;
 
 @Path("/baseData")
 public class BaseDataREST {
@@ -49,9 +48,19 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 		BaseDataExcelRead bdxr = new BaseDataExcelRead(
-				"/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
-		Collection<BaseData> bd = bdxr.readExcelFile();
-		service.putData(bd);
+				"/home/marc/Documents/sample_dataset.xls");
+		Collection<Network> networkData = bdxr.readNetworkTable();
+		Collection<UE> ueData = bdxr.readUETable();
+		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
+		Collection<Failure> failureData = bdxr.readFailureClassTable();
+		//Collection<BaseData> bd = bdxr.readExcelFile();
+		
+		service.putNetworkData(networkData);
+		service.putUEData(ueData);
+		service.putEventCauseData(eventCauseData);
+		service.putFailureData(failureData);
+		//service.putData(bd);
+		
 	}
 
 	@POST
@@ -65,7 +74,7 @@ public class BaseDataREST {
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
 
-		String filename = "/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
+		String filename = "/home/marc/Documents/sample_dataset.xls";
 		if (form == null)
 			filename = "null.txt";
 

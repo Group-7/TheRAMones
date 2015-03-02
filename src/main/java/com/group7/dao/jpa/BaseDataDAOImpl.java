@@ -11,8 +11,15 @@ import javax.persistence.PersistenceContext;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.EventCause;
+import com.group7.entities.Failure;
+import com.group7.entities.Network;
+import com.group7.entities.UE;
+
+import javax.inject.Named;
 
 
+@Named
 @NamedQueries({
 	@NamedQuery(name="BaseData.getAll", query="select bd from baseData bd")
 }
@@ -56,6 +63,37 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			base.setHeir32ID(basedata.getHeir32ID());
 			base.setHeir321ID(basedata.getHeir321ID());
 			em.persist(base);
+		}
+		
+	}
+
+	@Override
+	public void putNetworkData(Collection<Network> networkData) {
+		for(Object n : networkData){
+			em.persist(n);
+		}
+		
+	}
+
+	@Override
+	public void putUEData(Collection<UE> ueData) {
+		for(Object n : ueData){
+			em.persist(n);
+		}
+	}
+
+	@Override
+	public void putEventCauseData(Collection<EventCause> eventCauseData) {
+		for(Object n : eventCauseData){
+			em.persist(n);
+		}
+		
+	}
+
+	@Override
+	public void putFailureData(Collection<Failure> failureData) {
+		for(Object n : failureData){
+			em.persist(n);
 		}
 		
 	}
