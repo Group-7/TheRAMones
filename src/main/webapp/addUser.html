@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Temporary </title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+ 
 </head>
 <body>
 
-	
-	<h1>GROUP 7</h1>
-	</body>
-	</html>
+<div class="container">
+  <h2>Add User</h2>
+  <form role="form">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+    </div>
+    
+    
+
+<select id="menu" name="menu">
+<option value="1">System Admin</option>
+<option value="2">Customer Service Rep</option>
+<option value="3">Support Engineer</option>
+<option value="4">Network Management Engineer</option>
+</select>
+
+    
+    
+    
+    <button id="addUserBut" type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+  <script src="js/userAdd.js"></script>
+</body>
+</html>
