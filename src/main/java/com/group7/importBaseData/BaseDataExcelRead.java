@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,26 +27,21 @@ import com.group7.entities.Failure;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
 
-@Stateless
+
 public class BaseDataExcelRead {
 
 	private String stringInput;
-	//int len = 13;
-	//private String stringInput;
-	//String[] strings = new String[len];
-
 	DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	Date date = null;
 	String convertedDate = null;
-	//BaseData entity;
 	//TODO
 	ArrayList<BaseData> bsList = new ArrayList<BaseData>();
 	ArrayList<Network> networkTableList = new ArrayList<Network>();
 	ArrayList<UE> ueTableList = new ArrayList<>();
 	ArrayList<EventCause> eventCauseList = new ArrayList<EventCause>();
 	ArrayList<Failure> failureClassList = new ArrayList<>();
-	@Inject
-	BaseDataValidation validation;// = new BaseDataValidation();
+
+	BaseDataValidation validation = BaseDataValidation.getInstance();
 	
 	
 	/**
@@ -66,7 +62,7 @@ public class BaseDataExcelRead {
 	 * @throws IOException
 	 */
 	public Collection<BaseData> readExcelFile() throws BiffException, IOException{
-		
+		validation.fillListsWithObjects();
 		String[] strings = new String[13];
 		int sIndex = 0;
 		File inputWorkBook = new File(stringInput);
@@ -97,8 +93,8 @@ public class BaseDataExcelRead {
 				sIndex = 0;
 				try{
 					//validation.xx();
-				//validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
-				//Timestamp dateDB=new Timestamp(date.getTime());
+				validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
+				Timestamp dateDB=new Timestamp(date.getTime());
 				int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 				int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));
 				BigInteger ueTypeTac = new BigInteger(validation.ueTypeTacValidation(strings[2]));
@@ -115,7 +111,7 @@ public class BaseDataExcelRead {
 				//create the object 
 				BaseData entity = new BaseData();
 				//set its values
-				//entity.setDateAndTime(dateDB);
+				entity.setDateAndTime(dateDB);
 				entity.setEventId(event_id);
 				entity.setFailureClass(failure_class);
 				entity.setTac(ueTypeTac);

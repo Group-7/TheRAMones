@@ -26,6 +26,7 @@ import com.group7.entities.FileUploadForm;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
 import com.group7.importBaseData.BaseDataExcelRead;
+import com.group7.importBaseData.BaseDataValidation;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @Path("/baseData")
@@ -37,6 +38,7 @@ public class BaseDataREST {
 	private BaseDataExcelRead bdxr;*/
 	/*@EJB
 	BaseDataDAO dao;*/
+	private BaseDataValidation bvd = BaseDataValidation.getInstance();
 
 	public BaseDataREST() {
 
@@ -59,8 +61,14 @@ public class BaseDataREST {
 		Collection<UE> ueData = bdxr.readUETable();
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
 		Collection<Failure> failureData = bdxr.readFailureClassTable();
-		Collection<BaseData> bd = bdxr.readExcelFile();
 		
+		//Filling the cache
+		bvd.setEventCauses(eventCauseData);
+		bvd.setFailures(failureData);
+		bvd.setNetworks(networkData);
+		bvd.setUeObjects(ueData);
+		Collection<BaseData> bd = bdxr.readExcelFile();
+		//Filling the Datasbase
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
