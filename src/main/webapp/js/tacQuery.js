@@ -11,10 +11,11 @@ $("#displayCallFailuresPerIMSI").click(function() {
 });
 
 function getAllCallFailuresPerPhoneType(){
+	
 	var tacNumber = $("#TAC").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
-
+	
 	$.ajax({
 		  type: 'GET',
 		  url: 'rest/baseData/tacFailures?TAC='+ tacNumber+'&startDate='+ startDate+'&endDate='+endDate,

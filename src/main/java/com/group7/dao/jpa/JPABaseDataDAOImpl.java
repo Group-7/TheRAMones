@@ -16,10 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
 
@@ -72,15 +68,15 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 		
 	}
 
+	
 	/**
 	 * Queries the total number of call failures within a certain
 	 * time period based on the phoneType.
 	 */
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate) {
 		
-		Timestamp dbStartDate=new Timestamp(dateFormater(startDate).getTime());
-		Timestamp dbEndDate=new Timestamp(dateFormater(endDate).getTime());
+		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
 	
 		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.tac LIKE :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("tac", phoneType)
@@ -95,11 +91,10 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 	 * Queries the total number of call failures within a certain
 	 * time period based on the imsi number.
 	 */
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate) {
 		
-		Timestamp dbStartDate=new Timestamp(dateFormater(startDate).getTime());
-		Timestamp dbEndDate=new Timestamp(dateFormater(endDate).getTime());
+		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
 				
 		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("imsi", imsi)
@@ -112,9 +107,9 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 	/**
 	 * Formats the date so the DataBase can use read it
 	 * @param date
-	 * @return
+	 * @return formated date object
 	 */
-	private Date dateFormater(String date){
+	private Date dateFormatter(String date){
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date newDate = null;
 		try {
