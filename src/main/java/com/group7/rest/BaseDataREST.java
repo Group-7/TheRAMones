@@ -47,7 +47,7 @@ public class BaseDataREST {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/imsi")
+	@Path("/eventid_causeid")
 	public Collection<BaseData> getAllEventIdAndCauseIdREST() throws BiffException, IOException {
 		return service.getAllEventIdAndCauseId();
 	}

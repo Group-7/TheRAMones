@@ -11,6 +11,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.jboss.logging.Cause;
+
 /**
  *
  *	Basedata , pojo for the base data 
@@ -20,13 +22,26 @@ import javax.persistence.Table;
  *
  */
 
-@NamedQueries({
-	//@NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd"),
-	@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi") })
+	//@NamedQueries({
+	//Niall's named query @NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd"),
+	//@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi") })
+	//@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT NEW com.group7.dao.BaseData(bs.imsi, bd.causeCode, bd.eventId) FROM BaseData bs") }) 
 
 @Entity @IdClass(BaseDataId.class)
 @Table(name="Base_Data")
 public class BaseData {
+	
+	public BaseData() {}
+	
+	public BaseData(BigInteger imsi,Integer causeCode, Integer eventId) {
+		
+		this.imsi = imsi;
+		this.causeCode = causeCode;
+		this.eventId = eventId;
+		
+	}
+
+
 
 	@Id
 	@Column(name="DateTime")

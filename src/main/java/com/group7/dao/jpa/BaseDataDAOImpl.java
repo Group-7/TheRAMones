@@ -66,10 +66,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * "BaseData.displayCause_CodeANDEventID").getResultList(); return
 	 * resultList; }
 	 */
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public Collection<BaseData> getAllCauseCodeAndEventIdByIMSI() {
-		return (Collection<BaseData>) em.createNamedQuery(
-				"BaseData.displayCauseCodeANDEventID").getResultList();
+		return (Collection<BaseData>) em.createQuery(
+				"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi").getResultList();
 				//"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi").getResultList();
 				
 	}
