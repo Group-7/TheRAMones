@@ -145,7 +145,6 @@ public class ValidationTest {
 		}
 	}
 	
-	
 	/**
 	 * Test the NE Validation method with invalid NE data.
 	 * 
@@ -198,7 +197,7 @@ public class ValidationTest {
 			assertEquals(validUeTestData[i], validator.ueTypeTacValidation(validUeTestData[i]));
 			assertTrue(validator.getUeTypeTac().contains(validUeTestData[i]));
 		}
-	}
+	} 
 	
 	/**
 	 * Test the FailureClass Validation method with valid FailureClass data.			
