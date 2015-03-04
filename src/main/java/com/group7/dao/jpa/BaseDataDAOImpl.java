@@ -1,5 +1,6 @@
 package com.group7.dao.jpa;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.TransactionAttribute;
@@ -67,11 +68,18 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * resultList; }
 	 */
 	//@SuppressWarnings("unchecked")
-	public Collection<BaseData> getAllCauseCodeAndEventIdByIMSI() {
-		return (Collection<BaseData>) em.createQuery(
-				"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi").getResultList();
+	//use projectDB;
+	//select IMSI, EventID, Cause_Code from Base_Data where IMSI = 240210000000013;
+	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
+		return em.createQuery(
+				"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd WHERE bd.imsi = :imsi").setParameter("imsi", imsi).getResultList();
 				//"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi").getResultList();
 				
+	}
+	
+	public Collection<BigInteger> getUniqueAffectedImsi(){
+		return (Collection<BigInteger>) em.createQuery("SELECT DISTINCT bd.imsi FROM BaseData bd").getResultList(); 
+	
 	}
 
 }

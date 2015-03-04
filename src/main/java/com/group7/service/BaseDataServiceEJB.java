@@ -1,5 +1,6 @@
 package com.group7.service;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.Local;
@@ -42,8 +43,14 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
     //a transaction context. The TransactionAttribute annotation can be used for session beans and message driven beans. 
 	//It can only be specified if container managed transaction demarcation is used. 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public Collection<BaseData> getAllEventIdAndCauseId() {
-		return dao.getAllCauseCodeAndEventIdByIMSI();
+	public Collection<Object> getAllEventIdAndCauseId(BigInteger Imsi) {
+		return dao.getAllCauseCodeAndEventIdByIMSI( Imsi);
+	}
+
+	@Override
+	public Collection<BigInteger> getUniqueAffectedImsi() {
+		// TODO Auto-generated method stub
+		return dao.getUniqueAffectedImsi();
 	}
 	
 }

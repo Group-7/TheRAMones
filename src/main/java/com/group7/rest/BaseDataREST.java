@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -48,8 +50,8 @@ public class BaseDataREST {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/eventid_causeid")
-	public Collection<BaseData> getAllEventIdAndCauseIdREST() throws BiffException, IOException {
-		return service.getAllEventIdAndCauseId();
+	public Collection<Object> getAllEventIdAndCauseIdREST(@QueryParam("imsi") BigInteger Imsi)  {
+		return service.getAllEventIdAndCauseId(Imsi);
 	}
 
 	@POST
@@ -100,6 +102,13 @@ public class BaseDataREST {
 		fop.flush();
 		fop.close();
 
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/uniqueIMSI")
+	public Collection<BigInteger> getUniqueAffectedImsi() throws IOException {
+		return service.getUniqueAffectedImsi();
 	}
 
 }

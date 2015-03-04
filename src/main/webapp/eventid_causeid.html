@@ -6,11 +6,11 @@
 <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
-<body>
+<body onload="load()">
 
 	<h1>Display Event ID and Cause ID for affected IMSI</h1>
 
-	<select id="imsiNumber">
+	<select id="imsiNumber" onchange="update()">
 		<option>IMSI Number</option>
 	</select>
 
