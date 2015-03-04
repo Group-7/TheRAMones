@@ -2,25 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Marc Java test</title>
+<title>Display Event ID and Cause ID for affected IMSI</title>
 <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
 
 	<h1>Display Event ID and Cause ID for affected IMSI</h1>
+
+	<select id="imsiNumber">
+		<option>IMSI Number</option>
+	</select>
+
+
 	<table id="table" class="table table-striped">
 		<thead>
 			<th>IMSI</th>
 			<th>EVENT ID</th>
 			<th>CAUSE ID</th>
 		</thead>
-		<tbody  id="table-body">
+		<tbody id="table-body">
 		</tbody>
 	</table>
 
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="js/eventid_causeid.js"></script>
 </body>
 </html>
