@@ -42,9 +42,9 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	}
 
 	@Override
-	public Collection<BigInteger> getImsiFailureOverTime(String dateFrom, String dateTo) {
+	public Collection<BigInteger> getImsiFailureOverTime(String from, String to) {
 		// TODO Auto-generated method stub
-		return dao.getImsiFailureOverTime(dateFrom,dateTo);
+		return dao.getImsiFailureOverTime(from,to);
 	}
 	
 }

@@ -2,22 +2,24 @@ package com.group7.rest;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-import org.apache.commons.httpclient.URI;
+
+
+
+
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.group7.entities.BaseData;
@@ -93,5 +95,15 @@ public class BaseDataREST {
 		fop.flush();
 		fop.close();
 
+	}
+	
+	@GET
+	@Path("/imsi")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getImsiFailureOverTime(@QueryParam("dates") String dates){
+		
+		String[] splitDates=dates.split(",",-1);
+		
+		return service.getImsiFailureOverTime(splitDates[0],splitDates[1]);
 	}
 }

@@ -1,5 +1,18 @@
+/*$.getScript("https://tarruda.github.io/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js",function(){
+	$.getScript("https://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js",function(){	
+		
+		$('#datetimepicker').datetimepicker({
+			format: 'MM/dd/yyyy hh:mm:ss'
+		});
+	
+	var picker = $('#datetimepicker').data('datetimepicker');
+	picker.setLocalDate(new Date(Date.UTC(2013,10,11,4,30)));
+		
+});	
+});*/
 
-var years=new Array();
+
+/*var years=new Array();
 var moths=new Array();
 var dates=new Array();
 
@@ -13,20 +26,23 @@ var montharray=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul"
 function loadYears(){
 	
 	
+	
 	var yearNum=2000;
 	var date=new Date();
 	
-	alert(""+date.getFullYear());
+	
 	for(var i=2000;i<date.getFullYear()+1;i++){
 		years[i-2000]=yearNum;
 		
 		yearNum++;
 		
 	}
+	
 }
 
 
 function load(){
+	
 	
 	
 	loadYears();
@@ -112,7 +128,7 @@ function loadMonthTo(){
 	if(fromYear==toYear){
 		from=document.getElementById('monthFrom').value;
 	}
-	alert(""+from);
+	
 	
 	var sel=document.getElementById('monthTo');
 	clearSel(sel);
@@ -161,17 +177,60 @@ function clearSel(sel){
 	}
 
 }
+*/
 
+	/*alert("submit");
+	var yearFrom=document.getElementById("yearFrom").value;
+	var yearTo=document.getElementById("yearTo").value;
+	var monthFrom=document.getElementById("monthFrom").value;
+	var monthTo=document.getElementById("monthTo").value;
+	var dateFrom=document.getElementById("dateFrom").value;
+	var dateTo=document.getElementById("dateTo").value;
+	
+	var from=""+yearFrom+""+monthFrom+""+dateFrom+"";
+	from="00131101";
+	//alert(""+from);
+	var to=""+yearTo+""+monthTo+""+dateTo+"";
+	to="00140912";
+	//alert(""+to);
+*/	
+	
+	
+	
+	/*var string=""+from+","+to+"";
+	alert(string);*/
 function submit(){
-	
-	
-	$ajax({
-		type: "POST",
-		url: "rest/baseData/imsi",
-		success: directToImport,
-		contentType: "json",
-		data: formData
-		
+	var from=document.getElementById("startDate").value;
+	var to=document.getElementById("endDate").value;
+	var dates=from+","+to;
+	//alert(dates);
+	//dates=dates.split("/").join("");
+	dates=dates.split("2").join("0");
+	alert(dates);
+	$.ajax({
+		type: 'GET',
+		url: 'rest/baseData/imsi?dates='+dates,
+		success: handleBaseDataResponse ,
+		contentType: 'application/json'
+
 	});
 	
 }
+
+function handleBaseDataResponse(data){
+	
+	var text="";
+	
+	for(var i=0; i< data.length; i++){
+			
+		text=text+
+				"<tr>" +
+				"<td>"+ data[i] +"</td>"+
+				"</tr>"
+		;
+		
+	};
+	document.getElementById("resultTableBody").innerHTML=text;
+}
+
+

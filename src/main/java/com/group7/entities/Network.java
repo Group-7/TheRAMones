@@ -10,15 +10,16 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author marc
+ * @author marc grogan
  *
+ *	A Test comment but also, named queries to go here!!
  */
 @Entity
 @IdClass(NetworkId.class)
 @Table(name="Network")
 public class Network implements Serializable{
 
-	//@Id
+	@Id
 	@Column(name = "MCC")
 	private int mcc;
 	

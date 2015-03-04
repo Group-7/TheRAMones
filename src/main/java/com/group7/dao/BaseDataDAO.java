@@ -11,5 +11,5 @@ public interface BaseDataDAO {
 	public void addBaseData(BaseData basedata);
 	public void putData(Collection<BaseData> bd);
 	
-	public Collection<BigInteger> getImsiFailureOverTime(String dateFrom, String dateTo);
+	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
 }
