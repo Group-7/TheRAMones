@@ -19,38 +19,36 @@ import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
-
+import com.group7.importBaseData.BaseDataValidation;
 
 @Named
-@NamedQueries({
-	@NamedQuery(name="BaseData.getAll", query="select bd from baseData bd")
-}
-)
+@NamedQueries({ @NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd") })
 @Local
 @Stateless
 public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@PersistenceContext
 	EntityManager em;
-	
+	BaseDataValidation bdv = BaseDataValidation.getInstance();
+
 	public Collection<BaseData> getAllBaseData() {
 		// TODO Auto-generated method stub
-		return (Collection<BaseData>)em.createQuery("select bd from BaseData bd").getResultList();
+		return (Collection<BaseData>) em.createQuery(
+				"select bd from BaseData bd").getResultList();
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void addBaseData(BaseData basedata){
+	public void addBaseData(BaseData basedata) {
 		em.persist(basedata);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-		
-		
-		for(BaseData basedata : bd){
-			//em.persist(basedata);
-			
-			BaseData base=new BaseData();
+
+		for (BaseData basedata : bd) {
+			// em.persist(basedata);
+
+			BaseData base = new BaseData();
 			base.setDateAndTime(basedata.getDateAndTime());
 			base.setEventId(basedata.getEventId());
 			base.setFailureClass(basedata.getFailureClass());
@@ -58,7 +56,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			base.setMcc(basedata.getMcc());
 			base.setMnc(basedata.getMnc());
 			base.setCellid(basedata.getCellid());
-			base.setDuration(basedata.getDuration()); 
+			base.setDuration(basedata.getDuration());
 			base.setCauseCode(basedata.getCauseCode());
 			base.setNeVersion(basedata.getNeVersion());
 			base.setImsi(basedata.getImsi());
@@ -67,70 +65,44 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			base.setHeir321ID(basedata.getHeir321ID());
 			em.persist(base);
 		}
-		
+
 	}
 
 	@Override
 	public void putNetworkData(Collection<Network> networkData) {
-		for(Object n : networkData){
-			em.persist(n);
+		for (Network n : networkData) {
+			if ((bdv.isNetworkFirst()) ||!bdv.persistCandidateKeysToNetworkTable(""+n.getMcc() + n.getMnc())) // works
+				em.persist(n);
 		}
-		
+		bdv.setNetworkFirst(false);
 	}
 
 	@Override
 	public void putUEData(Collection<UE> ueData) {
-		for(Object n : ueData){
-			em.persist(n);
+		for (UE u : ueData) {
+			if ((bdv.isUeFirst())|| (!bdv.persistEventCausePrimaryKey(Integer.toString(u.getTac())))) // Failed
+				em.persist(u);
+
 		}
+		bdv.setUeFirst(false);
 	}
 
 	@Override
 	public void putEventCauseData(Collection<EventCause> eventCauseData) {
-		for(Object n : eventCauseData){
-			em.persist(n);
+		for (EventCause e : eventCauseData) {
+			if ((bdv.isEventCauseFirst()) || !bdv.persistCandidateKeysToEventCauseTable(""+e.getCauseCode() + e.getEventId()))
+				em.persist(e);
 		}
-		
+		bdv.setEventCauseFirst(false);
 	}
 
 	@Override
 	public void putFailureData(Collection<Failure> failureData) {
-		for(Object n : failureData){
-			em.persist(n);
+		for (Failure f : failureData) {
+			if ((bdv.isFailureFirst())|| !bdv.persistFailurePrimaryKey(Integer.toString(f.getFailureCode()))) // failed
+				em.persist(f);
 		}
-		
+		bdv.setFailureFirst(false);
 	}
-	
-	public List<Integer> getMNCFromNetwork(){
-		if(em == null)
-			System.out.println("NNNNUUULULLLLLL");
-		List<Integer> networks = (List<Integer>)em.createNamedQuery("Network.getMNC").getResultList();
-		System.out.println(networks.size());
-		
-		return networks;
-	}
-	
-	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -25,11 +25,12 @@ public class BaseDataValidation {
 	private static Set<String> mcc = new HashSet<String>(); 
 	private static Set<String> mnc = new HashSet<String>();
 	private static Set<String> causeCode = new HashSet<String>(); 
-	//private static List<String> neVersion = new ArrayList<String>();
+	private static Set<String> failureList = new HashSet<String>();
 	private static Set<String> ueTypeTac = new HashSet<String>();
 	private static Set<String> networkCompositeKeys = new HashSet<String>();
 	private static Set<String> eventCauseCompositeKeys = new HashSet<String>();
 	//private static String refDuration = "1000";
+	private boolean ueFirst = true, failureFirst = true, networkFirst = true, eventCauseFirst = true;
 
 	private static BaseDataValidation instance = null;
 
@@ -56,6 +57,9 @@ public class BaseDataValidation {
 		}
 		for(UE u : ueObjects){
 			ueTypeTac.add(Integer.toString(u.getTac()));
+		}
+		for(Failure f : failures){
+			failureList.add(Integer.toString(f.getFailureCode()));
 		}
 		
 	}
@@ -196,8 +200,7 @@ public class BaseDataValidation {
 	 * @throws Exception
 	 */
 	public String isFailureClassValid(String failureClassInput) throws Exception {
-		if ((failureClassInput != null) && (Integer.parseInt(failureClassInput)>=0
-				&& Integer.parseInt(failureClassInput)<=4))
+		if ((failureClassInput != null) && (failureList.contains(failureClassInput)))
 			return failureClassInput;
 		throw new Exception();
 	}
@@ -286,18 +289,53 @@ public class BaseDataValidation {
 		}
 	}
 
-	//public void buildValidValidationData() {
-		/*cellId.add("4");
-		cellId.add("5");
-		cellId.add("3842");
-		neVersion.add("11B");
-		neVersion.add("12A");
-		refDuration = "1000";
-		ueTypeTac.add("21060800");
-		ueTypeTac.add("33000153");
-		ueTypeTac.add("33000253");*/
-	//}
+	/**
+	 * A method to determine if a composite key exists in the Cache
+	 * for network Composite Keys, if so don't commit to database 
+	 * @return boolean
+	 */
+	public boolean persistCandidateKeysToNetworkTable(String ComboKeys){
+		return networkCompositeKeys.contains(ComboKeys);
+	}
 
+	/**
+	 * A method to determine if a composite key exists in the Cache,
+	 * for Event Cause composite keys if so don't commit to database 
+	 * @return boolean
+	 */
+	public boolean persistCandidateKeysToEventCauseTable(String ComboKeys){
+		return eventCauseCompositeKeys.contains(ComboKeys);
+	}
+	
+	/**
+	 * A method to determine if Failure Class has an emxisiting primary key
+	 * @return boolean
+	 */
+	public boolean persistFailurePrimaryKey(String failureKey){
+		return failureList.contains(failureKey);
+	}
+	
+	/**
+	 * A method to determine if the UE table has existing preimary keys
+	 * 
+	 * @return boolean
+	 */
+	public boolean persistEventCausePrimaryKey(String tac){
+		return ueTypeTac.contains(tac);
+	}
+
+	
+	
+	
+	//TODO
+	/**
+	 * 
+	 * 
+	 * Getters and Setter below here
+	 * 
+	 * 
+	 * @return
+	 */
 	public static Set<String> getEventId() {
 		return eventId;
 	}
@@ -388,4 +426,46 @@ public class BaseDataValidation {
 		BaseDataValidation.eventCauseCompositeKeys = eventCauseCompositeKeys;
 	}
 
+	public static Set<String> getFailureList() {
+		return failureList;
+	}
+
+	public static void setFailureList(Set<String> failureList) {
+		BaseDataValidation.failureList = failureList;
+	}
+
+	public boolean isUeFirst() {
+		return ueFirst;
+	}
+
+	public void setUeFirst(boolean ueFirst) {
+		this.ueFirst = ueFirst;
+	}
+
+	public boolean isFailureFirst() {
+		return failureFirst;
+	}
+
+	public void setFailureFirst(boolean failureFirst) {
+		this.failureFirst = failureFirst;
+	}
+
+	public boolean isNetworkFirst() {
+		return networkFirst;
+	}
+
+	public void setNetworkFirst(boolean networkFirst) {
+		this.networkFirst = networkFirst;
+	}
+
+	public boolean isEventCauseFirst() {
+		return eventCauseFirst;
+	}
+
+	public void setEventCauseFirst(boolean eventCauseFirst) {
+		this.eventCauseFirst = eventCauseFirst;
+	}
+	
+
+	
 }
