@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
@@ -18,16 +20,16 @@ public class BaseDataValidation {
 	private static Collection<Network> networks = new ArrayList<>();
 	private static Collection<Failure> failures = new ArrayList<>();
 	private static Collection<UE> ueObjects = new ArrayList<>();
-
-	private static List<Integer> eventId = new ArrayList<Integer>(); // done
-	private static List<Integer> mcc = new ArrayList<Integer>();
-	private static List<Integer> mnc = new ArrayList<Integer>();
-	private static List<String> cellId = new ArrayList<String>();
-	private static List<String> neVersion = new ArrayList<String>();
-	private static List<String> ueTypeTac = new ArrayList<String>();
-	private static List<String> networkCompositeKeys = new ArrayList<String>();
-	private static List<String> eventCauseCompositeKeys = new ArrayList<String>();
-	private static String refDuration;
+	//TODO
+	private static Set<String> eventId = new HashSet<String>(); 
+	private static Set<String> mcc = new HashSet<String>(); 
+	private static Set<String> mnc = new HashSet<String>();
+	private static Set<String> causeCode = new HashSet<String>(); 
+	//private static List<String> neVersion = new ArrayList<String>();
+	private static Set<String> ueTypeTac = new HashSet<String>();
+	private static Set<String> networkCompositeKeys = new HashSet<String>();
+	private static Set<String> eventCauseCompositeKeys = new HashSet<String>();
+	//private static String refDuration = "1000";
 
 	private static BaseDataValidation instance = null;
 
@@ -40,72 +42,30 @@ public class BaseDataValidation {
 		return instance;
 	}
 
-	/*
-	 * public BaseDataValidation(){
-	 * 
-	 * buildValidValidationData(); }
-	 */
+
 	public void fillListsWithObjects() {
-		buildValidValidationData();
 		for (EventCause e : eventCauses){
-			eventId.add(e.getEventId());
+			eventId.add(Integer.toString(e.getEventId()));
 			eventCauseCompositeKeys.add(""+e.getCauseCode()+e.getEventId());
+			causeCode.add(Integer.toString(e.getCauseCode()));
 		}
 		for (Network n : networks) {
-			mcc.add(n.getMcc());
-			mnc.add(n.getMnc());
+			mcc.add(Integer.toString(n.getMcc()));
+			mnc.add(Integer.toString(n.getMnc()));
 			networkCompositeKeys.add(""+n.getMcc()+n.getMnc());
-			
-			
 		}
-		/*System.out.println();
-		System.out.println();
-		System.out.println("*************************************************************************");
-		System.out.println("Size: " + networkCompositeKeys.size());
-		System.out.println(networkCompositeKeys.get(0));
-		System.out.println(networkCompositeKeys.get(1));
-		System.out.println("*************************************************************************");
-		System.out.println();
-		System.out.println();
-		System.out.println("*************************************************************************");
-		System.out.println("Size: " + eventCauseCompositeKeys.size());
-		System.out.println(eventCauseCompositeKeys.get(0));
-		System.out.println(eventCauseCompositeKeys.get(1));
-		System.out.println("*************************************************************************");*/
+		for(UE u : ueObjects){
+			ueTypeTac.add(Integer.toString(u.getTac()));
+		}
+		
 	}
 
-	public Collection<EventCause> getEventCauses() {
-		return eventCauses;
-	}
-
-	public void setEventCauses(Collection<EventCause> eventCauseData) {
-		this.eventCauses = eventCauseData;
-	}
-
-	public Collection<Network> getNetworks() {
-		return networks;
-	}
-
-	public void setNetworks(Collection<Network> networks) {
-		this.networks = networks;
-	}
-
-	public Collection<Failure> getFailures() {
-		return failures;
-	}
-
-	public void setFailures(Collection<Failure> failures) {
-		this.failures = failures;
-	}
-
-	public Collection<UE> getUeObjects() {
-		return ueObjects;
-	}
-
-	public void setUeObjects(Collection<UE> ueObjects) {
-		this.ueObjects = ueObjects;
-	}
-
+	/**
+	 * Method to return the single instance of the Object for the 
+	 * Singleton Pattern
+	 * 
+	 * @param instance
+	 */
 	public static void setInstance(BaseDataValidation instance) {
 		BaseDataValidation.instance = instance;
 	}
@@ -118,9 +78,9 @@ public class BaseDataValidation {
 	 * @return true if found/valid.
 	 * @throws Exception
 	 */
-	public String mncValidation(String mnc) throws Exception {
-		if (!(mnc == null) && mnc.contains(mnc)) {
-			return mnc;
+	public String mncValidation(String mncInput) throws Exception {
+		if (!(mncInput == null) && mnc.contains(mncInput)) {
+			return mncInput;
 		}
 		throw new Exception();
 	}
@@ -134,7 +94,7 @@ public class BaseDataValidation {
 	 * @throws Exception
 	 */
 	public String cellIdValidation(String cellId) throws Exception {
-		if (!(cellId == null) && cellId.contains(cellId)) {
+		if (!(cellId == null) && Integer.parseInt(cellId)>=0) {
 			return cellId;
 		}
 		throw new Exception();
@@ -149,8 +109,7 @@ public class BaseDataValidation {
 	 * @throws Exception
 	 */
 	public String durationValidation(String duration) throws Exception {
-		if (!(duration == null) && duration.equals(refDuration)){
-		
+		if (!(duration == null) && Integer.parseInt(duration)>=0){
 			return duration;
 		}
 		throw new Exception();
@@ -221,29 +180,25 @@ public class BaseDataValidation {
 	 * @return true/false
 	 * @throws Exception
 	 */
-	public String isEventIdValid(String eventId) throws Exception {
-		if (eventId == null || !eventId.matches("^[0-9]+"))
-			throw new Exception();
-		if (eventId.contains(eventId))
-			return eventId;
+	public String isEventIdValid(String eventIdInput) throws Exception {
+		if (!(eventId == null)&& eventId.contains(eventIdInput))
+			return eventIdInput;
 		throw new Exception();
 
 	}
 
 	/**
 	 * A method to check the Failure String. It also checks if each character is
-	 * a digit between 0-9.
+	 * a digit between 0-4.
 	 * 
 	 * @param failureClass
 	 * @return true/false
 	 * @throws Exception
 	 */
-	public String isFailureClassValid(String failureClass) throws Exception {
-		if (failureClass == null || !failureClass.matches("^[0-9]+"))
-			throw new Exception();
-		int convertedFailClass = Integer.parseInt(failureClass);
-		if (convertedFailClass >= 0 && convertedFailClass < 5)
-			return failureClass;
+	public String isFailureClassValid(String failureClassInput) throws Exception {
+		if ((failureClassInput != null) && (Integer.parseInt(failureClassInput)>=0
+				&& Integer.parseInt(failureClassInput)<=4))
+			return failureClassInput;
 		throw new Exception();
 	}
 
@@ -255,11 +210,9 @@ public class BaseDataValidation {
 	 * @return true/false
 	 * @throws Exception
 	 */
-	public String isMCCValid(String mcc) throws Exception {
-		if (mcc == null || !mcc.matches("^[0-9]+"))
-			throw new Exception();
-		if (mcc.contains(mcc))
-			return mcc;
+	public String isMCCValid(String mccInput) throws Exception {
+		if ((mccInput != null) && mcc.contains(mccInput))
+			return mccInput;
 		throw new Exception();
 
 	}
@@ -272,12 +225,9 @@ public class BaseDataValidation {
 	 * @return
 	 * @throws Exception
 	 */
-	public String isCauseCodeValid(String causeCode) throws Exception {
-		if (causeCode == null || !causeCode.matches("^[0-9]+"))
-			throw new Exception();
-		int convertedCauseCode = Integer.parseInt(causeCode);
-		if (convertedCauseCode >= 0 && convertedCauseCode < 34)
-			return causeCode;
+	public String isCauseCodeValid(String causeCodeInput) throws Exception {
+		if ((causeCodeInput != null) && causeCode.contains(causeCodeInput))
+			return causeCodeInput;
 		throw new Exception();
 	}
 
@@ -304,14 +254,14 @@ public class BaseDataValidation {
 	 * @throws Exception
 	 */
 	public String neVersionValidation(String NEVersion) throws Exception {
-		if (!(NEVersion == null) && neVersion.contains(NEVersion)) {
+		if ((NEVersion != null)) {
 			return NEVersion;
 		}
 		throw new Exception();
 	}
 
 	/**
-	 * Mehtod to check that all composite keys match a country and operaotr
+	 * Method to check that all composite keys match a country and operator
 	 * description.
 	 * 
 	 * @param value
@@ -324,7 +274,7 @@ public class BaseDataValidation {
 	}
 
 	/**
-	 * Mehtod to check that all composite keys match eventid and cause code
+	 * Method to check that all composite keys match eventid and cause code
 	 * description.
 	 * 
 	 * @param value
@@ -336,8 +286,8 @@ public class BaseDataValidation {
 		}
 	}
 
-	public void buildValidValidationData() {
-		cellId.add("4");
+	//public void buildValidValidationData() {
+		/*cellId.add("4");
 		cellId.add("5");
 		cellId.add("3842");
 		neVersion.add("11B");
@@ -345,6 +295,97 @@ public class BaseDataValidation {
 		refDuration = "1000";
 		ueTypeTac.add("21060800");
 		ueTypeTac.add("33000153");
-		ueTypeTac.add("33000253");
+		ueTypeTac.add("33000253");*/
+	//}
+
+	public static Set<String> getEventId() {
+		return eventId;
 	}
+
+	public static Set<String> getMcc() {
+		return mcc;
+	}
+
+	public static Set<String> getMnc() {
+		return mnc;
+	}
+
+	public static Set<String> getUeTypeTac() {
+		return ueTypeTac;
+	}
+
+	public static Set<String> getNetworkCompositeKeys() {
+		return networkCompositeKeys;
+	}
+
+	public static Set<String> getEventCauseCompositeKeys() {
+		return eventCauseCompositeKeys;
+	}
+	
+
+	public Collection<EventCause> getEventCauses() {
+		return eventCauses;
+	}
+
+	public void setEventCauses(Collection<EventCause> eventCauseData) {
+		this.eventCauses = eventCauseData;
+	}
+
+	public Collection<Network> getNetworks() {
+		return networks;
+	}
+
+	public void setNetworks(Collection<Network> networks) {
+		this.networks = networks;
+	}
+
+	public Collection<Failure> getFailures() {
+		return failures;
+	}
+
+	public void setFailures(Collection<Failure> failures) {
+		this.failures = failures;
+	}
+
+	public Collection<UE> getUeObjects() {
+		return ueObjects;
+	}
+
+	public void setUeObjects(Collection<UE> ueObjects) {
+		this.ueObjects = ueObjects;
+	}
+
+	public static Set<String> getCauseCode() {
+		return causeCode;
+	}
+
+	public static void setCauseCode(Set<String> causeCode) {
+		BaseDataValidation.causeCode = causeCode;
+	}
+
+	public static void setEventId(Set<String> eventId) {
+		BaseDataValidation.eventId = eventId;
+	}
+
+	public static void setMcc(Set<String> mcc) {
+		BaseDataValidation.mcc = mcc;
+	}
+
+	public static void setMnc(Set<String> mnc) {
+		BaseDataValidation.mnc = mnc;
+	}
+
+	public static void setUeTypeTac(Set<String> ueTypeTac) {
+		BaseDataValidation.ueTypeTac = ueTypeTac;
+	}
+
+	public static void setNetworkCompositeKeys(Set<String> networkCompositeKeys) {
+		BaseDataValidation.networkCompositeKeys = networkCompositeKeys;
+	}
+
+	public static void setEventCauseCompositeKeys(
+			Set<String> eventCauseCompositeKeys) {
+		BaseDataValidation.eventCauseCompositeKeys = eventCauseCompositeKeys;
+	}
+
 }

@@ -34,10 +34,7 @@ public class BaseDataREST {
 
 	@Inject
 	private BaseDataServiceLocal service;
-	/*@Inject
-	private BaseDataExcelRead bdxr;*/
-	/*@EJB
-	BaseDataDAO dao;*/
+	
 	private BaseDataValidation bvd = BaseDataValidation.getInstance();
 
 	public BaseDataREST() {
@@ -75,6 +72,11 @@ public class BaseDataREST {
 		service.putFailureData(failureData);
 		service.putData(bd);
 		
+		//Should I make these Collection null now??
+		networkData = null;
+		ueData = null;
+		eventCauseData = null;
+		failureData = null;
 	}
 
 	
