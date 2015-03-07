@@ -66,20 +66,16 @@ public class BaseDataExcelRead {
 		String[] strings = new String[13];
 		int sIndex = 0;
 		File inputWorkBook = new File(stringInput);
-		Workbook w;
+		Workbook w; 
 		int count = 0; 
-		boolean send = true;
-		if(validation == null){
-			System.out.println("Yes");
-		}
 		try {
 			w = Workbook.getWorkbook(inputWorkBook);
 			Sheet sheet = w.getSheet(0);
-			System.out.println("Amount of Rows: " + sheet.getRows());
 			for (int j = 1; j <  sheet.getRows() ; j++) {
 				for (int i = 0; i < sheet.getColumns() ; i++) {
 					Cell cell = sheet.getCell(i, j);
 					if (i==0) {
+					
 						try{
 						date = format.parse(cell.getContents());
 						convertedDate = format.format(date);
@@ -199,7 +195,6 @@ public class BaseDataExcelRead {
 		try {
 			w = Workbook.getWorkbook(inputWorkBook);
 			Sheet sheet = w.getSheet(3);
-			System.out.println("Rows: " + sheet.getRows() + " Cols: " + sheet.getColumns());
 			for (int i = 1; i < sheet.getRows(); i++) {
 				for (int j = 0; j < sheet.getColumns(); j++) {
 					Cell cell = sheet.getCell(j, i);
@@ -370,16 +365,15 @@ public class BaseDataExcelRead {
 
 			File file = new File(FILE_PATH);
 
-			// if file doesnt exists, then create it
+			// if file doesn't exists, then create it
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
 			PrintWriter out = new PrintWriter(new FileWriter(file, true));
-			out.append("An error was discover in line: " + errorLineNo);
+			out.append("Line: " + errorLineNo);
 			out.append("\n");
 			out.close();
-			System.out.println("Done writing to the file");
 
 		} catch (IOException e) {
 			e.printStackTrace();
