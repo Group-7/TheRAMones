@@ -77,6 +77,7 @@ public class BaseDataREST {
 		ueData = null;
 		eventCauseData = null;
 		failureData = null;
+		bd = null;
 	}
 
 	

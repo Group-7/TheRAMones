@@ -67,7 +67,8 @@ public class BaseDataExcelRead {
 		int sIndex = 0;
 		File inputWorkBook = new File(stringInput);
 		Workbook w;
-		int count = 0;  
+		int count = 0; 
+		boolean send = true;
 		if(validation == null){
 			System.out.println("Yes");
 		}
@@ -92,7 +93,7 @@ public class BaseDataExcelRead {
 				}
 				sIndex = 0;
 				try{
-					//validation.xx();
+					
 				validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
 				Timestamp dateDB=new Timestamp(date.getTime());
 				int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
