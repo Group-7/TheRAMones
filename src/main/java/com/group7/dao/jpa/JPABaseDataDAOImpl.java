@@ -109,12 +109,12 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 	 * they have exhibited and the number of occurrences.
 	 * 
 	 */
-	public Collection<Long> getAllUniqueFailureCauseCodeCombinations(BigInteger imsi, String startDate, String endDate) {
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate) {
 		
 		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
 		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
 				
-		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+		return em.createQuery("SELECT imsi, SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("imsi", imsi)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)

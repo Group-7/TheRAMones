@@ -53,5 +53,12 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		
 		return dao.getTotalFailuresOfSpecificIMSI(imsi, startDate, endDate);
 	}
+
+
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
+			BigInteger imsi, String startDate, String endDate) {
+		// 
+		return dao.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
+	}
 	
 }

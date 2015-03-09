@@ -98,6 +98,16 @@ public class BaseDataREST {
 
 	}
 	
+	
+	/**
+	 * 
+	 * Returns for a given model of phone, 
+	 * the number of call failures it has had during a given time period.
+	 * @param tacCode
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
 	@GET
 	@Path("/tacFailures")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -110,6 +120,14 @@ public class BaseDataREST {
 	}
 	
 	
+	/**
+	 * 
+	 * Returns for a given IMSI, the number of failures they have had during a given time period.
+	 * @param imsi
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
 	@GET
 	@Path("/imsiFailures")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -121,5 +139,24 @@ public class BaseDataREST {
 	
 	}
 	
+	
+	/**
+	 * 
+	 * Returns for each IMSI, the number of call failures and their total duration 
+	 * during a given time period
+	 * @param imsi
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	@GET
+	@Path("/imsiTotalDuration")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getTotalDurationOfSpecificIMSI(
+			@QueryParam("imsi") BigInteger imsi
+			,@QueryParam("startDate") String startDate
+			,@QueryParam("endDate") String endDate){
+		return service.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
+	}
 	
 }

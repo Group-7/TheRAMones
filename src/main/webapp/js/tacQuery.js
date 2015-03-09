@@ -10,9 +10,15 @@ $("#displayCallFailuresPerIMSI").click(function() {
 
 });
 
+$("#displayTotalDurationPerIMSI").click(function() {
+	
+	getTotalDurationPerIMSI();
+
+});
+
 function getAllCallFailuresPerPhoneType(){
 	
-	("#table-body").html("");
+	$("#table-body").html("");//
 	
 	var tacNumber = $("#TAC").val();
 	var startDate = $("#startDate").val();
@@ -43,7 +49,24 @@ function getAllCallFailuresPerIMSI(){
 }
 
 
+function getTotalDurationPerIMSI(){
+	 $("#table-body").html("");
+	
+	var imsiNumber = $("#imsi").val();
+	var startDate = $("#startDate").val();
+	var endDate = $("#endDate").val();
+
+	$.ajax({
+		  type: 'GET',
+		  url: 'rest/baseData/imsiFailures?imsi='+ imsiNumber+'&startDate='+ startDate+'&endDate='+endDate,
+		  success: handleResponseJQuery2,
+		  contentType: 'application/json'
+	});
+}
+
+
 function handleResponseJQuery(myData) {
+	
 		 $('#table-body').append(
 				 "<tr>" +
                  "<td>" + myData[0] + "</td>" +
@@ -51,3 +74,14 @@ function handleResponseJQuery(myData) {
 	
 		
 }
+
+function handleResponseJQuery2(myData) {
+	
+	 $('#table-body').append(
+			 "<tr>" +
+            "<td>" + myData[0][0] + "</td>" +
+            "<td>" + myData[0][1].Duration + "</td>" +
+            "</tr>");
+	
+}
+	
