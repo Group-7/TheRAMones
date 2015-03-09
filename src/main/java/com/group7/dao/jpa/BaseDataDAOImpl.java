@@ -7,7 +7,10 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Named;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,6 +28,7 @@ import com.group7.importBaseData.BaseDataValidation;
 @NamedQueries({ @NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd") })
 @Local
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@PersistenceContext
@@ -42,13 +46,28 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		em.persist(basedata);
 	}
 
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-
+		
+		System.out.println("valid size "+bd.size());
+		int count = 0;
 		for (BaseData basedata : bd) {
-			// em.persist(basedata);
+			/*System.out.println("******************************");
+			System.out.println(count + " Inserted");
+			System.out.println("******************************");*/
+			try{
+				em.merge(basedata.deepCopy());
+					
+				
+			}
+			catch(EntityExistsException eee){
+				System.out.println("***************\nEntity exixts exception "+"\n**************");
+				count++;
+				
+			}
 
-			BaseData base = new BaseData();
+			/*BaseData base = new BaseData();
 			base.setDateAndTime(basedata.getDateAndTime());
 			base.setEventId(basedata.getEventId());
 			base.setFailureClass(basedata.getFailureClass());
@@ -63,9 +82,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			base.setHeir3ID(basedata.getHeir3ID());
 			base.setHeir32ID(basedata.getHeir32ID());
 			base.setHeir321ID(basedata.getHeir321ID());
-			em.persist(base);
+			em.persist(base);*/
 		}
 
+		System.out.println("dupicates "+count);
 	}
 
 	@Override
@@ -104,5 +124,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		}
 		bdv.setFailureFirst(false);
 	}
+
+
 
 }

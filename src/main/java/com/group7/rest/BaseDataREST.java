@@ -53,7 +53,7 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 		
-		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/marc/Documents/sample_dataset.xls");
+		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/marc/Documents/sample_dataset2.xls");
 		Collection<Network> networkData = bdxr.readNetworkTable();
 		Collection<UE> ueData = bdxr.readUETable();
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
@@ -93,7 +93,7 @@ public class BaseDataREST {
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
 
-		String filename = "/home/marc/Documents/sample_dataset.xls";
+		String filename = "/home/marc/Documents/sample_dataset2.xls";
 		if (form == null)
 			filename = "null.txt";
 

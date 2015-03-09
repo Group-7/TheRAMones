@@ -12,6 +12,7 @@ public class BaseDataId implements Serializable {
 	private Integer causeCode;
 	private Integer eventId;
 	private Integer cellid;
+	//private int id;
 	public BaseDataId(){
 	
 	}
@@ -46,6 +47,12 @@ public class BaseDataId implements Serializable {
 	public void setCellid(Integer cellid) {
 		this.cellid = cellid;
 	}
+	/*public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,6 +102,7 @@ public class BaseDataId implements Serializable {
 			return false;
 		return true;
 	}
+	
 
 	
 	

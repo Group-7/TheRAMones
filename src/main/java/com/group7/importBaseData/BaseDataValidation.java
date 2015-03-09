@@ -185,7 +185,7 @@ public class BaseDataValidation {
 	 * @throws Exception
 	 */
 	public String isEventIdValid(String eventIdInput) throws Exception {
-		if (!(eventId == null)&& eventId.contains(eventIdInput))
+		if (!(eventIdInput == null)&& eventId.contains(eventIdInput))
 			return eventIdInput;
 		throw new Exception();
 
@@ -270,10 +270,11 @@ public class BaseDataValidation {
 	 * @param value
 	 * @throws Exception
 	 */
-	public void validateCompositeKeysInNetwork(String value) throws Exception {
+	public boolean validateCompositeKeysInNetwork(String value) throws Exception {
 		if (!networkCompositeKeys.contains(value)) {
 			throw new Exception();
 		}
+		return true;
 	}
 
 	/**
@@ -283,10 +284,11 @@ public class BaseDataValidation {
 	 * @param value
 	 * @throws Exception
 	 */
-	public void validateCompositeInEventCause(String value) throws Exception {
+	public boolean validateCompositeInEventCause(String value) throws Exception {
 		if (!eventCauseCompositeKeys.contains(value)) {
 			throw new Exception();
 		}
+		return true;
 	}
 
 	/**

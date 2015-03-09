@@ -31,7 +31,7 @@ import com.group7.entities.UE;
 public class BaseDataExcelRead {
 
 	private String stringInput;
-	DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 	Date date = null;
 	String convertedDate = null;
 	//TODO
@@ -90,7 +90,7 @@ public class BaseDataExcelRead {
 				sIndex = 0;
 				try{
 					
-				validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
+				validation.isThisDateValid(convertedDate,"MM/dd/yyyy HH:mm");
 				Timestamp dateDB=new Timestamp(date.getTime());
 				int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 				int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));
@@ -125,6 +125,7 @@ public class BaseDataExcelRead {
 				count++;
 				bsList.add(entity);
 				convertedDate = null;
+				entity = null;
 				}catch(Exception e){
 					writeToLogError(count);
 					count++;

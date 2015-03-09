@@ -12,6 +12,10 @@ import javax.inject.Inject;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.EventCause;
+import com.group7.entities.Failure;
+import com.group7.entities.Network;
+import com.group7.entities.UE;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @Stateless
@@ -38,6 +42,30 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public void putData(Collection<BaseData> bd) {
 		// TODO Auto-generated method stub
 		dao.putData(bd);
+	}
+
+	@Override
+	public void putNetworkData(Collection<Network> networkList) {
+		dao.putNetworkData(networkList);
+		
+	}
+
+	@Override
+	public void putUEData(Collection<UE> ueList) {
+		dao.putUEData(ueList);
+		
+	}
+
+	@Override
+	public void putEventCauseData(Collection<EventCause> eventCauseList) {
+		dao.putEventCauseData(eventCauseList);
+		
+	}
+
+	@Override
+	public void putFailureData(Collection<Failure> failureList) {
+		dao.putFailureData(failureList);
+		
 	}
 	
 }
