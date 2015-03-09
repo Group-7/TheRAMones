@@ -70,7 +70,7 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 
 	
 	/**
-	 * Queries the total number of call failures within a certain
+	 * Returns the total number of call failures within a certain
 	 * time period based on the phoneType.
 	 */
 	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate) {
@@ -88,10 +88,28 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 
 	
 	/**
-	 * Queries the total number of call failures within a certain
+	 * Returns the total number of call failures within a certain
 	 * time period based on the imsi number.
 	 */
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate) {
+		
+		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
+				
+		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.setParameter("imsi", imsi)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+			}
+	
+	
+	/** 
+	 * Returns for a given phone type all the unique failure Event Id and Cause Code combinations 
+	 * they have exhibited and the number of occurrences.
+	 * 
+	 */
+	public Collection<Long> getAllUniqueFailureCauseCodeCombinations(BigInteger imsi, String startDate, String endDate) {
 		
 		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
 		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());

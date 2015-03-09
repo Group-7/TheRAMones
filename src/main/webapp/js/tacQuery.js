@@ -12,6 +12,8 @@ $("#displayCallFailuresPerIMSI").click(function() {
 
 function getAllCallFailuresPerPhoneType(){
 	
+	("#table-body").html("");
+	
 	var tacNumber = $("#TAC").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
@@ -26,6 +28,8 @@ function getAllCallFailuresPerPhoneType(){
 
 
 function getAllCallFailuresPerIMSI(){
+	 $("#table-body").html("");
+	
 	var imsiNumber = $("#imsi").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
@@ -40,7 +44,6 @@ function getAllCallFailuresPerIMSI(){
 
 
 function handleResponseJQuery(myData) {
-	
 		 $('#table-body').append(
 				 "<tr>" +
                  "<td>" + myData[0] + "</td>" +
