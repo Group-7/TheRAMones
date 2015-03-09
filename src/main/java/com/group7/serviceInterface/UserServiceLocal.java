@@ -11,4 +11,6 @@ public interface UserServiceLocal {
 
 	Collection<User> showAllUsers();
 	User getUserByEmail(String email,String password);
+	//User addUser(String email, String password, int position);
+  User addUser(String email,String password, int type);
 }

@@ -28,5 +28,17 @@ public class UserServiceEJB implements UserServiceLocal {
 	public User getUserByEmail(String email,String password) {
 		return dao.searchUserByEmail(email, password);
 	}
+	
+	public User addUser(String email,String password, int type){
+		//System.out.println(user.getEmail());
+	
+		return dao.addUser(email,password,type);
+	}
+
+//	@Override
+//	public User addUser(String email, String password, int position) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
