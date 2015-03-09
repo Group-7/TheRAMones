@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity(name="Event_Cause_Table")
 @IdClass(EventCauseID.class)
-//@Table(name="Event_Cause_Table")// does  not work with @Table
+@Table(name="Event_Cause_Table")// does  not work with @Table
 public class EventCause implements Serializable{
 	
 	@Id
@@ -32,7 +32,6 @@ public class EventCause implements Serializable{
 	
 	@Column(name="Description")
 	private String description;
-
 	
 	
 	public Integer getCauseCode() {

@@ -19,7 +19,6 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	EntityManager em;
 
 	public Collection<BaseData> getAllBaseData() {
-		// TODO Auto-generated method stub
 		return (Collection<BaseData>) em.createQuery(
 				"select bd from BaseData bd").getResultList();
 	}
@@ -55,31 +54,23 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	}
 
-	/*
-	 * retrieves all IMSI, Cause_ID, EventID from BaseData
-	 */
 
 	/*
-	 * public Collection<BaseData> getAllCause_CodeAndEventIdByIMSI() {
-	 * 
-	 * @SuppressWarnings("unchecked") Collection<BaseData> resultList =
-	 * (Collection<BaseData>) em.createQuery(
-	 * "BaseData.displayCause_CodeANDEventID").getResultList(); return
-	 * resultList; }
+	 * SELECT Base_Data.IMSI, Base_Data.Cause_Code, Base_Data.EventID,
+	 * Event_Cause_Table.Description FROM Base_Data, Event_Cause_Table WHERE
+	 * Base_Data.Cause_Code = Event_Cause_Table.Cause_Code AND Base_Data.EventID
+	 * = Event_Cause_Table.EventID AND Base_Data.IMSI = 344930000000001;
 	 */
-	//@SuppressWarnings("unchecked")
-	//use projectDB;
-	//select IMSI, EventID, Cause_Code from Base_Data where IMSI = 240210000000013;
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
-		return em.createQuery(
-				"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd WHERE bd.imsi = :imsi").setParameter("imsi", imsi).getResultList();
-				//"SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi").getResultList();
-				
+		return em
+				.createQuery(
+						"SELECT bd.imsi, bd.causeCode, bd.eventId, ec.description FROM Event_Cause_Table ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi").setParameter("imsi", imsi).getResultList();
 	}
-	
-	public Collection<BigInteger> getUniqueAffectedImsi(){
-		return (Collection<BigInteger>) em.createQuery("SELECT DISTINCT bd.imsi FROM BaseData bd").getResultList(); 
-	
+
+	public Collection<BigInteger> getUniqueAffectedImsi() {
+		return (Collection<BigInteger>) em.createQuery(
+				"SELECT DISTINCT bd.imsi FROM BaseData bd").getResultList();
+
 	}
 
 }
