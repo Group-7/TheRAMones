@@ -58,7 +58,7 @@ function getTotalDurationPerIMSI(){
 
 	$.ajax({
 		  type: 'GET',
-		  url: 'rest/baseData/imsiFailures?imsi='+ imsiNumber+'&startDate='+ startDate+'&endDate='+endDate,
+		  url: 'rest/baseData/imsiTotalDuration?imsi='+ imsiNumber+'&startDate='+ startDate+'&endDate='+endDate,
 		  success: handleResponseJQuery2,
 		  contentType: 'application/json'
 	});
@@ -75,13 +75,17 @@ function handleResponseJQuery(myData) {
 		
 }
 
-function handleResponseJQuery2(myData) {
+function handleResponseJQuery2(myData2) {
 	
-	 $('#table-body').append(
-			 "<tr>" +
-            "<td>" + myData[0][0] + "</td>" +
-            "<td>" + myData[0][1].Duration + "</td>" +
-            "</tr>");
-	
-}
+	//for(var i = 0 ; i <myData.length; i++){
+		
+		 $('#table-body').append(
+               "<tr>" +
+               "<td>" + myData2[0][1] + "</td>" +
+               "<td>" + myData2[0][2] + "</td>" +
+               "<td>" + myData2[0][0] + "</td>" +
+               "</tr>");
+        //   };
+        }
+
 	

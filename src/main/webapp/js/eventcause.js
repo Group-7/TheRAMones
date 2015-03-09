@@ -17,13 +17,13 @@ function getAllEvents(){
 function handleResponseJQuery(myData) {
 	
 	for(var i = 0 ; i <myData.length; i++){
-	
+		
 		 $('#table-body').append(
-                 "<tr>" +
-                 "<td>" + myData[i].causeCode + "</td>" +
-                 "<td>" + myData[i].eventId + "</td>" +
-                 "<td>" + myData[i].description + "</td>" +
-                 "</tr>");
-             };
+                "<tr>" +
+                "<td>" + myData[i].causeCode + "</td>" +
+                "<td>" + myData[i].eventId + "</td>" +
+                "<td>" + myData[i].description + "</td>" +
+                "</tr>");
+            };
 		
 }

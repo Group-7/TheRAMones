@@ -11,15 +11,15 @@
 	<p> Use the dropdown-menu to select the phone-type of which you
 		would like to display the number of call failures in a given period</p>
 		<p> make sure the date requested is written in the dd/mm/yyyy format, even if the database has it different</p>
-
+		<p>	dummy date 11/01/0013 17:10:00 </p>
 	
 				<p> phone TAC number : <input type="text" id="TAC" name="TAC"></p>
 				<p> IMSI number      : <input type="text" id="imsi" name="imsi"></p>
-<!-- 			<p> select start date :   <input type="text" id="startDate" name="startDate"></p> -->
+<!--  			<p> select start date :   <input type="text" id="startDate" name="startDate"></p> -->
 <!-- 			<p> select end date :   <input type="text" id="endDate" name="endDate"></p> -->
 		 		
 	 		 	
-	 select start date :  	
+	 Select start date :  	
 	<div id="datetimepicker"  class="input-append date">
 	<input type="text" id="startDate" name="startDate"></input>
 
@@ -31,7 +31,7 @@
 
 <p></p> 
 
-	select end date :                                  <!--  data-date="12-02-2012 11:10:00" data-date-format="dd/MM/yyyy HH:mm:ss"-->
+	Select end date :                                  
 	<div id="datetimepicker2" class="input-append date">
   <input type="text" id="endDate" name="endDate">
 
@@ -49,8 +49,9 @@
 
 	<table id="table" class="table table-striped">
 		<thead>
-			<th>Number of call failures</th>
-			<th>Duration</th>
+			<th>Total Number of_call-failures</th>
+			<th>Total Duration in milliseconds</th>
+			<th>IMSI</th>
 		</thead>
 		<tbody id="table-body">
 

@@ -100,13 +100,11 @@ public class BaseDataREST {
 	
 	
 	/**
-	 * 
 	 * Returns for a given model of phone, 
 	 * the number of call failures it has had during a given time period.
 	 * @param tacCode
 	 * @param startDate
 	 * @param endDate
-	 * @return
 	 */
 	@GET
 	@Path("/tacFailures")
@@ -121,12 +119,10 @@ public class BaseDataREST {
 	
 	
 	/**
-	 * 
 	 * Returns for a given IMSI, the number of failures they have had during a given time period.
 	 * @param imsi
 	 * @param startDate
 	 * @param endDate
-	 * @return
 	 */
 	@GET
 	@Path("/imsiFailures")
@@ -140,14 +136,12 @@ public class BaseDataREST {
 	}
 	
 	
-	/**
-	 * 
+	/** 
 	 * Returns for each IMSI, the number of call failures and their total duration 
 	 * during a given time period
 	 * @param imsi
 	 * @param startDate
 	 * @param endDate
-	 * @return
 	 */
 	@GET
 	@Path("/imsiTotalDuration")

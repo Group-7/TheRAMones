@@ -107,14 +107,13 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 	/** 
 	 * Returns for a given phone type all the unique failure Event Id and Cause Code combinations 
 	 * they have exhibited and the number of occurrences.
-	 * 
 	 */
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate) {
 		
 		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
 		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
 				
-		return em.createQuery("SELECT imsi, SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+		return em.createQuery("SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("imsi", imsi)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
