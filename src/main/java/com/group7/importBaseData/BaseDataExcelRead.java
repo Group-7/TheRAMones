@@ -26,7 +26,7 @@ public class BaseDataExcelRead {
 	private String stringInput;
 	String[] strings = new String[len];
 
-	DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 	Date date = null;
 	String convertedDate = null;
 	//BaseData entity;
@@ -66,7 +66,7 @@ public class BaseDataExcelRead {
 				}
 				sIndex = 0;
 				try{
-				validation.isThisDateValid(convertedDate,"dd/MM/yyyy HH:mm");
+				validation.isThisDateValid(convertedDate,"MM/dd/yyyy HH:mm");
 				Timestamp dateDB=new Timestamp(date.getTime());
 				int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 				int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));
@@ -110,8 +110,8 @@ public class BaseDataExcelRead {
 				
 				
 			}
-			System.out.println("HERE:----------------------" + bsList.get(0).getHeir32ID());
-			System.out.println("HERE:----------------------" + bsList.get(750).getHeir32ID());
+			//System.out.println("HERE:----------------------" + bsList.get(0).getHeir32ID());
+			//System.out.println("HERE:----------------------" + bsList.get(750).getHeir32ID());
 
 		} catch (BiffException e) {
 			e.printStackTrace();
