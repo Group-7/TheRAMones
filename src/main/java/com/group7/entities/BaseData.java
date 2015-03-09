@@ -6,9 +6,11 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -33,6 +35,7 @@ public class BaseData {
 	private Integer cellid;
 	
 	@Id
+	//@ForeignKey(name="EventCause")
 	@Column(name="Cause_Code")
 	private Integer causeCode;
 	@Id

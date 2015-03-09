@@ -66,6 +66,18 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		}
 		
 	}
+	
+	public Collection<Object> getAllCauseCodeAndEventId(BigInteger imsi){
+		
+		return em.createQuery("SELECT bd.imsi, bd.causeCode, "
+				+ "bd.eventId, ec.description"
+				+ " FROM BaseData bd, EventCause ec"
+				+ " WHERE bd.causeCode=ec.causeCode"
+				+ " AND  bd.eventId = ec.eventId"
+				+ " AND bd.imsi=:imsi")
+				.setParameter("imsi", imsi)
+				.getResultList();
+	}
 
 	@Override
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to) {
@@ -93,5 +105,8 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 //		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
 //	    dt = DateTime.parse("10/02/2013 20:00:00", parser); 
 	}
+	
+	
+	
 
 }

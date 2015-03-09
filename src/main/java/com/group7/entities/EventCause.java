@@ -16,9 +16,9 @@ import javax.persistence.Table;
  * @author giovanni
  */
 
-@Entity(name="Event_Cause_Table")
+@Entity
 @IdClass(EventCauseID.class)
-//@Table(name="Event_Cause_Table")// does  not work with @Table
+@Table(name="Event_Cause_Table")// does  not work with @Table
 public class EventCause implements Serializable{
 	
 	@Id

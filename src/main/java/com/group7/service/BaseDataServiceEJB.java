@@ -46,5 +46,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		// TODO Auto-generated method stub
 		return dao.getImsiFailureOverTime(from,to);
 	}
+
+	@Override
+	public Collection<Object> getAllCasueCodeAndEventId(BigInteger imsi) {
+		// TODO Auto-generated method stub
+		return dao.getAllCauseCodeAndEventId(imsi);
+	}
 	
 }

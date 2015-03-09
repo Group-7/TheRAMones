@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 
 
 
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.group7.entities.BaseData;
@@ -51,7 +52,7 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 		BaseDataExcelRead bdxr = new BaseDataExcelRead(
-				"/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
+				"/home/niall/Data.xls");
 		Collection<BaseData> bd = bdxr.readExcelFile();
 		service.putData(bd);
 	}
@@ -67,7 +68,7 @@ public class BaseDataREST {
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
 
-		String filename = "/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
+		String filename = "/home/niall/Data.xls";
 		if (form == null)
 			filename = "null.txt";
 
@@ -95,6 +96,12 @@ public class BaseDataREST {
 		fop.flush();
 		fop.close();
 
+	}
+	
+	@GET
+	@Path("/failureDescriptions")
+	public Collection<Object> getAllCauseCodeAndEventId(@QueryParam("imsi") BigInteger imsi){
+		return service.getAllCasueCodeAndEventId(imsi);
 	}
 	
 	@GET
