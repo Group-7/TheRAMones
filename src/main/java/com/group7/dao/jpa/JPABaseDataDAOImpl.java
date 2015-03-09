@@ -109,7 +109,7 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 	 * @param date
 	 * @return formated date object
 	 */
-	private Date dateFormatter(String date){
+	public Date dateFormatter(String date){
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date newDate = null;
 		try {

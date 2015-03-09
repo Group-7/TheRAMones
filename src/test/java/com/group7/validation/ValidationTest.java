@@ -2,6 +2,10 @@ package com.group7.validation;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
+import com.group7.dao.BaseDataDAO;
+import com.group7.dao.jpa.JPABaseDataDAOImpl;
 import com.group7.importBaseData.BaseDataValidation;
 
 import org.junit.Before;
@@ -317,6 +321,7 @@ public class ValidationTest {
 		assertFalse(validator.isThisDateValid(null, "dd/M/yyyy HH:mm"));
 	}
  
+	
 	/**
 	 * Test the datValidation method for date in the past.			
 	 */	
@@ -324,6 +329,18 @@ public class ValidationTest {
 	public void testThatDateInThePast(){
 		assertFalse(validator.isThisDateValid("31/31/1999  23:59:59", "dd/M/yyyy HH:mm:ss"));
 		assertTrue(validator.isThisDateValid("01/01/2000  00:00:01", "dd/M/yyyy HH:mm:ss"));
+	}
+	
+	
+	/**
+	 * Test for correct date parsing 
+	 */
+	@Test
+	public void dateFormatterTest(){
+		JPABaseDataDAOImpl baseDataImpl = new JPABaseDataDAOImpl();
+		Date date = new Date();
+		assertNotSame(baseDataImpl.dateFormatter("11/01/2013 17:10:00"), "11/01/2013 17:10:00");
+
 	}
 	
 }
