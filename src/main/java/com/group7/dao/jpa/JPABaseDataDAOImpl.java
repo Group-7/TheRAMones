@@ -121,6 +121,14 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 			}
 	
 	
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model) {
+		
+		return em.createQuery("select u.model, b.failureClass, b.causeCode , count(*) as occurences from BaseData b, UE_Table u where b.tac = u.tac and u.model = :phoneModel group by b.failureClass, b.causeCode")
+				.setParameter("phoneModel", model)
+				.getResultList();
+			}
+	
+	
 	/**
 	 * Formats the date so the DataBase can use read it
 	 * @param date

@@ -14,4 +14,5 @@ public interface BaseDataDAO {
 	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate);
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate);
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 }

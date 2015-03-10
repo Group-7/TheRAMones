@@ -1,4 +1,3 @@
-package com.group7.arquillian;
 /*package com.group7.arquillian;
 
 import static org.junit.Assert.*;
@@ -54,11 +53,11 @@ public class CallFailuresPerPhoneTypeTest {
 	}
 	
 	@Test
-	public void isBaseDataEmpty() throws Exception {
+	public void isBaseDataEmptyIMSI() throws Exception {
 		BigInteger IMSIDummy = new BigInteger("344930000000011");
 		String startDate =  "11/01/2013 17:09:00";
 		String endDate = "11/01/2013 17:17:00";
-		assertFalse(dao.getTotalFailuresOfSpecificPhone(IMSIDummy, startDate, endDate).isEmpty());	
+		assertFalse(dao.getTotalFailuresOfSpecificIMSI(IMSIDummy, startDate, endDate).isEmpty());	
 		
 	}
 	

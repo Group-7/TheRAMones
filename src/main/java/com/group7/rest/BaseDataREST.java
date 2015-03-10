@@ -153,4 +153,13 @@ public class BaseDataREST {
 		return service.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
 	}
 	
+	
+	@GET
+	@Path("/modelFailure")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(
+			@QueryParam("model") String model){
+		return service.getAllUniqueEventCausecodeCombinations(model);
+	}
+	
 }

@@ -61,4 +61,8 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		return dao.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
 	}
 	
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model){
+		return dao.getAllUniqueEventCausecodeCombinations(model);
+	}
+	
 }
