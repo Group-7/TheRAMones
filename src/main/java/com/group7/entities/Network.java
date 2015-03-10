@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -14,6 +16,11 @@ import javax.persistence.Table;
  *
  *	A Test comment but also, named queries to go here!!
  */
+
+@NamedQueries( {
+	@NamedQuery(name = "Network.getMNC", query = "select distinct o.mnc from Network o order by o.mnc"),
+	@NamedQuery(name = "Network.getMCC", query = "select distinct a.mcc from Network a order by a.mcc")
+})
 @Entity
 @IdClass(NetworkId.class)
 @Table(name="Network")

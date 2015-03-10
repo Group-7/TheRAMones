@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Collection;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,27 +16,28 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-
-
-
-
-
-
-
+import jxl.read.biff.BiffException;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.EventCause;
+import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
+import com.group7.entities.Network;
+import com.group7.entities.UE;
 import com.group7.importBaseData.BaseDataExcelRead;
+import com.group7.importBaseData.BaseDataValidation;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
-import jxl.read.biff.BiffException;
 
 @Path("/baseData")
 public class BaseDataREST {
 
 	@Inject
 	private BaseDataServiceLocal service;
+	
+	private BaseDataValidation bvd = BaseDataValidation.getInstance();
 
 	public BaseDataREST() {
 
@@ -59,10 +61,31 @@ public class BaseDataREST {
 	@POST
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
-		BaseDataExcelRead bdxr = new BaseDataExcelRead(
-				"/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
+		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
+		Collection<Network> networkData = bdxr.readNetworkTable();
+		Collection<UE> ueData = bdxr.readUETable();
+		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
+		Collection<Failure> failureData = bdxr.readFailureClassTable();
+		
+		//Filling the cache
+		bvd.setEventCauses(eventCauseData);
+		bvd.setFailures(failureData);
+		bvd.setNetworks(networkData);
+		bvd.setUeObjects(ueData);
 		Collection<BaseData> bd = bdxr.readExcelFile();
+		//Filling the Datasbase
+		service.putNetworkData(networkData);
+		service.putUEData(ueData);
+		service.putEventCauseData(eventCauseData);
+		service.putFailureData(failureData);
 		service.putData(bd);
+		
+		//Should I make these Collection null now??
+		networkData = null;
+		ueData = null;
+		eventCauseData = null;
+		failureData = null;
+		bd = null;
 	}
 
 	@POST

@@ -12,8 +12,9 @@ public class BaseDataId implements Serializable {
 	private Integer causeCode;
 	private Integer eventId;
 	private Integer cellid;
+	//private int id;
 	public BaseDataId(){
-	
+		
 	}
 	public Timestamp getDateAndTime() {
 		return dateAndTime;
@@ -21,7 +22,6 @@ public class BaseDataId implements Serializable {
 	public void setDateAndTime(Timestamp dateAndTime) {
 		this.dateAndTime = dateAndTime;
 	}
-	
 	public BigInteger getImsi() {
 		return imsi;
 	}
@@ -95,7 +95,9 @@ public class BaseDataId implements Serializable {
 			return false;
 		return true;
 	}
-
 	
+	
+	
+
 	
 }
