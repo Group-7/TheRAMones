@@ -14,9 +14,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.QueryParam;
+
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import jxl.read.biff.BiffException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+
+import org.apache.commons.httpclient.URI;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.group7.dao.BaseDataDAO;
@@ -61,6 +66,7 @@ public class BaseDataREST {
 	@POST
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
+
 		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/bmj/Documents/Ericsson_Files/sample_dataset.xls");
 		Collection<Network> networkData = bdxr.readNetworkTable();
 		Collection<UE> ueData = bdxr.readUETable();
@@ -72,6 +78,7 @@ public class BaseDataREST {
 		bvd.setFailures(failureData);
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
+
 		Collection<BaseData> bd = bdxr.readExcelFile();
 		//Filling the Datasbase
 		service.putNetworkData(networkData);
@@ -98,7 +105,7 @@ public class BaseDataREST {
 	@Path("/upload")
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
-
+		//Downloads/Group Project - Dataset 3A.xls";
 		String filename = "/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
 		if (form == null)
 			filename = "null.txt";
@@ -129,6 +136,7 @@ public class BaseDataREST {
 
 	}
 	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/uniqueIMSI")
@@ -145,4 +153,70 @@ public class BaseDataREST {
 		
 		return service.getImsiFailureOverTime(splitDates[0],splitDates[1]);
 	}
+
+	
+	/**
+	 * Returns for a given model of phone, 
+	 * the number of call failures it has had during a given time period.
+	 * @param tacCode
+	 * @param startDate
+	 * @param endDate
+	 */
+	@GET
+	@Path("/tacFailures")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Long> getTotalFailuresOfSpecificPhone(
+			@QueryParam("TAC") BigInteger tacCode
+			,@QueryParam("startDate") String startDate
+			,@QueryParam("endDate") String endDate){
+		return service.getTotalFailuresOfSpecificPhone(tacCode, startDate, endDate);
+	
+	}
+	
+	
+	/**
+	 * Returns for a given IMSI, the number of failures they have had during a given time period.
+	 * @param imsi
+	 * @param startDate
+	 * @param endDate
+	 */
+	@GET
+	@Path("/imsiFailures")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(
+			@QueryParam("imsi") BigInteger imsi
+			,@QueryParam("startDate") String startDate
+			,@QueryParam("endDate") String endDate){
+		return service.getTotalFailuresOfSpecificIMSI(imsi, startDate, endDate);
+	
+	}
+	
+	
+	/** 
+	 * Returns for each IMSI, the number of call failures and their total duration 
+	 * during a given time period
+	 * @param imsi
+	 * @param startDate
+	 * @param endDate
+	 */
+	@GET
+	@Path("/imsiTotalDuration")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getTotalDurationOfSpecificIMSI(
+			@QueryParam("imsi") BigInteger imsi
+			,@QueryParam("startDate") String startDate
+			,@QueryParam("endDate") String endDate){
+		return service.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
+	}
+	
+	
+	@GET
+	@Path("/modelFailure")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(
+			@QueryParam("model") String model){
+		return service.getAllUniqueEventCausecodeCombinations(model);
+	}
+	
+
 }

@@ -1301,4 +1301,8 @@
   }
 
 
+<<<<<<< HEAD
 })(window.jQuery)
+=======
+})(window.jQuery)
+>>>>>>> refs/remotes/origin/giovanniSprint2

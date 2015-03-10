@@ -102,18 +102,6 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	}
 	
 	
-	private Date dateFormatter(String date){
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		Date newDate = null;
-		try {
-			newDate = format.parse(date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return newDate;
-//		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
-//	    dt = DateTime.parse("10/02/2013 20:00:00", parser); 
-	}
 	
 	
 	
@@ -154,7 +142,80 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		}
 		bdv.setFailureFirst(false);
 	}
+	
+	/**
+	 * Returns the total number of call failures within a certain
+	 * time period based on the phoneType.
+	 */
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate) {
+		
+		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
+	
+		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.tac LIKE :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.setParameter("tac", phoneType)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+	
+		}
 
+	
+	/**
+	 * Returns the total number of call failures within a certain
+	 * time period based on the imsi number.
+	 */
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate) {
+		
+		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
+				
+		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.setParameter("imsi", imsi)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+			}
+	
+	
+	/** 
+	 * Returns for a given phone type all the unique failure Event Id and Cause Code combinations 
+	 * they have exhibited and the number of occurrences.
+	 */
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate) {
+		
+		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
+				
+		return em.createQuery("SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.setParameter("imsi", imsi)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+			}
+	
+	
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model) {
+		
+		return em.createQuery("select u.model, b.failureClass, b.causeCode , count(*) as occurences from BaseData b, UE_Table u where b.tac = u.tac and u.model = :phoneModel group by b.failureClass, b.causeCode")
+				.setParameter("phoneModel", model)
+				.getResultList();
+			}
+	
 
-
+	public Date dateFormatter(String date){
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date newDate = null;
+		try {
+			newDate = format.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return newDate;
+//		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+//	    dt = DateTime.parse("10/02/2013 20:00:00", parser); 
+	}
+	
+	
+	
 }

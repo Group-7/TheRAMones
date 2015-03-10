@@ -28,6 +28,7 @@ public interface BaseDataServiceLocal {
 	public Collection<BaseData> getAllBasedata();
 	public void addBaseData(BaseData basedata);
 	public void putData(Collection<BaseData> bd);
+
 	public Collection<Object> getAllEventIdAndCauseId(BigInteger Imsi);
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
@@ -36,4 +37,10 @@ public interface BaseDataServiceLocal {
 	public void putUEData(Collection<UE> ueList);
 	public void putEventCauseData(Collection<EventCause> eventCauseList);
 	public void putFailureData(Collection<Failure>failureList);
+
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate);
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate);
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
+
 }

@@ -19,6 +19,7 @@ import com.group7.entities.Network;
 import com.group7.entities.UE;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
+
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -28,6 +29,7 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	private BaseDataDAO dao;
 
 	public Collection<BaseData> getAllBasedata() {
+
 		return dao.getAllBaseData();
 	}
 	
@@ -38,7 +40,6 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-		// TODO Auto-generated method stub
 		dao.putData(bd);
 	}
 
@@ -55,6 +56,7 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	}
 	
 	
+
 	//The TransactionAttribute annotation specifies whether the container is to invoke a business method within 
     //a transaction context. The TransactionAttribute annotation can be used for session beans and message driven beans. 
 	//It can only be specified if container managed transaction demarcation is used. 
@@ -93,4 +95,32 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		
 	}
 	
+
+
+	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, 
+			String startDate, String endDate) {
+		
+		return dao.getTotalFailuresOfSpecificPhone(phoneType, startDate, endDate);
+	}
+
+	
+	
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
+			String startDate, String endDate) {
+		
+		return dao.getTotalFailuresOfSpecificIMSI(imsi, startDate, endDate);
+	}
+
+
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
+			BigInteger imsi, String startDate, String endDate) {
+		// 
+		return dao.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
+	}
+	
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model){
+		return dao.getAllUniqueEventCausecodeCombinations(model);
+	}
+	
 }
+

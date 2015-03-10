@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Date;
+
+import com.group7.dao.BaseDataDAO;
+import com.group7.dao.jpa.BaseDataDAOImpl;
+import com.group7.importBaseData.BaseDataValidation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -313,6 +318,7 @@ public class ValidationTest {
 	 * A method to test validateCompositeKeysInNetwork(String)
 	 */
 	@Test
+
 	public void testNetworkCompostieKeys() throws Exception{
 		assertTrue(validator.validateCompositeKeysInNetwork("2381"));
 		assertTrue(validator.validateCompositeKeysInNetwork("240580"));
@@ -321,6 +327,19 @@ public class ValidationTest {
 		assertTrue(validator.validateCompositeKeysInNetwork("340930"));
 	}
 	
+ 
+	
+	/**
+	 * Test the datValidation method for date in the past.			
+	 */	
+	@Test
+	public void testThatDateInThePast(){
+		assertFalse(validator.isThisDateValid("31/31/1999  23:59:59", "dd/M/yyyy HH:mm:ss"));
+		assertTrue(validator.isThisDateValid("01/01/2000  00:00:01", "dd/M/yyyy HH:mm:ss"));
+
+	}
+	
+
 	/**
 	 * A method to test invalid data for validateCompositeKeysInNetwork
 	 */
@@ -352,7 +371,7 @@ public class ValidationTest {
 		assertTrue(validator.validateCompositeInEventCause("000000"));
 	}
 	
-	// /=====================================
+
 	/**
 	 * Method to fill the ArrayLists
 	 */
@@ -417,7 +436,18 @@ public class ValidationTest {
 		eventCauseCompositeKeys.add("412512");
 		eventCauseCompositeKeys.add("410623");
 		validator.setEventCauseCompositeKeys(eventCauseCompositeKeys);
+	}
 		
+		/**
+		 * Test for correct date parsing 
+		 */
+		@Test
+		public void dateFormatterTest(){
+			BaseDataDAOImpl baseDataImpl = new BaseDataDAOImpl();
+			Date date = new Date();
+			assertNotSame(baseDataImpl.dateFormatter("11/01/2013 17:10:00"), "11/01/2013 17:10:00");
+
+		}
 		
 	}
 	// Test the mnc Validation method on invalid mnc data.
@@ -433,7 +463,7 @@ public class ValidationTest {
 	 * validator.mncValidation(inValidMncTestData[j]); } }
 	 */
 
-}
+
 /*
  * //** Test the mnc Validation method on valid mnc data.
  * 
@@ -672,3 +702,7 @@ public class ValidationTest {
  * 
  * }
  */
+
+	
+
+

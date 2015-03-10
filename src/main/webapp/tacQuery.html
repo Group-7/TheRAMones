@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+  </head>
+
+<body>
+	<h2>Call Failures</h2>
+	<p> Use the dropdown-menu to select the phone-type of which you
+		would like to display the number of call failures in a given period</p>
+		<p> make sure the date requested is written in the dd/mm/yyyy format, even if the database has it different</p>
+		<p>	dummy date 11/01/0013 17:10:00 </p>
+	
+				<p> phone TAC number : <input type="text" id="TAC" name="TAC"></p>
+				<p> IMSI number      : <input type="text" id="imsi" name="imsi"></p>
+<!--  			<p> select start date :   <input type="text" id="startDate" name="startDate"></p> -->
+<!-- 			<p> select end date :   <input type="text" id="endDate" name="endDate"></p> -->
+		 		
+	 		 	
+	 Select start date :  	
+	<div id="datetimepicker"  class="input-append date">
+	<input type="text" id="startDate" name="startDate"></input>
+
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+
+    </div>
+
+<p></p> 
+
+	Select end date :                                  
+	<div id="datetimepicker2" class="input-append date">
+  <input type="text" id="endDate" name="endDate">
+
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </div> 
+    
+    
+		<button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
+		<button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call Failures per IMSI</button>
+		<button class="btn btn-primary" id="displayTotalDurationPerIMSI">Call Total duration per IMSI</button>
+
+
+
+	<table id="table" class="table table-striped">
+		<thead>
+			<th>Total Number of_call-failures</th>
+			<th>Total Duration in milliseconds</th>
+			<th>IMSI</th>
+		</thead>
+		<tbody id="table-body">
+
+		</tbody>
+	</table>
+
+ <script type="text/javascript"
+     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+ 
+    </script> 
+    <script type="text/javascript"
+     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+    
+     <script type="text/javascript">
+      $('#datetimepicker').datetimepicker({
+        format: 'dd/MM/yyyy HH:mm:ss',
+        language: 'en'
+      });
+    </script> 
+    
+    <script type="text/javascript">
+      $('#datetimepicker2').datetimepicker({
+        format: 'dd/MM/yyyy HH:mm:ss',
+        language: 'en'
+      });
+    </script>
+    
+    <script src="js/tacQuery.js"></script>
+    
+    
+  </body>
+</html>
+
+<!-- 	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/home/giovanni/git/TheRamones/src/main/webapp/js/tacQuery.js"></script>
+    
+  
+    <script type="text/javascript"
+		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+     </script>  
+    <script type="text/javascript"
+		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+     </script> 
+    <script type="text/javascript"
+		src="/home/giovanni/git/TheRamones/src/main/webapp/js/bootstrap-datetimepicker.min.js">
+     </script> 
+    <script type="text/javascript"
+		src="/home/giovanni/git/TheRamones/src/main/webapp/js/locales/bootstrap-datetimepicker.uk.js">
+     </script> 
+    
+     </script> 
+  </body>
+</html>
+ -->
