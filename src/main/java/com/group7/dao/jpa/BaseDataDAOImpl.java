@@ -1,7 +1,12 @@
 package com.group7.dao.jpa;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -9,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TemporalType;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
@@ -72,5 +78,36 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				"SELECT DISTINCT bd.imsi FROM BaseData bd").getResultList();
 
 	}
+	
+
+	@Override
+	public Collection<BigInteger> getImsiFailureOverTime(String from, String to) {
+		// TODO Auto-generated method stub
+		Timestamp start=new Timestamp(dateFormatter(from).getTime());
+		Timestamp end=new Timestamp(dateFormatter(to).getTime());
+		
+		return (Collection<BigInteger>)em.createQuery("select DISTINCT bd.imsi from BaseData bd "
+				+ "where bd.dateAndTime between :from and :to"
+				).setParameter("from", start, TemporalType.TIMESTAMP)
+				.setParameter("to", end, TemporalType.TIMESTAMP)
+				.getResultList();
+	}
+	
+	
+	private Date dateFormatter(String date){
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date newDate = null;
+		try {
+			newDate = format.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return newDate;
+//		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+//	    dt = DateTime.parse("10/02/2013 20:00:00", parser); 
+	}
+	
+	
+	
 
 }

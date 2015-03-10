@@ -29,6 +29,7 @@ public class UeServiceEJBTest {
 				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class)
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		
 
   }
 

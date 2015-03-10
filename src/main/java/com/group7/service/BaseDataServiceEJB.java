@@ -37,6 +37,18 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		// TODO Auto-generated method stub
 		dao.putData(bd);
 	}
+
+	@Override
+	public Collection<BigInteger> getImsiFailureOverTime(String from, String to) {
+		// TODO Auto-generated method stub
+		return dao.getImsiFailureOverTime(from,to);
+	}
+
+	@Override
+	public Collection<Object> getAllCasueCodeAndEventId(BigInteger imsi) {
+		// TODO Auto-generated method stub
+		return dao.getAllCauseCodeAndEventIdByIMSI(imsi);
+	}
 	
 	
 	//The TransactionAttribute annotation specifies whether the container is to invoke a business method within 

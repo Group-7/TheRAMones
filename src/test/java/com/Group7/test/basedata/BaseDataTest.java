@@ -38,7 +38,8 @@ public class BaseDataTest {
 	@Test
 	public void checkBaseDataSizeTest() {
 
-		assertEquals(service.getAllBaseData().size(), 800);
+		assertFalse(service.getAllBaseData().isEmpty());	
+
 	}
 
 }

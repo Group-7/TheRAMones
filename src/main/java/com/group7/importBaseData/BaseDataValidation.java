@@ -284,6 +284,7 @@ public class BaseDataValidation {
 			mnc.add("88");
 			mnc.add("90");
 			
+			
 			cellId.add("4");
 			cellId.add("5");
 			cellId.add("3842");
@@ -309,12 +310,14 @@ public class BaseDataValidation {
 			
 			neVersion.add("11B");
 			neVersion.add("12A");
+			neVersion.add("13A");
 			
-			refDuration = "1000";
+			refDuration = "1005";
 			
 			ueTypeTac.add("21060800");
 			ueTypeTac.add("33000153");
 			ueTypeTac.add("33000253");
+			ueTypeTac.add("33001753");
 			networkCompositeKeys.add("2381");
 			networkCompositeKeys.add("2382");
 			networkCompositeKeys.add("2383");

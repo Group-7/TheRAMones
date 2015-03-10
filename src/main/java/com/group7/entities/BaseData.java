@@ -2,13 +2,15 @@ package com.group7.entities;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
-
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.jboss.logging.Cause;
@@ -31,16 +33,6 @@ import org.jboss.logging.Cause;
 @Table(name="Base_Data")
 public class BaseData {
 	
-	public BaseData() {}
-	
-	public BaseData(BigInteger imsi,Integer causeCode, Integer eventId) {
-		
-		this.imsi = imsi;
-		this.causeCode = causeCode;
-		this.eventId = eventId;
-		
-	}
-
 
 
 	@Id

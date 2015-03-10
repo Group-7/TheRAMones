@@ -12,4 +12,5 @@ public interface BaseDataDAO {
 	public void putData(Collection<BaseData> bd);
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger Imsi);
 	public Collection<BigInteger> getUniqueAffectedImsi();
+	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
 }

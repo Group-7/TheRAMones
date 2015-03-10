@@ -22,7 +22,23 @@ public class User {
 	@Column(name = "Password")
 	private String password;
 	@Column(name = "Usertype")
-	private int usertype;
+	private Integer usertype;
+
+//	public User(String email2, String password2, int position) {
+//		// TODO Auto-generated constructor stub
+//		email=email2;
+//		password=password2;
+//		usertype=position;
+//	}
+	
+	public User(){}
+
+	public User(String email, String password, int position) {
+		// TODO Auto-generated constructor stub
+		this.email=email;
+		this.password=password;
+		this.usertype=position;
+	}
 
 	public String getEmail() {
 		return email;
