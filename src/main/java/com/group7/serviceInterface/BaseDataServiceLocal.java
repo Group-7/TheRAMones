@@ -2,8 +2,12 @@ package com.group7.serviceInterface;
 
 import java.util.Collection;
 
-import com.group7.entities.BaseData;
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 
+import com.group7.entities.BaseData;
+@Stateless
+@Local
 public interface BaseDataServiceLocal {
 
 	public Collection<BaseData> getAllBasedata();
