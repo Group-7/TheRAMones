@@ -36,12 +36,19 @@ public class UeServiceEJBTest {
 	@EJB
 	private UeDAO dao;
 
+	
+	@Test
+	public void notNullTest(){
+		assertNotNull(dao);
+	}
+	
 	// here create simple test which check method of ejb
 	@Test
 	public void isUETableEmpty() throws Exception {
 		//Assert.assertEquals(dao.getEU().size(),);
 		//assertEquals(dao.getEU().size(), 1);
 		//assertFalse(!dao.getEU().isEmpty());
-		assertFalse(dao.getEU().isEmpty());	
+		//assertTrue(dao.getEU().isEmpty());	
+		
 	}
 }

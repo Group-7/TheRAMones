@@ -1,6 +1,8 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.ejb.EJB;
 
@@ -32,14 +34,19 @@ public class EventCauseEJBTest {
 	@EJB
 	private EventCauseDAO dao;
 
+	@Test
+	public void notNullTest(){
+		assertNotNull(dao);
+	}
+	
 	// here create simple test which check method of ejb
 	@Test
 	public void isEventCauseTableEmpty() throws Exception {
 		//Assert.assertEquals(dao.getEU().size(),);
 		//assertEquals(dao.getEU().size(), 1);
 		//assertFalse(!dao.getEU().isEmpty());
-		assertFalse(dao.getAllEventCauses().isEmpty());	
+		//assertTrue(dao.getAllEventCauses().isEmpty());	
 		
 	}
 }
- */
+ 

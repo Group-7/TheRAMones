@@ -57,7 +57,7 @@ public class BaseDataExcelRead {
 		this.stringInput=fileName;
 	}
 	public BaseDataExcelRead(){
-		stringInput = "/home/bmj/Documents/Ericsson_Files/sample_dataset.xls";
+		stringInput = "/home/niall/sample_dataset.xls";
 	}
 	
 	/***
@@ -326,7 +326,7 @@ public class BaseDataExcelRead {
 
 	
 	public void writeToLogError(int errorLineNo) {
-		final String FILE_PATH = "//home/bmj/Documents/Ericsson_Files/errorlog.txt";
+		final String FILE_PATH = "/home/niall/errorlog.txt";
 
 		try {
 

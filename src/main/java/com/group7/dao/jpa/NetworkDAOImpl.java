@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -16,7 +17,8 @@ import com.group7.entities.Network;
 @Local
 public class NetworkDAOImpl implements NetworkDAO{
 	
-	@PersistenceContext
+	//@PersistenceContext
+	@Inject
 	private EntityManager em;
 
 	/**
