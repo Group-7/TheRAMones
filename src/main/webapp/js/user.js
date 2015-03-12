@@ -1,8 +1,10 @@
-$("#infoBtn").click(function() {
+/*$("#infoBtn").click(function() {
 
 	getAllUsers();
 
-});
+});*/
+
+getAllUsers();
 
 function getAllUsers() {
 	$.ajax({
@@ -18,7 +20,7 @@ function handleResponseJQuery(myData) {
 
 	for (var i = 0; i < myData.length; i++) {
 
-		$('#table-body').append(
+		$('#table-body-users').append(
 				"<tr>" + "<td>" + myData[i].email + "</td>" + "<td>"
 						+ myData[i].password + "</td>" + "<td>"
 						+ myData[i].type 
