@@ -1,7 +1,10 @@
 $('#addUserBut').on('click', function() {
+    //email before
     var $username = $('#email').val();
+    //pwd before
     var $pwd = $('#pwd').val();
     var $admin = 1;
+    //menu before gendre
     var $position = $('#menu').val();
 
 
@@ -24,12 +27,15 @@ $('#addUserBut').on('click', function() {
         async: false,
 
         success: function() {
-            $("#error").text("User added ");
+            
+            //$("#error").text("User added ");
+            alert("User added");
         },
 
         error: function() {
 
-            $("#error").text("This user already exists");
+            //$("#error").text("This user already exists");
+            alert("This user already exists");
 
         }
 
