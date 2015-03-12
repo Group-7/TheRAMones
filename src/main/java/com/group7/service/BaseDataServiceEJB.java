@@ -64,5 +64,14 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model){
 		return dao.getAllUniqueEventCausecodeCombinations(model);
 	}
+
+	@Override
+	public Collection<BigInteger> getUniqueAffectedImsi() {
+		return dao.getUniqueAffectedImsi();
+	}
+	
+	public Collection<BigInteger> getAllPhoneTypes(){
+		return dao.getAllPhoneTypes();
+	}
 	
 }

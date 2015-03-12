@@ -15,4 +15,6 @@ public interface BaseDataServiceLocal {
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
+	public Collection<BigInteger> getUniqueAffectedImsi();
+	public Collection<BigInteger> getAllPhoneTypes();
 }

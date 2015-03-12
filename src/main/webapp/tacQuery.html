@@ -8,13 +8,27 @@
 
 <body>
 	<h2>Call Failures</h2>
-	<p> Use the dropdown-menu to select the phone-type of which you
+	<p> Use the dropdown-menu to select the phone-type or IMSI which you
 		would like to display the number of call failures in a given period</p>
 		<p> make sure the date requested is written in the dd/mm/yyyy format, even if the database has it different</p>
-		<p>	dummy date 11/01/0013 17:10:00 </p>
+		
 	
-				<p> phone TAC number : <input type="text" id="TAC" name="TAC"></p>
-				<p> IMSI number      : <input type="text" id="imsi" name="imsi"></p>
+	<p>
+	<p>phone TAC number:</p>
+	<select id="tac" onchange="updateTac()">
+				<option>TAC Number</option>
+				</select></p>
+				
+	<p>
+	<p>IMSI number:</p>
+	<select id="imsi" onchange="update()">
+				<option>IMSI Number</option>
+				</select>
+	</p>
+				
+				
+<!-- 			<p> phone TAC number : <input type="text" id="TAC" name="TAC"></p> -->				
+<!-- 			<p> IMSI number      : <input type="text" id="imsi" name="imsi"></p> -->
 <!--  			<p> select start date :   <input type="text" id="startDate" name="startDate"></p> -->
 <!-- 			<p> select end date :   <input type="text" id="endDate" name="endDate"></p> -->
 		 		

@@ -162,4 +162,20 @@ public class BaseDataREST {
 		return service.getAllUniqueEventCausecodeCombinations(model);
 	}
 	
+		
+	@GET
+	@Path("/uniqueIMSI")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getAllUniqueAffectedImsi(){
+		return service.getUniqueAffectedImsi();
+	}
+	
+	
+	@GET
+	@Path("/uniqueTAC")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getAllPhoneTypes(){
+		return service.getAllPhoneTypes();
+	}
+	
 }

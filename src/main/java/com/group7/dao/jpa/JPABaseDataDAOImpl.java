@@ -131,7 +131,15 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 				.setParameter("phoneModel", model)
 				.getResultList();
 			}
+	public Collection<BigInteger> getUniqueAffectedImsi(){
+		return em.createQuery("SELECT DISTINCT bd.imsi FROM BaseData bd")
+				.getResultList();
+		
+	}
 	
+	public Collection<BigInteger> getAllPhoneTypes(){
+		return em.createQuery("SELECT DISTINCT bd.tac from BaseData bd").getResultList();
+	}
 	
 	/**
 	 * Formats the date so the DataBase can use read it
