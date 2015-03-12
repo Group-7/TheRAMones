@@ -18,7 +18,6 @@ import com.group7.entities.UE;
 
 @Local
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
 public interface BaseDataDAO {
 
 	public Collection<BaseData> getAllBaseData();

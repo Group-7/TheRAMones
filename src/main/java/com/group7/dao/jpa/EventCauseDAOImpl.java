@@ -5,8 +5,10 @@ import java.util.Collection;
 
 
 
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -18,12 +20,13 @@ import com.group7.entities.EventCause;
 @Local
 public class EventCauseDAOImpl implements EventCauseDAO{
  
-	@PersistenceContext
+	//@PersistenceContext
+	@Inject
 	private EntityManager em;
 
 	
 	public Collection<EventCause> getAllEventCauses() {
-			Query query = em.createQuery("from Event_Cause_Table");
+			Query query = em.createQuery("from EventCause");
 			return query.getResultList();
 		}
 		
