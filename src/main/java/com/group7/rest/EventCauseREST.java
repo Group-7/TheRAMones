@@ -24,12 +24,4 @@ public class EventCauseREST {
 
 	}
 
-	@GET
-	@Path(value = "/String")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String testString() {
-		return "testing eventcause";
-
-	}
-
 }

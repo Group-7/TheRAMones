@@ -11,14 +11,48 @@ public class UE {
 	
 	@Id
 	@Column(name = "TAC")
-	private BigInteger tac;
+	private int tac;
+	
+	@Column(name = "Marketing_Name")
+	private String marketingName;
+	
+	@Column(name = "Manufacturer")
+	private String manufacturer;
+	
+	@Column(name = "Access_Capability")
+	private String accessCapability;
+	
+	@Column(name = "Model")
+	private String model;
 	
 	@Column(name = "Vendor_Name")
 	private String vendorName;
 	
-	@Column(name = "Model")
-	private String model;
 		
+	public String getMarketingName() {
+		return marketingName;
+	}
+
+	public void setMarketingName(String marketingName) {
+		this.marketingName = marketingName;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public String getAccessCapability() {
+		return accessCapability;
+	}
+
+	public void setAccessCapability(String accessCapability) {
+		this.accessCapability = accessCapability;
+	}
+
 	@Column(name = "UE_Type")
 	private String ueType;
 	
@@ -29,11 +63,11 @@ public class UE {
 	private String inputMode;
 
 	
-	public BigInteger getTac() {
+	public int getTac() {
 		return tac;
 	}
 
-	public void setTac(BigInteger tac) {
+	public void setTac(int tac) {
 		this.tac = tac;
 	}
 

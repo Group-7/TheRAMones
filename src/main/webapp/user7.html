@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<link
+	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="css/bootstrap-datetimepicker.min.css">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	
+<head>
+<meta charset="UTF-8">
+<title>User7</title>
+
+
+
+
+</head>
+<body >
+
+<h1> Select all IMSI for given time period</h1>
+
+
+
+ select start date :  	
+	<div id="datetimepicker"  class="input-append date">
+	<input type="text" id="startDate" name="startDate"></input>
+
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+
+    </div>
+
+<p></p>
+
+	select end date :
+	<div id="datetimepicker2" class="input-append date">
+	<input type="text" id="endDate" name="endDate"></input>
+
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </span>
+    </div>
+
+
+
+<button onclick="submit()" id="submit" >Submit </button>
+
+
+
+
+<table id="resultTable" class="table table-striped">
+
+
+	<thead>
+	<tr>
+		<th>Imsi</th>
+		
+	</tr>
+	</thead>
+	
+	<tbody id="resultTableBody">
+	
+	</tbody>
+</table>
+
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/user7.js"></script>
+    
+  
+    <script type="text/javascript"
+		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+     </script>  
+    <script type="text/javascript"
+		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+     </script> 
+    <script type="text/javascript"
+		src="js/bootstrap-datetimepicker.min.js">
+     </script> 
+    <script type="text/javascript"
+		src="js/locales/bootstrap-datetimepicker.uk.js">
+     </script> 
+    <script type="text/javascript">
+       $('#datetimepicker').datetimepicker({
+    	   format: 'dd/MM/yyyy hh:mm:ss',
+         language: 'en'
+       });
+     </script> 
+<script type="text/javascript">
+       $('#datetimepicker2').datetimepicker({
+        format: 'dd/MM/yyyy hh:mm:ss',
+         language: 'en'
+       });
+       </script>
+
+</body>
+</html>

@@ -1,15 +1,19 @@
 package com.group7.entities;
 
 import java.math.BigInteger;
-import java.sql.Date;
 import java.sql.Timestamp;
-
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.jboss.logging.Cause;
 
 /**
  *
@@ -19,6 +23,11 @@ import javax.persistence.Table;
  * @author niall
  *
  */
+
+	//@NamedQueries({
+	//Niall's named query @NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd"),
+	//@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi") })
+	//@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT NEW com.group7.dao.BaseData(bs.imsi, bd.causeCode, bd.eventId) FROM BaseData bs") }) 
 
 @Entity @IdClass(BaseDataId.class)
 @Table(name="Base_Data")
@@ -72,31 +81,6 @@ public class BaseData {
 	
 	@Column(name="Hier321_ID")
 	private String heir321ID;
-
-	/*public BaseData(Timestamp dateAndTime, Integer cellid, Integer causeCode,
-			Integer eventId, Integer failureClass, BigInteger tac, Integer mcc,
-			Integer mnc, int duration, String neVersion, BigInteger imsi,
-			String heir3id, String heir32id, String heir321id) {
-		super();
-		this.dateAndTime = dateAndTime;
-		this.cellid = cellid;
-		this.causeCode = causeCode;
-		this.eventId = eventId;
-		this.failureClass = failureClass;
-		this.tac = tac;
-		this.mcc = mcc;
-		this.mnc = mnc;
-		this.duration = duration;
-		this.neVersion = neVersion;
-		this.imsi = imsi;
-		heir3ID = heir3id;
-		heir32ID = heir32id;
-		heir321ID = heir321id;
-	}
-
-	public BaseData() {
-		super();
-	}*/
 
 	public Timestamp getDateAndTime() {
 		return dateAndTime;
@@ -319,6 +303,32 @@ public class BaseData {
 		return true;
 	}
 
+	public BaseData deepCopy(){
+		
+		
+		BaseData base=new BaseData();
+		
+		
+		base.setDateAndTime(this.getDateAndTime());
+		base.setEventId(this.getEventId());
+		base.setFailureClass(this.getFailureClass());
+		base.setTac(this.getTac());
+		base.setMcc(this.getMcc());
+		base.setMnc(this.getMnc());
+		base.setCellid(this.getCellid());
+		base.setDuration(this.getDuration());
+		base.setCauseCode(this.getCauseCode());
+		base.setNeVersion(this.getNeVersion());
+		base.setImsi(this.getImsi());
+		base.setHeir3ID(this.getHeir3ID());
+		base.setHeir32ID(this.getHeir32ID());
+		base.setHeir321ID(this.getHeir321ID());
+		
+		
+		
+		return base;
+		
+	}
 	
 }
 

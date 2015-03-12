@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Display Event ID and Cause ID for affected IMSI</title>
+<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body onload="load()">
+
+	<h1>Display Event ID and Cause ID for affected IMSI</h1>
+
+	<select id="imsiNumber" onchange="update()">
+		<option>IMSI Number</option>
+	</select>
+
+
+	<table id="table" class="table table-striped">
+		<thead>
+			<th>IMSI</th>
+			<th>EVENT ID</th>
+			<th>CAUSE ID</th>
+			<th>DESCRIPTION</th>
+		</thead>
+		<tbody id="table-body">
+		</tbody>
+	</table>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="js/eventid_causeid.js"></script>
+</body>
+</html>
