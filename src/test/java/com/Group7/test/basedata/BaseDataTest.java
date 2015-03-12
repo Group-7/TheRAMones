@@ -1,4 +1,4 @@
-package com.Group7.test.basedata;
+/*package com.Group7.test.basedata;
 
 import static org.junit.Assert.*;
 
@@ -28,7 +28,7 @@ public class BaseDataTest {
 		return ShrinkWrap
 				.create(JavaArchive.class, "BaseTest.jar")
 				.addClasses(BaseData.class, BaseDataId.class,
-						BaseDataDAO.class)
+						BaseDataDAO.class,Base)
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
@@ -42,4 +42,4 @@ public class BaseDataTest {
 
 	}
 
-}
+}*/

@@ -1,4 +1,4 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
@@ -18,18 +18,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.group7.dao.BaseDataDAO;
-import com.group7.dao.jpa.JPABaseDataDAOImpl;
+import com.group7.dao.jpa.BaseDataDAOImpl;
 import com.group7.entities.BaseData;
 import com.group7.importBaseData.BaseDataValidation;
 
 @RunWith(Arquillian.class)
-public class CallFailuresPerPhoneTypeTest {
+public class CallFailuresQueriesTest {
 	
 	
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
-				.addClasses(JPABaseDataDAOImpl.class, BaseDataDAO.class, BaseData.class)
+				.addClasses(BaseDataDAOImpl.class, BaseDataDAO.class, BaseData.class,BaseDataValidation.class)
+				.addPackage(BaseData.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   
@@ -39,6 +40,11 @@ public class CallFailuresPerPhoneTypeTest {
 	@EJB
 	private BaseDataDAO dao;
 
+	@Test
+	public void notNullTest(){
+		assertNotNull(dao);
+	}
+	
 	// here create simple test which check method of ejb
 	@Test
 	public void isBaseDataEmpty() throws Exception {
@@ -63,4 +69,3 @@ public class CallFailuresPerPhoneTypeTest {
 	
 
 }
-*/
