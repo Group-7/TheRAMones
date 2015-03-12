@@ -92,11 +92,11 @@ public class BaseData {
 		heir3ID = heir3id;
 		heir32ID = heir32id;
 		heir321ID = heir321id;
-	}
+	}*/
 
 	public BaseData() {
 		super();
-	}*/
+	}
 
 	public Timestamp getDateAndTime() {
 		return dateAndTime;

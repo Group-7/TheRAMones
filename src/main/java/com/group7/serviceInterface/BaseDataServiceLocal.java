@@ -2,6 +2,7 @@ package com.group7.serviceInterface;
 
 import java.math.BigInteger;
 import java.util.Collection;
+import java.util.HashMap;
 
 import com.group7.entities.BaseData;
 
