@@ -36,7 +36,6 @@ import com.group7.importBaseData.BaseDataValidation;
 @Local
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-
 public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@Inject
@@ -53,23 +52,21 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	public void addBaseData(BaseData basedata) {
 		em.persist(basedata);
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-		//System.out.println("valid size "+bd.size());
+		// System.out.println("valid size "+bd.size());
 		int count = 0;
 		for (BaseData basedata : bd) {
-			try{
+			try {
 				em.merge(basedata.deepCopy());
-			}
-			catch(EntityExistsException eee){
-				//System.out.println("***************\nEntity exixts exception "+"\n**************");
+			} catch (EntityExistsException eee) {
+				// System.out.println("***************\nEntity exixts exception "+"\n**************");
 				count++;
 			}
 		}
-		//System.out.println("dupicates "+count);
+		// System.out.println("dupicates "+count);
 	}
-
 
 	/*
 	 * SELECT Base_Data.IMSI, Base_Data.Cause_Code, Base_Data.EventID,
@@ -80,7 +77,8 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
 				.createQuery(
-						"SELECT bd.imsi, bd.causeCode, bd.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi").setParameter("imsi", imsi).getResultList();
+						"SELECT bd.imsi, bd.causeCode, bd.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi")
+				.setParameter("imsi", imsi).getResultList();
 	}
 
 	public Collection<BigInteger> getUniqueAffectedImsi() {
@@ -88,30 +86,28 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				"SELECT DISTINCT bd.imsi FROM BaseData bd").getResultList();
 
 	}
-	
 
 	@Override
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to) {
 		// TODO Auto-generated method stub
-		Timestamp start=new Timestamp(dateFormatter(from).getTime());
-		Timestamp end=new Timestamp(dateFormatter(to).getTime());
-		
-		return (Collection<BigInteger>)em.createQuery("select DISTINCT bd.imsi from BaseData bd "
-				+ "where bd.dateAndTime between :from and :to"
-				).setParameter("from", start, TemporalType.TIMESTAMP)
+		Timestamp start = new Timestamp(dateFormatter(from).getTime());
+		Timestamp end = new Timestamp(dateFormatter(to).getTime());
+
+		return (Collection<BigInteger>) em
+				.createQuery(
+						"select DISTINCT bd.imsi from BaseData bd "
+								+ "where bd.dateAndTime between :from and :to")
+				.setParameter("from", start, TemporalType.TIMESTAMP)
 				.setParameter("to", end, TemporalType.TIMESTAMP)
 				.getResultList();
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public void putNetworkData(Collection<Network> networkData) {
 		for (Network n : networkData) {
-			if ((bdv.isNetworkFirst()) ||!bdv.persistCandidateKeysToNetworkTable(""+n.getMcc() + n.getMnc())) // works
+			if ((bdv.isNetworkFirst())
+					|| !bdv.persistCandidateKeysToNetworkTable("" + n.getMcc()
+							+ n.getMnc())) // works
 				em.persist(n);
 		}
 		bdv.setNetworkFirst(false);
@@ -120,7 +116,9 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	@Override
 	public void putUEData(Collection<UE> ueData) {
 		for (UE u : ueData) {
-			if ((bdv.isUeFirst())|| (!bdv.persistEventCausePrimaryKey(Integer.toString(u.getTac())))) // Failed
+			if ((bdv.isUeFirst())
+					|| (!bdv.persistEventCausePrimaryKey(Integer.toString(u
+							.getTac())))) // Failed
 				em.persist(u);
 
 		}
@@ -130,7 +128,9 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	@Override
 	public void putEventCauseData(Collection<EventCause> eventCauseData) {
 		for (EventCause e : eventCauseData) {
-			if ((bdv.isEventCauseFirst()) || !bdv.persistCandidateKeysToEventCauseTable(""+e.getCauseCode() + e.getEventId()))
+			if ((bdv.isEventCauseFirst())
+					|| !bdv.persistCandidateKeysToEventCauseTable(""
+							+ e.getCauseCode() + e.getEventId()))
 				em.persist(e);
 		}
 		bdv.setEventCauseFirst(false);
@@ -139,73 +139,90 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	@Override
 	public void putFailureData(Collection<Failure> failureData) {
 		for (Failure f : failureData) {
-			if ((bdv.isFailureFirst())|| !bdv.persistFailurePrimaryKey(Integer.toString(f.getFailureCode()))) // failed
+			if ((bdv.isFailureFirst())
+					|| !bdv.persistFailurePrimaryKey(Integer.toString(f
+							.getFailureCode()))) // failed
 				em.persist(f);
 		}
 		bdv.setFailureFirst(false);
 	}
-	
+
 	/**
-	 * Returns the total number of call failures within a certain
-	 * time period based on the phoneType.
+	 * Returns the total number of call failures within a certain time period
+	 * based on the phoneType.
 	 */
-	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate) {
-		
-		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
-		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
-	
-		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.tac LIKE :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+	public Collection<Long> getTotalFailuresOfSpecificPhone(
+			BigInteger phoneType, String startDate, String endDate) {
+
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
+				.getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+
+		return em
+				.createQuery(
+						"SELECT COUNT(*) FROM BaseData bd WHERE bd.tac LIKE :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("tac", phoneType)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
 				.getResultList();
-	
-		}
 
-	
+	}
+
 	/**
-	 * Returns the total number of call failures within a certain
-	 * time period based on the imsi number.
+	 * Returns the total number of call failures within a certain time period
+	 * based on the imsi number.
 	 */
-	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate) {
-		
-		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
-		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
-				
-		return em.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
-				.setParameter("imsi", imsi)
-				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
-				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
-				.getResultList();
-			}
-	
-	
-	/** 
-	 * Returns for a given phone type all the unique failure Event Id and Cause Code combinations 
-	 * they have exhibited and the number of occurrences.
-	 */
-	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate) {
-		
-		Timestamp dbStartDate=new Timestamp(dateFormatter(startDate).getTime());
-		Timestamp dbEndDate=new Timestamp(dateFormatter(endDate).getTime());
-				
-		return em.createQuery("SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
-				.setParameter("imsi", imsi)
-				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
-				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
-				.getResultList();
-			}
-	
-	
-	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model) {
-		
-		return em.createQuery("select u.model, b.failureClass, b.causeCode , count(*) as occurences from BaseData b, UE_Table u where b.tac = u.tac and u.model = :phoneModel group by b.failureClass, b.causeCode")
-				.setParameter("phoneModel", model)
-				.getResultList();
-			}
-	
+	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
+			String startDate, String endDate) {
 
-	public Date dateFormatter(String date){
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
+				.getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+
+		return em
+				.createQuery(
+						"SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.setParameter("imsi", imsi)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+	}
+
+	/**
+	 * Returns for a given phone type all the unique failure Event Id and Cause
+	 * Code combinations they have exhibited and the number of occurrences.
+	 */
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
+			BigInteger imsi, String startDate, String endDate) {
+
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
+				.getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+
+		return em
+				.createQuery(
+						"SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.setParameter("imsi", imsi)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+	}
+
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(
+			String model) {
+
+		return em
+				.createQuery(
+						"select u.model, b.failureClass, b.causeCode , count(*) as occurences from BaseData b, UE_Table u where b.tac = u.tac and u.model = :phoneModel group by b.failureClass, b.causeCode")
+				.setParameter("phoneModel", model).getResultList();
+	}
+
+	public Collection<BigInteger> getAllPhoneTypes() {
+		return em.createQuery("SELECT DISTINCT bd.tac from BaseData bd")
+				.getResultList();
+	}
+
+	public Date dateFormatter(String date) {
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date newDate = null;
 		try {
@@ -214,10 +231,9 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			e.printStackTrace();
 		}
 		return newDate;
-//		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
-//	    dt = DateTime.parse("10/02/2013 20:00:00", parser); 
+		// DateTimeFormatter parser =
+		// DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
+		// dt = DateTime.parse("10/02/2013 20:00:00", parser);
 	}
-	
-	
-	
+
 }

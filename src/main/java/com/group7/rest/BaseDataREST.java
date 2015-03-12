@@ -218,5 +218,11 @@ public class BaseDataREST {
 		return service.getAllUniqueEventCausecodeCombinations(model);
 	}
 	
+	@GET
+	@Path("/uniqueTAC")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getAllPhoneTypes(){
+		return service.getAllPhoneTypes();
+	}
 
 }

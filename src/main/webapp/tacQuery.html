@@ -7,21 +7,35 @@
   </head>
 
 <body>
-	<h2>Call Failures</h2>
-	<p> Use the dropdown-menu to select the phone-type of which you
-		would like to display the number of call failures in a given period</p>
-		<p> make sure the date requested is written in the dd/mm/yyyy format, even if the database has it different</p>
-		<p>	dummy date 11/01/0013 17:10:00 </p>
-	
-				<p> phone TAC number : <input type="text" id="TAC" name="TAC"></p>
-				<p> IMSI number      : <input type="text" id="imsi" name="imsi"></p>
-<!--  			<p> select start date :   <input type="text" id="startDate" name="startDate"></p> -->
-<!-- 			<p> select end date :   <input type="text" id="endDate" name="endDate"></p> -->
-		 		
-	 		 	
-	 Select start date :  	
-	<div id="datetimepicker"  class="input-append date">
-	<input type="text" id="startDate" name="startDate"></input>
+  <h2>Call Failures</h2>
+  <p> Use the dropdown-menu to select the phone-type or IMSI which you
+    would like to display the number of call failures in a given period</p>
+    <p> make sure the date requested is written in the dd/mm/yyyy format, even if the database has it different</p>
+    
+  
+  <p>
+  <p>phone TAC number:</p>
+  <select id="tac" onchange="updateTac()">
+        <option>TAC Number</option>
+        </select></p>
+        
+  <p>
+  <p>IMSI number:</p>
+  <select id="imsi" onchange="update()">
+        <option>IMSI Number</option>
+        </select>
+  </p>
+        
+        
+<!--      <p> phone TAC number : <input type="text" id="TAC" name="TAC"></p> -->        
+<!--      <p> IMSI number      : <input type="text" id="imsi" name="imsi"></p> -->
+<!--        <p> select start date :   <input type="text" id="startDate" name="startDate"></p> -->
+<!--      <p> select end date :   <input type="text" id="endDate" name="endDate"></p> -->
+        
+        
+   Select start date :    
+  <div id="datetimepicker"  class="input-append date">
+  <input type="text" id="startDate" name="startDate"></input>
 
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
@@ -31,8 +45,8 @@
 
 <p></p> 
 
-	Select end date :                                  
-	<div id="datetimepicker2" class="input-append date">
+  Select end date :                                  
+  <div id="datetimepicker2" class="input-append date">
   <input type="text" id="endDate" name="endDate">
 
       <span class="add-on">
@@ -41,22 +55,22 @@
     </div> 
     
     
-		<button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
-		<button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call Failures per IMSI</button>
-		<button class="btn btn-primary" id="displayTotalDurationPerIMSI">Call Total duration per IMSI</button>
+    <button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
+    <button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call Failures per IMSI</button>
+    <button class="btn btn-primary" id="displayTotalDurationPerIMSI">Call Total duration per IMSI</button>
 
 
 
-	<table id="table" class="table table-striped">
-		<thead>
-			<th>Total Number of_call-failures</th>
-			<th>Total Duration in milliseconds</th>
-			<th>IMSI</th>
-		</thead>
-		<tbody id="table-body">
+  <table id="table" class="table table-striped">
+    <thead>
+      <th>Total Number of_call-failures</th>
+      <th>Total Duration in milliseconds</th>
+      <th>IMSI</th>
+    </thead>
+    <tbody id="table-body">
 
-		</tbody>
-	</table>
+    </tbody>
+  </table>
 
  <script type="text/javascript"
      src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
@@ -92,22 +106,22 @@
   </body>
 </html>
 
-<!-- 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!--  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="/home/giovanni/git/TheRamones/src/main/webapp/js/tacQuery.js"></script>
     
   
     <script type="text/javascript"
-		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
      </script>  
     <script type="text/javascript"
-		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
      </script> 
     <script type="text/javascript"
-		src="/home/giovanni/git/TheRamones/src/main/webapp/js/bootstrap-datetimepicker.min.js">
+    src="/home/giovanni/git/TheRamones/src/main/webapp/js/bootstrap-datetimepicker.min.js">
      </script> 
     <script type="text/javascript"
-		src="/home/giovanni/git/TheRamones/src/main/webapp/js/locales/bootstrap-datetimepicker.uk.js">
+    src="/home/giovanni/git/TheRamones/src/main/webapp/js/locales/bootstrap-datetimepicker.uk.js">
      </script> 
     
      </script> 
