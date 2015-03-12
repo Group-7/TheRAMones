@@ -50,7 +50,7 @@ $('#buttonJ').click(function(){
                  else {
                 	 alert("You succesfully logged in");
                 	 $("#error").text("Hello " + userData.email);
-                	 window.location.href="temp.html";
+                	 window.location.href="dashboard.html";
                  }
              }
          });
