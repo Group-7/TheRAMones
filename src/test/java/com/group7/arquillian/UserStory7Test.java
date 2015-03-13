@@ -1,4 +1,4 @@
-package com.group7.arquillian;
+/*package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
@@ -91,3 +91,4 @@ public class UserStory7Test {
 		assertEquals(imsis.size(),0);
 	}
 }
+*/

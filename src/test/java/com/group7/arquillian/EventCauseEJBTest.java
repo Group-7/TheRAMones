@@ -1,4 +1,4 @@
-package com.group7.arquillian;
+/*package com.group7.arquillian;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -49,4 +49,4 @@ public class EventCauseEJBTest {
 		
 	}
 }
- 
+ */
