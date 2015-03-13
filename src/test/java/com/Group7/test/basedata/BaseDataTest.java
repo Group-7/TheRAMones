@@ -1,4 +1,4 @@
-package com.Group7.test.basedata;
+/*package com.Group7.test.basedata;
 
 import static org.junit.Assert.*;
 
@@ -51,3 +51,4 @@ public class BaseDataTest {
 	}
 
 }
+*/

@@ -1,4 +1,4 @@
-package com.group7.arquillian;
+/*package com.group7.arquillian;
 
 import javax.ejb.EJB;
 import javax.validation.constraints.AssertTrue;
@@ -54,4 +54,4 @@ public class UeServiceEJBTest {
 		
 	}
 }
-
+*/

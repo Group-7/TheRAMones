@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -23,6 +24,7 @@ import com.group7.entities.UE;
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
+
 public interface BaseDataServiceLocal {
 
 	public Collection<BaseData> getAllBasedata();

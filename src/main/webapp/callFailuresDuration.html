@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
+
 	<h1>UE Table</h1>
 	<button class="btn btn-primary" id="infoBtn">I'm a nice
 		button,please click me</button>
@@ -18,10 +19,12 @@
 			<th>UE Type</th>
 			<th>Operating System</th>
 			<th>Input Mode</th>
+
 		</thead>
 		<tbody id="table-body">
 		</tbody>
 	</table>
+
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="js/uetable.js"></script>
@@ -47,6 +50,9 @@
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/materialadmin.css?1425466319" />
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/font-awesome.min.css?1422529194" />
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+		<!-- Andrzej: line below cause conflicts with template css, STUFF FROM GIOVANNI -->
+		  <!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"> 
+		  <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">  -->
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -207,12 +213,12 @@
 						<!-- BEGIN INTRO -->
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="text-primary">UE Table</h1>
+								<h1 class="text-primary">Calls Failure Duration</h1>
 							</div><!--end .col -->
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										Table displays information about TAC, Vendor name, Model and other related information.
+										Count for a given model of phone the number of call failures and their total duration during time period.
 									</p>
 								</article>
 							</div><!--end .col -->
@@ -235,19 +241,93 @@
 							<!-- <div class="col-lg-offset-1 col-md-8"> -->
 								<div class="card"> 
 									<div class="card-body">
+										<br />
+										<br />
+										<br />
+										<p>phone TAC number:</p>
+                  <select id="tac" onchange="updateTac()">
+                    <option>TAC Number</option>
+                  </select></p>	
+
+                  					Select start date :    
+                  <div id="datetimepicker"  class="input-append date">
+                    <input type="text" id="startDate" name="startDate"></input>
+
+                    <span class="add-on">
+                      <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                    </span>
+
+                  </div>
+
+                  <p></p> 
+
+                  Select end date :                                  
+                  <div id="datetimepicker2" class="input-append date">
+                    <input type="text" id="endDate" name="endDate">
+
+                    <span class="add-on">
+                      <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                    </span>
+                  </div> 
+
+                  <br />
+
+                  <button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
+                  <button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call Failures per IMSI</button>
+                  <button class="btn btn-primary" id="displayTotalDurationPerIMSI">Call Total duration per IMSI</button>
+                  <br />
+                  <br />
+
+
+
+
+
+
 										<table class="table table-striped no-margin" id="table">
 											<thead>
-												<th>TAC</th>
-												<th>Vendor Name</th>
-												<th>Model</th>
-												<th>UE Type</th>
-												<th>Operating System</th>
-												<th>Input Mode</th>
+												<th>Total Number of call-failures</th>
+												<th>Total Duration in milliseconds</th>
+												<th>IMSI</th>
+												
 											</thead>
 
 											<tbody id="table-body">
 											</tbody>
 										</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 									</div><!--end .card-body -->
 								</div><!--end .card -->
 								
@@ -673,7 +753,13 @@
 		<script src="assets/js/core/source/AppNavSearch.js"></script>
 		<script src="assets/js/core/source/AppVendor.js"></script>
 		<script src="assets/js/core/demo/Demo.js"></script>
-		<script src="js/uetable.js"></script>
+		<script src="js/tacQuery.js"></script>
+		<!--stuff from giovanii-->
+		<!-- <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script> -->
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
+        <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+        <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
+
 		<!-- END JAVASCRIPT -->
 
 	</body>

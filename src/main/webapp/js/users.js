@@ -215,5 +215,31 @@ function validate(username, password) {
     }
 
     return true;
+}
 
+//copied from gerry to avoid conflicts
+function handleResponseJQuery(myData) {
+
+	for (var i = 0; i < myData.length; i++) {
+
+		$('#table-body-users').append(
+				"<tr>" + "<td>" + myData[i].email + "</td>" + "<td>"
+						+ myData[i].password + "</td>" + "<td>"
+						+ myData[i].type 
+						+ "</tr>");
+	}
+	;
+}
+//copied from gerry to avoid conflicts
+function handleResponseJQuery(myData) {
+
+	for (var i = 0; i < myData.length; i++) {
+
+		$('#table-body-users').append(
+				"<tr>" + "<td>" + myData[i].email + "</td>" + "<td>"
+						+ myData[i].password + "</td>" + "<td>"
+						+ myData[i].type 
+						+ "</tr>");
+	}
+	;
 }

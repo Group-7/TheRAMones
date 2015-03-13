@@ -79,6 +79,8 @@ function getTotalDurationPerIMSI(){
 	var imsiNumber = $("#imsi").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
+	startDate = startDate.split("2").join("0");
+	endDate = endDate.split("2").join("0");
 
 	$.ajax({
 		  type: 'GET',

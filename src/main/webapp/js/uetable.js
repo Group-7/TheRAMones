@@ -1,4 +1,3 @@
-
 	getAllUE();
 
 
@@ -27,6 +26,3 @@ function handleResponseJQuery(myData) {
 	}
 	;
 }
-
-
-
