@@ -32,7 +32,6 @@ public interface BaseDataServiceLocal {
 	public Collection<Object> getAllEventIdAndCauseId(BigInteger Imsi);
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
-	public Collection<Object> getAllCasueCodeAndEventId(BigInteger imsi);
 	public void putNetworkData(Collection<Network> networkList);
 	public void putUEData(Collection<UE> ueList);
 	public void putEventCauseData(Collection<EventCause> eventCauseList);

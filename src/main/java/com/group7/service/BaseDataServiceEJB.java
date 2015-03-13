@@ -49,11 +49,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		return dao.getImsiFailureOverTime(from,to);
 	}
 
-	@Override
+	/*@Override
 	public Collection<Object> getAllCasueCodeAndEventId(BigInteger imsi) {
 		// TODO Auto-generated method stub
 		return dao.getAllCauseCodeAndEventIdByIMSI(imsi);
-	}
+	}*/
 	
 	
 

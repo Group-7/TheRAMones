@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 
 import com.group7.dao.EventCauseDAO;
 import com.group7.dao.jpa.EventCauseDAOImpl;
+import com.group7.databases.DataBaseProducer;
 import com.group7.entities.EventCause;
 import com.group7.entities.EventCauseID;
 
@@ -25,6 +26,7 @@ public class EventCauseEJBTest {
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
 				.addClasses(EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class)
+				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   

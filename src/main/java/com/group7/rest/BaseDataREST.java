@@ -39,7 +39,7 @@ import com.group7.serviceInterface.BaseDataServiceLocal;
 @Path("/baseData")
 public class BaseDataREST {
 
-	@Inject
+	@EJB
 	private BaseDataServiceLocal service;
 	
 	private BaseDataValidation bvd = BaseDataValidation.getInstance();
