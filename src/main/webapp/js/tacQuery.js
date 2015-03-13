@@ -33,6 +33,11 @@ function getAllCallFailuresPerPhoneType(){
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	
+	startDate = startDate.split("2").join("0");
+	endDate = endDate.split("2").join("0");
+	console.log("startDate: " + startDate);
+	console.log("endDate: " + endDate);
+	
 	$.ajax({
 		  type: 'GET',
 		  url: 'rest/baseData/tacFailures?TAC='+ tacNumber+'&startDate='+ startDate+'&endDate='+endDate,
@@ -48,10 +53,20 @@ function getAllCallFailuresPerIMSI(){
 	var imsiNumber = $("#imsi").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
-
+	
+	var dates=startDate+","+endDate;
+	//alert(dates);
+	//dates=dates.split("/").join("");
+	//dates=dates.split("2").join("0");   
+	startDate = startDate.split("2").join("0");
+	endDate = endDate.split("2").join("0");
+	console.log("startDate: " + startDate);
+	console.log("endDate: " + endDate);
+	
 	$.ajax({
 		  type: 'GET',
 		  url: 'rest/baseData/imsiFailures?imsi='+ imsiNumber+'&startDate='+ startDate+'&endDate='+endDate,
+
 		  success: handleResponseJQuery,
 		  contentType: 'application/json'
 	});
@@ -185,3 +200,5 @@ function handleResponseJQuery2(myData2) {
                "</tr>");
        
         }
+
+
