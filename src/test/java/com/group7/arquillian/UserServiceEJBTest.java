@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 
 import com.group7.dao.UserDAO;
 import com.group7.dao.jpa.UserDAOImpl;
+import com.group7.databases.DataBaseProducer;
 import com.group7.entities.User;
 
 @RunWith(Arquillian.class)
@@ -27,8 +28,10 @@ public class UserServiceEJBTest {
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
 				.addClasses(User.class, UserDAO.class, UserDAOImpl.class)
+				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+				
 
   }
 

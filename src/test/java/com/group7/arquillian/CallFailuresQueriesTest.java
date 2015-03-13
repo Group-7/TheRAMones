@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.dao.jpa.BaseDataDAOImpl;
+import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
 import com.group7.importBaseData.BaseDataValidation;
 
@@ -31,6 +32,7 @@ public class CallFailuresQueriesTest {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
 				.addClasses(BaseDataDAOImpl.class, BaseDataDAO.class, BaseData.class,BaseDataValidation.class)
 				.addPackage(BaseData.class.getPackage())
+				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   

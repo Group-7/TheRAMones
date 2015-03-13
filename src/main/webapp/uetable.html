@@ -2,27 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>It's finally working ! OH YEAH!!!!!!</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
-	<h1>Users Table</h1>
-	<button class="btn btn-primary" id="infoBtn">Display all users</button>
+	<h1>UE Table</h1>
+	<button class="btn btn-primary" id="infoBtn">I'm a nice
+		button,please click me</button>
 	<table id="table" class="table table-striped">
 		<thead>
-			<th>Username</th>
-			<th>Password</th>
-			<th>Position</th>
-			
+			<th>TAC</th>
+			<th>Vendor Name</th>
+			<th>Model</th>
+			<th>UE Type</th>
+			<th>Operating System</th>
+			<th>Input Mode</th>
 		</thead>
 		<tbody id="table-body">
 		</tbody>
 	</table>
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="js/user.js"></script>
+	<script src="js/uetable.js"></script>
 </body>
 </html> -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -182,70 +187,81 @@
 
 			<!-- BEGIN OFFCANVAS LEFT -->
 			<div class="offcanvas">
+
 			</div><!--end .offcanvas-->
 			<!-- END OFFCANVAS LEFT -->
 
-			<!-- BEGIN CONTENT-->
-			<div id="content">
+		
 
-				<!-- BEGIN BLANK SECTION -->
+
+
+			<div id="content">
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li><a href="html/dashboard.html">home</a></li>
-							<li class="active">Users</li>
+							<li class="active">UE Table</li>
 						</ol>
-					</div><!--end .section-header -->
-					<div class="section-body">
-					</div><!--end .section-body -->
-				</section>
+					</div>
+					<div class="section-body contain-lg">
 
-				<!--
-					<table id="table" class="table table-striped">
-		<thead>
-			<th>Username</th>
-			<th>Password</th>
-			<th>Position</th>
-			
-		</thead>
-		<tbody id="table-body">
-		</tbody>
-	</table>
-				-->
-
-				<!-- BEGIN BLANK SECTION -->
-
-											<div class="col-lg-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table no-margin">
-												<thead>
-													<tr>
-														<th>Email</th>
-														<th>Password</th>
-														<th>Account Type</th>														
-													</tr>
-												</thead>
-												<tbody id="table-body-users">										
-												</tbody>
-											</table>
-										</div><!--end .table-responsive -->
-									</div><!--end .card-body -->
-								</div><!--end .card -->
+						<!-- BEGIN INTRO -->
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">UE Table</h1>
+							</div><!--end .col -->
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										Table displays information about TAC, Vendor name, Model and other related information.
+									</p>
+								</article>
 							</div><!--end .col -->
 						</div><!--end .row -->
-						<!-- END RESPONSIVE TABLE 1 -->
+						<!-- END INTRO -->
+						<!-- !!!!!!!!!!!!!!!TABLE START!!!!!!!!!!!!!!!!!!!! -->
+
+						<!-- BEGIN STRIPED TABLE -->
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>Striped table</h4>
+							</div><!--end .col -->
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										Use <code>.table-striped</code> to add zebra-striping to any table row within the <code>&lt;tbody&gt;</code>.
+									</p>
+								</article>
+							</div><!--end .col -->
+							<!-- <div class="col-lg-offset-1 col-md-8"> -->
+								<div class="card"> 
+									<div class="card-body">
+										<table class="table table-striped no-margin" id="table">
+											<thead>
+												<th>TAC</th>
+												<th>Vendor Name</th>
+												<th>Model</th>
+												<th>UE Type</th>
+												<th>Operating System</th>
+												<th>Input Mode</th>
+											</thead>
+
+											<tbody id="table-body">
+											</tbody>
+										</table>
+									</div><!--end .card-body -->
+								</div><!--end .card -->
+								
+							
+						</div><!--end .row -->
+						<!-- END STRIPED TABLE -->	
 
 
 
- 
-
-
-
-
-			</div><!--end #content-->
+						<!-- !!!!!!!!!!!!!!!!!!!TABLE END!!!!!!!!!!!!!!!!!!!!! -->
+						
 			<!-- END CONTENT -->
+
+
 
 			<!-- BEGIN MENUBAR-->
 			<div id="menubar" class="menubar-inverse ">
@@ -344,7 +360,6 @@
 							<ul>
 								<li><a href="uetable.html" ><span class="title">UE Table</span></a></li>
 								
-								
 							</ul><!--end /submenu -->
 						</li><!--end /menu-li -->
 						<!-- END TABLES -->
@@ -357,8 +372,13 @@
 							</a>
 							<!--start submenu -->
 							<ul>
-								 <li><a href="addUser.html" ><span class="title">Add new user</span></a></li>
-                <li><a href="users.html" ><span class="title">List of all users</span></a></li>
+								<li><a href="addUser.html" ><span class="title">Add user</span></a></li>
+								<li><a href="html/forms/basic.html" ><span class="title">Form basic</span></a></li>
+								<li><a href="html/forms/advanced.html" ><span class="title">Form advanced</span></a></li>
+								<li><a href="html/forms/layouts.html" ><span class="title">Form layouts</span></a></li>
+								<li><a href="html/forms/editors.html" ><span class="title">Editors</span></a></li>
+								<li><a href="html/forms/validation.html" ><span class="title">Form validation</span></a></li>
+								<li><a href="html/forms/wizard.html" ><span class="title">Form wizard</span></a></li>
 							</ul><!--end /submenu -->
 						</li><!--end /menu-li -->
 						<!-- END FORMS -->
@@ -760,8 +780,7 @@
 		<script src="assets/js/core/source/AppNavSearch.js"></script>
 		<script src="assets/js/core/source/AppVendor.js"></script>
 		<script src="assets/js/core/demo/Demo.js"></script>
-		<script src="js/user.js"></script>
-
+		<script src="js/uetable.js"></script>
 		<!-- END JAVASCRIPT -->
 
 	</body>

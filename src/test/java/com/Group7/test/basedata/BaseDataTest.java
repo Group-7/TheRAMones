@@ -1,4 +1,4 @@
-/*package com.Group7.test.basedata;
+package com.Group7.test.basedata;
 
 import static org.junit.Assert.*;
 
@@ -14,8 +14,11 @@ import org.junit.runner.RunWith;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.dao.BaseDataDAO;
+import com.group7.dao.jpa.BaseDataDAOImpl;
+import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataId;
+import com.group7.importBaseData.BaseDataValidation;
 
 //import com.group7.serviceInterface.BaseDataService;
 
@@ -26,9 +29,14 @@ public class BaseDataTest {
 	public static JavaArchive createDeployment() {
 
 		return ShrinkWrap
+
 				.create(JavaArchive.class, "BaseTest.jar")
 				.addClasses(BaseData.class, BaseDataId.class,
-						BaseDataDAO.class,Base)
+						BaseDataDAO.class, BaseDataDAOImpl.class)
+				.addPackage(BaseDataValidation.class.getPackage())
+				.addPackage(BaseData.class.getPackage())
+				.addPackage(DataBaseProducer.class.getPackage())
+				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
@@ -38,8 +46,8 @@ public class BaseDataTest {
 	@Test
 	public void checkBaseDataSizeTest() {
 
-		assertFalse(service.getAllBaseData().isEmpty());	
+		assertFalse(service.getAllBaseData().isEmpty());
 
 	}
 
-}*/
+}

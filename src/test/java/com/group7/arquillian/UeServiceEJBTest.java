@@ -17,6 +17,7 @@ import static org.junit.Assert.*;
 
 import com.group7.dao.UeDAO;
 import com.group7.dao.jpa.UeDAOImpl;
+import com.group7.databases.DataBaseProducer;
 import com.group7.entities.UE;
 import com.group7.serviceInterface.UeServiceLocal;
 
@@ -27,6 +28,7 @@ public class UeServiceEJBTest {
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
 				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class)
+				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		
