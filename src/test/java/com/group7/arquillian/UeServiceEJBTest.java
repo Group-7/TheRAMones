@@ -1,6 +1,7 @@
 package com.group7.arquillian;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.validation.constraints.AssertTrue;
 
 import junit.framework.Assert;
@@ -19,6 +20,8 @@ import com.group7.dao.UeDAO;
 import com.group7.dao.jpa.UeDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.UE;
+import com.group7.rest.UeREST;
+import com.group7.service.UeServiceEJB;
 import com.group7.serviceInterface.UeServiceLocal;
 
 @RunWith(Arquillian.class)
@@ -27,7 +30,8 @@ public class UeServiceEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
-				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class)
+				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class,
+						UeServiceLocal.class,UeServiceEJB.class,UeREST.class)
 				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -35,8 +39,8 @@ public class UeServiceEJBTest {
 
   }
 
-	@EJB
-	private UeDAO dao;
+	@Inject
+	private UeServiceLocal dao;
 
 	
 	@Test
@@ -49,7 +53,7 @@ public class UeServiceEJBTest {
 	public void isUETableEmpty() throws Exception {
 		//Assert.assertEquals(dao.getEU().size(),);
 		//assertEquals(dao.getEU().size(), 1);
-		//assertFalse(!dao.getEU().isEmpty());
+		assertFalse(dao.getAllEU().isEmpty());
 		//assertTrue(dao.getEU().isEmpty());	
 		
 	}

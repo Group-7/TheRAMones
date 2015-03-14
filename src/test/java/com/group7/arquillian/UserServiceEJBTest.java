@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -20,6 +21,9 @@ import com.group7.dao.UserDAO;
 import com.group7.dao.jpa.UserDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.User;
+import com.group7.rest.UeREST;
+import com.group7.service.UserServiceEJB;
+import com.group7.serviceInterface.UserServiceLocal;
 
 @RunWith(Arquillian.class)
 public class UserServiceEJBTest {
@@ -27,15 +31,16 @@ public class UserServiceEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
-				.addClasses(User.class, UserDAO.class, UserDAOImpl.class)
+				.addClasses(User.class, UserDAO.class, UserDAOImpl.class,
+						UeREST.class,UserServiceLocal.class,UserServiceEJB.class)
 				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
   }
 
-	@EJB
-	private UserDAO dao;
+	@Inject
+	private UserServiceLocal dao;
 
 	@Test
 	public void notNullTest(){
@@ -46,7 +51,7 @@ public class UserServiceEJBTest {
 	@Test
 	public void isUserServiceTableEmpty() throws Exception {
 		
-		//assertTrue(dao.showAllUsers().isEmpty());	
+		assertFalse(dao.showAllUsers().isEmpty());	
 	}
 	
 	/*public void isCorrectUserLoggedIn() throws Exception {

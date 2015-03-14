@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import junit.framework.Assert;
 
@@ -22,6 +23,9 @@ import com.group7.dao.jpa.BaseDataDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
 import com.group7.importBaseData.BaseDataValidation;
+import com.group7.rest.BaseDataREST;
+import com.group7.service.BaseDataServiceEJB;
+import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @RunWith(Arquillian.class)
 public class CallFailuresQueriesTest {
@@ -30,7 +34,8 @@ public class CallFailuresQueriesTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
-				.addClasses(BaseDataDAOImpl.class, BaseDataDAO.class, BaseData.class,BaseDataValidation.class)
+				.addClasses(BaseDataDAOImpl.class, BaseDataDAO.class, BaseData.class,BaseDataValidation.class,
+						BaseDataServiceLocal.class,BaseDataServiceEJB.class,BaseDataREST.class)
 				.addPackage(BaseData.class.getPackage())
 				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
@@ -39,8 +44,8 @@ public class CallFailuresQueriesTest {
   }
 
 	//check
-	@EJB
-	private BaseDataDAO dao;
+	@Inject
+	private BaseDataServiceLocal dao;
 
 	@Test
 	public void notNullTest(){
