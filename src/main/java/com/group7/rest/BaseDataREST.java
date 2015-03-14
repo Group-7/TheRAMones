@@ -154,6 +154,10 @@ public class BaseDataREST {
 	}
 	
 	
+	/**
+	 * Returns for a given model of phone, all the unique failure Event Id 
+	 * and Cause Code combinations they have exhibited and the number of occurrences.
+	 */
 	@GET
 	@Path("/modelFailure")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -163,6 +167,10 @@ public class BaseDataREST {
 	}
 	
 		
+	/**
+	 * return all unique IMSI numbers.
+	 * Used to populate the drop-down menus.
+	 */
 	@GET
 	@Path("/uniqueIMSI")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -171,11 +179,27 @@ public class BaseDataREST {
 	}
 	
 	
+	/**
+	 * returns all unique tac numbers.
+	 * Used to populate the drop-down menus.
+	 */
 	@GET
 	@Path("/uniqueTAC")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<BigInteger> getAllPhoneTypes(){
 		return service.getAllPhoneTypes();
+	}
+	
+	
+	/**
+	 * returns all unique model numbers.
+	 * Used to populate the drop-down menus.
+	 */
+	@GET
+	@Path("/uniqueModels")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<String> getAllDistictPhoneModels(){
+		return service.getAllDistinctPhoneModels();
 	}
 	
 }

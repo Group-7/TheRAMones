@@ -131,14 +131,23 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 				.setParameter("phoneModel", model)
 				.getResultList();
 			}
+	
+	
+	
 	public Collection<BigInteger> getUniqueAffectedImsi(){
 		return em.createQuery("SELECT DISTINCT bd.imsi FROM BaseData bd")
 				.getResultList();
 		
 	}
-	
+	//select from ue table not baseData for all phone types
 	public Collection<BigInteger> getAllPhoneTypes(){
 		return em.createQuery("SELECT DISTINCT bd.tac from BaseData bd").getResultList();
+	}
+	
+	
+	public Collection<String> getAllDistinctPhoneModels() {
+		
+		return em.createQuery("SELECT DISTINCT u.model FROM UE_Table u").getResultList();
 	}
 	
 	/**
@@ -158,4 +167,6 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 //		DateTimeFormatter parser = DateTimeFormat.forPattern("MM/dd/yyyy HH:mm:ss");
 //	    dt = DateTime.parse("10/02/2013 20:00:00", parser); 
 	}
+
+	
 }

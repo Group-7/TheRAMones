@@ -17,5 +17,6 @@ public interface BaseDataDAO {
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getAllPhoneTypes();
+	public Collection<String> getAllDistinctPhoneModels();
 	
 }

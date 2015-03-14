@@ -48,7 +48,7 @@ public class BaseDataExcelRead {
 		try {
 			w = Workbook.getWorkbook(inputWorkBook);
 			Sheet sheet = w.getSheet(0);
-			System.out.println("Amount of Rows: " + sheet.getRows());
+			//System.out.println("Amount of Rows: " + sheet.getRows());
 			for (int j = 1; j <  sheet.getRows() ; j++) {
 				for (int i = 0; i < sheet.getColumns() ; i++) {
 					Cell cell = sheet.getCell(i, j);
@@ -110,17 +110,18 @@ public class BaseDataExcelRead {
 				
 				
 			}
-			System.out.println("HERE:----------------------" + bsList.get(0).getHeir32ID());
-			System.out.println("HERE:----------------------" + bsList.get(750).getHeir32ID());
+			//System.out.println("HERE:----------------------" + bsList.get(0).getHeir32ID());
+			//System.out.println("HERE:----------------------" + bsList.get(750).getHeir32ID());
 
 		} catch (BiffException e) {
 			e.printStackTrace();
 		}
+		System.out.println(bsList.toString());
 		return bsList;
 
 }
 	public void writeToLogError(int errorLineNo) {
-		final String FILE_PATH = "/home/bmj/git_backup/TheRamones/errorlog.txt";
+		final String FILE_PATH = "/home/giovanni/git/TheRamones/errorlog.txt";
 
 		try {
 
@@ -135,7 +136,7 @@ public class BaseDataExcelRead {
 			out.append("An error was discover in line: " + errorLineNo);
 			out.append("\n");
 			out.close();
-			System.out.println("Done writing to the file");
+			//System.out.println("Done writing to the file");
 
 		} catch (IOException e) {
 			e.printStackTrace();

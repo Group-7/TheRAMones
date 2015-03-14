@@ -33,6 +33,10 @@ function getAllCallFailuresPerPhoneType(){
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	
+	startDate = startDate.split("2").join("0");
+	endDate = endDate.split("2").join("0");
+
+	
 	$.ajax({
 		  type: 'GET',
 		  url: 'rest/baseData/tacFailures?TAC='+ tacNumber+'&startDate='+ startDate+'&endDate='+endDate,
@@ -43,11 +47,14 @@ function getAllCallFailuresPerPhoneType(){
 
 
 function getAllCallFailuresPerIMSI(){
-	 $("#table-body").html("");
+	 $("#table-body").html("");// refresh table
 	
 	var imsiNumber = $("#imsi").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
+	
+	startDate = startDate.split("2").join("0");
+	endDate = endDate.split("2").join("0");
 
 	$.ajax({
 		  type: 'GET',
@@ -59,11 +66,14 @@ function getAllCallFailuresPerIMSI(){
 
 
 function getTotalDurationPerIMSI(){
-	 $("#table-body").html("");
+	 $("#table-body").html(""); // refresh table
 	
 	var imsiNumber = $("#imsi").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
+	
+	startDate = startDate.split("2").join("0");
+	endDate = endDate.split("2").join("0");
 
 	$.ajax({
 		  type: 'GET',
@@ -79,7 +89,6 @@ function loadAllUniqueIMSI() {
 	$.ajax({
 		type : 'GET',
 		url : 'rest/baseData/uniqueIMSI',
-		// url : 'rest/baseData/eventid_causeid?imsiNumber='+ imsiNr,
 		success : populateImsiSelector,
 		contentType : 'application/json'
 	});
@@ -91,7 +100,6 @@ function loadAllUniqueTAC() {
 	$.ajax({
 		type : 'GET',
 		url : 'rest/baseData/uniqueTAC',
-		// url : 'rest/baseData/eventid_causeid?imsiNumber='+ imsiNr,
 		success : populateTacSelector,
 		contentType : 'application/json'
 	});
@@ -100,7 +108,7 @@ function loadAllUniqueTAC() {
 
 //********Update selectors/dropDownMenu's**********
 
-function update() {
+/*function updateImsi() {
 	
 	//clears table 
 	$("#table-body").html("");
@@ -116,7 +124,8 @@ function update() {
 
 }
 
-function update() {
+
+function updateTac() {
 	
 	//clears table 
 	$("#table-body").html("");
@@ -125,12 +134,12 @@ function update() {
 	
 	$.ajax({
 		type : 'GET',
-		url : 'rest/baseData/eventid_causeid?imsi=' + tacNr,
+		url : 'rest/baseData/eventid_causeid?tac=' + tacNr,
 		success : handleResponseJQuery,
 		contentType : 'application/json'
 	});
 
-}
+}*/
 
 //********Populate selectors/dropDownMenu's**********
 
