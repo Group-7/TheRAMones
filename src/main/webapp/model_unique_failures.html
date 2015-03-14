@@ -237,8 +237,17 @@
 							<!-- <div class="col-lg-offset-1 col-md-8"> -->
 								<div class="card"> 
 									<div class="card-body">
-      <input type="model" class="form-control" id="model" placeholder="Enter model">
-	 <button id="getModel" type="submit" class="btn btn-default">Submit</button>
+									<br />
+									<br />
+      <p>phone model:</p>
+<!-- <p> phone model: <input type="text" id="model" name="phone_model"></p> -->
+	 <select id="model" onchange="updateModel()">
+				<option>model</option>
+				</select>
+				
+	</p>
+		<button class="btn btn-primary" id="displayAllEventCauseCodeCombinationsPerPhoneModel"> Call Failures per PhoneModel</button>
+	
 										<table class="table table-striped no-margin" id="table">
 											<thead>
 												<th>Model</th>
@@ -308,8 +317,10 @@
               </a>
               <!--start submenu -->
               <ul>
+                <!-- ANDRZEJ -->
                 <li><a href="uetable.html" ><span class="title">UE Table</span></a></li>
-                
+                <li><a href="baseData.html" ><span class="title">Base Data Table</span></a></li>
+                <li><a href="eventcause.html" ><span class="title">Event Cause Table</span></a></li>
               </ul><!--end /submenu -->
             </li><!--end /menu-li -->
             <!-- END TABLES -->
@@ -360,10 +371,12 @@
             <li class="gui-folder">
               <a>
                 <div class="gui-icon"><i class="fa fa-folder-open fa-fw"></i></div>
-                <span class="title">Menu levels demo</span>
+                <span class="title">Upload Data Menu</span>
               </a>
               <!--start submenu -->
               <ul>
+              
+              <li><a href="upload.html"><span class="title">Upload file</span></a></li>
                 <li><a href="#"><span class="title">Item 1</span></a></li>
                 <li><a href="#"><span class="title">Item 1</span></a></li>
                 <li class="gui-folder">
@@ -680,7 +693,7 @@
 		<script src="assets/js/core/source/AppNavSearch.js"></script>
 		<script src="assets/js/core/source/AppVendor.js"></script>
 		<script src="assets/js/core/demo/Demo.js"></script>
-		<script src="js/model_unique_failures.js"></script>
+		 <script src="js/model_unique_failures.js"></script>
 		<!-- END JAVASCRIPT -->
 
 	</body>

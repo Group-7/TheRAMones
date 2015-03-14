@@ -205,7 +205,7 @@
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li class="active">UE Table</li>
+							<li class="active">Call Total duration per IMSI</li>
 						</ol>
 					</div>
 					<div class="section-body contain-lg">
@@ -213,12 +213,12 @@
 						<!-- BEGIN INTRO -->
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="text-primary">Calls Failure Duration</h1>
+								<h1 class="text-primary">Total call failure duration per IMSI</h1>
 							</div><!--end .col -->
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										Count for a given model of phone the number of call failures and their total duration during time period.
+										Counts, for each IMSI, the number of call failures and the total duration during a given time period
 									</p>
 								</article>
 							</div><!--end .col -->
@@ -244,10 +244,13 @@
 										<br />
 										<br />
 										<br />
-										<p>phone TAC number:</p>
-                  <select id="tac" onchange="updateTac()">
-                    <option>TAC Number</option>
-                  </select></p>	
+										<p>
+				                  <p>IMSI number:</p>
+				                  <select id="imsi" onchange="update()">
+				                    <option>IMSI Number</option>
+				                  </select>
+                </p>
+
 
                   					Select start date :    
                   <div id="datetimepicker"  class="input-append date">
@@ -272,7 +275,8 @@
 
                   <br />
 
-                  <button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
+                  
+                  <button class="btn btn-primary" id="displayTotalDurationPerIMSI">Total call failure duration</button>
                   
                   <br />
                   <br />
@@ -285,7 +289,8 @@
 										<table class="table table-striped no-margin" id="table">
 											<thead>
 												<th>Total Number of call-failures</th>
-												
+												<th>Total Duration in milliseconds</th>
+												<th>Affected IMSI</th>
 												
 											</thead>
 
@@ -420,7 +425,7 @@
                   
                   
                   
-               
+                  
                      <li><a href="eventid_causeid.html" ><span class="title">Affected IMSIs</span></a></li>
                   <li><a href="callFailuresDuration.html" ><span class="title">Call Failures Duration</span></a></li>
                   <li><a href="callFailuresByIMSI.html" ><span class="title">Call Failures By IMSI</span></a></li>

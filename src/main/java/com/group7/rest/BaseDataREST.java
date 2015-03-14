@@ -224,5 +224,16 @@ public class BaseDataREST {
 	public Collection<BigInteger> getAllPhoneTypes(){
 		return service.getAllPhoneTypes();
 	}
+	
+	/**
+	 * returns all unique model numbers.
+	 * Used to populate the drop-down menus.
+	 */
+	@GET
+	@Path("/uniqueModels")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<String> getAllDistictPhoneModels(){
+		return service.getAllDistinctPhoneModels();
+	}
 
 }

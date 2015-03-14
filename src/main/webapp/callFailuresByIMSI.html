@@ -205,7 +205,7 @@
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li class="active">UE Table</li>
+							<li class="active">Call failures by IMSI</li>
 						</ol>
 					</div>
 					<div class="section-body contain-lg">
@@ -213,12 +213,12 @@
 						<!-- BEGIN INTRO -->
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="text-primary">Calls Failure Duration</h1>
+								<h1 class="text-primary">Calls Failures By IMSI </h1>
 							</div><!--end .col -->
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										Count for a given model of phone the number of call failures and their total duration during time period.
+										Add description here
 									</p>
 								</article>
 							</div><!--end .col -->
@@ -244,10 +244,13 @@
 										<br />
 										<br />
 										<br />
-										<p>phone TAC number:</p>
-                  <select id="tac" onchange="updateTac()">
-                    <option>TAC Number</option>
-                  </select></p>	
+										<p>
+				                  <p>IMSI number:</p>
+				                  <select id="imsi" onchange="update()">
+				                    <option>IMSI Number</option>
+				                  </select>
+                </p>
+
 
                   					Select start date :    
                   <div id="datetimepicker"  class="input-append date">
@@ -272,7 +275,8 @@
 
                   <br />
 
-                  <button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
+                  
+                  <button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call Failures per IMSI</button>
                   
                   <br />
                   <br />
@@ -378,18 +382,16 @@
 
                 <!-- BEGIN TABLES -->
                 <li class="gui-folder">
-              <a>
-                <div class="gui-icon"><i class="fa fa-table"></i></div>
-                <span class="title">Data</span>
-              </a>
-              <!--start submenu -->
-              <ul>
-                <!-- ANDRZEJ -->
-                <li><a href="uetable.html" ><span class="title">UE Table</span></a></li>
-                <li><a href="baseData.html" ><span class="title">Base Data Table</span></a></li>
-                <li><a href="eventcause.html" ><span class="title">Event Cause Table</span></a></li>
-              </ul><!--end /submenu -->
-            </li><!--end /menu-li -->
+                  <a>
+                    <div class="gui-icon"><i class="fa fa-table"></i></div>
+                    <span class="title">Data</span>
+                  </a>
+                  <!--start submenu -->
+                  <ul>
+                    <li><a href="uetable.html" ><span class="title">UE Table</span></a></li>
+                    
+                  </ul><!--end /submenu -->
+                </li><!--end /menu-li -->
                 <!-- END TABLES -->
 
                 <!-- BEGIN FORMS -->
@@ -419,8 +421,7 @@
                   
                   
                   
-                  
-               
+                
                      <li><a href="eventid_causeid.html" ><span class="title">Affected IMSIs</span></a></li>
                   <li><a href="callFailuresDuration.html" ><span class="title">Call Failures Duration</span></a></li>
                   <li><a href="callFailuresByIMSI.html" ><span class="title">Call Failures By IMSI</span></a></li>

@@ -2,11 +2,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Display Event Cause</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+
+	<h1>Event Cause Table</h1>
+	<button class="btn btn-primary" id="displayBtn">Display Events</button>
+	<table id="table" class="table table-striped">
+		<thead>
+			<th>Event Cause</th>
+			<th>Event ID</th>
+			<th>Description</th>
+		</thead>
+		<tbody  id="table-body">
+		</tbody>
+	</table>
+
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="js/eventcause.js"></script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
 <title>It's finally working ! OH YEAH!!!!!!</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
+
 	<h1>UE Table</h1>
 	<button class="btn btn-primary" id="infoBtn">I'm a nice
 		button,please click me</button>
@@ -18,10 +48,12 @@
 			<th>UE Type</th>
 			<th>Operating System</th>
 			<th>Input Mode</th>
+
 		</thead>
 		<tbody id="table-body">
 		</tbody>
 	</table>
+
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="js/uetable.js"></script>
@@ -47,9 +79,12 @@
 	<link type="text/css" rel="stylesheet" href="assets/css/theme-default/materialadmin.css?1425466319" />
 	<link type="text/css" rel="stylesheet" href="assets/css/theme-default/font-awesome.min.css?1422529194" />
 	<link type="text/css" rel="stylesheet" href="assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
-	<!-- END STYLESHEETS -->
+	<!-- Andrzej: line below cause conflicts with template css, STUFF FROM GIOVANNI -->
+		  <!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"> 
+		  <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">  -->
+		  <!-- END STYLESHEETS -->
 
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
 		<script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
@@ -199,7 +234,7 @@
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li class="active">UE Table</li>
+							<li class="active">Call failure by Phone Model</li>
 						</ol>
 					</div>
 					<div class="section-body contain-lg">
@@ -207,13 +242,12 @@
 						<!-- BEGIN INTRO -->
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="text-primary">UE Table</h1>
+								<h1 class="text-primary">Call failure by Phone Model</h1>
 							</div><!--end .col -->
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										Table displays information about TAC, Vendor name, Model and other related information.
-									</p>
+										 Displays for a given model of phone, all the unique failure event ID and cause code combination thet have exhibited and the number of occurences (dummy data VEA3)
 								</article>
 							</div><!--end .col -->
 						</div><!--end .row -->
@@ -235,19 +269,36 @@
 							<!-- <div class="col-lg-offset-1 col-md-8"> -->
 							<div class="card"> 
 								<div class="card-body">
-								
-										<table id="table" class="table table-striped">
-											<thead>
-												<th>TAC</th>
-												<th>Vendor Name</th>
-												<th>Model</th>
-												<th>UE Type</th>
-												<th>Operating System</th>
-												<th>Input Mode</th>
-											</thead>
-											<tbody id="table-body">
-											</tbody>
-										</table>
+									
+									<br />
+									<br />
+									<p>
+										
+
+									</p>
+									
+
+
+									<table id="table" class="table table-striped">
+		<thead>
+			<th>TAC</th>
+			<th>Vendor Name</th>
+			<th>Model</th>
+			<th>UE Type</th>
+			<th>Operating System</th>
+			<th>Input Mode</th>
+
+		</thead>
+		<tbody id="table-body">
+		</tbody>
+	</table>
+
+
+
+
+
+
+
 									</div><!--end .card-body -->
 								</div><!--end .card -->
 								
@@ -684,7 +735,14 @@
 							<script src="assets/js/core/source/AppNavSearch.js"></script>
 							<script src="assets/js/core/source/AppVendor.js"></script>
 							<script src="assets/js/core/demo/Demo.js"></script>
-							<script src="js/uetable.js"></script>
+								<script src="js/uetable.js"></script>
+
+							<!--stuff from giovanii-->
+							<!-- <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script> -->
+							<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
+							<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+							<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
+
 							<!-- END JAVASCRIPT -->
 
 						</body>

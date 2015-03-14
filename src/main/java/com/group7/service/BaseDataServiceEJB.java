@@ -125,5 +125,8 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public Collection<BigInteger> getAllPhoneTypes(){
 		return dao.getAllPhoneTypes();
 	}
+	public Collection<String> getAllDistinctPhoneModels(){
+		return dao.getAllDistinctPhoneModels();
+	}
 }
 

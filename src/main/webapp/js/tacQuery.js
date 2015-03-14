@@ -142,7 +142,7 @@ function update() {
 	
 	$.ajax({
 		type : 'GET',
-		url : 'rest/baseData/eventid_causeid?imsi=' + tacNr,
+		url : 'rest/baseData/eventid_causeid?imsi=' + imsiNr,
 		success : handleResponseJQuery,
 		contentType : 'application/json'
 	});
