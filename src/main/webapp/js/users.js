@@ -14,8 +14,6 @@ function showAllUsers(){
 	
 }
 
-
-
 function handleResponseJQuery(myData) {
 	
 	for(var i = 0 ; i <myData.length; i++){
@@ -154,7 +152,7 @@ $('#buttonJ').click(function(){
 			 type: "POST",
              url: 'rest/users/auth',
              contentType: 'application/json',
-             data:JSON.stringify({ "email": email, "password" : password }),
+             data:JSON.stringify({ "email": email, "password" : password, "type":1 }),
              success: function (userData) {
 
                  if (userData == null) {
@@ -163,7 +161,18 @@ $('#buttonJ').click(function(){
                  else {
                 	 alert("You succesfully logged in");
                 	 $("#error").text("Hello " + userData.email);
-                	 window.location.href="temp.html";
+                	 if(userData.type==1){
+                		 window.location.href="dashboard.html";
+                	 }
+                	 else if(userData.type==2){
+                		 window.location.href="customerServiceRep.html";
+                	 }
+                	 else if(userData.type==3){
+                		 window.location.href="supportEngineer.html";
+                	 }
+                	 else if(userData.type==4){
+                		 window.location.href="networkManagementEngineer.html";
+                	 }
                  }
              }
          });

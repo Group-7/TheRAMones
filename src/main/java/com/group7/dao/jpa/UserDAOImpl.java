@@ -32,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
 		return q.getResultList();
 	}
 
-	public User searchUserByEmail(String email, String password) {
+	public User searchUserByEmail(String email, String password, int i) {
 		System.out.println("Validating user " + email);
 		Query q = em.createQuery("from User u where u.email = :email");
 		q.setParameter("email", email);

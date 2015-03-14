@@ -54,7 +54,7 @@ public class UserREST {
 		user.setPassword("fggg");
 		user.setType(1);
 		return user;*/
-		return service.getUserByEmail(user.getEmail(),user.getPassword());
+		return service.getUserByEmail(user.getEmail(),user.getPassword(), user.getType());
 	}
 	
 	

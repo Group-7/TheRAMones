@@ -10,7 +10,7 @@ import com.group7.entities.User;
 public interface UserServiceLocal {
 
 	Collection<User> showAllUsers();
-	User getUserByEmail(String email,String password);
+	User getUserByEmail(String email,String password, int i);
 	//User addUser(String email, String password, int position);
   User addUser(String email,String password, int type);
 }
