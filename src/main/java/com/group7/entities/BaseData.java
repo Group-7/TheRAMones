@@ -1,4 +1,4 @@
-/*package com.group7.entities;
+package com.group7.entities;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -15,14 +15,14 @@ import javax.persistence.Table;
 
 import org.jboss.logging.Cause;
 
-*//**
+/**
  *
  *	Basedata , pojo for the base data 
  *  coming in from the excel sheet
  *
  * @author niall
  *
- *//*
+ */
 
 	//@NamedQueries({
 	//Niall's named query @NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd"),
@@ -332,10 +332,12 @@ public class BaseData {
 	
 }
 
-*/
 
-//-------------------------------------MARC PART-----------------------------------
 
+
+
+//-------------------------------------MARC NEW PART-----------------------------------
+/*
 package com.group7.entities;
 
 import java.math.BigInteger;
@@ -350,14 +352,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
+*//**
  *
  *	Basedata , Pojo for the base data 
  *  coming in from the excel sheet
  *
  * @author niall 
  *
- */
+ *//*
 
 	//@NamedQueries({
 	//Niall's named query @NamedQuery(name = "BaseData.getAll", query = "select bd from baseData bd"),
@@ -747,3 +749,4 @@ public class BaseData {
 	}
 	
 }
+*/

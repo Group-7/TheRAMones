@@ -1,4 +1,4 @@
-/*package com.group7.dao.jpa;
+package com.group7.dao.jpa;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -69,10 +69,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	}
 
 	
- * SELECT Base_Data.IMSI, Base_Data.Cause_Code, Base_Data.EventID,
- * Event_Cause_Table.Description FROM Base_Data, Event_Cause_Table WHERE
- * Base_Data.Cause_Code = Event_Cause_Table.Cause_Code AND Base_Data.EventID
- * = Event_Cause_Table.EventID AND Base_Data.IMSI = 344930000000001;
+// * SELECT Base_Data.IMSI, Base_Data.Cause_Code, Base_Data.EventID,
+// * Event_Cause_Table.Description FROM Base_Data, Event_Cause_Table WHERE
+// * Base_Data.Cause_Code = Event_Cause_Table.Cause_Code AND Base_Data.EventID
+// * = Event_Cause_Table.EventID AND Base_Data.IMSI = 344930000000001;
 	 
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
@@ -147,11 +147,11 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		bdv.setFailureFirst(false);
 	}
 
- *//**
+ /**
  * Returns the total number of call failures within a certain time period
  * based on the phoneType.
  */
-/*
+
 public Collection<Long> getTotalFailuresOfSpecificPhone(
 	BigInteger phoneType, String startDate, String endDate) {
 
@@ -169,11 +169,11 @@ return em
 
 }
 
- *//**
+ /**
  * Returns the total number of call failures within a certain time period
  * based on the imsi number.
  */
-/*
+
 public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
 	String startDate, String endDate) {
 
@@ -190,11 +190,11 @@ return em
 		.getResultList();
 }
 
- *//**
+/**
  * Returns for a given phone type all the unique failure Event Id and Cause
  * Code combinations they have exhibited and the number of occurrences.
  */
-/*
+
 public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
 	BigInteger imsi, String startDate, String endDate) {
 
@@ -239,12 +239,23 @@ return newDate;
 // dt = DateTime.parse("10/02/2013 20:00:00", parser);
 }
 
+public Collection<String> getAllDistinctPhoneModels() {
+
+	return em.createQuery("SELECT DISTINCT u.model FROM UE_Table u")
+			.getResultList();
 }
- */
 
-//-------------------------------------MARC PART
+}
+ 
 
-package com.group7.dao.jpa;
+
+
+
+
+
+//-------------------------------------MARC NEW PART---------------------------------------------------
+
+/*package com.group7.dao.jpa;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -304,12 +315,12 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		int count = 0;
 		int inserted = 0;
 		for (BaseData basedata : bd) {
-			/*
+			
 			 * try{ em.merge(basedata.deepCopy()); inserted++; }
 			 * catch(EntityExistsException eee){
 			 * //System.out.println("***************\nEntity exixts exception "
 			 * +"\n**************"); count++; }
-			 */
+			 
 
 			System.out.println("inserting: " + inserted);
 			em.persist(basedata.deepCopy());
@@ -319,12 +330,12 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	}
 
-	/*
+	
 	 * SELECT Base_Data.IMSI, Base_Data.Cause_Code, Base_Data.EventID,
 	 * Event_Cause_Table.Description FROM Base_Data, Event_Cause_Table WHERE
 	 * Base_Data.Cause_Code = Event_Cause_Table.Cause_Code AND Base_Data.EventID
 	 * = Event_Cause_Table.EventID AND Base_Data.IMSI = 344930000000001;
-	 */
+	 
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
 				.createQuery(
@@ -398,10 +409,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		bdv.setFailureFirst(false);
 	}
 
-	/**
+	*//**
 	 * Returns the total number of call failures within a certain time period
 	 * based on the phoneType.
-	 */
+	 *//*
 	public Collection<Long> getTotalFailuresOfSpecificPhone(
 			BigInteger phoneType, String startDate, String endDate) {
 
@@ -419,10 +430,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	}
 
-	/**
+	*//**
 	 * Returns the total number of call failures within a certain time period
 	 * based on the imsi number.
-	 */
+	 *//*
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
 			String startDate, String endDate) {
 
@@ -439,10 +450,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				.getResultList();
 	}
 
-	/**
+	*//**
 	 * Returns for a given phone type all the unique failure Event Id and Cause
 	 * Code combinations they have exhibited and the number of occurrences.
-	 */
+	 *//*
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
 			BigInteger imsi, String startDate, String endDate) {
 
@@ -494,3 +505,4 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	}
 
 }
+*/

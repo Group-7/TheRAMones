@@ -1,4 +1,4 @@
-$("#getModel").click(function() {
+/*$("#getModel").click(function() {
 getFailures();
 }
 
@@ -14,4 +14,4 @@ var model = $('#model').val();
 		
 	});
 
-}
+}*/
