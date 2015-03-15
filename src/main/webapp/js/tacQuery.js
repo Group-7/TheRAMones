@@ -35,8 +35,6 @@ function getAllCallFailuresPerPhoneType(){
 	
 	startDate = startDate.split("2").join("0");
 	endDate = endDate.split("2").join("0");
-	console.log("startDate: " + startDate);
-	console.log("endDate: " + endDate);
 	
 	$.ajax({
 		  type: 'GET',
@@ -47,6 +45,9 @@ function getAllCallFailuresPerPhoneType(){
 }
 
 
+
+
+
 function getAllCallFailuresPerIMSI(){
 	 $("#table-body").html("");
 	
@@ -54,19 +55,12 @@ function getAllCallFailuresPerIMSI(){
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	
-	var dates=startDate+","+endDate;
-	//alert(dates);
-	//dates=dates.split("/").join("");
-	//dates=dates.split("2").join("0");   
 	startDate = startDate.split("2").join("0");
 	endDate = endDate.split("2").join("0");
-	console.log("startDate: " + startDate);
-	console.log("endDate: " + endDate);
 	
 	$.ajax({
 		  type: 'GET',
 		  url: 'rest/baseData/imsiFailures?imsi='+ imsiNumber+'&startDate='+ startDate+'&endDate='+endDate,
-
 		  success: handleResponseJQuery,
 		  contentType: 'application/json'
 	});
@@ -117,37 +111,7 @@ function loadAllUniqueTAC() {
 
 //********Update selectors/dropDownMenu's**********
 
-function update() {
-	
-	//clears table 
-	$("#table-body").html("");
-	
-	var imsiNr = $("#imsi").val();
-	
-	$.ajax({
-		type : 'GET',
-		url : 'rest/baseData/eventid_causeid?imsi=' + imsiNr,
-		success : handleResponseJQuery,
-		contentType : 'application/json'
-	});
 
-}
-
-function update() {
-	
-	//clears table 
-	$("#table-body").html("");
-	
-	var imsiNr = $("#tac").val();
-	
-	$.ajax({
-		type : 'GET',
-		url : 'rest/baseData/eventid_causeid?imsi=' + imsiNr,
-		success : handleResponseJQuery,
-		contentType : 'application/json'
-	});
-
-}
 
 //********Populate selectors/dropDownMenu's**********
 

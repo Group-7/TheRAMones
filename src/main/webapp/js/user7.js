@@ -205,8 +205,9 @@ function submit(){
 	var dates=from+","+to;
 	//alert(dates);
 	//dates=dates.split("/").join("");
+	console.log("Dates before join: " + dates);
 	dates=dates.split("2").join("0");
-	alert(dates);
+	console.log("Dates after join: " + dates);
 	$.ajax({
 		type: 'GET',
 		url: 'rest/baseData/imsi?dates='+dates,

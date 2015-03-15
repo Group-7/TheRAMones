@@ -55,17 +55,25 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
-		// System.out.println("valid size "+bd.size());
+		//System.out.println("valid size "+bd.size());
 		int count = 0;
+		int inserted = 0;
 		for (BaseData basedata : bd) {
-			try {
+			/*try{
 				em.merge(basedata.deepCopy());
-			} catch (EntityExistsException eee) {
-				// System.out.println("***************\nEntity exixts exception "+"\n**************");
-				count++;
+				inserted++;
 			}
+			catch(EntityExistsException eee){
+				//System.out.println("***************\nEntity exixts exception "+"\n**************");
+				count++;
+			}*/
+			
+			System.out.println("inserting: " + inserted);
+			em.persist(basedata.deepCopy());
+			inserted++;
 		}
-		// System.out.println("dupicates "+count);
+		//System.out.println("dupicates "+count);
+		
 	}
 
 	
@@ -161,13 +169,14 @@ Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
 
 return em
 		.createQuery(
-				"SELECT COUNT(*) FROM BaseData bd WHERE bd.tac LIKE :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				"SELECT COUNT(*) FROM BaseData bd WHERE bd.tac = :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 		.setParameter("tac", phoneType)
 		.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 		.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
 		.getResultList();
 
 }
+
 
  /**
  * Returns the total number of call failures within a certain time period
@@ -180,13 +189,15 @@ public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
 Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
 		.getTime());
 Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+	
+	
 
 return em
 		.createQuery(
-				"SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				"SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi = :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 		.setParameter("imsi", imsi)
-		.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
-		.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+		.setParameter("startdate", dbStartDate)
+		.setParameter("enddate", dbEndDate)
 		.getResultList();
 }
 
@@ -202,9 +213,10 @@ Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
 		.getTime());
 Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
 
+
 return em
 		.createQuery(
-				"SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi LIKE :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				"SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi = :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 		.setParameter("imsi", imsi)
 		.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 		.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
