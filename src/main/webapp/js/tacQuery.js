@@ -157,6 +157,7 @@ function populateImsiSelector(data) {
 	}
 }
 
+
 function populateTacSelector(data) {
 
 	var select = document.getElementById("tac");

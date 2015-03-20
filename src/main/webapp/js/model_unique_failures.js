@@ -1,12 +1,35 @@
-window.onload = function() {
+var modelTac = tac;
 
+window.onload = function(){
 	loadAllUniqueModels();
+
+/*	if(modelTac == tac){
+		loadAllUniqueModels();
+		modelTac = model;
+	}
+	else{
+		loadAllUniqueTAC();
+		modelTac = tac;
+	}*/
+
 }
 
 
 $("#displayAllEventCauseCodeCombinationsPerPhoneModel").click(function() {
-	
 	getAllEventCauseCodeCombinationsPerPhoneModel();
+
+});
+
+$("#modelTacSwitch").click(function() {
+	
+	if(modelTac == tac){
+		loadAllUniqueModels();
+		modelTac = model;
+	}
+	else{
+		loadAllUniqueTAC();
+		modelTac = tac;
+	}
 
 });
 
@@ -16,12 +39,24 @@ function loadAllUniqueModels() {
 	$.ajax({
 		type : 'GET',
 		url : 'rest/baseData/uniqueModels',
-		success : populateModelSelector,
+		success : populateModelTacSelector,
 		contentType : 'application/json'
 	});
 }
 
-function populateModelSelector(data) {
+
+function loadAllUniqueTAC() {
+
+	$.ajax({
+		type : 'GET',
+		url : 'rest/baseData/uniqueTAC',
+		success : populateModelTacSelector,
+		contentType : 'application/json'
+	});
+}
+
+
+function populateModelTacSelector(data) {
 	//$("#model").remove();
 	var select = document.getElementById("model");
 
@@ -34,6 +69,22 @@ function populateModelSelector(data) {
 		select.appendChild(el);
 	}
 }
+
+
+/*function populateTacSelector(data) {
+
+	//var select = document.getElementById("tac");
+
+	for (var i = 0; i < data.length; i++) {
+
+		var opt = data[i];
+		var el = document.createElement("option");
+		el.textContent = opt;
+		el.value = opt;
+		select.appendChild(el);
+	}
+}*/
+
 
 function getAllEventCauseCodeCombinationsPerPhoneModel(){
 	

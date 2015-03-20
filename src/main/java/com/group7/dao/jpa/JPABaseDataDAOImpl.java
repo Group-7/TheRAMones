@@ -127,7 +127,7 @@ public class JPABaseDataDAOImpl implements BaseDataDAO {
 	 */
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model) {
 		
-		return em.createQuery("select u.model, b.failureClass, b.causeCode , count(*) as occurences from BaseData b, UE_Table u where b.tac = u.tac and u.model = :phoneModel group by b.failureClass, b.causeCode")
+		return em.createQuery("select u.model, cu.description, count(*) as occurences from BaseData b, UE_Table u, Event_Cause_Table cu where b.tac = u.tac and u.model = :phoneModel and b.eventId = cu.eventId and b.causeCode = cu.causeCode group by b.eventId, b.causeCode, cu.description")
 				.setParameter("phoneModel", model)
 				.getResultList();
 			}

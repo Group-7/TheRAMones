@@ -135,6 +135,7 @@ public class BaseDataREST {
 	
 	}
 	
+
 	
 	/** 
 	 * Returns for each IMSI, the number of call failures and their total duration 
