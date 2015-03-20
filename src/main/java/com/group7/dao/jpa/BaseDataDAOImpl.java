@@ -228,7 +228,7 @@ public Collection<Object> getAllUniqueEventCausecodeCombinations(
 
 return em
 		.createQuery(
-				"select u.model, b.failureClass, b.causeCode , count(*) as occurences from BaseData b, UE_Table u where b.tac = u.tac and u.model = :phoneModel group by b.failureClass, b.causeCode")
+				"select u.model, b.eventId, ec.description, b.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.tac = u.tac AND ec.eventId = b.eventId AND ec.causeCode = b.causeCode AND u.model = :phoneModel group by b.eventId, b.causeCode, ec.description")
 		.setParameter("phoneModel", model).getResultList();
 }
 
