@@ -55,6 +55,12 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		return dao.getAllCauseCodeAndEventIdByIMSI(imsi);
 	}
 	
+	@Override
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger imsi) {
+		// TODO Auto-generated method stub
+		return dao.getAllCauseCodeAndDescByIMSI(imsi);
+	}
+	
 	
 
 	//The TransactionAttribute annotation specifies whether the container is to invoke a business method within 

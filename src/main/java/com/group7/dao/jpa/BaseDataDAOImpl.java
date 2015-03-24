@@ -88,6 +88,13 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 						"SELECT bd.imsi, bd.causeCode, bd.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();
 	}
+	
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger imsi) {
+		return em
+				.createQuery(
+						"SELECT DISTINCT bd.causeCode, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi")
+				.setParameter("imsi", imsi).getResultList();
+	}
 
 	public Collection<BigInteger> getUniqueAffectedImsi() {
 		return (Collection<BigInteger>) em.createQuery(

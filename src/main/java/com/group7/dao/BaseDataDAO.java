@@ -25,6 +25,7 @@ public interface BaseDataDAO {
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd);
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger Imsi);
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger Imsi);
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
 	public void putNetworkData(Collection<Network> networkData);
