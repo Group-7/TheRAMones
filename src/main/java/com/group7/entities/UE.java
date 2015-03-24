@@ -1,11 +1,12 @@
 package com.group7.entities;
 
-import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity(name = "UE_Table")
 public class UE {
@@ -28,6 +29,9 @@ public class UE {
 	
 	@Column(name = "Vendor_Name")
 	private String vendorName;
+	
+	@OneToMany(mappedBy="ueMap")
+	private List<BaseData> ueBD = new ArrayList<>();
 	
 		
 	public String getMarketingName() {
@@ -111,5 +115,14 @@ public class UE {
 	public void setInputMode(String inputMode) {
 		this.inputMode = inputMode;
 	}
+
+	public List<BaseData> getUeBD() {
+		return ueBD;
+	}
+
+	public void setUeBD(List<BaseData> ueBD) {
+		this.ueBD = ueBD;
+	}
+	
 	
 }

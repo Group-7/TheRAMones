@@ -1,13 +1,14 @@
 package com.group7.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,6 +31,8 @@ public class EventCause implements Serializable{
 	@Column(name="EventID")
 	private Integer eventId;
 	
+	@OneToMany(mappedBy="eventCauseMap")
+	private List<BaseData> eventcauseBD = new ArrayList<BaseData>();
 	
 	@Column(name="Description")
 	private String description;
@@ -58,5 +61,22 @@ public class EventCause implements Serializable{
 	public void setDiscription(String description) {
 		this.description = description;
 	}
+
+	public List<BaseData> getEventcauseBD() {
+		return eventcauseBD;
+	}
+
+	public void setEventcauseBD(List<BaseData> eventcauseBD) {
+		this.eventcauseBD = eventcauseBD;
+	}
+
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 
 }
