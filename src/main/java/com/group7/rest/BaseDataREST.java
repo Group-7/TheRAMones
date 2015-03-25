@@ -166,7 +166,7 @@ public class BaseDataREST {
 	@Path("/tacFailures")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Long> getTotalFailuresOfSpecificPhone(
-			@QueryParam("TAC") BigInteger tacCode,
+			@QueryParam("TAC") int tacCode,
 			//@QueryParam("dates") String dates){
 			@QueryParam("startDate") String startDate,
 			@QueryParam("endDate") String endDate){

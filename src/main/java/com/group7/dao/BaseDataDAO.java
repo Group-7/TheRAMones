@@ -31,7 +31,7 @@ public interface BaseDataDAO {
 	public void putUEData(Collection<UE> ueData);
 	public void putEventCauseData(Collection<EventCause> eventCauseData);
 	public void putFailureData(Collection<Failure> failureData);
-	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate);
+	public Collection<Long> getTotalFailuresOfSpecificPhone(int phoneType, String startDate, String endDate);
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);

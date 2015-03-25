@@ -74,16 +74,12 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	}
 
-	// * SELECT Base_Data.IMSI, Base_Data.Cause_Code, Base_Data.EventID,
-	// * Event_Cause_Table.Description FROM Base_Data, Event_Cause_Table WHERE
-	// * Base_Data.Cause_Code = Event_Cause_Table.Cause_Code AND
-	// Base_Data.EventID
-	// * = Event_Cause_Table.EventID AND Base_Data.IMSI = 344930000000001;
 
+	//DONE
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
 				.createQuery(
-						"SELECT bd.imsi, bd.causeCode, bd.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi")
+						"SELECT bd.imsi, bd.eventCauseMap.causeCode, bd.eventCauseMap.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();
 	}
 
@@ -92,7 +88,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				"SELECT DISTINCT bd.imsi FROM BaseData bd").getResultList();
 
 	}
-
+	//works
 	@Override
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to) {
 		// TODO Auto-generated method stub
@@ -167,9 +163,8 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * Returns the total number of call failures within a certain time period
 	 * based on the phoneType.
 	 */
-
-	public Collection<Long> getTotalFailuresOfSpecificPhone(
-			BigInteger phoneType, String startDate, String endDate) {
+	//DONE!!
+	public Collection<Long> getTotalFailuresOfSpecificPhone(int phoneType, String startDate, String endDate) {
 
 		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
 				.getTime());
@@ -177,7 +172,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 		return em
 				.createQuery(
-						"SELECT COUNT(*) FROM BaseData bd WHERE bd.tac = :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+						"SELECT COUNT(*) FROM BaseData bd WHERE bd.ueMap.tac = :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("tac", phoneType)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
@@ -189,7 +184,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * Returns the total number of call failures within a certain time period
 	 * based on the imsi number.
 	 */
-
+	//works
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi,
 			String startDate, String endDate) {
 
@@ -209,7 +204,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * Returns for a given phone type all the unique failure Event Id and Cause
 	 * Code combinations they have exhibited and the number of occurrences.
 	 */
-
+//done
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
 			BigInteger imsi, String startDate, String endDate) {
 
@@ -231,7 +226,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 		return em
 				.createQuery(
-						"select u.model, b.eventId, ec.description, b.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.tac = u.tac AND ec.eventId = b.eventId AND ec.causeCode = b.causeCode AND u.model = :phoneModel group by b.eventId, b.causeCode, ec.description")
+						"select u.model, b.eventCauseMap.eventId, ec.description, b.eventCauseMap.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.ueMap.tac = u.tac AND ec.eventId = b.eventCauseMap.eventId AND ec.causeCode = b.eventCauseMap.causeCode AND u.model = :phoneModel group by b.eventCauseMap.eventId, b.eventCauseMap.causeCode, ec.description")
 				.setParameter("phoneModel", model).getResultList();
 	}
 
