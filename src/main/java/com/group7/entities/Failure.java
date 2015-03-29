@@ -1,11 +1,13 @@
 package com.group7.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 @Entity(name ="Failure_Class_Table")
 public class Failure implements Serializable{
@@ -18,7 +20,9 @@ public class Failure implements Serializable{
 	@Column(name = "Description")
 	private String description;
 
-
+	@OneToMany(mappedBy="failureMap")
+	private List<BaseData> failureBD = new ArrayList<>();
+	
 	public Integer getFailureCode() {
 		return FailureCode;
 	}
@@ -37,6 +41,18 @@ public class Failure implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
+	public List<BaseData> getFailureBD() {
+		return failureBD;
+	}
+
+
+	public void setFailureBD(List<BaseData> failureBD) {
+		this.failureBD = failureBD;
+	}
+	
+	
 	
 	
 }

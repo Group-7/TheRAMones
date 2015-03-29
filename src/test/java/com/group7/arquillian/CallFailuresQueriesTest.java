@@ -1,4 +1,4 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
@@ -55,7 +55,7 @@ public class CallFailuresQueriesTest {
 	// here create simple test which check method of ejb
 	@Test
 	public void isBaseDataEmpty() throws Exception {
-		BigInteger phoneTypeDummy = new BigInteger("33000153");
+		Integer phoneTypeDummy = new Integer("33000153");
 		String startDate =  "11/01/2013 17:09:00";
 		String endDate = "11/01/2013 17:17:00";
 		//Assert.assertEquals(dao.getEU().size(),);
@@ -76,4 +76,4 @@ public class CallFailuresQueriesTest {
 	
 
 }
-*/
+

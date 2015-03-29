@@ -67,7 +67,7 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 
-		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/gerry/Documents/sample_dataset.xls");
+		BaseDataExcelRead bdxr = new BaseDataExcelRead("C:/Users/marc/Documents/sample_dataset.xls");
 		Collection<Network> networkData = bdxr.readNetworkTable();
 		Collection<UE> ueData = bdxr.readUETable();
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
@@ -106,7 +106,7 @@ public class BaseDataREST {
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
 		//Downloads/Group Project - Dataset 3A.xls";
-		String filename = "/home/gerry/Documents/sample_dataset.xls";
+		String filename = "C:/Users/marc/Documents/sample_dataset.xls";
 		if (form == null)
 			filename = "null.txt";
 
@@ -166,7 +166,7 @@ public class BaseDataREST {
 	@Path("/tacFailures")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Long> getTotalFailuresOfSpecificPhone(
-			@QueryParam("TAC") BigInteger tacCode,
+			@QueryParam("TAC") int tacCode,
 			//@QueryParam("dates") String dates){
 			@QueryParam("startDate") String startDate,
 			@QueryParam("endDate") String endDate){
