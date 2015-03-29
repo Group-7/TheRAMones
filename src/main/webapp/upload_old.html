@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Upload Page</title>
+</head>
+<body onload="load()">
+
+<h1> upload Form</h1>
+<form id="uploadForm" action="rest/baseData/upload" method="POST" enctype="multipart/form-data">
+<p>
+Select a file : <input type="file" id="uploadFile" name="uploadedFile" size="50" class="btn btn-primary" onchange="validate()" /> 
+</p>
+<input type="submit" value="Upload it" id="uploadFileBtn" class="btn btn-primary"/>
+
+</form> 
+	<!-- <button class="btn btn-primary" id="uploadDataBtn">Upload data</button> -->
+	
+	<a href="import.html">Upload Data</a>
+
+<!-- <p> -->
+<!-- Select a file : <input type="file" id="uploadedFile" name="uploadedFile" size="50" />  -->
+<!-- </p> -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/upload.js"></script>
+</body>
+</html>

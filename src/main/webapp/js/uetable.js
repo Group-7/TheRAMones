@@ -1,10 +1,6 @@
-//Andrew UE_Table   uetable.html
-
-$("#infoBtn").click(function() {
-
 	getAllUE();
 
-});
+
 
 function getAllUE() {
 	$.ajax({
@@ -30,6 +26,3 @@ function handleResponseJQuery(myData) {
 	}
 	;
 }
-
-
-

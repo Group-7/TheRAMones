@@ -122,5 +122,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		return dao.getAllUniqueEventCausecodeCombinations(model);
 	}
 	
+	public Collection<BigInteger> getAllPhoneTypes(){
+		return dao.getAllPhoneTypes();
+	}
+	public Collection<String> getAllDistinctPhoneModels(){
+		return dao.getAllDistinctPhoneModels();
+	}
 }
 

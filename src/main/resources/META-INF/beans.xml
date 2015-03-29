@@ -4,6 +4,6 @@
  
  <alternatives>
  	<stereotype>com.group7.databases.ProdDB</stereotype>
- </alternatives>
+ </alternatives> 
  
  </beans>

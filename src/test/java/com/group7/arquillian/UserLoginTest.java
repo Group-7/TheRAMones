@@ -67,8 +67,8 @@ public class UserLoginTest {
 		assertEquals(1,service.showAllUsers().size());
 		
 		
-		assertNotNull(service.getUserByEmail(email, password));
-		assertNull(service.getUserByEmail("ggg", "eee"));
+		assertNotNull(service.getUserByEmail(email, password,1));
+		assertNull(service.getUserByEmail("ggg", "eee",1));
 		
 	}
 

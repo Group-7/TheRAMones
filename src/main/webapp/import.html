@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="css/marc_bootstrap.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/myUpload.css"> -->
 </head>
 <body>
-<p> This is the import page</p>
+	
+	<!-- **********************************	-->
+	<div class="row">
+		<div class="col-md-8 col-md-offset-3" id="delete">
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-1" id="delete">
+					<div class="jumbotron" >
+						<h1>Up-Load Form</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- **********************************	-->
+		<div class="row">
+			<div class="col-md-5 col-md-offset-3" id="delete">
+				<form id="uploadForm" action="rest/baseData/upload" method="POST" enctype="multipart/form-data">
+					<p>
+						<input type="file" id="uploadFile" name="uploadedFile" size="3"  class="form-control" onchange="validate()" placeholder="Choose A File" aria-describedby="sizing-addon1"/> 
+					</p>
 
 
-<form id="importForm" action="rest/baseData/import" method="POST" enctype="multipart/form-data">
+				</form> 
 
-<input type="submit" value="StartImport" id="uploadFileBtn" />
-</form> 
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5 col-md-offset-3 " id="delete">
+				<input type="submit" value="Upload it" id="uploadFileBtn" class="btn btn-success btn-block"/>
+			</div>
+		</div>	
 
-<br>
-<a href="temp.html">Main Page</a>
+		<br><br>
+		<!-- ********************************** -->
+		<div class="row">
+		<div class="col-md-5 col-md-offset-3" id="delete">
+				<form id="importForm" action="rest/baseData/import" method="POST" enctype="multipart/form-data">
+					<input type="submit" value="Start Import" id="uploadFileBtn" class="btn btn-primary btn-block" />
+				</form> 
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ********************************** -->
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/upload.js"></script>
 </body>
 </html>

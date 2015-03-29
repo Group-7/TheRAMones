@@ -1,4 +1,4 @@
-package com.group7.arquillian;
+/*package com.group7.arquillian;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -29,8 +29,12 @@ public class EventCauseEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
+<<<<<<< HEAD
 				.addClasses(EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class,
 						EventCauseREST.class,EventCauseServiceLocal.class,EventCauseServiceEJB.class)
+=======
+				.addClasses(EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class)
+>>>>>>> refs/heads/sub-master
 				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -56,4 +60,4 @@ public class EventCauseEJBTest {
 		
 	}
 }
- 
+ */

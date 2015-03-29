@@ -1,8 +1,5 @@
-$("#displayBtn").click(function() {
-	
 	getAllEvents();
 
-});
 
 function getAllEvents(){
 	$.ajax({

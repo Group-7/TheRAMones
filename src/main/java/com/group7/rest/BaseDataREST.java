@@ -67,7 +67,7 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 
-		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/niall/sample_dataset.xls");
+		BaseDataExcelRead bdxr = new BaseDataExcelRead("/home/gerry/Documents/sample_dataset.xls");
 		Collection<Network> networkData = bdxr.readNetworkTable();
 		Collection<UE> ueData = bdxr.readUETable();
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
@@ -106,7 +106,7 @@ public class BaseDataREST {
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
 		//Downloads/Group Project - Dataset 3A.xls";
-		String filename = "/home/niall/sample_dataset.xls";
+		String filename = "/home/gerry/Documents/sample_dataset.xls";
 		if (form == null)
 			filename = "null.txt";
 
@@ -166,9 +166,11 @@ public class BaseDataREST {
 	@Path("/tacFailures")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Long> getTotalFailuresOfSpecificPhone(
-			@QueryParam("TAC") BigInteger tacCode
-			,@QueryParam("startDate") String startDate
-			,@QueryParam("endDate") String endDate){
+			@QueryParam("TAC") BigInteger tacCode,
+			//@QueryParam("dates") String dates){
+			@QueryParam("startDate") String startDate,
+			@QueryParam("endDate") String endDate){
+		
 		return service.getTotalFailuresOfSpecificPhone(tacCode, startDate, endDate);
 	
 	}
@@ -218,5 +220,22 @@ public class BaseDataREST {
 		return service.getAllUniqueEventCausecodeCombinations(model);
 	}
 	
+	@GET
+	@Path("/uniqueTAC")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getAllPhoneTypes(){
+		return service.getAllPhoneTypes();
+	}
+	
+	/**
+	 * returns all unique model numbers.
+	 * Used to populate the drop-down menus.
+	 */
+	@GET
+	@Path("/uniqueModels")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<String> getAllDistictPhoneModels(){
+		return service.getAllDistinctPhoneModels();
+	}
 
 }

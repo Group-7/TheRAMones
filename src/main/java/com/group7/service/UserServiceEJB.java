@@ -25,8 +25,8 @@ public class UserServiceEJB implements UserServiceLocal {
 		return dao.showAllUsers();
 	}
 
-	public User getUserByEmail(String email,String password) {
-		return dao.searchUserByEmail(email, password);
+	public User getUserByEmail(String email,String password, int type) {
+		return dao.searchUserByEmail(email, password, type);
 	}
 	
 	public User addUser(String email,String password, int type){

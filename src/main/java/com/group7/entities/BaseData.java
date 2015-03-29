@@ -2,25 +2,22 @@ package com.group7.entities;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.sql.Date;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.jboss.logging.Cause;
 
 /**
  *
- *	Basedata , pojo for the base data 
+ *	Basedata , Pojo for the base data 
  *  coming in from the excel sheet
  *
- * @author niall
+ * @author niall 
  *
  */
 
@@ -29,22 +26,28 @@ import org.jboss.logging.Cause;
 	//@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT bd.imsi, bd.causeCode, bd.eventId FROM BaseData bd ORDER BY bd.imsi") })
 	//@NamedQuery(name = "BaseData.displayCauseCodeANDEventID", query = "SELECT NEW com.group7.dao.BaseData(bs.imsi, bd.causeCode, bd.eventId) FROM BaseData bs") }) 
 
-@Entity @IdClass(BaseDataId.class)
+@Entity //@IdClass(BaseDataId.class)
 @Table(name="Base_Data")
 public class BaseData {
-
+	
 	@Id
+	@Column(name="Base_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+
+	//@Id
 	@Column(name="DateTime")
 	private Timestamp dateAndTime;
 	
-	@Id
+	//@Id
 	@Column(name="Cell_ID")
 	private Integer cellid;
 	
-	@Id
+	//@Id
 	@Column(name="Cause_Code")
 	private Integer causeCode;
-	@Id
+	
+	//@Id
 	@Column(name="EventID")
 	private Integer eventId;
 
@@ -69,7 +72,7 @@ public class BaseData {
 	@Column(name="NE_Version")
 	private String neVersion;
 	
-	@Id
+	//@Id
 	@Column(name="IMSI")
 	private BigInteger imsi;
 	
@@ -81,7 +84,7 @@ public class BaseData {
 	
 	@Column(name="Hier321_ID")
 	private String heir321ID;
-
+	
 	public Timestamp getDateAndTime() {
 		return dateAndTime;
 	}
@@ -121,7 +124,14 @@ public class BaseData {
 	public void setFailureClass(Integer failureClass) {
 		this.failureClass = failureClass;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Integer getMcc() {
 		return mcc;
@@ -197,6 +207,9 @@ public class BaseData {
 		this.duration = duration;
 	}
 
+
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -215,6 +228,7 @@ public class BaseData {
 		result = prime * result
 				+ ((heir32ID == null) ? 0 : heir32ID.hashCode());
 		result = prime * result + ((heir3ID == null) ? 0 : heir3ID.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((imsi == null) ? 0 : imsi.hashCode());
 		result = prime * result + ((mcc == null) ? 0 : mcc.hashCode());
 		result = prime * result + ((mnc == null) ? 0 : mnc.hashCode());
@@ -275,6 +289,8 @@ public class BaseData {
 				return false;
 		} else if (!heir3ID.equals(other.heir3ID))
 			return false;
+		if (id != other.id)
+			return false;
 		if (imsi == null) {
 			if (other.imsi != null)
 				return false;
@@ -331,4 +347,3 @@ public class BaseData {
 	}
 	
 }
-

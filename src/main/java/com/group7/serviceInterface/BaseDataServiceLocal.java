@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -23,6 +24,7 @@ import com.group7.entities.UE;
 @Stateless
 @Local
 @TransactionManagement(TransactionManagementType.CONTAINER)
+
 public interface BaseDataServiceLocal {
 
 	public Collection<BaseData> getAllBasedata();
@@ -41,5 +43,9 @@ public interface BaseDataServiceLocal {
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
+	public Collection<BigInteger> getAllPhoneTypes();
+	public Collection<String> getAllDistinctPhoneModels();
+
+
 
 }

@@ -11,7 +11,7 @@
 			<artifactId>jboss-javaee-7.0</artifactId>
 			<version>1.0.0.Final</version>
 			<type>pom</type>
-			<scope>import</scope>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>

@@ -1,4 +1,4 @@
-package com.group7.junit;
+/*package com.group7.junit;
 
 import static org.junit.Assert.*;
 
@@ -172,4 +172,4 @@ public class BaseDataTest {
 		
 		assertFalse(bd1.equals(bd2));
 	}
-}
+}*/

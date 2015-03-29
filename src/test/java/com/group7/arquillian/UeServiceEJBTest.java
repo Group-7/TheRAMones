@@ -1,4 +1,4 @@
-package com.group7.arquillian;
+/*package com.group7.arquillian;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -30,8 +30,12 @@ public class UeServiceEJBTest {
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test.jar")
+<<<<<<< HEAD
 				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class,
 						UeServiceLocal.class,UeServiceEJB.class,UeREST.class)
+=======
+				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class)
+>>>>>>> refs/heads/sub-master
 				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -58,4 +62,4 @@ public class UeServiceEJBTest {
 		
 	}
 }
-
+*/
