@@ -1,10 +1,11 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -61,7 +62,7 @@ public class CallFailuresPerPhoneTypeTest {
 
 	
 	
-	@EJB
+	@Inject
 	public BaseDataDAO bdDao;
 
 	
@@ -85,4 +86,3 @@ public class CallFailuresPerPhoneTypeTest {
 	
 
 }
-*/
