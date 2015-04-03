@@ -79,8 +79,8 @@ public class BaseDataREST {
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
 
-		Collection<BaseData> bd = bdxr.readExcelFile();
-		//Filling the Datasbase
+		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId());
+		//Filling the Database
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);

@@ -128,5 +128,10 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public Collection<String> getAllDistinctPhoneModels(){
 		return dao.getAllDistinctPhoneModels();
 	}
+
+	@Override
+	public long getLastRowId() {
+		return dao.getLastRowId();
+	}
 }
 

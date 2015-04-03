@@ -53,7 +53,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		em.persist(basedata);
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	//@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd) {
 		// System.out.println("valid size "+bd.size());
 		int count = 0;
@@ -67,7 +67,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			 */
 
 			System.out.println("inserting: " + inserted);
-			em.merge(basedata);
+			em.persist(basedata);
 			inserted++;
 		}
 		// System.out.println("dupicates "+count);
@@ -111,7 +111,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		for (Network n : networkData) {
 			// if (!bdv.persistCandidateKeysToNetworkTable("" + n.getMcc() +
 			// n.getMnc())) // works
-			if (!networkList.contains(n))
+			if (networkList.size()==0 || (!bdv.persistCandidateKeysToNetworkTable("" + n.getMcc() + n.getMnc())))
 				em.merge(n);
 		}
 	}
@@ -124,7 +124,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			// if ((bdv.isUeFirst())||
 			// (!bdv.persistEventCausePrimaryKey(Integer.toString(u.getTac()))))
 			// // Failed
-			if (!ueList.contains(u)) {
+			if (ueList.size()==0 || !bdv.persistEventCausePrimaryKey(Integer.toString(u.getTac()))) {
 				em.merge(u);
 			}
 		}
@@ -139,7 +139,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			// if ((bdv.isEventCauseFirst()) ||
 			// !bdv.persistCandidateKeysToEventCauseTable(""+ e.getCauseCode() +
 			// e.getEventId()))
-			if (!eventcauseList.contains(e))
+			if (eventcauseList.size()==0 || !bdv.persistCandidateKeysToEventCauseTable(""+ e.getCauseCode() + e.getEventId()))
 				em.merge(e);
 		}
 		// bdv.setEventCauseFirst(false);
@@ -153,7 +153,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			// if ((bdv.isFailureFirst())||
 			// !bdv.persistFailurePrimaryKey(Integer.toString(f.getFailureCode())))
 			// // failed
-			if (!failureList.contains(f))
+			if (failureList.size()==0 || !bdv.persistFailurePrimaryKey(Integer.toString(f.getFailureCode())))
 				em.merge(f);
 		}
 		// bdv.setFailureFirst(false);
@@ -253,6 +253,11 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 		return em.createQuery("SELECT DISTINCT u.model FROM UE_Table u")
 				.getResultList();
+	}
+	
+	public long getLastRowId(){
+		 List<Long> listofBds = (List<Long>) em.createQuery("SELECT count(*) FROM BaseData b").getResultList();
+		 return listofBds.get(0);
 	}
 
 }

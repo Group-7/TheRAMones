@@ -48,6 +48,7 @@ public class BaseDataExcelRead {
 
 	BaseDataValidation validation = BaseDataValidation.getInstance();
 	
+	
 	/**
 	 * Constructor
 	 * @param fileName
@@ -65,7 +66,7 @@ public class BaseDataExcelRead {
 	 * @throws BiffException
 	 * @throws IOException
 	 */
-	public Collection<BaseData> readExcelFile() throws BiffException, IOException{
+	public Collection<BaseData> readExcelFile(long id) throws BiffException, IOException{
 		validation.fillListsWithObjects();
 		bsList = new ArrayList<BaseData>();
 		String[] strings = new String[13];
@@ -110,8 +111,10 @@ public class BaseDataExcelRead {
 				validation.validateCompositeInEventCause(strings[7]+ strings[0]);
 				
 				//create the object 
-				BaseData entity = new BaseData(dateDB,cell_id,duration,neVersion,imsi,strings[10],
+				id++;
+				BaseData entity = new BaseData(id, dateDB,cell_id,duration,neVersion,imsi,strings[10],
 						strings[11],strings[12],failure_class,ueTypeTac,event_id,cause_code,mcc,mnc);
+				
 				bsList.add(entity);
 				}catch(Exception e){
 					writeToLogError(count);

@@ -46,6 +46,7 @@ public interface BaseDataServiceLocal {
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
+	public long getLastRowId();
 
 
 
