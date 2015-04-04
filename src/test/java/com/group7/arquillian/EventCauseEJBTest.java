@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import com.group7.dao.EventCauseDAO;
 import com.group7.dao.jpa.EventCauseDAOImpl;
 import com.group7.databases.DataBaseProducer;
+import com.group7.entities.BaseData;
 import com.group7.entities.EventCause;
 import com.group7.entities.EventCauseID;
 import com.group7.rest.EventCauseREST;
@@ -32,6 +33,7 @@ public class EventCauseEJBTest {
 				.addClasses(EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class,
 						EventCauseREST.class,EventCauseServiceLocal.class,EventCauseServiceEJB.class)
 				.addPackage(DataBaseProducer.class.getPackage())
+				.addPackage(BaseData.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   

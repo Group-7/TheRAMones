@@ -2,16 +2,10 @@ package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
-import static com.jayway.restassured.RestAssured.expect;
-
-import jxl.read.biff.BiffException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -22,22 +16,22 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.group7.dao.BaseDataDAO;
+import com.group7.dao.UeDAO;
 import com.group7.dao.jpa.BaseDataDAOImpl;
+import com.group7.dao.jpa.UeDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataId;
-import com.group7.entities.EventCause;
-import com.group7.entities.Failure;
-import com.group7.entities.Network;
 import com.group7.entities.UE;
-import com.group7.importBaseData.BaseDataExcelRead;
 import com.group7.importBaseData.BaseDataValidation;
 import com.group7.rest.BaseDataREST;
+import com.group7.rest.UeREST;
 import com.group7.service.BaseDataServiceEJB;
+import com.group7.service.UeServiceEJB;
 import com.group7.serviceInterface.BaseDataServiceLocal;
-
+import com.group7.serviceInterface.UeServiceLocal;
 @RunWith(Arquillian.class)
-public class UserStory7Test {
+public class GetPhoneModelTest {
 
 	@Deployment
 	public static JavaArchive createDeployment() {
@@ -57,61 +51,35 @@ public class UserStory7Test {
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
 	}
+	
+	
 	@Inject
-	private BaseDataServiceLocal service;
+	private BaseDataServiceLocal dao;
 
-	
-	private BaseDataREST rest;
-	
 	
 	@Test
 	public void notNullTest(){
-		assertNotNull(rest);
+		assertNotNull(dao);
 	}
-	
-	
+
 	
 	@Test
-	public void testUnique(){
+	public void testGetPhoneTypes(){
 		
-		ArrayList<BigInteger> imsis=(ArrayList<BigInteger>)rest.getImsiFailureOverTime("01/01/0013 12:40:20,12/12/0015 12:40:20");
-	
-	
+		Collection<BigInteger> phoneTypes=dao.getAllPhoneTypes();
 		
-		for(int i=0;i<imsis.size();i++){
-			
-			for(int j=i+1;j<imsis.size();j++){
-				assertNotSame(imsis.get(i),imsis.get(j));
-			}
-			System.out.println("\n\n\n\n"+i);
-		}
+		assertEquals(99,phoneTypes.size());
+		
 		
 	}
 	
 	@Test
-	public void testSize() {
-	
-		Collection<BigInteger> imsis=rest.getImsiFailureOverTime("01/01/0012 12:40:20,12/12/0015 12:40:20");
-		assertEquals(imsis.size(),6);
+	public void testGetPhoneModels(){
 		
-		imsis=rest.getImsiFailureOverTime("01/01/0014 12:40:20,12/12/0015 12:40:20");
-		assertEquals(imsis.size(),0);
-	}
-	
-	@Test
-	public void getUniqueImsiTest(){
+		Collection<String> phoneTypes=dao.getAllDistinctPhoneModels();
 		
-		expect().
-		statusCode(200).
-		body(equals("344930000000011,310560000000012,"
-				+ "240210000000013,"
-				+ "344930000000001,"
-				+ "310560000000002,"
-				+ "240210000000003"))
-				.when()
-				.get("rest/baseData/uniqueImsi");
-		//get("/rest/baseData/uniqueIMSI").then().body();
+		assertEquals(91,phoneTypes.size());
+		
 		
 	}
 }
-

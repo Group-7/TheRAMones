@@ -25,6 +25,7 @@ import com.group7.importBaseData.BaseDataValidation;
 import com.group7.rest.BaseDataREST;
 import com.group7.service.BaseDataServiceEJB;
 import com.group7.serviceInterface.BaseDataServiceLocal;
+
 @RunWith(Arquillian.class)
 public class User4 {
 
@@ -32,17 +33,14 @@ public class User4 {
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap
 				.create(JavaArchive.class, "US7.jar")
-				.addClasses(BaseData.class,
-						EventCause.class,
-						BaseDataId.class, 
-						BaseDataDAO.class,
-						BaseDataDAOImpl.class,
-						BaseDataValidation.class,
-						BaseDataREST.class,
-						BaseDataServiceEJB.class,
-						BaseDataServiceLocal.class)
-						.addPackage(BaseData.class.getPackage())
-						.addPackage(DataBaseProducer.class.getPackage())
+				.addPackage(BaseDataDAO.class.getPackage())
+				.addPackage(BaseDataDAOImpl.class.getPackage())
+				.addPackage(BaseDataREST.class.getPackage())
+				.addPackage(BaseDataServiceEJB.class.getPackage())
+				.addPackage(BaseDataServiceLocal.class.getPackage())
+				.addPackage(BaseData.class.getPackage())
+				.addPackage(BaseDataValidation.class.getPackage())
+				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 

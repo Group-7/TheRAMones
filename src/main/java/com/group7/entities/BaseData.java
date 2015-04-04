@@ -228,31 +228,6 @@ public class BaseData {
 		this.failureMap = failureMap;
 	}
 
-	/*public BaseData deepCopy(){
-		
-		
-		BaseData base=new BaseData();
-		
-		
-		base.setDateAndTime(this.getDateAndTime());
-		base.setEventId(this.getEventId());
-		//base.setFailureClass(this.getFailureClass());
-		base.setTac(this.getTac());
-		base.setMcc(this.getMcc());
-		base.setMnc(this.getMnc());
-		base.setCellid(this.getCellid());
-		base.setDuration(this.getDuration());
-		base.setCauseCode(this.getCauseCode());
-		base.setNeVersion(this.getNeVersion());
-		base.setImsi(this.getImsi());
-		base.setHeir3ID(this.getHeir3ID());
-		base.setHeir32ID(this.getHeir32ID());
-		base.setHeir321ID(this.getHeir321ID());
-		
-		
-		
-		return base;
-		
-	}*/
+	
 	
 }

@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 import com.group7.dao.UeDAO;
 import com.group7.dao.jpa.UeDAOImpl;
 import com.group7.databases.DataBaseProducer;
+import com.group7.entities.BaseData;
 import com.group7.entities.UE;
 import com.group7.rest.UeREST;
 import com.group7.service.UeServiceEJB;
@@ -33,6 +34,7 @@ public class UeServiceEJBTest {
 				.addClasses(UeDAO.class, UE.class, UeDAOImpl.class,
 						UeServiceLocal.class,UeServiceEJB.class,UeREST.class)
 				.addPackage(DataBaseProducer.class.getPackage())
+				.addPackage(BaseData.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		

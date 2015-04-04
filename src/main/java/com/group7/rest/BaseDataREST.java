@@ -1,51 +1,66 @@
 package com.group7.rest;
 
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.FileSystems;
+import java.nio.file.Paths;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.Collection;
 
-import javax.ejb.EJB;
+import javax.annotation.PostConstruct;
+import javax.ejb.Asynchronous;
+import javax.ejb.Startup;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import jxl.read.biff.BiffException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
-import org.apache.commons.httpclient.URI;
+import jxl.read.biff.BiffException;
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
-import com.group7.dao.BaseDataDAO;
+
 import com.group7.entities.BaseData;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
+import com.group7.importBaseData.AutoImporter;
 import com.group7.importBaseData.BaseDataExcelRead;
 import com.group7.importBaseData.BaseDataValidation;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
-
 @Path("/baseData")
+@Startup
+@Singleton
 public class BaseDataREST {
 
-	@EJB
+	@Inject
 	private BaseDataServiceLocal service;
-	
+
 	private BaseDataValidation bvd = BaseDataValidation.getInstance();
 
-	public BaseDataREST() {
+	private String folder="/home/niall/RemoteUploads";
+	private WatchService watcher;
+	private java.nio.file.Path dir ;
+	
+	public BaseDataREST() throws IOException, InterruptedException {
 
+		// new FolderWatcher("/home/niall/RemoteUploads");
 	}
 
 	@GET
@@ -59,7 +74,8 @@ public class BaseDataREST {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/eventid_causeid")
-	public Collection<Object> getAllEventIdAndCauseIdREST(@QueryParam("imsi") BigInteger Imsi)  {
+	public Collection<Object> getAllEventIdAndCauseIdREST(
+			@QueryParam("imsi") BigInteger Imsi) {
 		return service.getAllEventIdAndCauseId(Imsi);
 	}
 
@@ -67,27 +83,28 @@ public class BaseDataREST {
 	@Path("/import")
 	public void importData() throws BiffException, IOException {
 
-		BaseDataExcelRead bdxr = new BaseDataExcelRead("C:/Users/marc/Documents/sample_dataset.xls");
+		BaseDataExcelRead bdxr = new BaseDataExcelRead(
+				"/home/niall/sample_dataset.xls");
 		Collection<Network> networkData = bdxr.readNetworkTable();
 		Collection<UE> ueData = bdxr.readUETable();
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
 		Collection<Failure> failureData = bdxr.readFailureClassTable();
-		
-		//Filling the cache
+
+		// Filling the cache
 		bvd.setEventCauses(eventCauseData);
 		bvd.setFailures(failureData);
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
 
 		Collection<BaseData> bd = bdxr.readExcelFile();
-		//Filling the Datasbase
+		// Filling the Datasbase
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
 		service.putFailureData(failureData);
 		service.putData(bd);
-		
-		//Should I make these Collection null now??
+
+		// Should I make these Collection null now??
 		networkData = null;
 		ueData = null;
 		eventCauseData = null;
@@ -105,8 +122,8 @@ public class BaseDataREST {
 	@Path("/upload")
 	@Consumes("multipart/form-data")
 	public void uploadFile(@MultipartForm FileUploadForm form) {
-		//Downloads/Group Project - Dataset 3A.xls";
-		String filename = "C:/Users/marc/Documents/sample_dataset.xls";
+		// Downloads/Group Project - Dataset 3A.xls";
+		String filename = "/home/niall/sample_dataset.xls";
 		if (form == null)
 			filename = "null.txt";
 
@@ -135,7 +152,6 @@ public class BaseDataREST {
 		fop.close();
 
 	}
-	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -147,17 +163,18 @@ public class BaseDataREST {
 	@GET
 	@Path("/imsi")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<BigInteger> getImsiFailureOverTime(@QueryParam("dates") String dates){
-		
-		String[] splitDates=dates.split(",",-1);
-		
-		return service.getImsiFailureOverTime(splitDates[0],splitDates[1]);
+	public Collection<BigInteger> getImsiFailureOverTime(
+			@QueryParam("dates") String dates) {
+
+		String[] splitDates = dates.split(",", -1);
+
+		return service.getImsiFailureOverTime(splitDates[0], splitDates[1]);
 	}
 
-	
 	/**
-	 * Returns for a given model of phone, 
-	 * the number of call failures it has had during a given time period.
+	 * Returns for a given model of phone, the number of call failures it has
+	 * had during a given time period.
+	 * 
 	 * @param tacCode
 	 * @param startDate
 	 * @param endDate
@@ -167,17 +184,19 @@ public class BaseDataREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Long> getTotalFailuresOfSpecificPhone(
 			@QueryParam("TAC") int tacCode,
-			//@QueryParam("dates") String dates){
+			// @QueryParam("dates") String dates){
 			@QueryParam("startDate") String startDate,
-			@QueryParam("endDate") String endDate){
-		
-		return service.getTotalFailuresOfSpecificPhone(tacCode, startDate, endDate);
-	
+			@QueryParam("endDate") String endDate) {
+
+		return service.getTotalFailuresOfSpecificPhone(tacCode, startDate,
+				endDate);
+
 	}
-	
-	
+
 	/**
-	 * Returns for a given IMSI, the number of failures they have had during a given time period.
+	 * Returns for a given IMSI, the number of failures they have had during a
+	 * given time period.
+	 * 
 	 * @param imsi
 	 * @param startDate
 	 * @param endDate
@@ -186,17 +205,17 @@ public class BaseDataREST {
 	@Path("/imsiFailures")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(
-			@QueryParam("imsi") BigInteger imsi
-			,@QueryParam("startDate") String startDate
-			,@QueryParam("endDate") String endDate){
+			@QueryParam("imsi") BigInteger imsi,
+			@QueryParam("startDate") String startDate,
+			@QueryParam("endDate") String endDate) {
 		return service.getTotalFailuresOfSpecificIMSI(imsi, startDate, endDate);
-	
+
 	}
-	
-	
-	/** 
-	 * Returns for each IMSI, the number of call failures and their total duration 
-	 * during a given time period
+
+	/**
+	 * Returns for each IMSI, the number of call failures and their total
+	 * duration during a given time period
+	 * 
 	 * @param imsi
 	 * @param startDate
 	 * @param endDate
@@ -205,37 +224,110 @@ public class BaseDataREST {
 	@Path("/imsiTotalDuration")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Object> getTotalDurationOfSpecificIMSI(
-			@QueryParam("imsi") BigInteger imsi
-			,@QueryParam("startDate") String startDate
-			,@QueryParam("endDate") String endDate){
-		return service.getAllCallFailuresAndTotalDurationPerIMSI(imsi, startDate, endDate);
+			@QueryParam("imsi") BigInteger imsi,
+			@QueryParam("startDate") String startDate,
+			@QueryParam("endDate") String endDate) {
+		return service.getAllCallFailuresAndTotalDurationPerIMSI(imsi,
+				startDate, endDate);
 	}
-	
-	
+
 	@GET
 	@Path("/modelFailure")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(
-			@QueryParam("model") String model){
+			@QueryParam("model") String model) {
 		return service.getAllUniqueEventCausecodeCombinations(model);
 	}
-	
+
 	@GET
 	@Path("/uniqueTAC")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<BigInteger> getAllPhoneTypes(){
+	public Collection<BigInteger> getAllPhoneTypes() {
 		return service.getAllPhoneTypes();
 	}
-	
+
 	/**
-	 * returns all unique model numbers.
-	 * Used to populate the drop-down menus.
+	 * returns all unique model numbers. Used to populate the drop-down menus.
 	 */
 	@GET
 	@Path("/uniqueModels")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<String> getAllDistictPhoneModels(){
+	public Collection<String> getAllDistictPhoneModels() {
 		return service.getAllDistinctPhoneModels();
+	}
+
+	@Asynchronous
+	@PostConstruct
+	public void run() throws BiffException, IOException {
+		// TODO Auto-generated method stub
+		
+		   
+		    try {
+		    	watcher = FileSystems.getDefault().newWatchService();
+			    dir = Paths.get(folder);
+				dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		     
+		    System.out.println("Watch Service registered for dir: " + dir.getFileName());
+		     
+		    while (true) {
+		        //BaseDataREST.poll(watcher);
+		    	WatchKey key;
+				try {
+					key = watcher.take();
+				} catch (InterruptedException ex) {
+					return;
+				}
+
+				for (WatchEvent<?> event : key.pollEvents()) {
+					WatchEvent.Kind<?> kind = event.kind();
+
+					@SuppressWarnings("unchecked")
+					WatchEvent<java.nio.file.Path> ev = (WatchEvent<java.nio.file.Path>) event;
+					java.nio.file.Path fileName = ev.context();
+					
+					System.out
+							.println("Kind" + kind.name() + ": fileName :" + fileName);
+					System.out.println("This is the toString" + fileName.toString());
+
+					System.out.println("Am i printing");
+					if (fileName.toString().equals(
+							"DIT Group Project - Sample Dataset.xls")) {
+						BaseDataValidation bvd = BaseDataValidation.getInstance();
+						BaseDataExcelRead bdxr = new BaseDataExcelRead(
+								"/home/niall/sample_dataset.xls");
+						Collection<Network> networkData = bdxr.readNetworkTable();
+						Collection<UE> ueData = bdxr.readUETable();
+						Collection<EventCause> eventCauseData = bdxr
+								.readEventCauseTable();
+						Collection<Failure> failureData = bdxr.readFailureClassTable();
+
+						// Filling the cache
+						bvd.setEventCauses(eventCauseData);
+						bvd.setFailures(failureData);
+						bvd.setNetworks(networkData);
+						bvd.setUeObjects(ueData);
+
+						Collection<BaseData> bd = bdxr.readExcelFile();
+						// Filling the Datasbase
+						service.putNetworkData(networkData);
+						service.putUEData(ueData);
+						service.putEventCauseData(eventCauseData);
+						service.putFailureData(failureData);
+						service.putData(bd);
+
+						// Should I make these Collection null now??
+						networkData = null;
+						ueData = null;
+						eventCauseData = null;
+						failureData = null;
+						bd = null;
+					}
+		    }
+		   }
 	}
 
 }
