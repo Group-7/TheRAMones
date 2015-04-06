@@ -133,5 +133,16 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public long getLastRowId() {
 		return dao.getLastRowId();
 	}
+
+	@Override
+	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate,String endDate) {
+		
+		return dao.getTopTenImsiDuringPeriod(startDate, endDate);
+	}
+
+	@Override
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(int failureClass) {
+		return dao.imsiEffectedByAFailureCauseClass(failureClass);
+	}
 }
 

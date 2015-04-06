@@ -14,10 +14,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import jxl.read.biff.BiffException;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -236,6 +237,20 @@ public class BaseDataREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<String> getAllDistictPhoneModels(){
 		return service.getAllDistinctPhoneModels();
+	}
+	
+	@GET
+	@Path("/toptenimsi")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> getTopTenImsiDuringPeriod(@QueryParam("startDate") String startDate, @QueryParam("endDate")String endDate){
+		return service.getTopTenImsiDuringPeriod(startDate, endDate);
+	}
+	
+	@GET
+	@Path("/imsifailureclass")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(@QueryParam("failure")int failureClass){
+		return service.imsiEffectedByAFailureCauseClass(failureClass);
 	}
 
 }

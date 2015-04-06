@@ -78,8 +78,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	//DONE
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
-				.createQuery(
-						"SELECT bd.imsi, bd.eventCauseMap.causeCode, bd.eventCauseMap.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
+				.createQuery("SELECT bd.imsi, bd.eventCauseMap.causeCode, bd.eventCauseMap.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();
 	}
 
@@ -171,8 +170,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
 
 		return em
-				.createQuery(
-						"SELECT COUNT(*) FROM BaseData bd WHERE bd.ueMap.tac = :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.ueMap.tac = :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("tac", phoneType)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
@@ -192,8 +190,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				.getTime());
 		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
 
-		return em
-				.createQuery(
+		return em.createQuery(
 						"SELECT COUNT(*) FROM BaseData bd WHERE bd.imsi = :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("imsi", imsi)
 				.setParameter("startdate", dbStartDate)
@@ -205,34 +202,26 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * Code combinations they have exhibited and the number of occurrences.
 	 */
 //done
-	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(
-			BigInteger imsi, String startDate, String endDate) {
+	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate) {
 
-		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
-				.getTime());
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate).getTime());
 		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
 
-		return em
-				.createQuery(
-						"SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi = :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+		return em.createQuery("SELECT imsi, COUNT(*), SUM(duration) FROM BaseData bd WHERE bd.imsi = :imsi AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("imsi", imsi)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
 				.getResultList();
 	}
 
-	public Collection<Object> getAllUniqueEventCausecodeCombinations(
-			String model) {
+	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model) {
 
-		return em
-				.createQuery(
-						"select u.model, b.eventCauseMap.eventId, ec.description, b.eventCauseMap.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.ueMap.tac = u.tac AND ec.eventId = b.eventCauseMap.eventId AND ec.causeCode = b.eventCauseMap.causeCode AND u.model = :phoneModel group by b.eventCauseMap.eventId, b.eventCauseMap.causeCode, ec.description")
+		return em.createQuery("select u.model, b.eventCauseMap.eventId, ec.description, b.eventCauseMap.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.ueMap.tac = u.tac AND ec.eventId = b.eventCauseMap.eventId AND ec.causeCode = b.eventCauseMap.causeCode AND u.model = :phoneModel group by b.eventCauseMap.eventId, b.eventCauseMap.causeCode, ec.description")
 				.setParameter("phoneModel", model).getResultList();
 	}
 
 	public Collection<BigInteger> getAllPhoneTypes() {
-		return em.createQuery("SELECT DISTINCT bd.tac from BaseData bd")
-				.getResultList();
+		return em.createQuery("SELECT DISTINCT bd.tac from BaseData bd").getResultList();
 	}
 
 	public Date dateFormatter(String date) {
@@ -251,14 +240,38 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	public Collection<String> getAllDistinctPhoneModels() {
 
-		return em.createQuery("SELECT DISTINCT u.model FROM UE_Table u")
-				.getResultList();
+		return em.createQuery("SELECT DISTINCT u.model FROM UE_Table u").getResultList();
 	}
 	
 	public long getLastRowId(){
 		 List<Long> listofBds = (List<Long>) em.createQuery("SELECT count(*) FROM BaseData b").getResultList();
 		 return listofBds.get(0);
 	}
+	
+	/**
+	 * 
+	 */
+	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate, String endDate){
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+		return em.createQuery("SELECT imsi, COUNT(bd.imsi) FROM BaseData bd WHERE bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate group by bd.imsi order by count(bd.imsi) DESC")
+				.setMaxResults(10)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.getResultList();
+	
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(int failureClass) {
+		Query q = em.createQuery("select bd.imsi, bd.dateAndTime,f.description from BaseData bd,Failure_Class_Table f where bd.failureMap.FailureCode = f.FailureCode AND bd.failureMap.FailureCode = :failureClass");
+		q.setParameter("failureClass", failureClass);
+		return (Collection<BaseData>) q.getResultList();
+	}
+	
 
 }
 
