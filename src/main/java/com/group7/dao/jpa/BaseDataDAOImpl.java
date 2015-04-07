@@ -263,13 +263,22 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	}
 
 	/**
-	 * 
+	 * #14 Me and Gio
 	 */
 	@Override
-	public Collection<BaseData> imsiEffectedByAFailureCauseClass(int failureClass) {
-		Query q = em.createQuery("select bd.imsi, bd.dateAndTime,f.description from BaseData bd,Failure_Class_Table f where bd.failureMap.FailureCode = f.FailureCode AND bd.failureMap.FailureCode = :failureClass");
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass) {
+		Query q = em.createQuery("select bd.imsi, bd.dateAndTime from BaseData bd,Failure_Class_Table f where bd.failureMap.FailureCode = f.FailureCode AND bd.failureMap.description = :failureClass");
 		q.setParameter("failureClass", failureClass);
 		return (Collection<BaseData>) q.getResultList();
+	}
+
+	/**
+	 * #14 Me and Gio
+	 */
+	@Override
+	public Collection<String> getFailureDescriptionForDropDown() {
+		Query q = em.createQuery("Select f.description from Failure_Class_Table f");
+		return q.getResultList();
 	}
 	
 

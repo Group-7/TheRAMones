@@ -45,8 +45,11 @@ public interface BaseDataServiceLocal {
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
 	public long getLastRowId();
+	/**
+	 */
 	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate, String endDate);
-	Collection<BaseData> imsiEffectedByAFailureCauseClass(int failureClass);
+	Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass);
+	Collection<String>getFailureDescriptionForDropDown();
 
 
 

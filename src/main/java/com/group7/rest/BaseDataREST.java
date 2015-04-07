@@ -249,8 +249,16 @@ public class BaseDataREST {
 	@GET
 	@Path("/imsifailureclass")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<BaseData> imsiEffectedByAFailureCauseClass(@QueryParam("failure")int failureClass){
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(@QueryParam("failure")String failureClass){
 		return service.imsiEffectedByAFailureCauseClass(failureClass);
 	}
 
+	@GET
+	@Path("/failuredropdown")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<String> getFailureDescriptionForDropDown(){
+		return service.getFailureDescriptionForDropDown();
+		
+	}
+	
 }
