@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<p>Call Failures</p>
+	<select id="failureId" onchange="getDropdownValue()">
+		<option>Failure Class</option>
+	</select>
+	<table class="table table-striped no-margin" id="table">
+		<thead>
+			<th>IMSI</th>
+			<th>Date</th>
+		</thead>
+		<tbody id="tableofFailureClasses">
+		</tbody>
+	</table>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="js/user14.js"></script>
+</body>
+</html>
