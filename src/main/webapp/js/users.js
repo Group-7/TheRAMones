@@ -217,7 +217,7 @@ $('#buttonJ').click(function(){
                  else {
                 	  alert("You succesfully logged in");
                 	 
-                	 if(userData.type==1){
+                	/* if(userData.type==1){
                 		 window.location.href="http://localhost:8080/TeamProject-0.0.1-SNAPSHOT/dashboard.html";
                 	 }
                 	 else if(userData.type==2){
@@ -228,7 +228,11 @@ $('#buttonJ').click(function(){
                 	 }
                 	 else if(userData.type==4){
                 		 window.location.href="http://localhost:8080/TeamProject-0.0.1-SNAPSHOT/network_dashboard.html";
-                	 }
+                	 }*/
+                	 
+                	 document.cookie="user="+userData.type+";";
+                	 
+                	 window.location="dashboard.html";
                  }
              }
          });

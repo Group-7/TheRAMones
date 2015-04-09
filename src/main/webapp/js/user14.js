@@ -3,6 +3,7 @@
  */
 $( document ).ready(function() {
 	fillDropDown();
+	loadSideBar();
 });
 
 function fillDropDown(){

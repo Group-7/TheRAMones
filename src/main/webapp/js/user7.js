@@ -199,6 +199,13 @@ function clearSel(sel){
 	
 	/*var string=""+from+","+to+"";
 	alert(string);*/
+function load(){
+	
+	loadSideBar();
+
+}
+
+
 function submit(){
 	var from=document.getElementById("startDate").value;
 	var to=document.getElementById("endDate").value;
