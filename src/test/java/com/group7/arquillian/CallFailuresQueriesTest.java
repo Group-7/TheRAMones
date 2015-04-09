@@ -1,4 +1,4 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
@@ -71,4 +71,4 @@ public class CallFailuresQueriesTest {
 	
 
 }
-*/
+

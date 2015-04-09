@@ -1,10 +1,11 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -22,18 +23,18 @@ import com.group7.entities.EventCauseID;
 
 @RunWith(Arquillian.class)
 public class EventCauseEJBTest {
+	
 	@Deployment
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
-				.addClasses(EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class)
-				.addPackage(DataBaseProducer.class.getPackage())
+				.addClasses(EventCauseEJBTest.class, EventCauseDAOImpl.class, EventCause.class, EventCauseDAO.class,EventCauseID.class)
+				.addPackages(true, "com.group7.importBaseData", "com.group.dao.jpa", "com.group7.databases", "com.group7.entities")
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
   
   }
 
-	//check
-	@EJB
+	@Inject
 	private EventCauseDAO dao;
 
 	@Test
@@ -44,11 +45,9 @@ public class EventCauseEJBTest {
 	// here create simple test which check method of ejb
 	@Test
 	public void isEventCauseTableEmpty() throws Exception {
-		//Assert.assertEquals(dao.getEU().size(),);
-		//assertEquals(dao.getEU().size(), 1);
-		//assertFalse(!dao.getEU().isEmpty());
-		//assertTrue(dao.getAllEventCauses().isEmpty());	
+		
+		assertTrue(dao.getAllEventCauses().isEmpty());	
 		
 	}
 }
- */
+ 
