@@ -1,6 +1,7 @@
 window.onload = function() {
 
 	loadAllUniqueModels();
+	loadSideBar();
 }
 
 
@@ -51,12 +52,15 @@ function getAllEventCauseCodeCombinationsPerPhoneModel(){
 
 function handleResponseJQuery3(myData) {
 	
+for(var i = 0; i<myData.length; i++){ 
 	 $('#table-body').append(
           "<tr>" +
-          "<td>" + myData[0][0] + "</td>" +
-          "<td>" + myData[0][1] + "</td>" +
-          "<td>" + myData[0][2] + "</td>" +
-          "<td>" + myData[0][3] + "</td>" +
+          "<td>" + myData[i][0] + "</td>" +
+          "<td>" + myData[i][1] + "</td>" +
+          "<td>" + myData[i][3] + "</td>" +
+          "<td>" + myData[i][2] + "</td>" +
+	  "<td>" + myData[i][4] + "</td>" +
           "</tr>");
+}
   
    }

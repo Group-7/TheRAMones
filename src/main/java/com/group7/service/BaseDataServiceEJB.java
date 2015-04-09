@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -53,6 +54,12 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public Collection<Object> getAllCasueCodeAndEventId(BigInteger imsi) {
 		// TODO Auto-generated method stub
 		return dao.getAllCauseCodeAndEventIdByIMSI(imsi);
+	}
+	
+	@Override
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger imsi) {
+		// TODO Auto-generated method stub
+		return dao.getAllCauseCodeAndDescByIMSI(imsi);
 	}
 	
 	
@@ -97,7 +104,7 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	
 
 
-	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, 
+	public Collection<Long> getTotalFailuresOfSpecificPhone(int phoneType, 
 			String startDate, String endDate) {
 		
 		return dao.getTotalFailuresOfSpecificPhone(phoneType, startDate, endDate);
@@ -127,6 +134,33 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	}
 	public Collection<String> getAllDistinctPhoneModels(){
 		return dao.getAllDistinctPhoneModels();
+	}
+
+	@Override
+	public long getLastRowId() {
+		return dao.getLastRowId();
+	}
+
+	@Override
+	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate,String endDate) {
+		
+		return dao.getTopTenImsiDuringPeriod(startDate, endDate);
+	}
+
+	@Override
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass) {
+		return dao.imsiEffectedByAFailureCauseClass(failureClass);
+	}
+
+	@Override
+	public Collection<String> getFailureDescriptionForDropDown() {
+		return dao.getFailureDescriptionForDropDown();
+	}
+
+	@Override
+	public void putErrorData(Collection<BaseDataError> bderrors) {
+		dao.putErrorData(bderrors);
+		
 	}
 }
 

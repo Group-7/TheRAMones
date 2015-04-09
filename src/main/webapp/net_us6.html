@@ -1,102 +1,33 @@
 <!-- <!DOCTYPE html>
 <html>
-<link
-	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/bootstrap-datetimepicker.min.css">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	
 <head>
 <meta charset="UTF-8">
-<title>User7</title>
+<title>Display Event ID and Cause ID for affected IMSI</title>
 
-
-
-
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
-<body >
+<body onload="load()">
 
-<h1> Select all IMSI for given time period</h1>
+	<h1>Display Event ID and Cause ID for affected IMSI</h1>
 
-
-
- select start date :  	
-	<div id="datetimepicker"  class="input-append date">
-	<input type="text" id="startDate" name="startDate"></input>
-
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-
-    </div>
-
-<p></p>
-
-	select end date :
-	<div id="datetimepicker2" class="input-append date">
-	<input type="text" id="endDate" name="endDate"></input>
-
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-    </div>
+	<select id="imsiNumber" onchange="update()">
+		<option>IMSI Number</option>
+	</select>
 
 
+	<table id="table" class="table table-striped">
+		<thead>
+			<th>IMSI</th>
+			<th>EVENT ID</th>
+			<th>CAUSE ID</th>
+			<th>DESCRIPTION</th>
+		</thead>
+		<tbody id="table-body">
+		</tbody>
+	</table>
 
-<button onclick="submit()" id="submit" >Submit </button>
-
-
-
-
-<table id="resultTable" class="table table-striped">
-
-
-	<thead>
-	<tr>
-		<th>Imsi</th>
-		
-	</tr>
-	</thead>
-	
-	<tbody id="resultTableBody">
-	
-	</tbody>
-</table>
-
-<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/user7.js"></script>
-    
-  
-    <script type="text/javascript"
-		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-     </script>  
-    <script type="text/javascript"
-		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-     </script> 
-    <script type="text/javascript"
-		src="js/bootstrap-datetimepicker.min.js">
-     </script> 
-    <script type="text/javascript"
-		src="js/locales/bootstrap-datetimepicker.uk.js">
-     </script> 
-    <script type="text/javascript">
-       $('#datetimepicker').datetimepicker({
-    	   format: 'dd/MM/yyyy hh:mm:ss',
-         language: 'en'
-       });
-     </script> 
-<script type="text/javascript">
-       $('#datetimepicker2').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
-         language: 'en'
-       });
-       </script>
-
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="js/eventid_causeid.js"></script>
 </body>
 </html> -->
 
@@ -121,28 +52,14 @@
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
 		<!-- END STYLESHEETS -->
 
-		<!-- datetime picker stylesheets -->
-
-		<link
-	href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen"
-	href="css/bootstrap-datetimepicker.min.css">
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	
-	
-
-
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
 		<script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
 		<![endif]-->
 	</head>
-	<body class="menubar-hoverable header-fixed menubar-pin " onload="load()">
+	<!-- <body class="menubar-hoverable header-fixed menubar-pin " onload="load()"> -->
+	<body class="menubar-hoverable header-fixed menubar-pin" onload="load()">
 
 		<!-- BEGIN HEADER-->
 		<header id="header" >
@@ -270,7 +187,7 @@
 		<!-- END HEADER-->
 
 		<!-- BEGIN BASE-->
-		<div id="base">
+		<div id="base" >
 
 			<!-- BEGIN OFFCANVAS LEFT -->
 			<div class="offcanvas">
@@ -286,7 +203,7 @@
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li class="active">Affected IMSI numbers </li>
+							<li class="active">queries/IMSI</li>
 						</ol>
 					</div>
 					<div class="section-body contain-lg">
@@ -294,12 +211,12 @@
 						<!-- BEGIN INTRO -->
 						<div class="row">
 							<div class="col-lg-12">
-								<!-- <h1 class="text-primary">UE Table</h1> -->
+								<h1 class="text-primary">IMSI queries</h1>
 							</div><!--end .col -->
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										Select a start and end date to list all IMSI numbers affected for that time period
+										User Story 6
 									</p>
 								</article>
 							</div><!--end .col -->
@@ -309,73 +226,40 @@
 
 						<!-- BEGIN STRIPED TABLE -->
 						<div class="row">
+
+						
 							<div class="col-lg-12">
 								<h4>Striped table</h4>
+
 							</div><!--end .col -->
-							<!-- <div class="col-lg-3 col-md-4">
+							<div class="col-lg-3 col-md-4">
 								<article class="margin-bottom-xxl">
 									<p>
-				
+										Use <code>.table-striped</code> to add zebra-striping to any table row within the <code>&lt;tbody&gt;</code>.
 									</p>
 								</article>
-							</div>end .col -->
+							</div><!--end .col -->
 							<!-- <div class="col-lg-offset-1 col-md-8"> -->
-								<div class="card"> 
+
+								<!-- <body onload="load()"> -->
+
+								<div  class="card"> 
+
+									<select id="imsiNumber" onchange="update()">
+										<option>IMSI Number</option>
+									</select>
+
 									<div class="card-body">
-										
-										 select start date :  	
-	<div id="datetimepicker"  class="input-append date">
-	<input type="text" id="startDate" name="startDate"></input>
-
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-
-    </div>
-    
-    <p></p>
-
-	select end date :
-	<div id="datetimepicker2" class="input-append date">
-	<input type="text" id="endDate" name="endDate"></input>
-
-      <span class="add-on">
-        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-      </span>
-    </div>
-
-
-
-<button onclick="submit()" id="submit" >Submit </button>
-										
-										
-	<table id="resultTable" class="table table-striped">
-
-
-	<thead>
-	<tr>
-		<th>Imsi</th>
-		
-	</tr>
-	</thead>
-	
-	<tbody id="resultTableBody">
-	
-	</tbody>
-</table>
-										<!-- <table class="table table-striped no-margin" id="table">
+										<table class="table table-striped no-margin" id="table">
 											<thead>
-												<th>TAC</th>
-												<th>Vendor Name</th>
-												<th>Model</th>
-												<th>UE Type</th>
-												<th>Operating System</th>
-												<th>Input Mode</th>
+												<th>CAUSE ID</th>
+												<th>DESCRIPTION</th>
+												
 											</thead>
 
 											<tbody id="table-body">
 											</tbody>
-										</table> -->
+										</table>
 									</div><!--end .card-body -->
 								</div><!--end .card -->
 								
@@ -383,6 +267,8 @@
 						</div><!--end .row -->
 						<!-- END STRIPED TABLE -->	
 
+
+						
 
 
 						<!-- !!!!!!!!!!!!!!!!!!!TABLE END!!!!!!!!!!!!!!!!!!!!! -->
@@ -392,166 +278,89 @@
 
 
 			<!-- BEGIN MENUBAR-->
-        <div id="menubar" class="menubar-inverse ">
-          <div class="menubar-fixed-panel">
-            <div>
-              <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                <i class="fa fa-bars"></i>
-              </a>
-            </div>
-            <div class="expanded">
-              <a href="dashboard.html">
-                <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
-              </a>
-            </div>
-          </div>
-          <div class="menubar-scroll-panel">
+			<div id="menubar" class="menubar-inverse ">
+			<div class="menubar-fixed-panel">
+				<div>
+					<a class="btn btn-icon-toggle btn-default menubar-toggle"
+						data-toggle="menubar" href="javascript:void(0);"> <i
+						class="fa fa-bars"></i>
+					</a>
+				</div>
+				<div class="expanded">
+					<a href="support_dashboard.html"> <span
+						class="text-lg text-bold text-primary ">The
+							RAMones&nbsp;ADMIN</span>
+					</a>
+				</div>
+			</div>
+			<div class="menubar-scroll-panel">
 
-            <!-- BEGIN MAIN MENU -->
-            <ul id="main-menu" class="gui-controls">
+				<!-- BEGIN MAIN MENU -->
+				<ul id="main-menu" class="gui-controls">
 
-             
-
-              <!-- BEGIN EMAIL -->
-              <li class="gui-folder">
-                <li>
-                  <a href="dashboard.html" class="active">
-                    <div class="gui-icon"><i class="md md-home"></i></div>
-                    <span class="title">Dashboard</span>
-                  </a>
-                </li><!--end /menu-li -->
-                <!-- END DASHBOARD -->
-
-                
-
-                
-
-                <!-- BEGIN TABLES -->
-                <li class="gui-folder">
-                  <a>
-                    <div class="gui-icon"><i class="fa fa-table"></i></div>
-                    <span class="title">Data</span>
-                  </a>
-                  <!--start submenu -->
-                  <ul>
-                    <li><a href="uetable.html" ><span class="title">UE Table</span></a></li>
-                
-                <li><a href="eventcause.html" ><span class="title">Event Cause Table</span></a></li>
-                  <li><a href="failuredisplay.html" ><span class="title">Failure Class Table</span></a></li>
-                    <li><a href="networkdisplay.html" ><span class="title">Network Table</span></a></li>
-                    
-                  </ul><!--end /submenu -->
-                </li><!--end /menu-li -->
-                <!-- END TABLES -->
-
-                <!-- BEGIN FORMS -->
-                <li class="gui-folder">
-                  <a>
-                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                    <span class="title">User accounts</span>
-                  </a>
-                  <!--start submenu -->
-                  <ul>
-                   <li><a href="addUser.html" ><span class="title">Add new user</span></a></li>
-                   <li><a href="users.html" ><span class="title">List of all users</span></a></li>
-                   
-                 </ul><!--end /submenu -->
-               </li><!--end /menu-li -->
-               <!-- END FORMS -->
-
-               <!-- BEGIN PAGES -->
-               <!-- BEGIN PAGES -->
-               <li class="gui-folder">
-                <a>
-                  <div class="gui-icon"><i class="md md-computer"></i></div>
-                  <span class="title">Queries</span>
-                </a>
-                <!--start submenu -->
-                <ul id="userFunctionList">
-                  
-                  
-                  
-                  
-                    <!--  <li><a href="eventid_causeid.html" ><span class="title">Affected IMSIs</span></a></li>
-                  <li><a href="callFailuresDuration.html" ><span class="title">Call Failures Duration</span></a></li>
-                  <li><a href="callFailuresByIMSI.html" ><span class="title">Call Failures By IMSI</span></a></li>
-                  <li><a href="callTotalDurationByIMSI.html" ><span class="title">Call Total Duration By IMSI</span></a></li>
-                  <li><a href="user7.html" ><span class="title">IMSI over given time period</span></a></li>
-                  <li><a href="us10.html" ><span class="title">Call failure by Phone Model</span></a></li>
-                 
-                 
+					<!-- BEGIN DASHBOARD -->
+					<li><a href="rep_dashboard.html" class="active">
+							<div class="gui-icon">
+								<i class="md md-home"></i>
+							</div> <span class="title">Dashboard</span>
+					</a></li>
+					<!--end /menu-li -->
+					<!-- END DASHBOARD -->
 
 
-                  <li><a href="eventid_causeid.html" ><span class="title">Gerry</span></a></li>
-                  <li><a href="html/pages/blank.html" ><span class="title">Blank page</span></a></li> -->
-                </ul><!--end /submenu -->
-              </li><!--end /menu-li -->
-              <!-- END FORMS -->
 
-              
 
-              <!-- BEGIN LEVELS -->
-              <li class="gui-folder">
-                <a>
-                  <div class="gui-icon"><i class="fa fa-folder-open fa-fw"></i></div>
-                  <span class="title">Menu levels demo</span>
-                </a>
-                <!--start submenu -->
-                <ul>
-                  <li><a href="#"><span class="title">Item 1</span></a></li>
-                  <li><a href="#"><span class="title">Item 1</span></a></li>
-                  <li class="gui-folder">
-                    <a href="javascript:void(0);">
-                      <span class="title">Open level 2</span>
-                    </a>
-                    <!--start submenu -->
-                    <ul>
-                      <li><a href="#"><span class="title">Item 2</span></a></li>
-                      <li class="gui-folder">
-                        <a href="javascript:void(0);">
-                          <span class="title">Open level 3</span>
-                        </a>
-                        <!--start submenu -->
-                        <ul>
-                          <li><a href="#"><span class="title">Item 3</span></a></li>
-                          <li><a href="#"><span class="title">Item 3</span></a></li>
-                          <li class="gui-folder">
-                            <a href="javascript:void(0);">
-                              <span class="title">Open level 4</span>
-                            </a>
-                            <!--start submenu -->
-                            <ul>
-                              <li><a href="#"><span class="title">Item 4</span></a></li>
-                              <li class="gui-folder">
-                                <a href="javascript:void(0);">
-                                  <span class="title">Open level 5</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                  <li><a href="#"><span class="title">Item 5</span></a></li>
-                                  <li><a href="#"><span class="title">Item 5</span></a></li>
-                                </ul><!--end /submenu -->
-                              </li><!--end /submenu-li -->
-                            </ul><!--end /submenu -->
-                          </li><!--end /submenu-li -->
-                        </ul><!--end /submenu -->
-                      </li><!--end /submenu-li -->
-                    </ul><!--end /submenu -->
-                  </li><!--end /submenu-li -->
-                </ul><!--end /submenu -->
-              </li><!--end /menu-li -->
-              <!-- END LEVELS -->
-            </ul><!--end .main-menu -->
-            <!-- END MAIN MENU -->
 
-            <div class="menubar-foot-panel">
-              <small class="no-linebreak hidden-folded">
-                <span class="opacity-75">Copyright &copy; 2014</span> <strong>CodeCovers</strong>
-              </small>
-            </div>
-          </div><!--end .menubar-scroll-panel-->
-        </div><!--end #menubar-->
-        <!-- END MENUBAR -->
+					<!-- BEGIN TABLES -->
+
+
+					<!-- BEGIN PAGES -->
+					<!-- BEGIN PAGES -->
+					<li class="gui-folder"><a>
+							<div class="gui-icon">
+								<i class="md md-computer"></i>
+							</div> <span class="title">Queries</span>
+					</a> <!--start submenu -->
+						<ul>
+
+
+
+
+
+
+							<li><a href="rep_callFailuresByIMSI.html"><span
+									class="title">Call Failures By IMSI</span></a></li>
+							<li><a href="rep_eventid_causeid.html"><span class="title">Affected
+										IMSIs</span></a></li>
+
+
+
+
+
+						</ul> <!--end /submenu --></li>
+					<!--end /menu-li -->
+					<!-- END FORMS -->
+
+
+
+					<!-- BEGIN LEVELS -->
+
+					<!-- END LEVELS -->
+
+				</ul>
+				<!--end .main-menu -->
+				<!-- END MAIN MENU -->
+
+				<div class="menubar-foot-panel">
+					<small class="no-linebreak hidden-folded"> <span
+						class="opacity-75">Copyright &copy; 2014</span> <strong>CodeCovers</strong>
+					</small>
+				</div>
+			</div>
+			<!--end .menubar-scroll-panel-->
+		</div>
+		<!--end #menubar-->
+			<!-- END MENUBAR -->
 
 			<!-- BEGIN OFFCANVAS RIGHT -->
 			<div class="offcanvas">
@@ -814,39 +623,10 @@
 		<script src="assets/js/core/source/AppNavSearch.js"></script>
 		<script src="assets/js/core/source/AppVendor.js"></script>
 		<script src="assets/js/core/demo/Demo.js"></script>
-		<script src="js/dashboard.js"></script>
-		<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="js/user7.js"></script>
-    
-  
-    <script type="text/javascript"
-		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-     </script>  
-    <script type="text/javascript"
-		src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
-     </script> 
-    <script type="text/javascript"
-		src="js/bootstrap-datetimepicker.min.js">
-     </script> 
-    <script type="text/javascript"
-		src="js/locales/bootstrap-datetimepicker.uk.js">
-     </script> 
-    <script type="text/javascript">
-       $('#datetimepicker').datetimepicker({
-    	   format: 'dd/MM/yyyy hh:mm:ss',
-         language: 'en'
-       });
-     </script> 
-<script type="text/javascript">
-       $('#datetimepicker2').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
-         language: 'en'
-       });
-       </script>
-		
-		
+		<script src="js/net_us6.js"></script>
+
 		<!-- END JAVASCRIPT -->
 
 	</body>
 </html>
+

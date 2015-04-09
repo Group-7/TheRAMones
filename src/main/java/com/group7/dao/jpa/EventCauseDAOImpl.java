@@ -26,7 +26,7 @@ public class EventCauseDAOImpl implements EventCauseDAO{
 
 	
 	public Collection<EventCause> getAllEventCauses() {
-			Query query = em.createQuery("from EventCause");
+			Query query = em.createQuery("Select ec from EventCause ec");
 			return query.getResultList();
 		}
 		

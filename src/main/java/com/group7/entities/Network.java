@@ -1,6 +1,8 @@
 package com.group7.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -40,6 +43,9 @@ public class Network implements Serializable{
 	@Column(name = "Operator")
 	private String operator;
 	
+	@OneToMany
+	private List<BaseData> networkBD = new ArrayList<BaseData>();
+	
 	//Getters and setters
 	public int getMcc() {
 		return mcc;
@@ -65,6 +71,13 @@ public class Network implements Serializable{
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
+	public List<BaseData> getNetworkBD() {
+		return networkBD;
+	}
+	public void setNetworkBD(List<BaseData> networkBD) {
+		this.networkBD = networkBD;
+	}
+	
 	
 	
 }

@@ -14,10 +14,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import jxl.read.biff.BiffException;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -26,6 +27,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
@@ -62,6 +64,13 @@ public class BaseDataREST {
 	public Collection<Object> getAllEventIdAndCauseIdREST(@QueryParam("imsi") BigInteger Imsi)  {
 		return service.getAllEventIdAndCauseId(Imsi);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/causeid_per_imsi")
+	public Collection<Object> getAllCauseIdAndDescREST(@QueryParam("imsi") BigInteger Imsi)  {
+		return service.getAllCauseCodeAndDescByIMSI(Imsi);
+	}
 
 	@POST
 	@Path("/import")
@@ -73,19 +82,22 @@ public class BaseDataREST {
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
 		Collection<Failure> failureData = bdxr.readFailureClassTable();
 		
+		
 		//Filling the cache
 		bvd.setEventCauses(eventCauseData);
 		bvd.setFailures(failureData);
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
 
-		Collection<BaseData> bd = bdxr.readExcelFile();
-		//Filling the Datasbase
+		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId());
+		Collection<BaseDataError> bderrors = bdxr.getBaseDataErrorList();
+		//Filling the Database
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
 		service.putFailureData(failureData);
 		service.putData(bd);
+		service.putErrorData(bderrors);
 		
 		//Should I make these Collection null now??
 		networkData = null;
@@ -93,6 +105,7 @@ public class BaseDataREST {
 		eventCauseData = null;
 		failureData = null;
 		bd = null;
+		bderrors = null;
 	}
 
 	@POST
@@ -166,7 +179,7 @@ public class BaseDataREST {
 	@Path("/tacFailures")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Long> getTotalFailuresOfSpecificPhone(
-			@QueryParam("TAC") BigInteger tacCode,
+			@QueryParam("TAC") int tacCode,
 			//@QueryParam("dates") String dates){
 			@QueryParam("startDate") String startDate,
 			@QueryParam("endDate") String endDate){
@@ -237,5 +250,27 @@ public class BaseDataREST {
 	public Collection<String> getAllDistictPhoneModels(){
 		return service.getAllDistinctPhoneModels();
 	}
+	
+	@GET
+	@Path("/toptenimsi")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> getTopTenImsiDuringPeriod(@QueryParam("startDate") String startDate, @QueryParam("endDate")String endDate){
+		return service.getTopTenImsiDuringPeriod(startDate, endDate);
+	}
+	
+	@GET
+	@Path("/imsifailureclass")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(@QueryParam("failure")String failureClass){
+		return service.imsiEffectedByAFailureCauseClass(failureClass);
+	}
 
+	@GET
+	@Path("/failuredropdown")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<String> getFailureDescriptionForDropDown(){
+		return service.getFailureDescriptionForDropDown();
+		
+	}
+	
 }

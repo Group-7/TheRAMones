@@ -11,6 +11,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -25,18 +26,23 @@ public interface BaseDataDAO {
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd);
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger Imsi);
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger Imsi);
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
 	public void putNetworkData(Collection<Network> networkData);
 	public void putUEData(Collection<UE> ueData);
 	public void putEventCauseData(Collection<EventCause> eventCauseData);
 	public void putFailureData(Collection<Failure> failureData);
-	public Collection<Long> getTotalFailuresOfSpecificPhone(BigInteger phoneType, String startDate, String endDate);
+	public Collection<Long> getTotalFailuresOfSpecificPhone(int phoneType, String startDate, String endDate);
 	public Collection<Long> getTotalFailuresOfSpecificIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllCallFailuresAndTotalDurationPerIMSI(BigInteger imsi, String startDate, String endDate);
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
-
+	public long getLastRowId();
+	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate, String endDate);
+	Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass);
+	Collection<String>getFailureDescriptionForDropDown();
+	public void putErrorData(Collection<BaseDataError> bderrors);
 
 }

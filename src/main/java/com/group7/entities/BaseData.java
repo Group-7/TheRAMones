@@ -2,15 +2,18 @@ package com.group7.entities;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
  *
@@ -32,8 +35,8 @@ public class BaseData {
 	
 	@Id
 	@Column(name="Base_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	//@GeneratedValue(strategy=GenerationType.TABLE)
+	private long id;
 
 	//@Id
 	@Column(name="DateTime")
@@ -42,29 +45,7 @@ public class BaseData {
 	//@Id
 	@Column(name="Cell_ID")
 	private Integer cellid;
-	
-	//@Id
-	@Column(name="Cause_Code")
-	private Integer causeCode;
-	
-	//@Id
-	@Column(name="EventID")
-	private Integer eventId;
-
-	
-	@Column(name="Failure_Class")
-	private Integer failureClass;
-	
-
-	@Column(name="TAC")
-	private BigInteger tac;
-	
-	
-	@Column(name="MCC")
-	private Integer mcc;
-	
-	@Column(name="MNC")
-	private Integer mnc;
+		
 	
 	@Column(name="Duration")
 	private int duration;
@@ -85,6 +66,65 @@ public class BaseData {
 	@Column(name="Hier321_ID")
 	private String heir321ID;
 	
+	//Joins
+	@ManyToOne
+	@JoinColumn(name="Failure_Class")
+	@JsonBackReference
+	private Failure failureMap;
+	
+	@ManyToOne
+	@JoinColumn(name="TAC")
+	@JsonBackReference
+	private UE ueMap;
+	
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="Cause_Code",referencedColumnName="Cause_Code"),
+		@JoinColumn(name="EventID",referencedColumnName="EventID")
+	})
+	private EventCause eventCauseMap;
+	
+	@ManyToOne
+	@JoinColumns({
+		@JoinColumn(name="MCC",referencedColumnName="MCC"),
+		@JoinColumn(name="MNC",referencedColumnName="MNC")
+	})
+	private Network networkMap;
+	
+	////
+	
+	public BaseData(){}
+	
+	
+	public BaseData(long id, Timestamp dateAndTime, Integer cellid,
+			int duration, String neVersion, BigInteger imsi, String heir3id,
+			String heir32id, String heir321id, int failure, int tac,
+			int eventID,int causeCodeID, int mcc, int mnc) {
+		super();
+		this.id = id;
+		this.dateAndTime = dateAndTime;
+		this.cellid = cellid;
+		this.duration = duration;
+		this.neVersion = neVersion;
+		this.imsi = imsi;
+		heir3ID = heir3id;
+		heir32ID = heir32id;
+		heir321ID = heir321id;
+		this.failureMap = new Failure();
+		failureMap.setFailureCode(failure);
+		this.ueMap = new UE();
+		this.ueMap.setTac(tac);
+		this.eventCauseMap = new EventCause();
+		this.eventCauseMap.setCauseCode(causeCodeID);
+		this.eventCauseMap.setEventId(eventID);
+		this.networkMap = new Network();
+		this.networkMap.setMcc(mcc);
+		this.networkMap.setMnc(mnc);
+	}
+	
+	
+
+
 	public Timestamp getDateAndTime() {
 		return dateAndTime;
 	}
@@ -101,58 +141,36 @@ public class BaseData {
 		this.cellid = cellid;
 	}
 
-	public Integer getCauseCode() {
-		return causeCode;
-	}
-
-	public void setCauseCode(Integer causeCode) {
-		this.causeCode = causeCode;
-	}
-
-	public Integer getEventId() {
-		return eventId;
-	}
-
-	public void setEventId(Integer eventId) {
-		this.eventId = eventId;
-	}
-
-	public Integer getFailureClass() {
-		return failureClass;
-	}
-
-	public void setFailureClass(Integer failureClass) {
-		this.failureClass = failureClass;
-	}
 	
-	public int getId() {
+	
+	public EventCause getEventCauseMap() {
+		return eventCauseMap;
+	}
+
+	public void setEventCauseMap(EventCause eventCauseMap) {
+		this.eventCauseMap = eventCauseMap;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Integer getMcc() {
-		return mcc;
-	}
-
-	public void setMcc(Integer mcc) {
-		this.mcc = mcc;
-	}
-
-	public Integer getMnc() {
-		return mnc;
-	}
-
-	public void setMnc(Integer mnc) {
-		this.mnc = mnc;
 	}
 
 	public int getDuration() {
 		return duration;
 	}
 
+
+	public Network getNetworkMap() {
+		return networkMap;
+	}
+
+	public void setNetworkMap(Network networkMap) {
+		this.networkMap = networkMap;
+	}
 
 	public String getNeVersion() {
 		return neVersion;
@@ -187,13 +205,6 @@ public class BaseData {
 		heir321ID = heir321id;
 	}
 
-	public BigInteger getTac() {
-		return tac;
-	}
-
-	public void setTac(BigInteger tac) {
-		this.tac = tac;
-	}
 
 	public BigInteger getImsi() {
 		return imsi;
@@ -207,119 +218,24 @@ public class BaseData {
 		this.duration = duration;
 	}
 
-
-
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((causeCode == null) ? 0 : causeCode.hashCode());
-		result = prime * result + ((cellid == null) ? 0 : cellid.hashCode());
-		result = prime * result
-				+ ((dateAndTime == null) ? 0 : dateAndTime.hashCode());
-		result = prime * result + duration;
-		result = prime * result + ((eventId == null) ? 0 : eventId.hashCode());
-		result = prime * result
-				+ ((failureClass == null) ? 0 : failureClass.hashCode());
-		result = prime * result
-				+ ((heir321ID == null) ? 0 : heir321ID.hashCode());
-		result = prime * result
-				+ ((heir32ID == null) ? 0 : heir32ID.hashCode());
-		result = prime * result + ((heir3ID == null) ? 0 : heir3ID.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((imsi == null) ? 0 : imsi.hashCode());
-		result = prime * result + ((mcc == null) ? 0 : mcc.hashCode());
-		result = prime * result + ((mnc == null) ? 0 : mnc.hashCode());
-		result = prime * result
-				+ ((neVersion == null) ? 0 : neVersion.hashCode());
-		result = prime * result + ((tac == null) ? 0 : tac.hashCode());
-		return result;
+	public UE getUeMap() {
+		return ueMap;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BaseData other = (BaseData) obj;
-		if (causeCode == null) {
-			if (other.causeCode != null)
-				return false;
-		} else if (!causeCode.equals(other.causeCode))
-			return false;
-		if (cellid == null) {
-			if (other.cellid != null)
-				return false;
-		} else if (!cellid.equals(other.cellid))
-			return false;
-		if (dateAndTime == null) {
-			if (other.dateAndTime != null)
-				return false;
-		} else if (!dateAndTime.equals(other.dateAndTime))
-			return false;
-		if (duration != other.duration)
-			return false;
-		if (eventId == null) {
-			if (other.eventId != null)
-				return false;
-		} else if (!eventId.equals(other.eventId))
-			return false;
-		if (failureClass == null) {
-			if (other.failureClass != null)
-				return false;
-		} else if (!failureClass.equals(other.failureClass))
-			return false;
-		if (heir321ID == null) {
-			if (other.heir321ID != null)
-				return false;
-		} else if (!heir321ID.equals(other.heir321ID))
-			return false;
-		if (heir32ID == null) {
-			if (other.heir32ID != null)
-				return false;
-		} else if (!heir32ID.equals(other.heir32ID))
-			return false;
-		if (heir3ID == null) {
-			if (other.heir3ID != null)
-				return false;
-		} else if (!heir3ID.equals(other.heir3ID))
-			return false;
-		if (id != other.id)
-			return false;
-		if (imsi == null) {
-			if (other.imsi != null)
-				return false;
-		} else if (!imsi.equals(other.imsi))
-			return false;
-		if (mcc == null) {
-			if (other.mcc != null)
-				return false;
-		} else if (!mcc.equals(other.mcc))
-			return false;
-		if (mnc == null) {
-			if (other.mnc != null)
-				return false;
-		} else if (!mnc.equals(other.mnc))
-			return false;
-		if (neVersion == null) {
-			if (other.neVersion != null)
-				return false;
-		} else if (!neVersion.equals(other.neVersion))
-			return false;
-		if (tac == null) {
-			if (other.tac != null)
-				return false;
-		} else if (!tac.equals(other.tac))
-			return false;
-		return true;
+	public void setUeMap(UE ueMap) {
+		this.ueMap = ueMap;
 	}
 
-	public BaseData deepCopy(){
+	public Failure getFailureMap() {
+		return failureMap;
+	}
+
+	public void setFailureMap(Failure failureMap) {
+		this.failureMap = failureMap;
+	}
+
+	/*public BaseData deepCopy(){
 		
 		
 		BaseData base=new BaseData();
@@ -327,7 +243,7 @@ public class BaseData {
 		
 		base.setDateAndTime(this.getDateAndTime());
 		base.setEventId(this.getEventId());
-		base.setFailureClass(this.getFailureClass());
+		//base.setFailureClass(this.getFailureClass());
 		base.setTac(this.getTac());
 		base.setMcc(this.getMcc());
 		base.setMnc(this.getMnc());
@@ -344,6 +260,6 @@ public class BaseData {
 		
 		return base;
 		
-	}
+	}*/
 	
 }
