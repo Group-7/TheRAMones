@@ -221,7 +221,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	}
 
 	public Collection<BigInteger> getAllPhoneTypes() {
-		return em.createQuery("SELECT DISTINCT bd.tac from BaseData bd").getResultList();
+		return em.createQuery("SELECT DISTINCT bd.ueMap.tac from BaseData bd").getResultList();
 	}
 
 	public Date dateFormatter(String date) {
@@ -285,7 +285,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger imsi) {
 		return em
 				.createQuery(
-						"SELECT DISTINCT bd.causeCode, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi")
+						"SELECT DISTINCT bd.eventCauseMap.causeCode, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();
 	}
 	
