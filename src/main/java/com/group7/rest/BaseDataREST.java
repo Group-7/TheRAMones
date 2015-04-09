@@ -14,10 +14,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import jxl.read.biff.BiffException;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -159,6 +160,16 @@ public class BaseDataREST {
 		String[] splitDates=dates.split(",",-1);
 		
 		return service.getImsiFailureOverTime(splitDates[0],splitDates[1]);
+	}
+	
+	@GET
+	@Path("/us11")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getTopTen(@QueryParam("dates") String dates){
+		
+		String[] splitDates=dates.split(",",-1);
+		
+		return service.getTopTen(splitDates[0],splitDates[1]);
 	}
 
 	

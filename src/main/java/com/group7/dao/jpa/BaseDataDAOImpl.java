@@ -21,6 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
 import com.group7.dao.BaseDataDAO;
@@ -268,6 +269,18 @@ public Collection<String> getAllDistinctPhoneModels() {
 public Collection<Object> us13() {
 	// TODO Auto-generated method stub
 	return em.createNativeQuery("select count(*) as occurences, b.Cell_ID, n.Country, n.Operator from Base_Data b, Network n where b.MCC = n.MCC AND b.MNC = n.MNC group by b.MCC,b.MNC,b.Cell_ID order by occurences desc limit 10").getResultList();
+}
+
+@Override
+public Collection<Object> getTopTen(String from, String to) {
+	// TODO Auto-generated method stub
+	Timestamp start = new Timestamp(dateFormatter(from).getTime());
+	Timestamp end = new Timestamp(dateFormatter(to).getTime());
+	Query q = em.createNativeQuery("select count(*) as occurences, b.Cell_ID, n.Country, n.Operator from Base_Data b, Network n where b.MCC = n.MCC AND b.MNC = n.MNC AND + b.DateTime between ? and ? group by b.MCC,b.MNC,b.Cell_ID order by occurences desc limit 10");
+	q.setParameter(1, start);
+	q.setParameter(2, end);
+	return q.getResultList();
+	
 }
 
 }

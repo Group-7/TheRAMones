@@ -140,5 +140,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		// TODO Auto-generated method stub
 		return dao.us13();
 	}
+
+	@Override
+	public Collection<Object> getTopTen(String from, String to) {
+		// TODO Auto-generated method stub
+		return dao.getTopTen(from, to);
+	}
 }
 

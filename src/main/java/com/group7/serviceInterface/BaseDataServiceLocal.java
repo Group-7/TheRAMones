@@ -46,6 +46,7 @@ public interface BaseDataServiceLocal {
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
 	public Collection<Object> getus13();
+	public Collection<Object> getTopTen(String string, String string2);
 
 
 

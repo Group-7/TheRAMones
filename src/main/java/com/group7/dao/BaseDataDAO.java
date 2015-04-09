@@ -39,6 +39,7 @@ public interface BaseDataDAO {
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
 	public Collection<Object> us13();
+	public Collection<Object> getTopTen(String from, String to);
 
 
 }
