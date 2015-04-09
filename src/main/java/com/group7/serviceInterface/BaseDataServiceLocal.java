@@ -30,6 +30,7 @@ public interface BaseDataServiceLocal {
 	public void putData(Collection<BaseData> bd);
 
 	public Collection<Object> getAllEventIdAndCauseId(BigInteger Imsi);
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger Imsi);
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
 	public void putNetworkData(Collection<Network> networkList);

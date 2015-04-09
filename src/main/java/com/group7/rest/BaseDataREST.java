@@ -77,6 +77,13 @@ public class BaseDataREST {
 			@QueryParam("imsi") BigInteger Imsi) {
 		return service.getAllEventIdAndCauseId(Imsi);
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/causeid_per_imsi")
+	public Collection<Object> getAllCauseIdAndDescREST(@QueryParam("imsi") BigInteger Imsi)  {
+		return service.getAllCauseCodeAndDescByIMSI(Imsi);
+	}
 
 	@POST
 	@Path("/import")
