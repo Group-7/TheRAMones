@@ -95,8 +95,8 @@ public class BaseDataREST {
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
 
-		Collection<BaseData> bd = bdxr.readExcelFile();
-		// Filling the Datasbase
+		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId());
+		//Filling the Database
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
@@ -255,78 +255,14 @@ public class BaseDataREST {
 		return service.getAllDistinctPhoneModels();
 	}
 
-	@Asynchronous
-	@PostConstruct
-	public void run() throws BiffException, IOException {
-		// TODO Auto-generated method stub
+	
+
+	@GET
+	@Path("/failuredropdown")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<String> getFailureDescriptionForDropDown(){
+		return service.getFailureDescriptionForDropDown();
 		
-		   
-		    try {
-		    	watcher = FileSystems.getDefault().newWatchService();
-			    dir = Paths.get(folder);
-				dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		     
-		    System.out.println("Watch Service registered for dir: " + dir.getFileName());
-		     
-		    while (true) {
-		        //BaseDataREST.poll(watcher);
-		    	WatchKey key;
-				try {
-					key = watcher.take();
-				} catch (InterruptedException ex) {
-					return;
-				}
-
-				for (WatchEvent<?> event : key.pollEvents()) {
-					WatchEvent.Kind<?> kind = event.kind();
-
-					@SuppressWarnings("unchecked")
-					WatchEvent<java.nio.file.Path> ev = (WatchEvent<java.nio.file.Path>) event;
-					java.nio.file.Path fileName = ev.context();
-					
-					System.out
-							.println("Kind" + kind.name() + ": fileName :" + fileName);
-					System.out.println("This is the toString" + fileName.toString());
-
-					System.out.println("Am i printing");
-					if (fileName.toString().equals(
-							"DIT Group Project - Sample Dataset.xls")) {
-						BaseDataValidation bvd = BaseDataValidation.getInstance();
-						BaseDataExcelRead bdxr = new BaseDataExcelRead(
-								"/home/niall/sample_dataset.xls");
-						Collection<Network> networkData = bdxr.readNetworkTable();
-						Collection<UE> ueData = bdxr.readUETable();
-						Collection<EventCause> eventCauseData = bdxr
-								.readEventCauseTable();
-						Collection<Failure> failureData = bdxr.readFailureClassTable();
-
-						// Filling the cache
-						bvd.setEventCauses(eventCauseData);
-						bvd.setFailures(failureData);
-						bvd.setNetworks(networkData);
-						bvd.setUeObjects(ueData);
-
-						Collection<BaseData> bd = bdxr.readExcelFile();
-						// Filling the Datasbase
-						service.putNetworkData(networkData);
-						service.putUEData(ueData);
-						service.putEventCauseData(eventCauseData);
-						service.putFailureData(failureData);
-						service.putData(bd);
-
-						// Should I make these Collection null now??
-						networkData = null;
-						ueData = null;
-						eventCauseData = null;
-						failureData = null;
-						bd = null;
-					}
-		    }
-		   }
 	}
-
+	
 }

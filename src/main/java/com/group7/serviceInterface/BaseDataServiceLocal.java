@@ -5,8 +5,6 @@ import java.util.Collection;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-
-
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -45,6 +43,12 @@ public interface BaseDataServiceLocal {
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
+	public long getLastRowId();
+	/**
+	 */
+	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate, String endDate);
+	Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass);
+	Collection<String>getFailureDescriptionForDropDown();
 
 
 

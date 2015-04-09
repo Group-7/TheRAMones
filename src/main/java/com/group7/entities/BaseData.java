@@ -33,8 +33,8 @@ public class BaseData {
 	
 	@Id
 	@Column(name="Base_ID")
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	//@GeneratedValue(strategy=GenerationType.TABLE)
+	private long id;
 
 	//@Id
 	@Column(name="DateTime")
@@ -92,11 +92,12 @@ public class BaseData {
 	public BaseData(){}
 	
 	
-	public BaseData(Timestamp dateAndTime, Integer cellid,
+	public BaseData(long id, Timestamp dateAndTime, Integer cellid,
 			int duration, String neVersion, BigInteger imsi, String heir3id,
 			String heir32id, String heir321id, int failure, int tac,
 			int eventID,int causeCodeID, int mcc, int mnc) {
 		super();
+		this.id = id;
 		this.dateAndTime = dateAndTime;
 		this.cellid = cellid;
 		this.duration = duration;
@@ -116,6 +117,8 @@ public class BaseData {
 		this.networkMap.setMcc(mcc);
 		this.networkMap.setMnc(mnc);
 	}
+	
+	
 
 
 	public Timestamp getDateAndTime() {
@@ -144,11 +147,11 @@ public class BaseData {
 		this.eventCauseMap = eventCauseMap;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
