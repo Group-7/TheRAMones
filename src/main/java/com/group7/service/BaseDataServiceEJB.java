@@ -134,5 +134,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	public Collection<String> getAllDistinctPhoneModels(){
 		return dao.getAllDistinctPhoneModels();
 	}
+
+	@Override
+	public Collection<Object> getus13() {
+		// TODO Auto-generated method stub
+		return dao.us13();
+	}
 }
 

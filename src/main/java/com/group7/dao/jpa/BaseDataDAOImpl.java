@@ -264,6 +264,12 @@ public Collection<String> getAllDistinctPhoneModels() {
 			.getResultList();
 }
 
+@Override
+public Collection<Object> us13() {
+	// TODO Auto-generated method stub
+	return em.createNativeQuery("select count(*) as occurences, b.Cell_ID, n.Country, n.Operator from Base_Data b, Network n where b.MCC = n.MCC AND b.MNC = n.MNC group by b.MCC,b.MNC,b.Cell_ID order by occurences desc limit 10").getResultList();
+}
+
 }
  
 

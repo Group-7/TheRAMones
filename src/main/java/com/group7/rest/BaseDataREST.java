@@ -228,11 +228,21 @@ public class BaseDataREST {
 	}
 	
 	@GET
+	@Path("/us13")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Object> getUS13()
+	{
+		return service.getus13();
+	}
+	
+	@GET
 	@Path("/uniqueTAC")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<BigInteger> getAllPhoneTypes(){
 		return service.getAllPhoneTypes();
 	}
+	
+	
 	
 	/**
 	 * returns all unique model numbers.

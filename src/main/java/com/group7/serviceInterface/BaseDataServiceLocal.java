@@ -5,8 +5,6 @@ import java.util.Collection;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
-
-
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -47,6 +45,7 @@ public interface BaseDataServiceLocal {
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
+	public Collection<Object> getus13();
 
 
 
