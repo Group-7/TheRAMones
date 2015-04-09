@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -154,6 +155,12 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	@Override
 	public Collection<String> getFailureDescriptionForDropDown() {
 		return dao.getFailureDescriptionForDropDown();
+	}
+
+	@Override
+	public void putErrorData(Collection<BaseDataError> bderrors) {
+		dao.putErrorData(bderrors);
+		
 	}
 }
 

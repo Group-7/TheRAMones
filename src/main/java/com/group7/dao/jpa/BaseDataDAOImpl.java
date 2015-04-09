@@ -25,6 +25,7 @@ import javax.persistence.TemporalType;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -287,6 +288,18 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				.createQuery(
 						"SELECT DISTINCT bd.eventCauseMap.causeCode, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();
+	}
+
+	@Override
+	public void putErrorData(Collection<BaseDataError> bderrors) {
+		int inserted=0;
+		for (BaseDataError basedata : bderrors) {
+			
+			System.out.println("Errors inserting: " + inserted);
+			em.persist(basedata);
+			inserted++;
+		}
+		
 	}
 	
 

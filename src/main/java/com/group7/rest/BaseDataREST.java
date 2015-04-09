@@ -27,6 +27,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 import com.group7.dao.BaseDataDAO;
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
@@ -81,6 +82,7 @@ public class BaseDataREST {
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
 		Collection<Failure> failureData = bdxr.readFailureClassTable();
 		
+		
 		//Filling the cache
 		bvd.setEventCauses(eventCauseData);
 		bvd.setFailures(failureData);
@@ -88,12 +90,14 @@ public class BaseDataREST {
 		bvd.setUeObjects(ueData);
 
 		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId());
+		Collection<BaseDataError> bderrors = bdxr.getBaseDataErrorList();
 		//Filling the Database
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
 		service.putFailureData(failureData);
 		service.putData(bd);
+		service.putErrorData(bderrors);
 		
 		//Should I make these Collection null now??
 		networkData = null;
@@ -101,6 +105,7 @@ public class BaseDataREST {
 		eventCauseData = null;
 		failureData = null;
 		bd = null;
+		bderrors = null;
 	}
 
 	@POST
