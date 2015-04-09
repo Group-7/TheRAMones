@@ -280,6 +280,14 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		Query q = em.createQuery("Select f.description from Failure_Class_Table f");
 		return q.getResultList();
 	}
+
+	//TODO
+	public Collection<Object> getAllCauseCodeAndDescByIMSI(BigInteger imsi) {
+		return em
+				.createQuery(
+						"SELECT DISTINCT bd.causeCode, ec.description FROM EventCause ec, BaseData bd WHERE bd.causeCode = ec.causeCode AND bd.eventId = ec.eventId AND bd.imsi = :imsi")
+				.setParameter("imsi", imsi).getResultList();
+	}
 	
 
 }
