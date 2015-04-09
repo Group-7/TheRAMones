@@ -39,7 +39,6 @@ import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
 import com.group7.entities.Network;
 import com.group7.entities.UE;
-import com.group7.importBaseData.AutoImporter;
 import com.group7.importBaseData.BaseDataExcelRead;
 import com.group7.importBaseData.BaseDataValidation;
 import com.group7.serviceInterface.BaseDataServiceLocal;
