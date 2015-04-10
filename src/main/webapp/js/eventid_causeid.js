@@ -1,6 +1,6 @@
 
 function load() {
-
+	loadSideBar();
 	$.ajax({
 		type : 'GET',
 		url : 'rest/baseData/uniqueIMSI',

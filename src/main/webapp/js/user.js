@@ -3,8 +3,11 @@
 	getAllUsers();
 
 });*/
+window.onload = function() {
 
-getAllUsers();
+	getAllUsers();
+	loadSideBar();
+}
 
 function getAllUsers() {
 	$.ajax({
@@ -23,11 +26,7 @@ function handleResponseJQuery(myData) {
 		$('#table-body-users').append(
 				"<tr>" + "<td>" + myData[i].email + "</td>" + "<td>"
 						+ myData[i].password + "</td>" + "<td>"
-						+ myData[i].type 
-						+ "</tr>");
+						+ myData[i].type + "</tr>");
 	}
 	;
 }
-
-
-

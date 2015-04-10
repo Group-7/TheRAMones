@@ -2,7 +2,7 @@
 $(document).ready(function(){	
 	handleResponseJQuery(document);
 	handleResponseJQuery();
-
+	loadSideBar();
 });
 
 function getAllthePeople(){

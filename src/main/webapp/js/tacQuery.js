@@ -2,6 +2,7 @@ window.onload = function() {
 
 	loadAllUniqueIMSI();
 	loadAllUniqueTAC();
+	loadSideBar();
 }
 
 $("#displayCallFailuresPerPhoneType").click(function() {

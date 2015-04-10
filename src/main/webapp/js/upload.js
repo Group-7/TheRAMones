@@ -4,12 +4,14 @@ $('#uploadFileBtn').click(function(){
 	//alert(window.location.host +"\n"+window.location);
 	var url=window.location.search.split('SNAPSHOT/')[0];
 	
-	window.location.href=url+"import.html"
+	window.location.href=url+"import.html";
+	
 	//alert(url);
 });
 
 function load(){
 	document.getElementById("uploadFileBtn").disabled=true;
+	loadSideBar();
 }
 
 function validate(){

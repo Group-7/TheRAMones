@@ -14,9 +14,13 @@ function loadSideBar(){
 	var type=getCookie("user");
 	
 	var list=document.getElementById("userFunctionList");
+	var listUser=document.getElementById("addUserList");
 	
+	var accounts1 = "<li><a href='addUser.html'><span class='title'>Add	new user</span></a></li>";
+	var accounts2 = "<li><a href='users.html'><span class='title'>List	of all users</span></a></li>";
 	if(type=="1"){ 
 		list.innerHTML+=(q1+q2+q3+q4+q5+q6);	
+		listUser.innerHTML+=accounts1+accounts2;
 	}else if(type =='2'){ 
 		list.innerHTML+=(q1+q3);
 	}else if(type =='3'){ 
@@ -28,7 +32,7 @@ function loadSideBar(){
 		location.href="index.html"
 	}
 
-
+	
 }
 
 
