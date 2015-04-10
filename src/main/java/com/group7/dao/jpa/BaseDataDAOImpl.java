@@ -217,7 +217,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model) {
 
-		return em.createQuery("select u.model, b.eventCauseMap.eventId, ec.description, b.eventCauseMap.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.ueMap.tac = u.tac AND ec.eventId = b.eventCauseMap.eventId AND ec.causeCode = b.eventCauseMap.causeCode AND u.model = :phoneModel group by b.eventCauseMap.eventId, b.eventCauseMap.causeCode, ec.description")
+		return em.createQuery("select u.model, b.eventCauseMap.eventId, ec.description, b.eventCauseMap.causeCode , count(*) as occurences  FROM BaseData b, EventCause ec, UE_Table u where b.ueMap.tac = u.tac AND ec.eventId = b.eventCauseMap.eventId AND ec.causeCode = b.eventCauseMap.causeCode AND u.model = :phoneModel group by b.eventCauseMap.eventId, b.eventCauseMap.causeCode, ec.description order by occurences desc")
 				.setParameter("phoneModel", model).getResultList();
 	}
 
@@ -300,6 +300,17 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			inserted++;
 		}
 		
+	}
+
+	@Override
+	public Collection<BigInteger> getUS11(String start, String end) {
+		// TODO Auto-generated method stub
+		Timestamp dbStartDate = new Timestamp(dateFormatter(start).getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(end).getTime());
+		Query q = em.createNativeQuery("select count(*) as occurences, b.Cell_ID, n.Country, n.Operator from Base_Data b, Network n where b.MCC = n.MCC AND b.MNC = n.MNC AND DateTime between ? and ? group by b.MCC,b.MNC,b.Cell_ID order by occurences desc limit 10;");
+		q.setParameter(1, dbStartDate);
+		q.setParameter(2, dbEndDate);
+		return q.getResultList();
 	}
 	
 

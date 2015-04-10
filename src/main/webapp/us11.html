@@ -310,6 +310,7 @@ updateTac
             <!-- BEGIN INTRO -->
             <div class="row">
               <div class="col-lg-12">
+             
                 <h1 class="text-primary">Call Failures</h1>
               </div><!--end .col -->
               <div class="col-lg-8">
@@ -325,7 +326,6 @@ updateTac
 
 
             
-
 
 
 
@@ -350,8 +350,11 @@ updateTac
                   </span>
                 </div> 
 
+ <div style="float: right">
+													<div id="draw"></div>
+							</div>
 
-                <button class="btn btn-primary" id="displayCallFailuresPerPhoneType">Call Failures per Phone-Type</button>
+                <button onclick="submit()" id="submit" >Call Failures per Phone-Type</button>
                 
 
 
@@ -803,6 +806,10 @@ updateTac
               <script src="assets/js/core/source/AppNavSearch.js"></script>
               <script src="assets/js/core/source/AppVendor.js"></script>
               <script src="assets/js/core/demo/Demo.js"></script>
+              <script src="js/raphael-min.js"></script>
+							<script src="js/raphael.js"></script>
+        <script src="js/g.raphael-min.js"></script>
+        <script src="js/g.pie-min.js"></script>
               <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
 
                 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> 

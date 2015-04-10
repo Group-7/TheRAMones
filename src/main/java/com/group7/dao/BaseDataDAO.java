@@ -44,5 +44,6 @@ public interface BaseDataDAO {
 	Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass);
 	Collection<String>getFailureDescriptionForDropDown();
 	public void putErrorData(Collection<BaseDataError> bderrors);
+	public Collection<BigInteger> getUS11(String string, String string2);
 
 }

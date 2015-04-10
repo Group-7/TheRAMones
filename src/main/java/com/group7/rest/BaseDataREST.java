@@ -166,6 +166,16 @@ public class BaseDataREST {
 		
 		return service.getImsiFailureOverTime(splitDates[0],splitDates[1]);
 	}
+	
+	@GET
+	@Path("/us11")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getUS11(@QueryParam("dates") String dates){
+		
+		String[] splitDates=dates.split(",",-1);
+		
+		return service.getUS11(splitDates[0],splitDates[1]);
+	}
 
 	
 	/**

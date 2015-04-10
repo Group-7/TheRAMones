@@ -51,7 +51,7 @@ function getAllEventCauseCodeCombinationsPerPhoneModel(){
 }
 
 function handleResponseJQuery3(myData) {
-	
+	var data = myData
 for(var i = 0; i<myData.length; i++){ 
 	 $('#table-body').append(
           "<tr>" +
@@ -62,5 +62,22 @@ for(var i = 0; i<myData.length; i++){
 	  "<td>" + myData[i][4] + "</td>" +
           "</tr>");
 }
+$(function () {
+
+    var paper = Raphael(document.getElementById('draw'), 660, 350);
+    //var k = parseInt(jArray[0].Wins);
+    var c = paper.piechart(300, 200, 80, [myData[0][4],myData[1][4], myData[2][4],myData[3][4], myData[4][4]],
+    {
+        legend: ["%% Event:" + myData[0][1] + " Cause:" + myData[0][3],
+         "%% Event:" + myData[1][1] + " Cause:" + myData[1][3], 
+         "%% Event:" + myData[2][1] + " Cause:" + myData[2][3], 
+         "%% Event:" + myData[3][1] + " Cause:" + myData[3][3],
+         "%% Event:" + myData[4][1] + " Cause:" + myData[4][3] ]
+    });
+   
+
+});
   
    }
+   
+

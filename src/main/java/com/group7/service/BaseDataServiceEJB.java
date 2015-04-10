@@ -162,5 +162,11 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		dao.putErrorData(bderrors);
 		
 	}
+
+	@Override
+	public Collection<BigInteger> getUS11(String string, String string2) {
+		// TODO Auto-generated method stub
+		return dao.getUS11(string, string2);
+	}
 }
 
