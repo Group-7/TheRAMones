@@ -1,16 +1,14 @@
 /**
  * 
  */
-/*$( document ).ready(function() {
-	getTopTenIMSI();
-});*/
+$( document ).ready(function() {
+	loadSideBar();
+});
 $('#getImsiBtn').click(function(){
 	getTopTenIMSI();
 });
 
-function load(){
-	loadSideBar();
-}
+
 
 function getTopTenIMSI(){
 	//'01/01/0011 17:00:00'
