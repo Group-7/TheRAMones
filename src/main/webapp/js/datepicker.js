@@ -1,7 +1,8 @@
 var moment = rome.moment;
 
-rome(startDate);
-rome(endDate);
+rome(startDate, {inputFormat: 'DD/MM/YYYY HH:MM:SS'});
+rome(endDate, {inputFormat: 'DD/MM/YYYY HH:MM:SS'});
+
 /*rome(ivi);
 rome(ivp, { initialValue: '2014-12-08 08:36' });
 rome(sm, { weekStart: 1 });
@@ -27,7 +28,7 @@ function toggler () {
   }
   toggle.innerHTML = picker.destroyed ? 'Restore <code>rome</code> instance!' : 'Destroy <code>rome</code> instance!';
 }
-
+ 
 rome(mm, { min: '2013-12-30', max: '2014-10-01' });
 rome(mmt, { min: '2014-04-30 19:45', max: '2014-09-01 08:30' });
 

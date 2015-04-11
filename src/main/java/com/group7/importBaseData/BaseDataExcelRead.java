@@ -34,7 +34,7 @@ public class BaseDataExcelRead {
 
 	// String[] strings = new String[len];
 
-	DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+	DateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm");
 	Date date = null;
 	String convertedDate = null;
 	// TODO
@@ -57,7 +57,7 @@ public class BaseDataExcelRead {
 	}
 
 	public BaseDataExcelRead() {
-		stringInput = "C:/Users/marc/Documents/sample_dataset.xls";
+		stringInput = "C:\\Users\\bmj\\javastuff\\ericsson_project\\sample_dataset.xls";
 	}
 
 	/***
@@ -101,7 +101,7 @@ public class BaseDataExcelRead {
 				}
 				sIndex = 0;
 				try {
-					validation.isThisDateValid(convertedDate,	"MM/dd/yyyy HH:mm");
+					validation.isThisDateValid(convertedDate,	"MM/dd/yy HH:mm");
 					Timestamp dateDB = new Timestamp(date.getTime());
 					int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 					int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));
@@ -342,7 +342,7 @@ public class BaseDataExcelRead {
 	}
 
 	public void writeToLogError(int errorLineNo) {
-		final String FILE_PATH = "C:/Users/marc/Documents/errorlog.txt";
+		final String FILE_PATH = "C:\\Users\\bmj\\javastuff\\ericsson_project\\errorlog.txt";
 
 		try {
 
