@@ -48,7 +48,14 @@ public class BaseDataREST {
 	public BaseDataREST() {
 
 	}
-
+	@GET
+	@Path("/test")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String test(){
+	//	String testString = "hello world";
+		return "hello world";
+	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<BaseData> getAllbaseData() throws BiffException,

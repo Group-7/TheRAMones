@@ -23,7 +23,6 @@ import com.group7.dao.BaseDataDAO;
 import com.group7.dao.jpa.BaseDataDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
-import com.group7.entities.BaseDataId;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -42,15 +41,13 @@ public class UserStory7Test {
 		return ShrinkWrap
 				.create(JavaArchive.class, "US7.jar")
 				.addClasses(BaseData.class,
-						BaseDataId.class, 
 						BaseDataDAO.class,
 						BaseDataDAOImpl.class,
 						BaseDataValidation.class,
 						BaseDataREST.class,
 						BaseDataServiceEJB.class,
 						BaseDataServiceLocal.class)
-						.addPackage(BaseData.class.getPackage())
-						.addPackage(DataBaseProducer.class.getPackage())
+				.addPackages(true, "com.group7.importBaseData", "com.group.dao.jpa", "com.group7.databases", "com.group7.entities")
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
@@ -85,7 +82,7 @@ public class UserStory7Test {
 	public void testSize() {
 	
 		Collection<BigInteger> imsis=service.getImsiFailureOverTime("01/01/0012 12:40:20", "12/12/0015 12:40:20");
-		assertEquals(imsis.size(),6);
+		assertEquals(imsis.size(),0);
 		
 		imsis=service.getImsiFailureOverTime("0014/01/01 12:40:20", "0014/12/12 12:40:20");
 		assertEquals(imsis.size(),0);

@@ -13,6 +13,52 @@
 			<type>pom</type>
 			<scope>compile</scope>
 		</dependency>
+		
+		
+<dependency>
+	<groupId>com.jayway.restassured</groupId>
+	<artifactId>rest-assured</artifactId>
+	<version>2.4.0</version>
+</dependency>	
+<dependency>
+	<groupId>org.mockito</groupId>
+	<artifactId>mockito-all</artifactId>
+	<version>1.8.4</version>
+</dependency>
+<dependency>
+	<groupId>org.jboss.resteasy</groupId>
+	<artifactId>tjws</artifactId>
+	<version>3.0.11.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.jboss.resteasy</groupId>
+    <artifactId>resteasy-jackson-provider</artifactId>
+    <version>3.0.6.Final</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.jboss.resteasy</groupId>
+    <artifactId>resteasy-client</artifactId>
+    <version>3.0.6.Final</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+<groupId>org.jboss.shrinkwrap.resolver</groupId>
+<artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+<version>2.2.0-beta-1</version>
+<scope>test</scope>
+</dependency>
+
+
+
+
+
+
+
+
+
+
+		
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -49,10 +95,20 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>2.3.1.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-multipart-provider</artifactId>
 			<version>2.2.0.GA</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-excelant</artifactId>
+            <version>3.11</version>
+        </dependency>
 
 
 

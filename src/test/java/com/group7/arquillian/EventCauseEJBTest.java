@@ -46,8 +46,7 @@ public class EventCauseEJBTest {
 	@Test
 	public void isEventCauseTableEmpty() throws Exception {
 		
-		assertTrue(dao.getAllEventCauses().isEmpty());	
-		
+		assertTrue(dao.getAllEventCauses().isEmpty());		
 	}
 }
  
