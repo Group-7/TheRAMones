@@ -5,12 +5,17 @@ function loadSideBar(){
 	support engineer --> 3
 	network mnagament --> 4
 	**/
-	var q1 = '<li><a href="eventid_causeid.html"><span class="title">Affected IMSIs</span></a></li>';
-	var q2 = '<li><a href="callFailuresDuration.html"><span	class="title">Call Failures Duration</span></a></li>';
-	var q3 = '<li><a href="callFailuresByIMSI.html"><span class="title">Call Failures By IMSI</span></a></li>';
-	var q4 = '<li><a href="callTotalDurationByIMSI.html"><span	class="title">Call Total Duration By IMSI</span></a></li>';
-	var q5 ='<li><a href="user7.html"><span class="title">IMSI over given time period</span></a></li>';
-	var q6='<li><a href="us10.html"><span class="title">Call Failure by Phone Model</span></a></li>';
+	var userSt4 = '<li><a href="eventid_causeid.html"><span class="title">US 4</span></a></li>';
+	var userSt8 = '<li><a href="callFailuresDuration.html"><span	class="title">US 8</span></a></li>';
+	var userSt5 = '<li><a href="callFailuresByIMSI.html"><span class="title">US 5</span></a></li>';
+	var userSt9 = '<li><a href="callTotalDurationByIMSI.html"><span	class="title">US 9</span></a></li>';
+	var userSt7 ='<li><a href="user7.html"><span class="title">US 7</span></a></li>';
+	var userSt10='<li><a href="us10.html"><span class="title">US 10</span></a></li>';
+	var userSt6='<li><a href="net_us6.html"><span class="title">US 6</span></a></li>';
+	var userSt11='<li><a href="us11.html"><span class="title">US 11</span></a></li>';
+	var userSt12='<li><a href="user12.html"><span class="title">US 12</span></a></li>';
+	var userSt14='<li><a href="user14.html"><span class="title">US 14</span></a></li>';
+	
 	var type=getCookie("user");
 	
 	var list=document.getElementById("userFunctionList");
@@ -19,17 +24,17 @@ function loadSideBar(){
 	var accounts1 = "<li><a href='addUser.html'><span class='title'>Add	new user</span></a></li>";
 	var accounts2 = "<li><a href='users.html'><span class='title'>List	of all users</span></a></li>";
 	if(type=="1"){ 
-		list.innerHTML+=(q1+q2+q3+q4+q5+q6);	
+		list.innerHTML+=(userSt4+userSt5+userSt6+userSt7+userSt8+userSt9+userSt10+userSt11+userSt12+userSt14);	
 		listUser.innerHTML+=accounts1+accounts2;
 	}else if(type =='2'){ 
-		list.innerHTML+=(q1+q3);
+		list.innerHTML+=(userSt4+userSt5+userSt6+userSt7+userSt8+userSt9+userSt10+userSt11+userSt12+userSt14);
 	}else if(type =='3'){ 
-		list.innerHTML+=(q2+q5);
+		list.innerHTML+=(userSt4+userSt5+userSt6+userSt7+userSt8+userSt14);
 	}else if(type =='4'){ 
-		list.innerHTML+=(q4+q6);
+		list.innerHTML+=(userSt9+userSt10+userSt11+userSt12);
 	}
 	else{
-		location.href="index.html"
+		location.href="index.html";
 	}
 
 	
