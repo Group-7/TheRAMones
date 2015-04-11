@@ -34,7 +34,7 @@ public class BaseDataExcelRead {
 
 	// String[] strings = new String[len];
 
-	DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+	DateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm");
 	Date date = null;
 	String convertedDate = null;
 	// TODO
@@ -101,7 +101,7 @@ public class BaseDataExcelRead {
 				}
 				sIndex = 0;
 				try {
-					validation.isThisDateValid(convertedDate,	"MM/dd/yyyy HH:mm");
+					validation.isThisDateValid(convertedDate,	"MM/dd/yy HH:mm");
 					Timestamp dateDB = new Timestamp(date.getTime());
 					int event_id = Integer.parseInt(validation.isEventIdValid(strings[0]));
 					int failure_class = Integer.parseInt(validation.isFailureClassValid(strings[1]));

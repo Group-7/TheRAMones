@@ -16,6 +16,7 @@ function getTopTenIMSI(){
 	//'01/01/0011 17:00:00'
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
+	//startDate=startDate.split("2").join("0");
 	
 	$.ajax({
 		type:"GET",
