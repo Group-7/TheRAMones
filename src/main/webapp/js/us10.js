@@ -2,8 +2,9 @@ window.onload = function() {
 
 	loadAllUniqueModels();
 	loadSideBar();
-}
 
+}
+	var count=0;
 
 $("#displayAllEventCauseCodeCombinationsPerPhoneModel").click(function() {
 	
@@ -63,10 +64,13 @@ for(var i = 0; i<myData.length; i++){
           "</tr>");
 }
 $(function () {
-
-    var paper = Raphael(document.getElementById('draw'), 660, 350);
+if(count>0){
+document.getElementById('draw').innerHTML="";
+}
+if(myData !=""){
+    var paper = Raphael(document.getElementById('draw'), 550, 350);
     //var k = parseInt(jArray[0].Wins);
-    var c = paper.piechart(300, 200, 80, [myData[0][4],myData[1][4], myData[2][4],myData[3][4], myData[4][4]],
+    var c = paper.piechart(200, 200,100, [myData[0][4],myData[1][4], myData[2][4],myData[3][4], myData[4][4]],
     {
         legend: ["%% Event:" + myData[0][1] + " Cause:" + myData[0][3],
          "%% Event:" + myData[1][1] + " Cause:" + myData[1][3], 
@@ -74,8 +78,9 @@ $(function () {
          "%% Event:" + myData[3][1] + " Cause:" + myData[3][3],
          "%% Event:" + myData[4][1] + " Cause:" + myData[4][3] ]
     });
-   
-
+    count++;
+ 
+}
 });
   
    }

@@ -244,25 +244,29 @@ function handleBaseDataResponse(data){
 	document.getElementById("table-body").innerHTML=text;
 	chart(myData);
 }
-
+var count =0;
 function chart(myData) {
-
-    var paper = Raphael(document.getElementById('draw'), 660, 350);
+if(count>0){
+document.getElementById('draw').innerHTML="";
+}
+if(myData !=""){
+    var paper = Raphael(document.getElementById('draw'), 550, 350);
     //var k = parseInt(jArray[0].Wins);
-    var c = paper.piechart(300, 200, 80, [myData[0][0],myData[1][0], myData[2][0],myData[3][0], myData[4][0], myData[5][0],myData[6][0], myData[7][0],myData[8][0], myData[9][0]],
+    var c = paper.piechart(200, 200, 100, [myData[0][0],myData[1][0], myData[2][0],myData[3][0], myData[4][0], myData[5][0],myData[6][0], myData[7][0],myData[8][0], myData[9][0]],
     {
-        legend: ["%% Cell:" + myData[0][1] + " Operator:" + myData[0][3],
-         "%% Cell:" + myData[1][1] + " Operator:" + myData[1][3], 
-         "%% Cell:" + myData[2][1] + " Operator:" + myData[2][3], 
-         "%% Cell:" + myData[3][1] + " Operator:" + myData[3][3],
-         "%% Cell:" + myData[4][1] + " Operator:" + myData[4][3],
-         "%% Cell:" + myData[5][1] + " Operator:" + myData[5][3], 
-         "%% Cell:" + myData[6][1] + " Operator:" + myData[6][3], 
-         "%% Cell:" + myData[7][1] + " Operator:" + myData[7][3],
-         "%% Cell:" + myData[8][1] + " Operator:" + myData[8][3], 
-         "%% Cell:" + myData[9][1] + " Operator:" + myData[9][3]]
+        legend: ["%% Cell:" + myData[0][1] + " Occurences:" + myData[0][0],
+         "%% Cell:" + myData[1][1] + " Occurences:" + myData[1][0], 
+         "%% Cell:" + myData[2][1] + " Occurences:" + myData[2][0], 
+         "%% Cell:" + myData[3][1] + " Occurences:" + myData[3][0],
+         "%% Cell:" + myData[4][1] + " Occurences:" + myData[4][0],
+         "%% Cell:" + myData[5][1] + " Occurences:" + myData[5][0], 
+         "%% Cell:" + myData[6][1] + " Occurences:" + myData[6][0], 
+         "%% Cell:" + myData[7][1] + " Occurences:" + myData[7][0],
+         "%% Cell:" + myData[8][1] + " Occurences:" + myData[8][0], 
+         "%% Cell:" + myData[9][1] + " Occurences:" + myData[9][0]]
     });
-
+    count++;
+}
 }
 
 
