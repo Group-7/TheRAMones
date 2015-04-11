@@ -50,6 +50,11 @@ function getResultsForTable(data){
 				"<td>"+timeconverter(data[i][1])+"</td>"+
 		"</tr>");
 	}
+	/*var t = $('#table').DataTable();
+	for(var i =0;i<data.length;i++){
+		t.row.add([ data[i][0], timeconverter(data[i][1])]);
+	}
+	t.draw();*/
 }
 
 
