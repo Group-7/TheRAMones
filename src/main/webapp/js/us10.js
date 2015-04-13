@@ -25,8 +25,12 @@ function loadAllUniqueModels() {
 
 function populateModelSelector(data) {
 	//$("#model").remove();
+	data.sort();
 	var select = document.getElementById("model");
 
+	
+	
+	
 	for (var i = 0; i < data.length; i++) {
 
 		var opt = data[i];

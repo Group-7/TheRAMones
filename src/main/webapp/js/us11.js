@@ -212,9 +212,9 @@ function submit(){
 	var dates=from+","+to;
 	//alert(dates);
 	//dates=dates.split("/").join("");
-	console.log("Dates before join: " + dates);
+	/*console.log("Dates before join: " + dates);
 	dates=dates.split("2").join("0");
-	console.log("Dates after join: " + dates);
+	console.log("Dates after join: " + dates);*/
 	$.ajax({
 		type: 'GET',
 		url: 'rest/baseData/us11?dates='+dates,

@@ -203,7 +203,7 @@
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li class="active">queries/IMSI</li>
+							<li class="active">queries / user story 6</li>
 						</ol>
 					</div>
 					<div class="section-body contain-lg">
@@ -216,7 +216,7 @@
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										User Story 6
+										 I want to see, for a given IMSI, all the unique Cause Codes associated with its call failures
 									</p>
 								</article>
 							</div><!--end .col -->
@@ -242,9 +242,12 @@
 							<!-- <div class="col-lg-offset-1 col-md-8"> -->
 
 								<!-- <body onload="load()"> -->
-
+								
 								<div  class="card"> 
-
+								<br />
+								<br />
+								<br />
+								
 									<select id="imsiNumber" onchange="update()">
 										<option>IMSI Number</option>
 									</select>
@@ -278,79 +281,152 @@
 
 
 			<!-- BEGIN MENUBAR-->
-			<div id="menubar" class="menubar-inverse ">
-			<div class="menubar-fixed-panel">
-				<div>
-					<a class="btn btn-icon-toggle btn-default menubar-toggle"
-						data-toggle="menubar" href="javascript:void(0);"> <i
-						class="fa fa-bars"></i>
-					</a>
-				</div>
-				<div class="expanded">
-					<a href="support_dashboard.html"> <span
-						class="text-lg text-bold text-primary ">The
-							RAMones&nbsp;ADMIN</span>
-					</a>
-				</div>
-			</div>
-			<div class="menubar-scroll-panel">
+							<div id="menubar" class="menubar-inverse ">
+								<div class="menubar-fixed-panel">
+									<div>
+										<a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+											<i class="fa fa-bars"></i>
+										</a>
+									</div>
+									<div class="expanded">
+										<a href="dashboard.html">
+											<span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
+										</a>
+									</div>
+								</div>
+								<div class="menubar-scroll-panel">
 
-				<!-- BEGIN MAIN MENU -->
-				<ul id="main-menu" class="gui-controls">
-
-					<!-- BEGIN DASHBOARD -->
-					<li><a href="rep_dashboard.html" class="active">
-							<div class="gui-icon">
-								<i class="md md-home"></i>
-							</div> <span class="title">Dashboard</span>
-					</a></li>
-					<!--end /menu-li -->
-					<!-- END DASHBOARD -->
+									<!-- BEGIN MAIN MENU -->
+									<ul id="main-menu" class="gui-controls">
 
 
 
+										<!-- BEGIN EMAIL -->
+										<li class="gui-folder">
+											<li>
+												<a href="dashboard.html" class="active">
+													<div class="gui-icon"><i class="md md-home"></i></div>
+													<span class="title">Dashboard</span>
+												</a>
+											</li><!--end /menu-li -->
+											<!-- END DASHBOARD -->
 
 
-					<!-- BEGIN TABLES -->
 
 
-					<!-- BEGIN PAGES -->
-					<!-- BEGIN PAGES -->
-					<li class="gui-folder"><a>
-							<div class="gui-icon">
-								<i class="md md-computer"></i>
-							</div> <span class="title">Queries</span>
-					</a> <!--start submenu -->
-						<ul id="userFunctionList">
-							<!-- <li><a href="rep_callFailuresByIMSI.html"><span
-									class="title">Call Failures By IMSI</span></a></li>
-							<li><a href="rep_eventid_causeid.html"><span class="title">Affected
-										IMSIs</span></a></li>
+
+											
+
+											<!-- BEGIN FORMS -->
+											<li class="gui-folder">
+												<a>
+													<div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+													<span class="title">User accounts</span>
+												</a>
+												<!--start submenu -->
+												<ul id="addUserList">
+													<!-- <li><a href="addUser.html" ><span class="title">Add new user</span></a></li>
+													<li><a href="users.html" ><span class="title">List of all users</span></a></li>
  -->
-						</ul> <!--end /submenu --></li>
-					<!--end /menu-li -->
-					<!-- END FORMS -->
+												</ul><!--end /submenu -->
+											</li><!--end /menu-li -->
+											<!-- END FORMS -->
+
+											<!-- BEGIN PAGES -->
+											<!-- BEGIN PAGES -->
+											<li class="gui-folder">
+												<a>
+													<div class="gui-icon"><i class="md md-computer"></i></div>
+													<span class="title">Queries</span>
+												</a>
+												<!--start submenu -->
+												<ul id="userFunctionList">
 
 
 
-					<!-- BEGIN LEVELS -->
 
-					<!-- END LEVELS -->
+													<!-- <li><a href="eventid_causeid.html" ><span class="title">Affected IMSIs</span></a></li>
+													<li><a href="callFailuresDuration.html" ><span class="title">Call Failures Duration</span></a></li>
+													<li><a href="callFailuresByIMSI.html" ><span class="title">Call Failures By IMSI</span></a></li>
+													<li><a href="callTotalDurationByIMSI.html" ><span class="title">Call Total Duration By IMSI</span></a></li>
+													<li><a href="user7.html" ><span class="title">IMSI over given time period</span></a></li>
+                  <li><a href="us10.html" ><span class="title">Call failure by Phone Model</span></a></li>
+                 
 
-				</ul>
-				<!--end .main-menu -->
-				<!-- END MAIN MENU -->
 
-				<div class="menubar-foot-panel">
-					<small class="no-linebreak hidden-folded"> <span
-						class="opacity-75">Copyright &copy; 2014</span> <strong>CodeCovers</strong>
-					</small>
-				</div>
-			</div>
-			<!--end .menubar-scroll-panel-->
-		</div>
-		<!--end #menubar-->
-			<!-- END MENUBAR -->
+
+													<li><a href="eventid_causeid.html" ><span class="title">Gerry</span></a></li>
+													<li><a href="html/pages/blank.html" ><span class="title">Blank page</span></a></li> -->
+												</ul><!--end /submenu -->
+											</li><!--end /menu-li -->
+											<!-- END FORMS -->
+
+
+
+											<!-- BEGIN LEVELS -->
+											<li class="gui-folder">
+												<a>
+													<div class="gui-icon"><i class="fa fa-folder-open fa-fw"></i></div>
+													<span class="title">Upload Data Menu</span>
+												</a>
+												<!--start submenu -->
+												<ul>
+
+													<li><a href="upload.html"><span class="title">Upload file</span></a></li>
+													<li><a href="#"><span class="title">Item 1</span></a></li>
+													<li><a href="#"><span class="title">Item 1</span></a></li>
+													<li class="gui-folder">
+														<a href="javascript:void(0);">
+															<span class="title">Open level 2</span>
+														</a>
+														<!--start submenu -->
+														<ul>
+															<li><a href="#"><span class="title">Item 2</span></a></li>
+															<li class="gui-folder">
+																<a href="javascript:void(0);">
+																	<span class="title">Open level 3</span>
+																</a>
+																<!--start submenu -->
+																<ul>
+																	<li><a href="#"><span class="title">Item 3</span></a></li>
+																	<li><a href="#"><span class="title">Item 3</span></a></li>
+																	<li class="gui-folder">
+																		<a href="javascript:void(0);">
+																			<span class="title">Open level 4</span>
+																		</a>
+																		<!--start submenu -->
+																		<ul>
+																			<li><a href="#"><span class="title">Item 4</span></a></li>
+																			<li class="gui-folder">
+																				<a href="javascript:void(0);">
+																					<span class="title">Open level 5</span>
+																				</a>
+																				<!--start submenu -->
+																				<ul>
+																					<li><a href="#"><span class="title">Item 5</span></a></li>
+																					<li><a href="#"><span class="title">Item 5</span></a></li>
+																				</ul><!--end /submenu -->
+																			</li><!--end /submenu-li -->
+																		</ul><!--end /submenu -->
+																	</li><!--end /submenu-li -->
+																</ul><!--end /submenu -->
+															</li><!--end /submenu-li -->
+														</ul><!--end /submenu -->
+													</li><!--end /submenu-li -->
+												</ul><!--end /submenu -->
+											</li><!--end /menu-li -->
+											<!-- END LEVELS -->
+										</ul><!--end .main-menu -->
+										<!-- END MAIN MENU -->
+
+										<div class="menubar-foot-panel">
+											<small class="no-linebreak hidden-folded">
+												<span class="opacity-75">Copyright &copy; 2014</span> <strong>CodeCovers</strong>
+											</small>
+										</div>
+									</div><!--end .menubar-scroll-panel-->
+								</div><!--end #menubar-->
+								<!-- END MENUBAR -->
 
 			<!-- BEGIN OFFCANVAS RIGHT -->
 			<div class="offcanvas">
