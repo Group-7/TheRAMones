@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 
 import javax.ejb.EJB;
-import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -19,7 +18,8 @@ import com.group7.entities.BaseData;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @RunWith(Arquillian.class)
-public class User12ArquillianTest {
+public class User14ArquillianTest {
+
 	
 	@Deployment
 	public static JavaArchive createDeployment() {
@@ -33,17 +33,28 @@ public class User12ArquillianTest {
 	
 	@EJB
 	BaseDataServiceLocal serv;
-
+	
 	@Test
 	public void test() {
+		Collection<BaseData> returnedInfo = serv.imsiEffectedByAFailureCauseClass("EMERGENCY");
+		assertTrue(returnedInfo.size()>0);
+		assertTrue(returnedInfo.size()==160);
 		
 		
-		Collection<BaseData> result=serv.getTopTenImsiDuringPeriod("01/01/2013 00:00:00", "01/01/2015 00:00:00");
-		
-		assertTrue(result.size()<=10);
-		assertTrue(result.size()>=0);
-		
-		
+		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("HIGH PRIORITY ACCESS");
+		 assertTrue(returnedInfo.size()==600);
+		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("MT ACCESS");
+		 assertTrue(returnedInfo.size()==40);
+		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("MO SIGNALLING");
+		 assertTrue(returnedInfo.size()==0);
+		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("MO DATA");
+		 assertTrue(returnedInfo.size()==0);
+	}
+	
+	@Test
+	public void testDropDown(){
+		Collection<String> stringsReturned = serv.getFailureDescriptionForDropDown();
+		assertTrue(stringsReturned.size()==5);
 	}
 
 }
