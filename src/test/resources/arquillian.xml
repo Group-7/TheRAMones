@@ -3,9 +3,16 @@
    <container qualifier="jbossas-7-managed" default="true">
       <configuration>
          <property name="jbossHome">/home/niall/Downloads/java/jboss-as-7.1.1.Final</property>
-     	
+     	<!-- <property name="httpPort">-1</property>
+     	<property name="stopPort">-1</property>
+     	<property name="ajpPort">-1</property> -->
+     	<extension qualifier="jacoco">
+   	<property name="includes">org.jboss.arquillian.extension.jacoco.test.included.*</property>
+   	<property name="excludes">org.jboss.arquillian.extension.jacoco.test.integration.*;org.jboss.arquillian.extension.jacoco.test.excluded.*</property>
+   </extension>
       </configuration>
-      
+       
 
-   </container>
+ 	</container>
+   
 </arquillian>

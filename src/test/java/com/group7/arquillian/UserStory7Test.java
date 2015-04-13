@@ -60,12 +60,12 @@ public class UserStory7Test {
 	private BaseDataServiceLocal service;
 
 	
-	private BaseDataREST rest;
+
 	
 	
 	@Test
 	public void notNullTest(){
-		assertNotNull(rest);
+		assertNotNull(service);
 	}
 	
 	
@@ -73,7 +73,7 @@ public class UserStory7Test {
 	@Test
 	public void testUnique(){
 		
-		ArrayList<BigInteger> imsis=(ArrayList<BigInteger>)rest.getImsiFailureOverTime("01/01/0013 12:40:20,12/12/0015 12:40:20");
+		ArrayList<BigInteger> imsis=(ArrayList<BigInteger>)service.getImsiFailureOverTime("01/01/0013 12:40:20","12/12/0015 12:40:20");
 	
 	
 		
@@ -90,17 +90,17 @@ public class UserStory7Test {
 	@Test
 	public void testSize() {
 	
-		Collection<BigInteger> imsis=rest.getImsiFailureOverTime("01/01/0012 12:40:20,12/12/0015 12:40:20");
+		Collection<BigInteger> imsis=service.getImsiFailureOverTime("01/01/0012 12:40:20","12/12/0015 12:40:20");
 		assertEquals(imsis.size(),6);
 		
-		imsis=rest.getImsiFailureOverTime("01/01/0014 12:40:20,12/12/0015 12:40:20");
+		imsis=service.getImsiFailureOverTime("01/01/0014 12:40:20","12/12/0015 12:40:20");
 		assertEquals(imsis.size(),0);
 	}
 	
-	@Test
+	/*@Test
 	public void getUniqueImsiTest(){
 		
-		/*expect().
+		expect().
 		statusCode(200).
 		body(equals("344930000000011,310560000000012,"
 				+ "240210000000013,"
@@ -108,9 +108,10 @@ public class UserStory7Test {
 				+ "310560000000002,"
 				+ "240210000000003"))
 				.when()
-				.get("rest/baseData/uniqueImsi");*/
+				.get("rest/baseData/uniqueImsi");
 		//get("/rest/baseData/uniqueIMSI").then().body();
 		
 	}
+	*/
 }
 

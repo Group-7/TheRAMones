@@ -68,7 +68,7 @@ public class GetPhoneModelTest {
 		
 		Collection<BigInteger> phoneTypes=dao.getAllPhoneTypes();
 		
-		assertEquals(99,phoneTypes.size());
+		assertEquals(3,phoneTypes.size());
 		
 		
 	}

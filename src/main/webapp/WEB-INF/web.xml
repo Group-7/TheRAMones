@@ -19,10 +19,10 @@
  		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
  	</listener>
  
- 	<listener>
+ 	<!-- <listener>
  		<display-name>SIMPLE Startup Listener</display-name>
  		<listener-class>com.group7.importBaseData.Initializer</listener-class>
- 	</listener>
+ 	</listener> -->
  
      <servlet>
      <servlet-name>resteasy-servlet</servlet-name>

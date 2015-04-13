@@ -35,13 +35,14 @@ public class GetDataTests {
 
 		return ShrinkWrap
 				.create(JavaArchive.class, "BaseTest.jar")
+				.addClasses(BaseDataExcelRead.class,BaseDataValidation.class)
 				.addPackage(BaseData.class.getPackage())
 				.addPackage(BaseDataDAO.class.getPackage())
 				.addPackage(BaseDataDAOImpl.class.getPackage())
 				.addPackage(BaseDataServiceLocal.class.getPackage())
 				.addPackage(BaseDataServiceEJB.class.getPackage())
 				.addPackage(DataBaseProducer.class.getPackage())
-				.addPackage(BaseDataExcelRead.class.getPackage())
+				//.addPackage(BaseDataExcelRead.class.getPackage())
 						.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}

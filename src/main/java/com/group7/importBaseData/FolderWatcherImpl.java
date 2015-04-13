@@ -5,6 +5,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -27,7 +28,7 @@ import com.group7.entities.Network;
 import com.group7.entities.UE;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
-import java.nio.file.*;
+
 
 @Stateless
 @Local
@@ -37,6 +38,7 @@ public class FolderWatcherImpl implements FolderWatcher {
 	private WatchService watcher;
 	private Map<WatchKey,Path> keys;
 	private java.nio.file.Path dir ;
+	private boolean running=true;
 	
 	@Inject
 	private BaseDataServiceLocal service;
@@ -66,7 +68,7 @@ public class FolderWatcherImpl implements FolderWatcher {
 			System.out.println("runner called");
 		    System.out.println("Watch Service registered for dir: " + dir.getFileName());
 		     
-		    while (true) {
+		    while (running) {
 		        System.out.println("loop");
 		    	WatchKey key = null;
 				try {
@@ -160,5 +162,11 @@ public class FolderWatcherImpl implements FolderWatcher {
 					}
 				}
 		   }
+	}
+
+	@Override
+	public void stopRunner() {
+		// TODO Auto-generated method stub
+		running=false;
 	}
 }

@@ -21,6 +21,7 @@ import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataId;
 import com.group7.entities.EventCause;
+import com.group7.importBaseData.BaseDataExcelRead;
 import com.group7.importBaseData.BaseDataValidation;
 import com.group7.rest.BaseDataREST;
 import com.group7.service.BaseDataServiceEJB;
@@ -33,13 +34,14 @@ public class User4 {
 	public static JavaArchive createDeployment() {
 		return ShrinkWrap
 				.create(JavaArchive.class, "US7.jar")
+				.addClasses(BaseDataExcelRead.class,BaseDataValidation.class)
 				.addPackage(BaseDataDAO.class.getPackage())
 				.addPackage(BaseDataDAOImpl.class.getPackage())
 				.addPackage(BaseDataREST.class.getPackage())
 				.addPackage(BaseDataServiceEJB.class.getPackage())
 				.addPackage(BaseDataServiceLocal.class.getPackage())
 				.addPackage(BaseData.class.getPackage())
-				.addPackage(BaseDataValidation.class.getPackage())
+				//.addPackage(BaseDataValidation.class.getPackage())
 				.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");

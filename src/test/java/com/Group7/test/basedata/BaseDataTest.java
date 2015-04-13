@@ -3,6 +3,7 @@ package com.Group7.test.basedata;
 import static org.junit.Assert.*;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -19,6 +20,8 @@ import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataId;
 import com.group7.importBaseData.BaseDataValidation;
+import com.group7.service.BaseDataServiceEJB;
+import com.group7.serviceInterface.BaseDataServiceLocal;
 
 //import com.group7.serviceInterface.BaseDataService;
 
@@ -31,15 +34,16 @@ public class BaseDataTest {
 		return ShrinkWrap
 				.create(JavaArchive.class, "BaseTest.jar")
 				.addClasses(BaseData.class, BaseDataId.class,
-						BaseDataDAO.class,BaseDataDAOImpl.class)
-						.addPackage(BaseDataValidation.class.getPackage())
+						BaseDataDAO.class,BaseDataDAOImpl.class,
+						BaseDataServiceLocal.class,BaseDataServiceEJB.class,
+						BaseDataValidation.class)
 						.addPackage(BaseData.class.getPackage())
 						.addPackage(DataBaseProducer.class.getPackage())
 						.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
-	@EJB
+	@Inject
 	private BaseDataDAO service;
 
 	@Test

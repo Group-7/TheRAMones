@@ -14,5 +14,7 @@ public interface FolderWatcher {
 
 	@Asynchronous
 	public void runner() throws BiffException, IOException;
+
+	public void stopRunner();
 	
 }

@@ -222,7 +222,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 
 	public Collection<BigInteger> getAllPhoneTypes() {
 
-		return em.createQuery("SELECT DISTINCT bd.UeMap.tac from BaseData bd")
+		return em.createQuery("SELECT DISTINCT bd.ueMap.tac from BaseData bd")
 				.getResultList();
 
 	}

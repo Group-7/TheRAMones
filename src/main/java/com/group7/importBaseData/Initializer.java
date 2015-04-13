@@ -12,13 +12,13 @@ import jxl.read.biff.BiffException;
 
 public class Initializer implements ServletContextListener {
 
-	@Inject
-	private FolderWatcher fw;
+	/*@Inject
+	private FolderWatcher fw;*/
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		//fw.stopRunner();
 	}
 
 	
@@ -28,14 +28,14 @@ public class Initializer implements ServletContextListener {
 		for(int i=0;i<100;i++){
 			System.out.println("starting");
 		}
-		try {
+		/*try {
 			System.out.println("async call");
 			fw.runner();
 			System.out.println("aynce call return");
 		} catch (BiffException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }
