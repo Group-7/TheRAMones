@@ -2,6 +2,7 @@
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -13,6 +14,8 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,15 +28,26 @@ import com.group7.entities.User;
 public class UserServiceEJBTest {
 
 	@Deployment
-	public static JavaArchive createDeployment() {
-		return ShrinkWrap.create(JavaArchive.class, "test.jar")
-				.addClasses(User.class, UserDAO.class, UserDAOImpl.class)
-				.addPackage(DataBaseProducer.class.getPackage())
-				.addAsResource("META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-				
+	public static WebArchive createDeployment() {
+		WebArchive archive = ShrinkWrap
+                .create(WebArchive.class, "test.war")
+                .addPackages(true, "com.group7")
+                        .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                        .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
-  }
+       File[] libs;
+
+        libs = Maven.resolver()
+                .resolve("com.jayway.restassured:rest-assured:2.4.0")
+                .withTransitivity().as(File.class);
+        archive.addAsLibraries(libs);
+
+        libs = Maven.resolver().resolve("org.apache.poi:poi:3.11")
+                .withTransitivity().as(File.class);
+        archive.addAsLibraries(libs);
+        
+        return archive;
+	}
 
 	@EJB
 	private UserDAO dao;
@@ -47,7 +61,7 @@ public class UserServiceEJBTest {
 	@Test
 	public void isUserServiceTableEmpty() throws Exception {
 		
-		//assertTrue(dao.showAllUsers().isEmpty());	
+		assertTrue(dao.showAllUsers().isEmpty());	
 	}
 	
 	public void isCorrectUserLoggedIn() throws Exception {
@@ -63,7 +77,7 @@ public class UserServiceEJBTest {
 	
 	public User isSearchUserByEmailCorrect(String email,String password) {
 		
-		EntityManager em;
+		EntityManager em = null;
 		System.out.println("Validating user "+email);
 		Query q = em.createQuery("from User u where u.email = :email");
 		q.setParameter("email", email);
@@ -73,35 +87,4 @@ public class UserServiceEJBTest {
 		return null;
 	}
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//
-//
 */

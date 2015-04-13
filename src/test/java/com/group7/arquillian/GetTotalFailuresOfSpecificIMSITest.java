@@ -1,39 +1,33 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
+
+import static org.junit.Assert.*;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.util.Collection;
 
 import javax.ejb.EJB;
-import javax.validation.constraints.AssertTrue;
-
-import junit.framework.Assert;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
-
-import com.group7.dao.UeDAO;
-import com.group7.dao.jpa.UeDAOImpl;
-import com.group7.databases.DataBaseProducer;
-import com.group7.entities.UE;
-import com.group7.serviceInterface.UeServiceLocal;
+import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @RunWith(Arquillian.class)
-public class UeServiceEJBTest {
+public class GetTotalFailuresOfSpecificIMSITest {
 
 	@Deployment
-	public static WebArchive createDeployment() {
-		WebArchive archive = ShrinkWrap
+    public static WebArchive createDeployment() {
+        WebArchive archive = ShrinkWrap
                 .create(WebArchive.class, "test.war")
                 .addPackages(true, "com.group7")
-                        .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                        .addAsResource("META-INF/persistence.xml")
                         .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
        File[] libs;
@@ -48,28 +42,17 @@ public class UeServiceEJBTest {
         archive.addAsLibraries(libs);
         
         return archive;
-		
-
-  }
-
+	}
+	
 	@EJB
-	private UeDAO dao;
+	private BaseDataServiceLocal service;
+	
+	@Test
+	public void getTotalFailuresOfSpecificIMSI() {
+	
+	Collection<Long> data = service.getTotalFailuresOfSpecificIMSI(new BigInteger("240210000000013"), "01/01/0012 12:40:20", "12/12/0015 12:40:20");
+	assertEquals(data.size(),1);
+	
+	}
 
-	
-	@Test
-	public void notNullTest(){
-		assertNotNull(dao);
-	}
-	
-	// here create simple test which check method of ejb
-	@Test
-	public void isUETableEmpty() throws Exception {
-		//Assert.assertEquals(dao.getEU().size(),);
-		//assertEquals(dao.getEU().size(), 1);
-		//assertFalse(!dao.getEU().isEmpty());
-		//assertTrue(dao.getEU().isEmpty());	
-		
-	}
 }
-
-*/
