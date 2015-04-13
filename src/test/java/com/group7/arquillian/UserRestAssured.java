@@ -1,4 +1,4 @@
-package com.group7.arquillian;
+/*package com.group7.arquillian;
 import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
@@ -45,3 +45,4 @@ public class UserRestAssured {
 	}
 	
 }
+*/
