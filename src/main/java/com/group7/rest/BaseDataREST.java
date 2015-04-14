@@ -1,7 +1,6 @@
 package com.group7.rest;
 
-import static com.jayway.restassured.RestAssured.expect;
-import static org.junit.Assert.assertEquals;
+
 
 import java.io.File;
 import java.io.FileOutputStream;

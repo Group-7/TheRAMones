@@ -82,7 +82,19 @@ public class ExcelReadTest {
 		networkData = null;
 		ueData = null;
 		eventCauseData = null;
-		failureData = null;
+		failureData = null;@Test
+		public void putNetworkDataTest(){
+			
+			service.putNetworkData(new ArrayList<Network>());
+		}@Test
+		public void putNetworkDataTest(){
+			
+			service.putNetworkData(new ArrayList<Network>());
+		}@Test
+		public void putNetworkDataTest(){
+			
+			service.putNetworkData(new ArrayList<Network>());
+		}
 		bd = null;
 		bderrors = null;
 		
