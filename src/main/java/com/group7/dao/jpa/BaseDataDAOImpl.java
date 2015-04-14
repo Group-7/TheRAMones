@@ -262,6 +262,20 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 				.getResultList();
 	
 	}
+	
+	public Collection<BaseData> getTopTenImsiDuringPeriodDetails(String startDate, String endDate, BigInteger imsi){
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+		return em.createQuery("SELECT DISTINCT bd.eventCauseMap.description, COUNT(bd.imsi) FROM BaseData bd WHERE bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate AND"
+				+ " bd.imsi=:imsi GROUP BY bd.eventCauseMap.description ORDER BY COUNT(bd.imsi) DESC")
+				.setMaxResults(10)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.setParameter("imsi",imsi)
+				.getResultList();
+		
+		
+	}
 
 	/**
 	 * #14 Me and Gio

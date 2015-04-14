@@ -60,6 +60,8 @@ public interface BaseDataServiceLocal {
 	Collection<String>getFailureDescriptionForDropDown();
 	public void putErrorData(Collection<BaseDataError> bderrors);
 	public Collection<BigInteger> getUS11(String string, String string2);
+	public Collection<BaseData> getTopTenImsiDuringPeriodDetails(
+			String startDate, String endDate, BigInteger imsi);
 
 
 

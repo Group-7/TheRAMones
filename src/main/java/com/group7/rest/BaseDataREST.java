@@ -267,6 +267,13 @@ public class BaseDataREST {
 	public Collection<BaseData> getTopTenImsiDuringPeriod(@QueryParam("startDate") String startDate, @QueryParam("endDate")String endDate){
 		return service.getTopTenImsiDuringPeriod(startDate, endDate);
 	}
+	//drill1
+	@GET
+	@Path("/toptenimsiDetails")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> getTopTenImsiDuringPeriodDetails(@QueryParam("startDate") String startDate, @QueryParam("endDate")String endDate, @QueryParam("imsi")BigInteger imsi){
+		return service.getTopTenImsiDuringPeriodDetails(startDate, endDate, imsi);
+	}
 	
 	@GET //here userstory14
 	@Path("/imsifailureclass")
