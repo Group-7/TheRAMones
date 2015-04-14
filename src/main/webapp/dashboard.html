@@ -29,7 +29,7 @@
 <!-- END STYLESHEETS -->
 
 </head>
-<body class="menubar-hoverable header-fixed ">
+<body class="menubar-hoverable header-fixed " onload="loadSideBar()">
 
 	<!-- BEGIN HEADER-->
 	<header id="header">
@@ -280,12 +280,8 @@
 								<span class="glyphicon glyphicon-list-alt"></span>
 							</div> <span class="title">User accounts</span>
 					</a> <!--start submenu -->
-						<ul>
-							<li><a href="addUser.html"><span class="title">Add
-										new user</span></a></li>
-							<li><a href="users.html"><span class="title">List
-										of all users</span></a></li>
-
+						<ul id="addUserList">
+						
 						</ul>
 						<!--end /submenu --></li>
 					<!--end /menu-li -->
@@ -298,12 +294,12 @@
 								<i class="md md-computer"></i>
 							</div> <span class="title">Queries</span>
 					</a> <!--start submenu -->
-						<ul>
+						<ul id="userFunctionList">
 
 
 
 
-							<li><a href="eventid_causeid.html"><span class="title">Affected
+							<!-- <li><a href="eventid_causeid.html"><span class="title">Affected
 										IMSIs</span></a></li>
 
 							<li><a href="eventid_causeid.html"><span class="title">Affected
@@ -324,7 +320,7 @@
 
 							<li><a href="eventid_causeid.html"><span class="title">Gerry</span></a></li>
 							<li><a href="html/pages/blank.html"><span class="title">Blank
-										page</span></a></li>
+										page</span></a></li> -->
 						</ul>
 						<!--end /submenu --></li>
 					<!--end /menu-li -->
@@ -696,6 +692,7 @@
 	<script src="assets/js/core/source/AppVendor.js"></script>
 	<script src="assets/js/core/demo/Demo.js"></script>
 	<script src="assets/js/core/demo/DemoDashboard.js"></script>
+	<script src="js/dashboard.js"></script>
 	<!-- END JAVASCRIPT -->
 
 </body>

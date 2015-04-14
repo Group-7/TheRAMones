@@ -1,6 +1,7 @@
+window.onload = function() {
 	getAllUE();
-
-
+	loadSideBar();
+}
 
 function getAllUE() {
 	$.ajax({

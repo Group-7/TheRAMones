@@ -13,6 +13,8 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 /**
  *
  *	Basedata , Pojo for the base data 
@@ -67,10 +69,12 @@ public class BaseData {
 	//Joins
 	@ManyToOne
 	@JoinColumn(name="Failure_Class")
+	@JsonBackReference
 	private Failure failureMap;
 	
 	@ManyToOne
 	@JoinColumn(name="TAC")
+	@JsonBackReference
 	private UE ueMap;
 	
 	@ManyToOne

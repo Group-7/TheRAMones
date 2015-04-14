@@ -14,11 +14,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.group7.dao.BaseDataDAO;
-import com.group7.dao.BaseDataDAO;
 import com.group7.dao.jpa.BaseDataDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
-import com.group7.entities.BaseDataId;
 import com.group7.importBaseData.BaseDataValidation;
 import com.group7.service.BaseDataServiceEJB;
 import com.group7.serviceInterface.BaseDataServiceLocal;
@@ -33,7 +31,7 @@ public class BaseDataTest {
 
 		return ShrinkWrap
 				.create(JavaArchive.class, "BaseTest.jar")
-				.addClasses(BaseData.class, BaseDataId.class,
+				.addClasses(BaseData.class, 
 						BaseDataDAO.class,BaseDataDAOImpl.class,
 						BaseDataServiceLocal.class,BaseDataServiceEJB.class,
 						BaseDataValidation.class)

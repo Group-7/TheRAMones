@@ -2,8 +2,10 @@ package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
-
 import java.util.List;
 
 import org.jboss.resteasy.client.ClientRequest;
@@ -13,11 +15,15 @@ import org.jboss.resteasy.util.GenericType;
 
 import javax.ws.rs.core.UriBuilder;
 
+import jxl.read.biff.BiffException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,7 +31,7 @@ import com.group7.dao.BaseDataDAO;
 import com.group7.dao.jpa.BaseDataDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
-import com.group7.entities.BaseDataId;
+import com.group7.importBaseData.BaseDataExcelRead;
 import com.group7.importBaseData.BaseDataValidation;
 import com.group7.rest.BaseDataREST;
 import com.group7.service.BaseDataServiceEJB;
@@ -37,11 +43,13 @@ public class RestRest {
 
 	
 	@Deployment
-	public static JavaArchive createDeployment() {
-		return ShrinkWrap
-				.create(JavaArchive.class, "rest.jar")
+	public static WebArchive createDeployment() {
+		File[] libs=Maven.resolver().resolve("net.sourceforge.jexcelapi:jxl:2.6.10")
+				.withTransitivity().as(File.class);
+		
+		WebArchive web= ShrinkWrap
+				.create(WebArchive.class, "rest.war")
 				.addClasses(BaseData.class,
-						BaseDataId.class, 
 						BaseDataDAO.class,
 						BaseDataDAOImpl.class,
 						BaseDataValidation.class,
@@ -49,11 +57,18 @@ public class RestRest {
 						BaseDataServiceEJB.class,
 						BaseDataServiceLocal.class,
 						RestRest.class)
+						//BaseDataExcelRead.class,
+						//BaseDataValidation.class)
+						.addPackage(BaseDataExcelRead.class.getPackage())
 						.addPackage(BaseData.class.getPackage())
 						.addPackage(DataBaseProducer.class.getPackage())
 				.addAsResource("META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+				.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
+				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
+		
+		web.addAsLibraries(libs);
+		return web;
 	}
 	
 	
@@ -73,48 +88,54 @@ public class RestRest {
 				UriBuilder.fromUri("http://localhost:8080"
 						+ "/TeamProject-0.0.1-SNAPSHOT/rest/baseData/uniqueIMSI").build());
 		
-		//ClientRequest req=crf.createRelativeRequest("/rest/baseData/uniqueIMSI");
-		
 		ClientRequest req=new ClientRequest("http://localhost:8080"
 				+ "/TeamProject-0.0.1-SNAPSHOT/rest/baseData/uniqueIMSI");
 		
-
 		ClientResponse<List<BigInteger>> res=
 				req.get(new GenericType<List<BigInteger>>(){});
 				
 		List<BigInteger> imsis=res.getEntity();
 		
 		assertEquals(imsis.size(),12275);
-		//res.close();
 		
 		
+		ClientRequest IMPreq=new ClientRequest("http://localhost:8080"
+				+ "/TeamProject-0.0.1-SNAPSHOT/rest/baseData/imsi?dates="
+				+ "01/01/0013 00:00:00,01/01/0015 00:00:00");
 		
-		//get
-			/*Client client=ClientBuilder.newClient();
-			WebTarget target = client.target("http://localhost:8080");
+		ClientResponse<List<BigInteger>> impRes=IMPreq.get(new GenericType<List<BigInteger>>(){});
+		
+		imsis=impRes.getEntity();
+		assertEquals(impRes.getStatus(),200);
+		
+		ClientRequest us11req=new ClientRequest("http://localhost:8080"
+				+ "/TeamProject-0.0.1-SNAPSHOT/rest/baseData/imsi?dates="
+				+ "01/01/0013 00:00:00,01/01/0015 00:00:00");
+		
+		ClientResponse<List<BigInteger>> us11Res=us11req.get(new GenericType<List<BigInteger>>(){});
+		
+		imsis=us11Res.getEntity();
+		assertEquals(us11Res.getStatus(),200);
+		
+		
+		/*try{
+		ClientRequest IMPreq=new ClientRequest("http://localhost:8080"
+				+ "/TeamProject-0.0.1-SNAPSHOT/rest/baseData/import");
+		
+		ClientResponse impRes=IMPreq.post();
+		
+		
+		assertEquals(impRes.getStatus(),200);
+		}
+		catch(IOException | BiffException e){
 			
-			Response response=target.request().get();
-			String value=response.readEntity(String.class);
-			System.out.println(value);
-			assertEquals(2,2);*/
-			//final WebClient webClient =WebClient.create("http://localhost:8080/");
-			//final Response response=webClient.path("/rest/baseData/uniqueIMSI").get();
+			System.out.println(e.toString());
 			
-			//assertEquals(200,response.getStatus());
+		}*/
 		
 		
-		/*java.net.URI uri = UriBuilder.fromUri("http://localhost").port(8080).build();
 		
-		HttpServer server=HttpServer.create(new InetSocketAddress(uri.getPort()),0);
-		HttpHandler handler = RuntimeDelegate.getInstance().createEndpoint(new Application(),  HttpHandler.class);
-	
-		server.createContext(uri.getPath(),handler);
-		server.start();
 		
-		Client client = ClientBuilder.newClient();
-		
-		assertEquals(200,client.target("http://localhost:8080/TeamProject-0.0.1-SNAPSHOT/rest/baseData/uniqueIMSI").request().get().getStatus());
-		*/
 	}
 
 }

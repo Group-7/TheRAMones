@@ -1,8 +1,5 @@
 package com.group7.rest;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +31,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
 
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.FileUploadForm;
@@ -96,19 +94,22 @@ public class BaseDataREST {
 		Collection<EventCause> eventCauseData = bdxr.readEventCauseTable();
 		Collection<Failure> failureData = bdxr.readFailureClassTable();
 
-		// Filling the cache
+		
+		//Filling the cache
 		bvd.setEventCauses(eventCauseData);
 		bvd.setFailures(failureData);
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
 
 		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId());
+		Collection<BaseDataError> bderrors = bdxr.getBaseDataErrorList();
 		//Filling the Database
 		service.putNetworkData(networkData);
 		service.putUEData(ueData);
 		service.putEventCauseData(eventCauseData);
 		service.putFailureData(failureData);
 		service.putData(bd);
+		service.putErrorData(bderrors);
 
 		// Should I make these Collection null now??
 		networkData = null;
@@ -116,6 +117,7 @@ public class BaseDataREST {
 		eventCauseData = null;
 		failureData = null;
 		bd = null;
+		bderrors = null;
 	}
 
 	@POST
@@ -175,6 +177,16 @@ public class BaseDataREST {
 		String[] splitDates = dates.split(",", -1);
 
 		return service.getImsiFailureOverTime(splitDates[0], splitDates[1]);
+	}
+	
+	@GET
+	@Path("/us11")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BigInteger> getUS11(@QueryParam("dates") String dates){
+		
+		String[] splitDates=dates.split(",",-1);
+		
+		return service.getUS11(splitDates[0],splitDates[1]);
 	}
 
 	/**
@@ -263,6 +275,19 @@ public class BaseDataREST {
 	}
 
 	
+	@GET
+	@Path("/toptenimsi")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> getTopTenImsiDuringPeriod(@QueryParam("startDate") String startDate, @QueryParam("endDate")String endDate){
+		return service.getTopTenImsiDuringPeriod(startDate, endDate);
+	}
+	
+	@GET
+	@Path("/imsifailureclass")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<BaseData> imsiEffectedByAFailureCauseClass(@QueryParam("failure")String failureClass){
+		return service.imsiEffectedByAFailureCauseClass(failureClass);
+	}
 
 	@GET
 	@Path("/failuredropdown")

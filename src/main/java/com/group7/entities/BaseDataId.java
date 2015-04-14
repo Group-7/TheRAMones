@@ -1,4 +1,4 @@
-package com.group7.entities;
+/*package com.group7.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -100,4 +100,4 @@ public class BaseDataId implements Serializable {
 	
 
 	
-}
+}*/

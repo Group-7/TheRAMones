@@ -199,6 +199,13 @@ function clearSel(sel){
 	
 	/*var string=""+from+","+to+"";
 	alert(string);*/
+function load(){
+	
+	loadSideBar();
+
+}
+
+
 function submit(){
 	var from=document.getElementById("startDate").value;
 	var to=document.getElementById("endDate").value;
@@ -206,7 +213,7 @@ function submit(){
 	//alert(dates);
 	//dates=dates.split("/").join("");
 	console.log("Dates before join: " + dates);
-	dates=dates.split("2").join("0");
+	//dates=dates.split("2").join("0");
 	console.log("Dates after join: " + dates);
 	$.ajax({
 		type: 'GET',

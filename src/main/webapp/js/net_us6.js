@@ -8,6 +8,8 @@ function load() {
 		success : fillImsiSelect,
 		contentType : 'application/json'
 	});
+		
+		loadSideBar();
 }
 
 /**

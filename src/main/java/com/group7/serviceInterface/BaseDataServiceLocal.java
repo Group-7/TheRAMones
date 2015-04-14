@@ -13,6 +13,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.group7.entities.BaseData;
+import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -56,6 +57,8 @@ public interface BaseDataServiceLocal {
 	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate, String endDate);
 	Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass);
 	Collection<String>getFailureDescriptionForDropDown();
+	public void putErrorData(Collection<BaseDataError> bderrors);
+	public Collection<BigInteger> getUS11(String string, String string2);
 
 
 

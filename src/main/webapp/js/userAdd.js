@@ -1,3 +1,8 @@
+$( document ).ready(function() {
+	loadSideBar();
+});
+
+
 $('#addUserBut').on('click', function() {
     //email before
     var $username = $('#email').val();

@@ -6,10 +6,10 @@
      	<!-- <property name="httpPort">-1</property>
      	<property name="stopPort">-1</property>
      	<property name="ajpPort">-1</property> -->
-     	<extension qualifier="jacoco">
+     	<!-- <extension qualifier="jacoco">
    	<property name="includes">org.jboss.arquillian.extension.jacoco.test.included.*</property>
    	<property name="excludes">org.jboss.arquillian.extension.jacoco.test.integration.*;org.jboss.arquillian.extension.jacoco.test.excluded.*</property>
-   </extension>
+   </extension> -->
       </configuration>
        
 

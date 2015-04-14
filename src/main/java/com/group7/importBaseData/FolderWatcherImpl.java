@@ -85,7 +85,8 @@ public class FolderWatcherImpl implements FolderWatcher {
 				
 				for (WatchEvent<?> event : key.pollEvents()) {
 					WatchEvent.Kind<?> kind = event.kind();
-					
+					if(running==false)
+						break;
 					
 					WatchEvent<Path> ev =cast(event);
 					Path name=ev.context();

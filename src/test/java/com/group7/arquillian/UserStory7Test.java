@@ -24,7 +24,6 @@ import com.group7.dao.BaseDataDAO;
 import com.group7.dao.jpa.BaseDataDAOImpl;
 import com.group7.databases.DataBaseProducer;
 import com.group7.entities.BaseData;
-import com.group7.entities.BaseDataId;
 import com.group7.entities.EventCause;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
@@ -43,7 +42,6 @@ public class UserStory7Test {
 		return ShrinkWrap
 				.create(JavaArchive.class, "US7.jar")
 				.addClasses(BaseData.class,
-						BaseDataId.class, 
 						BaseDataDAO.class,
 						BaseDataDAOImpl.class,
 						BaseDataValidation.class,
