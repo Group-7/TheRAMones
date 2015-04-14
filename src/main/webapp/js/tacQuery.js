@@ -1,9 +1,9 @@
-window.onload = function() {
+/*window.onload = function() {
 
-	loadAllUniqueIMSI();
-	loadAllUniqueTAC();
+	//loadAllUniqueIMSI();
+	//loadAllUniqueTAC();
 	loadSideBar();
-}
+}*/
 
 $("#displayCallFailuresPerPhoneType").click(function() {
 	
@@ -52,7 +52,7 @@ function getAllCallFailuresPerPhoneType(){
 function getAllCallFailuresPerIMSI(){
 	 $("#table-body").html("");
 	
-	var imsiNumber = $("#imsi").val();
+	var imsiNumber = $("#srch").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	
@@ -71,7 +71,7 @@ function getAllCallFailuresPerIMSI(){
 function getTotalDurationPerIMSI(){
 	 $("#table-body").html("");
 	
-	var imsiNumber = $("#imsi").val();
+	var imsiNumber = $("#srch").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	//startDate = startDate.split("2").join("0");
@@ -92,17 +92,29 @@ function loadAllUniqueIMSI() {
 		type : 'GET',
 		url : 'rest/baseData/uniqueIMSI',
 		// url : 'rest/baseData/eventid_causeid?imsiNumber='+ imsiNr,
-		success : populateImsiSelector,
+		success : fillImsiSelect2,
 		contentType : 'application/json'
 	});
 }
 
+function fillImsiSelect2(data) {
+	//var select = document.getElementById("srch");
+	//alert("HERE");
+	
+	for(var i =0; i<data.length; i++) {
+	data[i] = String(data[i]);
+	}
+	//alert("Autocomplete");
+	$("#srch").autocomplete({source: data, minLength: 0, delay: 500});
+	//alert("Autocomplete");
+
+	}
 
 function loadAllUniqueTAC() {
 
 	$.ajax({
 		type : 'GET',
-		url : 'rest/baseData/uniqueTAC',
+		url : 'rest/baseData/uniqueModels',
 		// url : 'rest/baseData/eventid_causeid?imsiNumber='+ imsiNr,
 		success : populateTacSelector,
 		contentType : 'application/json'
@@ -116,7 +128,7 @@ function loadAllUniqueTAC() {
 
 //********Populate selectors/dropDownMenu's**********
 
-function populateImsiSelector(data) {
+/*function populateImsiSelector(data) {
 
 	var select = document.getElementById("imsi");
 
@@ -128,10 +140,10 @@ function populateImsiSelector(data) {
 		el.value = opt;
 		select.appendChild(el);
 	}
-}
+}*/
 
 function populateTacSelector(data) {
-
+	data.sort();
 	var select = document.getElementById("tac");
 
 	for (var i = 0; i < data.length; i++) {
@@ -163,7 +175,7 @@ function handleResponseJQuery2(myData2) {
                "<tr>" +
                "<td>" + myData2[0][1] + "</td>" +
                "<td>" + myData2[0][2] + "</td>" +
-               "<td>" + myData2[0][0] + "</td>" +
+              /* "<td>" + myData2[0][0] + "</td>" +*/
                "</tr>");
        
         }

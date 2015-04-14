@@ -15,7 +15,7 @@ function load() {
  * 
  */
 
-function fillImsiSelect(data) {
+/*function fillImsiSelect(data) {
 
 	var select = document.getElementById("imsiNumber");
 
@@ -27,7 +27,19 @@ function fillImsiSelect(data) {
 		el.value = opt;
 		select.appendChild(el);
 	}
-}
+}*/
+
+function fillImsiSelect(data) {
+	//var select = document.getElementById("srch");
+	//alert("HERE");
+	for(var i =0; i<data.length; i++) {
+	data[i] = String(data[i]);
+	}
+	//alert("Autocomplete");
+	$("#srch").autocomplete({source: data, minLength: 0, delay: 500});
+	//alert("Autocomplete");
+
+	}
 
 /**
  * Updates table with a given imsi
@@ -38,7 +50,7 @@ function update() {
 	//clears table 
 	$("#table-body").html("");
 	
-	var imsiNr = $("#imsiNumber").val();
+	var imsiNr = $("#srch").val();
 	
 	$.ajax({
 		type : 'GET',
@@ -59,9 +71,8 @@ function handleResponseJQuery(myData) {
 	for (var i = 0; i < myData.length; i++) {
 		
 		$('#table-body').append(
-				"<tr>" + "<td>" + myData[i][0] + "</td>" + "<td>"
-						+ myData[i][1] + "</td>" + "<td>" + myData[i][2]
-						+ "</td>" + "<td>" + myData[i][3] + "</tr>");
+				"<tr>" + "<td>" + myData[i][1] + "</td>" + 
+				"<td>" + myData[i][2] + "</td>" + "<td>" + myData[i][3] + "</tr>");
 	}
 	;
 }

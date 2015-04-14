@@ -164,14 +164,14 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * based on the phoneType.
 	 */
 	//DONE!!
-	public Collection<Long> getTotalFailuresOfSpecificPhone(int phoneType, String startDate, String endDate) {
+	public Collection<Long> getTotalFailuresOfSpecificPhone(String phoneType, String startDate, String endDate) {
 
 		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate)
 				.getTime());
 		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
 
 		return em
-				.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.ueMap.tac = :tac AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
+				.createQuery("SELECT COUNT(*) FROM BaseData bd WHERE bd.ueMap.tac in (select ue2.tac from UE_Table ue2 where ue2.model = :tac)  AND bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate")
 				.setParameter("tac", phoneType)
 				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
 				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)

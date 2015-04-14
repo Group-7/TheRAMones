@@ -10,12 +10,12 @@
 
 	<h1>Display Event ID and Cause ID for affected IMSI</h1>
 
-	<select id="imsiNumber" onchange="update()">
+	<!-- <select id="imsiNumber" onchange="update()">
 		<option>IMSI Number</option>
-	</select>
+	</select> -->
 
 
-	<table id="table" class="table table-striped">
+	<!--<table id="table" class="table table-striped">
 		<thead>
 			<th>IMSI</th>
 			<th>EVENT ID</th>
@@ -49,6 +49,8 @@
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/bootstrap.css?1422792965" />
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/materialadmin.css?1425466319" />
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/font-awesome.min.css?1422529194" />
+		<link href = "css/jquery-ui.min.css" rel="stylesheet">
+		<link href = "css/jqueryAddon.css" rel="stylesheet">
 		<link type="text/css" rel="stylesheet" href="assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
 		<!-- END STYLESHEETS -->
 
@@ -248,10 +250,11 @@
 								<br />
 								<br />
 								
-									<select id="imsiNumber" onchange="update()">
+									<!-- <select id="imsiNumber" onchange="update()">
 										<option>IMSI Number</option>
-									</select>
-
+									</select> -->
+							<input type="text" name = "srch" id="srch" />
+							<button class="btn btn-primary" id="but" onclick="update()">Submit</button>
 									<div class="card-body">
 										<table class="table table-striped no-margin" id="table">
 											<thead>
@@ -677,6 +680,7 @@
 		<!-- BEGIN JAVASCRIPT -->
 		<script src="assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
 		<script src="assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+		<script src="js/jquery-ui.js"></script>
 		<script src="assets/js/libs/bootstrap/bootstrap.min.js"></script>
 		<script src="assets/js/libs/spin.js/spin.min.js"></script>
 		<script src="assets/js/libs/autosize/jquery.autosize.min.js"></script>

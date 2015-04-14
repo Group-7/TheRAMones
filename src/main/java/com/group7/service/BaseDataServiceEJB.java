@@ -104,7 +104,7 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	
 
 
-	public Collection<Long> getTotalFailuresOfSpecificPhone(int phoneType, 
+	public Collection<Long> getTotalFailuresOfSpecificPhone(String phoneType, 
 			String startDate, String endDate) {
 		
 		return dao.getTotalFailuresOfSpecificPhone(phoneType, startDate, endDate);

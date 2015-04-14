@@ -23,6 +23,9 @@
 <link type="text/css" rel="stylesheet"
 	href="assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
 	<link type="text/css" rel="stylesheet" href="css/rome.css" /><!-- date/time picker -->
+<link type="text/css" rel="stylesheet"
+	href="css/jquery-ui.min.css" />
+		<link href = "css/jqueryAddon.css" rel="stylesheet">
 <!-- Andrzej: line below cause conflicts with template css, STUFF FROM GIOVANNI -->
 <!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"> 
 		  <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">  -->
@@ -238,9 +241,10 @@
 								<br /> <br /> <br />
 								<p>
 								<p>IMSI number:</p>
-								<select id="imsi" onchange="update()">
+								<!-- <select id="imsi" onchange="update()">
 									<option>IMSI Number</option>
-								</select>
+								</select> -->
+								<input type="text" name = "srch" id="srch" />
 								</p>
 
 
@@ -266,8 +270,7 @@
 								<br />
 
 
-								<button class="btn btn-primary" id="displayCallFailuresPerIMSI">Call
-									Failures per IMSI</button>
+								<button class="btn btn-primary" id="displayCallFailuresPerIMSI">Submit</button>
 
 								<br /> <br />
 
@@ -756,6 +759,7 @@
 
 				<!-- BEGIN JAVASCRIPT -->
 				<script src="assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
+				<script src="js/jquery-ui.js"></script>
 				<script src="assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 				<script src="assets/js/libs/bootstrap/bootstrap.min.js"></script>
 				<script src="assets/js/libs/spin.js/spin.min.js"></script>
@@ -775,8 +779,8 @@
 				<script src="js/datepicker.js"></script><!-- date/time picker conf file -->
 				<!--stuff from giovanii-->
 				<!-- <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script> -->
-				<script type="text/javascript"
-					src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+				<!-- <script type="text/javascript"
+					src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
 				<script type="text/javascript"
 					src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
 				<script type="text/javascript"

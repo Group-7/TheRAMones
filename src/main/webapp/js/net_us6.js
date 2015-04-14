@@ -19,16 +19,14 @@ function load() {
 
 function fillImsiSelect(data) {
 
-	var select = document.getElementById("imsiNumber");
-
-	for (var i = 0; i < data.length; i++) {
-
-		var opt = data[i];
-		var el = document.createElement("option");
-		el.textContent = opt;
-		el.value = opt;
-		select.appendChild(el);
+	//var select = document.getElementById("srch");
+	alert("HERE");
+	for(var i =0; i<data.length; i++) {
+	data[i] = String(data[i]);
 	}
+	//alert("Autocomplete");
+	$("#srch").autocomplete({source: data, minLength: 0, delay: 500});
+	alert("Autocomplete");
 }
 
 /**
@@ -40,7 +38,7 @@ function update() {
 	//clears table 
 	$("#table-body").html("");
 	
-	var imsiNr = $("#imsiNumber").val();
+	var imsiNr = $("#srch").val();
 	
 	$.ajax({
 		type : 'GET',
