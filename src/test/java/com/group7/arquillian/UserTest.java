@@ -1,8 +1,9 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -22,17 +23,21 @@ import org.junit.runner.RunWith;
 import com.group7.dao.UserDAO;
 import com.group7.dao.jpa.UserDAOImpl;
 import com.group7.databases.DataBaseProducer;
+import com.group7.entities.UE;
 import com.group7.entities.User;
+import com.group7.serviceInterface.UeServiceLocal;
+import com.group7.serviceInterface.UserServiceLocal;
 
 @RunWith(Arquillian.class)
-public class UserServiceEJBTest {
+public class UserTest {
 
 	@Deployment
 	public static WebArchive createDeployment() {
-		WebArchive archive = ShrinkWrap
+        WebArchive archive = ShrinkWrap
                 .create(WebArchive.class, "test.war")
+                .addClasses(EventCauseEJBTest.class)
                 .addPackages(true, "com.group7")
-                        .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                        .addAsResource("META-INF/persistence.xml")
                         .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
        File[] libs;
@@ -48,43 +53,26 @@ public class UserServiceEJBTest {
         
         return archive;
 	}
-
+	
+	
 	@EJB
-	private UserDAO dao;
-
+	private UserServiceLocal local;
+	
+	
 	@Test
-	public void notNullTest(){
-		assertNotNull(dao);
+	public void showAllUsersTest(){
+		Collection<User> data = local.showAllUsers();
+		assertEquals(data.size(),1);
 	}
 	
-	//this test will work just there is some issue with database which needs to be fixed win the final update
 	@Test
-	public void isUserServiceTableEmpty() throws Exception {
-		
-		assertTrue(dao.showAllUsers().isEmpty());	
+	public void searchUserByEmail(){
+		User data = local.getUserByEmail("a@b.c", "12345", 1);
+		assertEquals(data.getEmail(), "a@b.c");
 	}
 	
-	public void isCorrectUserLoggedIn() throws Exception {
-		
-		
-		
-	}
-	
-	//Assert.assertEquals(dao.getEU().size(),);
-			//assertEquals(dao.getEU().size(), 1);
-			//assertFalse(!dao.getEU().isEmpty());
-			//assertFalse(dao.getEU().isEmpty());	
-	
-	public User isSearchUserByEmailCorrect(String email,String password) {
-		
-		EntityManager em = null;
-		System.out.println("Validating user "+email);
-		Query q = em.createQuery("from User u where u.email = :email");
-		q.setParameter("email", email);
-		List<User> returnedUser = q.getResultList();
-		if (returnedUser.size() > 0 && validatePassword(returnedUser.get(0), password))
-			return returnedUser.get(0);
-		return null;
+	@Test
+	public void addUserTest(){
+		User user =  new User("marc@marc.com", "12345", 2);		
 	}
 }
-*/

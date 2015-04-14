@@ -3,7 +3,6 @@ package com.group7.arquillian;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -17,15 +16,21 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.group7.serviceInterface.BaseDataServiceLocal;
+import com.group7.entities.Failure;
+import com.group7.entities.Network;
+import com.group7.entities.UE;
+import com.group7.serviceInterface.FailureCauseServiceLocal;
+import com.group7.serviceInterface.NetworkServiceLocal;
+import com.group7.serviceInterface.UeServiceLocal;
 
 @RunWith(Arquillian.class)
-public class GetAllEventIdAndCauseIdTest {
+public class UeTest {
 
 	@Deployment
-    public static WebArchive createDeployment() {
+	public static WebArchive createDeployment() {
         WebArchive archive = ShrinkWrap
                 .create(WebArchive.class, "test.war")
+                .addClasses(EventCauseEJBTest.class)
                 .addPackages(true, "com.group7")
                         .addAsResource("META-INF/persistence.xml")
                         .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -44,15 +49,16 @@ public class GetAllEventIdAndCauseIdTest {
         return archive;
 	}
 	
+	
 	@EJB
-	private BaseDataServiceLocal service;
+	private UeServiceLocal local;
+	
 	
 	@Test
-	public void getAllEventIdAndCauseId() {
-	
-	Collection<Object> data = service.getAllEventIdAndCauseId(new BigInteger("240210000000013"));
-	assertEquals(data.size(),0);
-	
+	public void FailureCauseTest(){
+		Collection<UE> data = local.getAllEU();
+		assertEquals(data.size(),0);
 	}
+		
 
 }

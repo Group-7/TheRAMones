@@ -1,9 +1,8 @@
 package com.group7.arquillian;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
-import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -17,15 +16,19 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.group7.serviceInterface.BaseDataServiceLocal;
+import com.group7.entities.EventCause;
+import com.group7.entities.Failure;
+import com.group7.serviceInterface.EventCauseServiceLocal;
+import com.group7.serviceInterface.FailureCauseServiceLocal;
 
 @RunWith(Arquillian.class)
-public class GetAllCauseCodeAndDescByIMSITest {
+public class FailureCauseTest {
 
 	@Deployment
     public static WebArchive createDeployment() {
         WebArchive archive = ShrinkWrap
                 .create(WebArchive.class, "test.war")
+                .addClasses(EventCauseEJBTest.class)
                 .addPackages(true, "com.group7")
                         .addAsResource("META-INF/persistence.xml")
                         .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -44,14 +47,16 @@ public class GetAllCauseCodeAndDescByIMSITest {
         return archive;
 	}
 	
+	
 	@EJB
-	private BaseDataServiceLocal service;
+	private FailureCauseServiceLocal local;
+	
 	
 	@Test
-	public void getAllCauseCodeAndDescByIMSI() {
-	
-	Collection<Object> data = service.getAllCauseCodeAndDescByIMSI(new BigInteger("240210000000013"));
-	assertEquals(data.size(),0);
-	
+	public void FailureCauseTest(){
+		Collection<Failure> data = local.getAllFailureCauses();
+		assertEquals(data.size(),0);
 	}
+		
+
 }

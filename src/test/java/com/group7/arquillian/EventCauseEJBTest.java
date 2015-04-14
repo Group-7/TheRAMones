@@ -1,10 +1,12 @@
-/*package com.group7.arquillian;
+package com.group7.arquillian;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.Collection;
 
 import javax.ejb.EJB;
 
@@ -34,7 +36,7 @@ public class EventCauseEJBTest {
                 .create(WebArchive.class, "test.war")
                 .addClasses(EventCauseEJBTest.class)
                 .addPackages(true, "com.group7")
-                        .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                        .addAsResource("META-INF/persistence.xml")
                         .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
        File[] libs;
@@ -50,40 +52,18 @@ public class EventCauseEJBTest {
         
         return archive;
 	}
-	//check
-	@EJB
-	private EventCauseDAO dao;
+	
 	
 	@EJB
 	private EventCauseServiceLocal local;
 	
 	
-	
-
 	@Test
-	public void isEventCauseTableEmptyDAO() throws Exception {
-		
-		assertFalse(dao.getAllEventCauses().isEmpty());	
-		
+	public void EventCauseTest(){
+		Collection<EventCause> data = local.getAllEventCauses();
+		assertEquals(data.size(),0);
 	}
-	@Test
-	public void isEventCauseTableEmptyLOCAL() throws Exception {
-
-		assertTrue(local.getAllEventCauses().isEmpty());	
-		
-	}
-	@Test
-	public void notNullTest(){
-		assertNotNull(dao);
-	}
-	
-	@Test
-	public void notNullLocalTest(){
-		assertNotNull(local);
-	}
-	
 		
 	
 }
  
-*/

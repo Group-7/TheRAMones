@@ -50,18 +50,6 @@ public class EventCause implements Serializable{
 		return eventId;
 	}
 
-	public void setEventID(Integer eventId) {
-		this.eventId = eventId;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDiscription(String description) {
-		this.description = description;
-	}
-
 	public List<BaseData> getEventcauseBD() {
 		return eventcauseBD;
 	}
@@ -73,8 +61,15 @@ public class EventCause implements Serializable{
 	public void setEventId(Integer eventId) {
 		this.eventId = eventId;
 	}
+	
+	public void setEventID(Integer eventId) {
+		this.eventId = eventId;
+	}
 
 	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setDiscription(String description) {
 		this.description = description;
 	}
 	
