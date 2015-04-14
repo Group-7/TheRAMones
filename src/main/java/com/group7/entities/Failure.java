@@ -23,10 +23,14 @@ public class Failure implements Serializable{
 	@OneToMany(mappedBy="failureMap")
 	private List<BaseData> failureBD = new ArrayList<>();
 	
+	
+	
+	
+	
+	
 	public Integer getFailureCode() {
 		return FailureCode;
 	}
-
 
 	public void setFailureCode(Integer failureCode) {
 		FailureCode = failureCode;

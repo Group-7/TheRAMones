@@ -1,7 +1,9 @@
 /*package com.group7.arquillian;
 
+import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.math.BigInteger;
 
 import javax.ejb.EJB;
@@ -13,6 +15,8 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,19 +30,40 @@ import com.group7.importBaseData.BaseDataValidation;
 @RunWith(Arquillian.class)
 public class CallFailuresQueriesTest {
 	
-	
-	@Deployment
-	public static JavaArchive createDeployment() {
-		return ShrinkWrap.create(JavaArchive.class, "test2.jar")
-				.addClasses(BaseDataDAOImpl.class, BaseDataDAO.class, BaseData.class,BaseDataValidation.class)
-				.addPackage(BaseData.class.getPackage())
-				.addPackage(DataBaseProducer.class.getPackage())
-				.addAsResource("META-INF/persistence.xml")
-				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		@Deployment
+	    public static WebArchive createDeployment() {
+	        WebArchive archive = ShrinkWrap
+	                .create(WebArchive.class, "test.war")
+	                .addPackages(true, "com.group7")
+	                        .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+	                        .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+
+	       File[] libs;
+
+	        libs = Maven.resolver()
+	                .resolve("com.jayway.restassured:rest-assured:2.4.0")
+	                .withTransitivity().as(File.class);
+	        archive.addAsLibraries(libs);
+
+	        libs = Maven.resolver().resolve("org.apache.poi:poi:3.11")
+	                .withTransitivity().as(File.class);
+	        archive.addAsLibraries(libs);
+	        
+	        return archive;
   
   }
+		
+		@Test
+		public void getAllCauseIdAndDescRESTTest() {
+			Object[][] result = given()
+					.parameter("imsi", "240210000000013")
+					.when()
+					.get("http://localhost:8080/TeamProject-0.0.1-SNAPSHOT/rest/baseData/eventid_causeid")
+					.as(Object[][].class);
+				assertEquals(4098, result[0][2]);
+		}
 
-	//check
+	
 	@EJB
 	private BaseDataDAO dao;
 
@@ -47,10 +72,10 @@ public class CallFailuresQueriesTest {
 		assertNotNull(dao);
 	}
 	
-	// here create simple test which check method of ejb
+	//here create simple test which check method of ejb
 	@Test
 	public void isBaseDataEmpty() throws Exception {
-		BigInteger phoneTypeDummy = new BigInteger("33000153");
+		int phoneTypeDummy = 33000153;
 		String startDate =  "11/01/2013 17:09:00";
 		String endDate = "11/01/2013 17:17:00";
 		//Assert.assertEquals(dao.getEU().size(),);
@@ -71,4 +96,5 @@ public class CallFailuresQueriesTest {
 	
 
 }
+
 */
