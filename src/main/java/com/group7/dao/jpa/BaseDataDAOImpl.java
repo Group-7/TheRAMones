@@ -66,18 +66,15 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 			 * //System.out.println("***************\nEntity exixts exception "
 			 * +"\n**************"); count++; }
 			 */
-
-			System.out.println("inserting: " + inserted);
 			em.persist(basedata);
 			inserted++;
 		}
-		// System.out.println("dupicates "+count);
+		
 
 	}
 
 
-	//DONE
-	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
+		public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
 				.createQuery("SELECT bd.imsi, bd.eventCauseMap.causeCode, bd.eventCauseMap.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();

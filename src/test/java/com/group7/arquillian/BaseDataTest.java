@@ -22,8 +22,10 @@ import org.junit.runner.RunWith;
 import com.group7.entities.BaseData;
 import com.group7.entities.BaseDataError;
 import com.group7.entities.EventCause;
+import com.group7.entities.EventCauseID;
 import com.group7.entities.Failure;
 import com.group7.entities.Network;
+import com.group7.entities.NetworkId;
 import com.group7.entities.UE;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 import com.sun.jmx.snmp.Timestamp;
@@ -220,10 +222,74 @@ public class BaseDataTest {
 	service.putErrorData(bdErrors);
 	}
 	
-	
-	
 	@Test
 	public void getTopTenImsiDuringPeriodTest(){
 		service.getTopTenImsiDuringPeriod("01/01/0012 12:40:20", "12/12/0015 12:40:20");
 	}
+	
+	@Test
+	public void putFailureDataTest(){
+		
+		service.putFailureData(new ArrayList<Failure>());
+	}
+	
+	@Test
+	public void putEventCauseDataTest(){
+		
+		service.putEventCauseData(new ArrayList<EventCause>());
+	}
+	
+	@Test
+	public void putUEDataTest(){
+		
+		service.putUEData(new ArrayList<UE>());
+	}
+	
+	@Test
+	public void putNetworkDataTest(){
+		
+		service.putNetworkData(new ArrayList<Network>());
+	}
+	
+	@Test
+	public void putDataTest(){
+		Date date = new Date(99999999);
+		java.sql.Timestamp time = new java.sql.Timestamp(date.getTime());
+		Collection<BaseData> bdList = new ArrayList<BaseData>();
+		long id = service.getLastRowId()+4;
+		Integer i =  new Integer(13);
+		BigInteger bi = new BigInteger("240210000000013");
+		BaseData bd = new BaseData(id, time, i, 1000, "223", bi, "1324354657687980", "1324354657687980", "1324354657687980", 34, 4, 56, 67, 78, 99);
+		bdList.add(bd);
+		service.putData(new ArrayList<BaseData>());
+		
+	}
+	
+	@Test
+	public void NetworkIDTest(){
+		
+		NetworkId networkId = new NetworkId();
+		networkId.setMcc(123);
+		networkId.setMnc(321);
+		
+		NetworkId networkId2 = new NetworkId(123, 321);
+		
+		assertTrue(networkId2.equals(networkId));
+		assertTrue(networkId.hashCode() == networkId2.hashCode());
+	}
+	
+	@Test
+	public void EventCauseIDTest(){
+		
+		EventCauseID ecId = new EventCauseID();
+		ecId.setCauseCode(1212);
+		ecId.setEventId(12);
+		
+		EventCauseID ecId2 = new EventCauseID(1212, 12);
+
+		assertTrue(ecId2.equals(ecId));
+		assertTrue(ecId.hashCode() == ecId2.hashCode());
+	}
+	
+	
 }
