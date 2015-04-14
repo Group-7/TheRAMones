@@ -62,16 +62,16 @@ function getResultsForTable(data){
 	    				},
 	    				{
 	    					value: data[4][1],
-	    					color: "#4D5360",
-	    					highlight: "#616774",
+	    					color: "#DD3609",
+	    					highlight: "#AA2311",
 	    					label: data[4][0]
 	    				},
 	    				{
 	    					value: data[5][1],
-	    					color: "#4D5360",
-	    					highlight: "#616774",
+	    					color: "#deef6a",
+	    					highlight: "#b6c649",
 	    					label: data[5][0]
-	    				}/*,
+	    				},
 	    				{
 	    					value: data[6][1],
 	    					color: "#675E60",
@@ -92,10 +92,10 @@ function getResultsForTable(data){
 	    				},
 	    				{
 	    					value: data[9][1],
-	    					color: "#DD3609",
-	    					highlight: "#AA2311",
+	    					color: "#4D5360",//"#DD3609",
+	    					highlight:  "#616774",//"#AA2311",
 	    					label: data[9][0]
-	    				}*/
+	    				}
 	    			];
 	
 	var ctx = document.getElementById("chart-area").getContext("2d");
@@ -104,13 +104,13 @@ function getResultsForTable(data){
 
 
 
-$("#chart-area").click( 
+/*$("#chart-area").click( 
 	    function(evt){
 	        var activePoints = myDoughnut.getSegmentsAtEvent(evt);           
 	        var url = "label= " + activePoints[0].label + "&value= " + activePoints[0].value;
             alert(url);
 	    }
-	); 
+	); */
 
 
 
