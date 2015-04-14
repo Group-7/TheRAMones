@@ -20,13 +20,13 @@ function load() {
 function fillImsiSelect(data) {
 
 	//var select = document.getElementById("srch");
-	alert("HERE");
+	//alert("HERE");
 	for(var i =0; i<data.length; i++) {
 	data[i] = String(data[i]);
 	}
 	//alert("Autocomplete");
 	$("#srch").autocomplete({source: data, minLength: 0, delay: 500});
-	alert("Autocomplete");
+	//alert("Autocomplete");
 }
 
 /**

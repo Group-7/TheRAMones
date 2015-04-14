@@ -22,12 +22,17 @@ function loadSideBar(){
 	
 	var list=document.getElementById("userFunctionList");
 	var listUser=document.getElementById("addUserList");
+	var uploadList = document.getElementById("userUploadFunction");
 	
 	var accounts1 = "<li><a href='addUser.html'><span class='title'>Add	new user</span></a></li>";
 	var accounts2 = "<li><a href='users.html'><span class='title'>List	of all users</span></a></li>";
+	var uploadFileOption = "<li><a href='upload.html'><span class='title'>Upload file</span></a></li>";
+	
+	
 	if(type=="1"){ 
 		list.innerHTML+=(userSt4+userSt5+userSt6+userSt7+userSt8+userSt9+userSt10+userSt11+userSt12+userSt14);	
 		listUser.innerHTML+=accounts1+accounts2;
+		uploadList.innerHTML += uploadFileOption;
 	}else if(type =='2'){ 
 		list.innerHTML+=(userSt4+userSt5+userSt6+userSt7+userSt8+userSt9+userSt10+userSt11+userSt12+userSt14);
 	}else if(type =='3'){ 

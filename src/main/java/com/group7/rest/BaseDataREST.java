@@ -89,7 +89,7 @@ public class BaseDataREST {
 		bvd.setNetworks(networkData);
 		bvd.setUeObjects(ueData);
 
-		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId());
+		Collection<BaseData> bd = bdxr.readExcelFile(service.getLastRowId()+1);
 		Collection<BaseDataError> bderrors = bdxr.getBaseDataErrorList();
 		//Filling the Database
 		service.putNetworkData(networkData);
