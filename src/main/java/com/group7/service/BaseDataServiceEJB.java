@@ -148,7 +148,7 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 	}
 
 	@Override
-	public Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass) {
+	public Collection<BigInteger> imsiEffectedByAFailureCauseClass(String failureClass) {
 		return dao.imsiEffectedByAFailureCauseClass(failureClass);
 	}
 

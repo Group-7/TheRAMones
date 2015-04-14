@@ -50,7 +50,7 @@ public interface BaseDataServiceLocal {
 	/**
 	 */
 	public Collection<BaseData> getTopTenImsiDuringPeriod(String startDate, String endDate);
-	Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass);
+	Collection<BigInteger> imsiEffectedByAFailureCauseClass(String failureClass);
 	Collection<String>getFailureDescriptionForDropDown();
 	public void putErrorData(Collection<BaseDataError> bderrors);
 	public Collection<BigInteger> getUS11(String string, String string2);

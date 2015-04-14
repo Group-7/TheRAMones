@@ -268,10 +268,10 @@ public class BaseDataREST {
 		return service.getTopTenImsiDuringPeriod(startDate, endDate);
 	}
 	
-	@GET
+	@GET //here userstory14
 	@Path("/imsifailureclass")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<BaseData> imsiEffectedByAFailureCauseClass(@QueryParam("failure")String failureClass){
+	public Collection<BigInteger> imsiEffectedByAFailureCauseClass(@QueryParam("failure")String failureClass){
 		return service.imsiEffectedByAFailureCauseClass(failureClass);
 	}
 

@@ -41,6 +41,7 @@ function getDropdownValue(){
 	});
 }
 
+/*
 function getResultsForTable(data){
 	$('#tableofFailureClasses').html("");
 	for(var i =0;i<data.length;i++){
@@ -54,9 +55,19 @@ function getResultsForTable(data){
 	for(var i =0;i<data.length;i++){
 		t.row.add([ data[i][0], timeconverter(data[i][1])]);
 	}
-	t.draw();*/
-}
+	t.draw();
+}*/
 
+
+function getResultsForTable(data){
+	$('#tableofFailureClasses').html("");
+	for(var i =0;i<data.length;i++){
+		$('#tableofFailureClasses').append(
+				"<tr>" + 
+				"<td>"+data[i]+"</td>"+
+		"</tr>");
+	}
+}
 
 function timeconverter(timestamp){
 	

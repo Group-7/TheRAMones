@@ -267,10 +267,10 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	 * #14 Me and Gio
 	 */
 	@Override
-	public Collection<BaseData> imsiEffectedByAFailureCauseClass(String failureClass) {
-		Query q = em.createQuery("select bd.imsi, bd.dateAndTime from BaseData bd,Failure_Class_Table f where bd.failureMap.FailureCode = f.FailureCode AND bd.failureMap.description = :failureClass");
+	public Collection<BigInteger> imsiEffectedByAFailureCauseClass(String failureClass) {
+		Query q = em.createQuery("select DISTINCT bd.imsi from BaseData bd,Failure_Class_Table f where bd.failureMap.FailureCode = f.FailureCode AND bd.failureMap.description = :failureClass");
 		q.setParameter("failureClass", failureClass);
-		return (Collection<BaseData>) q.getResultList();
+		return (Collection<BigInteger>) q.getResultList();
 	}
 
 	/**
