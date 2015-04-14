@@ -1,7 +1,8 @@
 package com.group7.arquillian;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -14,7 +15,6 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.group7.entities.BaseData;
 import com.group7.serviceInterface.BaseDataServiceLocal;
 
 @RunWith(Arquillian.class)
@@ -36,15 +36,15 @@ public class User14ArquillianTest {
 	
 	@Test
 	public void test() {
-		Collection<BaseData> returnedInfo = serv.imsiEffectedByAFailureCauseClass("EMERGENCY");
+		Collection<BigInteger> returnedInfo = serv.imsiEffectedByAFailureCauseClass("EMERGENCY");
 		assertTrue(returnedInfo.size()>0);
-		assertTrue(returnedInfo.size()==160);
+		assertTrue(returnedInfo.size()==3);
 		
 		
 		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("HIGH PRIORITY ACCESS");
-		 assertTrue(returnedInfo.size()==600);
+		 assertTrue(returnedInfo.size()==6);
 		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("MT ACCESS");
-		 assertTrue(returnedInfo.size()==40);
+		 assertTrue(returnedInfo.size()==3);
 		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("MO SIGNALLING");
 		 assertTrue(returnedInfo.size()==0);
 		 returnedInfo = serv.imsiEffectedByAFailureCauseClass("MO DATA");
