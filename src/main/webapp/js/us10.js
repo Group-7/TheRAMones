@@ -55,38 +55,52 @@ function getAllEventCauseCodeCombinationsPerPhoneModel(){
 	});
 }
 
-function handleResponseJQuery3(myData) {
+
+
+/*function handleResponseJQuery3(myData) {
 	var data = myData
 for(var i = 0; i<myData.length; i++){ 
 	 $('#table-body').append(
           "<tr>" +
-         /* "<td>" + myData[i][0] + "</td>" +*/
+          "<td>" + myData[i][0] + "</td>" +
           "<td>" + myData[i][1] + "</td>" +
           "<td>" + myData[i][3] + "</td>" +
           "<td>" + myData[i][2] + "</td>" +
 	  "<td>" + myData[i][4] + "</td>" +
           "</tr>");
-}
+}*/
+	
+function handleResponseJQuery3(data) {
+	var myData=data;
+	var t = $('#datatable1').DataTable();
+	var i;
+	for(i =0;i<data.length;i++){
+		t.row.add([ data[i][1], data[i][3], data[i][2],data[i][4] ])
+	}
+	t.draw();
+
+	
 $(function () {
 if(count>0){
 document.getElementById('draw').innerHTML="";
 }
-if(myData !=""){
+if(data !=""){
     var paper = Raphael(document.getElementById('draw'), 550, 350);
     //var k = parseInt(jArray[0].Wins);
-    var c = paper.piechart(200, 200,100, [myData[0][4],myData[1][4], myData[2][4],myData[3][4], myData[4][4]],
+    var c = paper.piechart(200, 200,100, [data[0][4],data[1][4], data[2][4],data[3][4], data[4][4]],
     {
-        legend: ["%% Event:" + myData[0][1] + " Cause:" + myData[0][3],
-         "%% Event:" + myData[1][1] + " Cause:" + myData[1][3], 
-         "%% Event:" + myData[2][1] + " Cause:" + myData[2][3], 
-         "%% Event:" + myData[3][1] + " Cause:" + myData[3][3],
-         "%% Event:" + myData[4][1] + " Cause:" + myData[4][3] ]
+        legend: ["%% Event:" + data[0][1] + " Cause:" + data[0][3],
+         "%% Event:" + data[1][1] + " Cause:" + data[1][3], 
+         "%% Event:" + data[2][1] + " Cause:" + data[2][3], 
+         "%% Event:" + data[3][1] + " Cause:" + data[3][3],
+         "%% Event:" + data[4][1] + " Cause:" + data[4][3] ]
     });
     count++;
  
 }
+
 });
-  
-   }
+}  
+   
    
 

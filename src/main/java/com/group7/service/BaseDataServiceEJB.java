@@ -168,5 +168,12 @@ public class BaseDataServiceEJB implements BaseDataServiceLocal {
 		// TODO Auto-generated method stub
 		return dao.getUS11(string, string2);
 	}
+	
+	@Override
+	public Collection<BaseData> getTopTenImsiDuringPeriodDetails(
+			String startDate, String endDate, BigInteger imsi) {
+		// TODO Auto-generated method stub
+		return dao.getTopTenImsiDuringPeriodDetails(startDate,endDate,imsi);
+	}
 }
 

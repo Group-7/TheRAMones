@@ -56,6 +56,9 @@
 	href="assets/css/theme-default/font-awesome.min.css?1422529194" />
 <link type="text/css" rel="stylesheet"
 	href="assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+	<link type="text/css" rel="stylesheet" href="css/jquery.dataTables.css?1423553989" />
+	<link type="text/css" rel="stylesheet" href="css/dataTables.colVis.css?1423553990" />
+	<link type="text/css" rel="stylesheet" href="css/dataTables.tableTools.css?1423553990" />
 <!-- Andrzej: line below cause conflicts with template css, STUFF FROM GIOVANNI -->
 <!--  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"> 
 		  <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">  -->
@@ -232,7 +235,7 @@
 
 					<!-- BEGIN INTRO -->
 					<div class="row">
-						<div class="col-lg-12">
+						<div class="col-md-12">
 							<h1 class="text-primary">Call failure by Phone Model</h1>
 						</div>
 						<!--end .col -->
@@ -247,7 +250,9 @@
 					</div>
 					<!--end .row -->
 					<!-- END INTRO -->
-					<!-- !!!!!!!!!!!!!!!TABLE START!!!!!!!!!!!!!!!!!!!! -->
+
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!TABLE START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1! -->
 
 					<!-- BEGIN STRIPED TABLE -->
 					<div class="row">
@@ -272,51 +277,129 @@
 							<div style="float: right">
 								<div id="draw"></div>
 							</div>
-							<div class="card-body">
+						
 
-								<br /> <br />
-
-								<p>
-								<p>phone model:</p>
+								<br />
+								<br />
+								<br />
+								<div class="row">
+									<div class="col-md-4 col-md-offset-1">
+								<p>Phone model:</p>
 								<!-- <p> phone model: <input type="text" id="model" name="phone_model"></p> -->
 								<select id="model" onchange="updateModel()">
 									<option>model</option>
 								</select>
-
-								</p>
-								<button class="btn btn-primary"
+								
+									<br />
+									
+									<button class="btn btn-primary"
 									id="displayAllEventCauseCodeCombinationsPerPhoneModel">
 									Submit</button>
+									</div>
+									</div>
+									
+									<div id="draw"></div>
 
 
-								<table id="table" class="table table-striped">
-									<thead>
-									<thead>
-										<!-- <th>Phone model</th> -->
-										<th>Event ID</th>
-										<th>Cause Code</th>
-										<th>Event Description</th>
-										<th>Occurences</th>
-									</thead>
-									<tbody id="table-body">
+								<br /> <br />
+								<!-- BEGIN DATATABLE 1 -->
+								<div class="row">
+									<div class="col-md-8">
+										<article class="margin-bottom-xxl">
+											<p class="lead"></p>
+										</article>
+									</div>
+									<!--end .col -->
+								</div>
+								<!--end .row -->
+								<div class="row">
 
-									</tbody>
-								</table>
+									<div class="col-md-10 col-md-offset-1">
+										<div class="table-responsive">
+											<table id="datatable1"
+												class="table table-striped table-hover">
+												<thead>
+													<tr>
+														<th>Event ID</th>
+														<th>Cause code</th>
+														<th>Event Description</th>
+														<th>Occurences</th>
+													</tr>
+												</thead>
+												<tbody>
+
+												</tbody>
+											</table>
+											<div id="summary"></div>
+										</div>
+										<!--end .table-responsive -->
+									</div>
+									<!--end .col -->
+								</div>
+								<!--end .row -->
+								<!-- END DATATABLE 1 -->
 
 
 
-
-
-
-
+								
 							</div>
-							<!--end .card-body -->
+
 						</div>
-						<!--end .card -->
-
-
+						<!--end .card-body -->
 					</div>
-					<!--end .row -->
+					<!--end .card -->
+
+
+				</div>
+				<!--end .row -->
+				<!-- END STRIPED TABLE -->
+
+
+
+				<!-- !!!!!!!!!!!!!!!!!!!TABLE END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
+					
 					<!-- END STRIPED TABLE -->
 
 
@@ -417,50 +500,9 @@
 											<i class="fa fa-folder-open fa-fw"></i>
 										</div> <span class="title">Upload Data Menu</span>
 								</a> <!--start submenu -->
-									<ul>
+									<ul id="userUploadFunction">
 
-										<li><a href="upload.html"><span class="title">Upload
-													file</span></a></li>
-										<li><a href="#"><span class="title">Item 1</span></a></li>
-										<li><a href="#"><span class="title">Item 1</span></a></li>
-										<li class="gui-folder"><a href="javascript:void(0);">
-												<span class="title">Open level 2</span>
-										</a> <!--start submenu -->
-											<ul>
-												<li><a href="#"><span class="title">Item 2</span></a></li>
-												<li class="gui-folder"><a href="javascript:void(0);">
-														<span class="title">Open level 3</span>
-												</a> <!--start submenu -->
-													<ul>
-														<li><a href="#"><span class="title">Item 3</span></a></li>
-														<li><a href="#"><span class="title">Item 3</span></a></li>
-														<li class="gui-folder"><a href="javascript:void(0);">
-																<span class="title">Open level 4</span>
-														</a> <!--start submenu -->
-															<ul>
-																<li><a href="#"><span class="title">Item
-																			4</span></a></li>
-																<li class="gui-folder"><a
-																	href="javascript:void(0);"> <span class="title">Open
-																			level 5</span>
-																</a> <!--start submenu -->
-																	<ul>
-																		<li><a href="#"><span class="title">Item
-																					5</span></a></li>
-																		<li><a href="#"><span class="title">Item
-																					5</span></a></li>
-																	</ul>
-																	<!--end /submenu --></li>
-																<!--end /submenu-li -->
-															</ul>
-															<!--end /submenu --></li>
-														<!--end /submenu-li -->
-													</ul>
-													<!--end /submenu --></li>
-												<!--end /submenu-li -->
-											</ul>
-											<!--end /submenu --></li>
-										<!--end /submenu-li -->
+									
 									</ul>
 									<!--end /submenu --></li>
 								<!--end /menu-li -->
@@ -778,6 +820,9 @@
 					src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
 				<script type="text/javascript"
 					src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"></script>
+					<script src="js/jquery.dataTables.js"></script>
+				<script src="js/jquery.dataTables.min.js"></script>
+				<script src="js/dataTables.colVis.min.js"></script>
 
 				<!-- END JAVASCRIPT -->
 </body>

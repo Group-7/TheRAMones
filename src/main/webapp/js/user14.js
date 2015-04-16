@@ -1,9 +1,16 @@
 /**
  * 
  */
+/*var $ =jQuery.noConflict();
 $( document ).ready(function() {
 	fillDropDown();
 	loadSideBar();
+});*/
+
+$( document ).ready(function() {
+	fillDropDown();
+	loadSideBar();
+	
 });
 
 function fillDropDown(){
@@ -18,7 +25,6 @@ function fillDropDown(){
 function populateTable(data){
 	
 	var list = document.getElementById("failureId");
-	
 	for (var i = 0; i < data.length; i++){
 		
 		var option = data[i];
@@ -31,6 +37,7 @@ function populateTable(data){
 	
 }
 
+/////////////////////////////////////TABLE
 function getDropdownValue(){
 	var playlist = $('#failureId').val();
 	$.ajax({
@@ -41,32 +48,14 @@ function getDropdownValue(){
 	});
 }
 
-/*
-function getResultsForTable(data){
-	$('#tableofFailureClasses').html("");
-	for(var i =0;i<data.length;i++){
-		$('#tableofFailureClasses').append(
-				"<tr>" + 
-				"<td>"+data[i][0]+"</td>"+
-				"<td>"+timeconverter(data[i][1])+"</td>"+
-		"</tr>");
-	}
-	/*var t = $('#table').DataTable();
-	for(var i =0;i<data.length;i++){
-		t.row.add([ data[i][0], timeconverter(data[i][1])]);
+function getResultsForTable(data) {
+
+	var t = $('#datatable1').DataTable();
+	var i;
+	for(i =0;i<data.length;i++){
+		t.row.add([ data[i]])
 	}
 	t.draw();
-}*/
-
-
-function getResultsForTable(data){
-	$('#tableofFailureClasses').html("");
-	for(var i =0;i<data.length;i++){
-		$('#tableofFailureClasses').append(
-				"<tr>" + 
-				"<td>"+data[i]+"</td>"+
-		"</tr>");
-	}
 }
 
 function timeconverter(timestamp){

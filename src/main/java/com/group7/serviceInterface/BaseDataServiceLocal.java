@@ -28,6 +28,7 @@ public interface BaseDataServiceLocal {
 
 	public Collection<BaseData> getAllBasedata();
 	public void addBaseData(BaseData basedata);
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putData(Collection<BaseData> bd);
 
 	public Collection<Object> getAllEventIdAndCauseId(BigInteger Imsi);
@@ -35,9 +36,13 @@ public interface BaseDataServiceLocal {
 	public Collection<BigInteger> getUniqueAffectedImsi();
 	public Collection<BigInteger> getImsiFailureOverTime(String from, String to);
 	public Collection<Object> getAllCasueCodeAndEventId(BigInteger imsi);
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putNetworkData(Collection<Network> networkList);
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putUEData(Collection<UE> ueList);
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putEventCauseData(Collection<EventCause> eventCauseList);
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void putFailureData(Collection<Failure>failureList);
 
 	public Collection<Long> getTotalFailuresOfSpecificPhone(String phoneType, String startDate, String endDate);
@@ -46,6 +51,7 @@ public interface BaseDataServiceLocal {
 	public Collection<Object> getAllUniqueEventCausecodeCombinations(String model);
 	public Collection<BigInteger> getAllPhoneTypes();
 	public Collection<String> getAllDistinctPhoneModels();
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public long getLastRowId();
 	/**
 	 */
@@ -54,6 +60,8 @@ public interface BaseDataServiceLocal {
 	Collection<String>getFailureDescriptionForDropDown();
 	public void putErrorData(Collection<BaseDataError> bderrors);
 	public Collection<BigInteger> getUS11(String string, String string2);
+	public Collection<BaseData> getTopTenImsiDuringPeriodDetails(
+			String startDate, String endDate, BigInteger imsi);
 
 
 

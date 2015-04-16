@@ -79,7 +79,7 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 	//DONE
 	public Collection<Object> getAllCauseCodeAndEventIdByIMSI(BigInteger imsi) {
 		return em
-				.createQuery("SELECT bd.imsi, bd.eventCauseMap.causeCode, bd.eventCauseMap.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
+				.createQuery("SELECT DISTINCT bd.imsi, bd.eventCauseMap.causeCode, bd.eventCauseMap.eventId, ec.description FROM EventCause ec, BaseData bd WHERE bd.eventCauseMap.causeCode = ec.causeCode AND bd.eventCauseMap.eventId = ec.eventId AND bd.imsi = :imsi")
 				.setParameter("imsi", imsi).getResultList();
 	}
 
@@ -313,6 +313,19 @@ public class BaseDataDAOImpl implements BaseDataDAO {
 		return q.getResultList();
 	}
 	
+	public Collection<BaseData> getTopTenImsiDuringPeriodDetails(String startDate, String endDate, BigInteger imsi){
+		Timestamp dbStartDate = new Timestamp(dateFormatter(startDate).getTime());
+		Timestamp dbEndDate = new Timestamp(dateFormatter(endDate).getTime());
+		return em.createQuery("SELECT DISTINCT bd.eventCauseMap.description, COUNT(bd.imsi) FROM BaseData bd WHERE bd.dateAndTime > :startdate AND bd.dateAndTime < :enddate AND"
+				+ " bd.imsi=:imsi GROUP BY bd.eventCauseMap.description ORDER BY COUNT(bd.imsi) DESC")
+				.setMaxResults(10)
+				.setParameter("startdate", dbStartDate, TemporalType.TIMESTAMP)
+				.setParameter("enddate", dbEndDate, TemporalType.TIMESTAMP)
+				.setParameter("imsi",imsi)
+				.getResultList();
+		
+		
+	}
 
 }
 
